@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Wirtualna Apteczka</string>
+    <string name="moja_lista_lekow">Moja lista leków</string>
+    <string name="nie_dodano_jeszcze_leku">Nie dodano jeszcze żadnego leku</string>
 </resources>
