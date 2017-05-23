@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- pojedynczy element z listy lekow-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text_medicine_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="witamina C"/>
+
+    <TextView
+        android:id="@+id/text_kind_of_medicine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="tabletki"/>
+</LinearLayout>
+</LinearLayout>
