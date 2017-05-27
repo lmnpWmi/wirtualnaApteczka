@@ -17,9 +17,9 @@ public class MainActivity extends AppCompatActivity {
     private MedicineAdapter adapter;
 
     @Override
-    protected void onResume() {
+    protected void onResume() { 
         super.onResume();
-        String nazwa = this.getIntent().getStringExtra("nazwa");
+        String nazwa = this.getIntent().getStringExtra("medicineName");
         if (nazwa != null) {
             adapter.add(new Medicine(nazwa, "nieznany typ"));
         }
