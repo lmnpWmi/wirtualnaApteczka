@@ -1,21 +1,23 @@
 package lmnp.wirtualnaapteczka;
 
-class Medicine {
+import java.io.Serializable;
 
-    private String nameMedicine;
-    private String kindOfMedicine;
+class Medicine implements Serializable {
+
+    private String name;
+    private String kind;
 
 
-    public Medicine(String nameMedicine, String kindOfMedicine) {
-        this.nameMedicine = nameMedicine;
-        this.kindOfMedicine = kindOfMedicine;
+    public Medicine(String name, String kind) {
+        this.name = name;
+        this.kind = kind;
     }
 
-    public String getNameMedicine() {
-        return nameMedicine;
+    public String getName() {
+        return name;
     }
 
-    public String getKindOfMedicine() {
-        return kindOfMedicine;
+    public String getKind() {
+        return kind;
     }
 }

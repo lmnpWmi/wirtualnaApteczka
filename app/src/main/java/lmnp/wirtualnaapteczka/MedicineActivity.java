@@ -19,9 +19,10 @@ public class MedicineActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String givenName = ((EditText) findViewById(R.id.edit_text_name)).getText().toString();
+                String name = ((EditText) findViewById(R.id.edit_text_name)).getText().toString();
                 Intent medicineIntent = new Intent(MedicineActivity.this, MainActivity.class);
-                medicineIntent.putExtra(Extras.MEDICINE_NAME, givenName);
+                Medicine medicine = new Medicine(name, "tabletka");
+                medicineIntent.putExtra(Extras.NEW_MEDICINE, medicine);
                 startActivity(medicineIntent);
             }
 

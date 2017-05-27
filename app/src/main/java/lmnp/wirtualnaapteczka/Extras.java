@@ -4,5 +4,5 @@ package lmnp.wirtualnaapteczka;
 public class Extras {
 
 
-    public static final String MEDICINE_NAME = "medicineName";
+    public static final String NEW_MEDICINE = "newMedicine";
 }

@@ -17,9 +17,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() { 
         super.onResume();
-        String nazwa = this.getIntent().getStringExtra(Extras.MEDICINE_NAME);
-        if (nazwa != null) {
-            adapter.add(new Medicine(nazwa, "nieznany typ"));
+        Medicine newMedicine = (Medicine) this.getIntent().getSerializableExtra(Extras.NEW_MEDICINE);
+        if (newMedicine != null) {
+            adapter.add(newMedicine);
         }
         if (!adapter.isEmpty()) {
             LinearLayout parent = (LinearLayout) findViewById(R.id.layout_medicine_list);

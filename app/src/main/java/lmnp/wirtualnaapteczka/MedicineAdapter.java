@@ -25,9 +25,9 @@ public class MedicineAdapter extends ArrayAdapter<Medicine> {
                     R.layout.list_item, parent, false);
         }
         TextView nameMedicine = (TextView) listItemView.findViewById(R.id.text_medicine_name);
-        nameMedicine.setText(currentMedicine.getNameMedicine());
+        nameMedicine.setText(currentMedicine.getName());
         TextView kindOfMedicine = (TextView) listItemView.findViewById(R.id.text_kind_of_medicine);
-        kindOfMedicine.setText(currentMedicine.getKindOfMedicine());
+        kindOfMedicine.setText(currentMedicine.getKind());
         return listItemView;
     }
 
