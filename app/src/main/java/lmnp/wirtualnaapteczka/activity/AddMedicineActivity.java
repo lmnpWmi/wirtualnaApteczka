@@ -27,6 +27,16 @@ public class AddMedicineActivity extends AppCompatActivity implements View.OnCli
 
     private OfflineConfiguration offlineConfiguration;
 
+    private EditText medicineAmount;
+    private EditText medicineCategory;
+    private EditText medicineDueDate;
+    private EditText medicineName;
+    private Spinner medicineType;
+
+    private FloatingActionButton saveNewMedicineBtn;
+    private FloatingActionButton cancelNewMedicineBtn;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,15 +44,7 @@ public class AddMedicineActivity extends AppCompatActivity implements View.OnCli
 
         offlineConfiguration = CommonUtils.retrieveOfflineConfiguration(getApplicationContext());
 
-        Spinner medicineType = (Spinner) findViewById(R.id.medicineTypeEnum);
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.dropdown_element_layout, MedicineTypeEnum.retrieveNames());
-        medicineType.setAdapter(spinnerArrayAdapter);
-
-        FloatingActionButton cancelNewMedicineBtn = (FloatingActionButton) findViewById(R.id.cancelNewMedicine);
-        cancelNewMedicineBtn.setOnClickListener(this);
-
-        FloatingActionButton saveNewMedicineBtn = (FloatingActionButton) findViewById(R.id.saveNewMedicine);
-        saveNewMedicineBtn.setOnClickListener(this);
+        initializeComponents();
     }
 
     @Override
@@ -61,12 +63,7 @@ public class AddMedicineActivity extends AppCompatActivity implements View.OnCli
                             .getMedicines()
                             .add(medicineItem);
 
-                    List<String> medicineCategories = offlineConfiguration.getMedicineCategories();
-                    boolean doesCategoryAlreadyExists = medicineCategories.contains(medicineItem.getCategory());
-
-                    if (!doesCategoryAlreadyExists) {
-                        medicineCategories.add(medicineItem.getCategory());
-                    }
+                    addCategoryToOfflineConfigurationIfDoesntExists(medicineItem);
 
                     CommonUtils.updateOfflineConfiguration(offlineConfiguration, getApplicationContext());
                 } catch (ParseException e) {
@@ -77,27 +74,51 @@ public class AddMedicineActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private void initializeComponents() {
+        medicineAmount = (EditText) findViewById(R.id.medicineAmount);
+        medicineName = (EditText) findViewById(R.id.medicineName);
+        medicineCategory = (EditText) findViewById(R.id.medicineCategory);
+        medicineDueDate = (EditText) findViewById(R.id.medicineDueDate);
+
+        medicineType = (Spinner) findViewById(R.id.medicineTypeEnum);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.dropdown_element_layout, MedicineTypeEnum.retrieveNames());
+        medicineType.setAdapter(spinnerArrayAdapter);
+
+        cancelNewMedicineBtn = (FloatingActionButton) findViewById(R.id.cancelNewMedicine);
+        cancelNewMedicineBtn.setOnClickListener(this);
+
+        saveNewMedicineBtn = (FloatingActionButton) findViewById(R.id.saveNewMedicine);
+        saveNewMedicineBtn.setOnClickListener(this);
+    }
+
     private MedicineItem prepareMedicineItem() throws ParseException {
         MedicineItem medicineItem = new MedicineItem();
 
-        EditText medicineName = (EditText) findViewById(R.id.medicineName);
-        EditText medicineCategory = (EditText) findViewById(R.id.medicineCategory);
-        Spinner medicineType = (Spinner) findViewById(R.id.medicineTypeEnum);
-        EditText medicineAmount = (EditText) findViewById(R.id.medicineAmount);
-        EditText medicineDueDate = (EditText) findViewById(R.id.medicineDueDate);
-
-        medicineItem.setName(medicineName.getText().toString());
+        String name = medicineName.getText().toString();
+        medicineItem.setName(name);
 
         String category = medicineCategory.getText().toString();
         medicineItem.setCategory(category);
 
-        medicineItem.setType(MedicineTypeEnum.of(medicineType.getSelectedItem().toString()));
-        medicineItem.setAmount(Long.valueOf(medicineAmount.getText().toString()));
+        MedicineTypeEnum typeEnum = MedicineTypeEnum.of(medicineType.getSelectedItem().toString());
+        medicineItem.setType(typeEnum);
+
+        Long amount = Long.valueOf(medicineAmount.getText().toString());
+        medicineItem.setAmount(amount);
 
         String dateInTxt = medicineDueDate.getText().toString();
         Date dueDate = CommonUtils.parseStringToDate(dateInTxt);
         medicineItem.setDueDate(dueDate);
 
         return medicineItem;
+    }
+
+    private void addCategoryToOfflineConfigurationIfDoesntExists(MedicineItem medicineItem) {
+        List<String> medicineCategories = offlineConfiguration.getMedicineCategories();
+        boolean doesCategoryAlreadyExists = medicineCategories.contains(medicineItem.getCategory());
+
+        if (!doesCategoryAlreadyExists) {
+            medicineCategories.add(medicineItem.getCategory());
+        }
     }
 }
