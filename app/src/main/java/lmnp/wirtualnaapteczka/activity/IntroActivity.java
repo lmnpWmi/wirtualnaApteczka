@@ -15,16 +15,15 @@ import lmnp.wirtualnaapteczka.utils.CommonUtils;
 
 public class IntroActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private Button skipBtn;
+    private Button createNewAccountBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        Button skipBtn = (Button) findViewById(R.id.skipBtn);
-        skipBtn.setOnClickListener(this);
-
-        Button createNewAccountBtn = (Button) findViewById(R.id.createNewAccBtn);
-        createNewAccountBtn.setOnClickListener(this);
+        initializeComponents();
     }
 
     @Override
@@ -39,5 +38,13 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(intent);
                 break;
         }
+    }
+
+    private void initializeComponents() {
+        skipBtn = (Button) findViewById(R.id.skipBtn);
+        skipBtn.setOnClickListener(this);
+
+        createNewAccountBtn = (Button) findViewById(R.id.createNewAccBtn);
+        createNewAccountBtn.setOnClickListener(this);
     }
 }
