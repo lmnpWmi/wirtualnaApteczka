@@ -34,8 +34,6 @@ public class AddMedicineActivity extends AppCompatActivity implements View.OnCli
     private Spinner medicineType;
 
     private FloatingActionButton saveNewMedicineBtn;
-    private FloatingActionButton cancelNewMedicineBtn;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +50,6 @@ public class AddMedicineActivity extends AppCompatActivity implements View.OnCli
         Intent intent = new Intent(this, MedicineListActivity.class);
 
         switch (v.getId()) {
-            case R.id.cancelNewMedicine:
-                startActivity(intent);
-                break;
             case R.id.saveNewMedicine:
                 try {
                     MedicineItem medicineItem = prepareMedicineItem();
@@ -83,9 +78,6 @@ public class AddMedicineActivity extends AppCompatActivity implements View.OnCli
         medicineType = (Spinner) findViewById(R.id.medicineTypeEnum);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.dropdown_element_layout, MedicineTypeEnum.retrieveNames());
         medicineType.setAdapter(spinnerArrayAdapter);
-
-        cancelNewMedicineBtn = (FloatingActionButton) findViewById(R.id.cancelNewMedicine);
-        cancelNewMedicineBtn.setOnClickListener(this);
 
         saveNewMedicineBtn = (FloatingActionButton) findViewById(R.id.saveNewMedicine);
         saveNewMedicineBtn.setOnClickListener(this);

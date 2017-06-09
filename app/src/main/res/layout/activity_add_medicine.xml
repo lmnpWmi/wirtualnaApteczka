@@ -161,27 +161,12 @@
         android:id="@+id/saveNewMedicine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/cancelNewMedicine"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/cancelNewMedicine"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="62dp"
-        android:layout_marginRight="62dp"
-        android:alpha="0.8"
-        android:clickable="true"
-        app:backgroundTint="@android:color/holo_green_light"
-        app:fabSize="normal"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/cancelNewMedicine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/saveNewMedicine"
-        android:alpha="0.8"
+        android:layout_marginBottom="30px"
+        android:layout_marginRight="30px"
         android:clickable="true"
         app:fabSize="normal"
-        app:srcCompat="@android:drawable/ic_delete" />
+        app:srcCompat="@drawable/ic_add_white_24dp" />
+
 </RelativeLayout>
