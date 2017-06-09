@@ -16,7 +16,7 @@
     <string name="medicinelist_cough">Kaszel</string>
     <string name="medicinelist_headcold">Katar</string>
     <string name="medicinelist_vitamins">Witaminy</string>
-    <string name="medicinelist_empty">Nie dodano jeszcze żadnego leku.</string>
+    <string name="medicinelist_empty">Brak leków w wybranej kategorii.</string>
 
     <!-- Add Medicine Activity -->
     <string name="addmedicine_medicineName">Nazwa leku:</string>

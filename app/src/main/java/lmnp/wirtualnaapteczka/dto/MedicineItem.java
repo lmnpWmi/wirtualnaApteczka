@@ -129,6 +129,55 @@ public class MedicineItem {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        MedicineItem that = (MedicineItem) o;
+
+        if (overdue != that.overdue)
+            return false;
+        if (toAcquire != that.toAcquire)
+            return false;
+        if (!id.equals(that.id))
+            return false;
+        if (!name.equals(that.name))
+            return false;
+        if (!category.equals(that.category))
+            return false;
+        if (type != that.type)
+            return false;
+        if (!amount.equals(that.amount))
+            return false;
+        if (!dueDate.equals(that.dueDate))
+            return false;
+        if (photoUrl != null ? !photoUrl.equals(that.photoUrl) : that.photoUrl != null)
+            return false;
+        if (userNotes != null ? !userNotes.equals(that.userNotes) : that.userNotes != null)
+            return false;
+        return description != null ? description.equals(that.description) : that.description == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + category.hashCode();
+        result = 31 * result + type.hashCode();
+        result = 31 * result + amount.hashCode();
+        result = 31 * result + dueDate.hashCode();
+        result = 31 * result + (photoUrl != null ? photoUrl.hashCode() : 0);
+        result = 31 * result + (userNotes != null ? userNotes.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (overdue ? 1 : 0);
+        result = 31 * result + (toAcquire ? 1 : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("MedicineItem{");

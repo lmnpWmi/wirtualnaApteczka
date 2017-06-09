@@ -2,6 +2,7 @@ package lmnp.wirtualnaapteczka.dto;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Class that is serialized to json and stored inside SharedPreferences for offline configuration

@@ -1,6 +1,7 @@
 package lmnp.wirtualnaapteczka.dto;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Class that represents single Medical Kit / Medicine Chest. Name will probably have to be changed.

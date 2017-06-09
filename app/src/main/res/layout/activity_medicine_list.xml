@@ -12,36 +12,19 @@
         android:layout_alignParentStart="true">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button"
-                style="@style/MedicineListTopBtnStyle"
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/medicinelist_medToBuyBtnTxt" />
-
-            <Button
-                android:id="@+id/button2"
-                style="@style/MedicineListTopBtnStyle"
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/medicinelist_overdueBtnTxt" />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/categoriesLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="20px"
-            android:paddingRight="20px">
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp">
 
+            <Spinner
+                android:id="@+id/categorySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary" />
         </LinearLayout>
 
         <ListView

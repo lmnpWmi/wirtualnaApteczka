@@ -58,7 +58,7 @@ public class AddMedicineActivity extends AppCompatActivity implements View.OnCli
                             .getMedicines()
                             .add(medicineItem);
 
-                    addCategoryToOfflineConfigurationIfDoesntExists(medicineItem);
+                    offlineConfiguration.getMedicineCategories().add(medicineItem.getCategory());
 
                     CommonUtils.updateOfflineConfiguration(offlineConfiguration, getApplicationContext());
                 } catch (ParseException e) {
@@ -103,14 +103,5 @@ public class AddMedicineActivity extends AppCompatActivity implements View.OnCli
         medicineItem.setDueDate(dueDate);
 
         return medicineItem;
-    }
-
-    private void addCategoryToOfflineConfigurationIfDoesntExists(MedicineItem medicineItem) {
-        List<String> medicineCategories = offlineConfiguration.getMedicineCategories();
-        boolean doesCategoryAlreadyExists = medicineCategories.contains(medicineItem.getCategory());
-
-        if (!doesCategoryAlreadyExists) {
-            medicineCategories.add(medicineItem.getCategory());
-        }
     }
 }

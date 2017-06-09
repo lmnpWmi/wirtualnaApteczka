@@ -2,20 +2,31 @@ package lmnp.wirtualnaapteczka.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatSpinner;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.customarrayadapters.MedicineItemArrayAdapter;
+import lmnp.wirtualnaapteczka.data.MedicineTypeEnum;
 import lmnp.wirtualnaapteczka.dto.MedicineItem;
 import lmnp.wirtualnaapteczka.dto.OfflineConfiguration;
 import lmnp.wirtualnaapteczka.utils.CommonUtils;
@@ -27,11 +38,9 @@ public class MedicineListActivity extends AppCompatActivity {
 
     private OfflineConfiguration offlineConfiguration;
 
+    private Spinner categorySpinner;
     private ListView medicineList;
     private FloatingActionButton floatingBtn;
-
-    private LinearLayout categoriesLinearLayout;
-    private LinearLayout.LayoutParams params;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +50,7 @@ public class MedicineListActivity extends AppCompatActivity {
         offlineConfiguration = CommonUtils.retrieveOfflineConfiguration(getApplicationContext());
 
         initializeComponents();
-        prepareCategoryButtons();
+        prepareCategorySpinner();
 
         boolean isMedicineChestNotEmpty = !offlineConfiguration.getMedicineChest().getMedicines().isEmpty();
 
@@ -64,47 +73,24 @@ public class MedicineListActivity extends AppCompatActivity {
             }
         });
 
-        categoriesLinearLayout = (LinearLayout) findViewById(R.id.categoriesLayout);
-        categoriesLinearLayout.setWeightSum(offlineConfiguration.getMedicineCategories().size() + 1);
-
-        params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.weight = 1f;
+        categorySpinner = (Spinner) findViewById(R.id.categorySpinner);
+        categorySpinner.setOnItemSelectedListener(new CategorySpinnerItemSelectedListener());
     }
 
-    private void prepareCategoryButtons() {
-        final List<String> medicineCategories = offlineConfiguration.getMedicineCategories();
+    private void prepareCategorySpinner() {
+        String allCategoryText = getResources().getString(R.string.medicinelist_categoryAll);
 
-        // Prepares a category button for viewing from all categories
-        String categoryAllName = getApplicationContext().getString(R.string.medicinelist_categoryAll);
-        Button categoryAllButton = prepareSingleCategoryButton(categoryAllName, true);
+        List<String> medicineCategories = new ArrayList<>();
+        medicineCategories.add(allCategoryText);
+        medicineCategories.addAll(offlineConfiguration.getMedicineCategories());
 
-        categoriesLinearLayout.addView(categoryAllButton);
-
-        for (final String category : medicineCategories) {
-            Button categoryButton = prepareSingleCategoryButton(category, false);
-            categoriesLinearLayout.addView(categoryButton);
-        }
-    }
-
-    private Button prepareSingleCategoryButton(final String category, boolean isSelected) {
-        Button createdButton = (Button) getLayoutInflater().inflate(R.layout.medicine_layout_top_button, null);
-
-        createdButton.setText(category);
-
-        if (isSelected) {
-            createdButton.setTextColor(Color.rgb(201, 34, 21));
-        }
-
-        createdButton.setLayoutParams(params);
-        createdButton.setOnClickListener(new CategoryButtonListener(category, categoriesLinearLayout));
-
-        return createdButton;
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.dropdown_category_layout, medicineCategories);
+        categorySpinner.setAdapter(spinnerArrayAdapter);
     }
 
     private void addMedicinesFromMedicineChestToMedicinesList() {
         List<MedicineItem> medicines = offlineConfiguration.getMedicineChest().getMedicines();
-        MedicineItemArrayAdapter medicineItemArrayAdapter = new MedicineItemArrayAdapter(this, 0, medicines);
+        MedicineItemArrayAdapter medicineItemArrayAdapter = new MedicineItemArrayAdapter(this, 0, medicines, categorySpinner);
 
         medicineList.setAdapter(medicineItemArrayAdapter);
     }
@@ -119,39 +105,28 @@ public class MedicineListActivity extends AppCompatActivity {
             }
         }
 
-        MedicineItemArrayAdapter medicineItemArrayAdapter = new MedicineItemArrayAdapter(this, 0, categoryMedicines);
+        MedicineItemArrayAdapter medicineItemArrayAdapter = new MedicineItemArrayAdapter(this, 0, categoryMedicines, categorySpinner);
         medicineList.setAdapter(medicineItemArrayAdapter);
     }
 
-    private class CategoryButtonListener implements View.OnClickListener {
+    private class CategorySpinnerItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
-        private String category;
-        private LinearLayout categoriesLinearLayout;
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            String selectedCategory = categorySpinner.getItemAtPosition(position).toString();
 
+            boolean isAllCategorySelected = selectedCategory.equals(getResources().getString(R.string.medicinelist_categoryAll));
 
-        CategoryButtonListener(String category, LinearLayout categoriesLinearLayout) {
-            this.category = category;
-            this.categoriesLinearLayout = categoriesLinearLayout;
+            if (isAllCategorySelected) {
+                addMedicinesFromMedicineChestToMedicinesList();
+            } else {
+                addMedicinesByCategoryToMedicinesList(selectedCategory);
+            }
         }
 
         @Override
-        public void onClick(View v) {
-            for (int i = 0; i < categoriesLinearLayout.getChildCount(); i++) {
-                Button button = (Button) categoriesLinearLayout.getChildAt(i);
-                button.setTextColor(Color.BLACK);
-            }
+        public void onNothingSelected(AdapterView<?> parent) {
 
-            Button button = (Button) v;
-            button.setTextColor(Color.rgb(201, 34, 21));
-
-            String categoryAllName = getApplicationContext().getString(R.string.medicinelist_categoryAll);
-            boolean isCategoryAllSelected = category.equals(categoryAllName);
-
-            if (isCategoryAllSelected) {
-                addMedicinesFromMedicineChestToMedicinesList();
-            } else {
-                addMedicinesByCategoryToMedicinesList(category);
-            }
         }
     }
 }
