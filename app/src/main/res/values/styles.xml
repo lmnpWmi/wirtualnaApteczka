@@ -8,6 +8,28 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="DefaultButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:background">@color/defaultBtnColor</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/defaultBtnTextColor</item>
+        <item name="android:layout_margin">80px</item>
+    </style>
 
+    <style name="MedicineListTopBtnStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:padding">5px</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:minWidth">40dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="AddMedicineBtnStyle" parent="Widget.AppCompat.Button">
+        <item name="android:textAllCaps">false</item>
+    </style>
 
 </resources>
