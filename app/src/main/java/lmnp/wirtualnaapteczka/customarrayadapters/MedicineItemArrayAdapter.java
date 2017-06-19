@@ -3,12 +3,11 @@ package lmnp.wirtualnaapteczka.customarrayadapters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.data.MedicineTypeEnum;
 import lmnp.wirtualnaapteczka.dto.MedicineItem;
 import lmnp.wirtualnaapteczka.dto.OfflineConfiguration;
 import lmnp.wirtualnaapteczka.utils.CommonUtils;
@@ -67,10 +65,10 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<MedicineItem> {
         String formattedDueDate = formatter.format(medicine.getDueDate());
         dueDate.setText(DUEDATE_TEXT + formattedDueDate);
 
-        AppCompatImageButton deleteBtn = (AppCompatImageButton) view.findViewById(R.id.deleteMedicineBtn);
+        ImageButton deleteBtn = (ImageButton) view.findViewById(R.id.deleteMedicineBtn);
         deleteBtn.setOnClickListener(new DeleteButtonOnClickListener(name.getText().toString()));
 
-        AppCompatImageButton editBtn = (AppCompatImageButton) view.findViewById(R.id.editMedicineBtn);
+        ImageButton editBtn = (ImageButton) view.findViewById(R.id.editMedicineBtn);
         editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +76,7 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<MedicineItem> {
             }
         });
 
-        AppCompatImageButton viewBtn = (AppCompatImageButton) view.findViewById(R.id.viewMedicineBtn);
+        ImageButton viewBtn = (ImageButton) view.findViewById(R.id.viewMedicineBtn);
         viewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
