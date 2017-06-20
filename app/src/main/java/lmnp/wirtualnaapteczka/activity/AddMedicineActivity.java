@@ -4,15 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.text.ParseException;
 import java.util.Date;
-import java.util.List;
 
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.MedicineTypeEnum;
@@ -23,7 +24,7 @@ import lmnp.wirtualnaapteczka.utils.CommonUtils;
 /**
  * Activity class for handling adding new medicine form activity.
  */
-public class AddMedicineActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddMedicineActivity extends AppCompatActivity {
 
     private OfflineConfiguration offlineConfiguration;
 
@@ -39,6 +40,8 @@ public class AddMedicineActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_medicine);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         offlineConfiguration = CommonUtils.retrieveOfflineConfiguration(getApplicationContext());
 
@@ -46,27 +49,37 @@ public class AddMedicineActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(this, MedicineListActivity.class);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
-        switch (v.getId()) {
-            case R.id.saveNewMedicine:
-                try {
-                    MedicineItem medicineItem = prepareMedicineItem();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
-                    offlineConfiguration.getMedicineChest()
-                            .getMedicines()
-                            .add(medicineItem);
+        if (id == R.id.action_add) {
+            try {
+                MedicineItem medicineItem = prepareMedicineItem();
 
-                    offlineConfiguration.getMedicineCategories().add(medicineItem.getCategory());
+                offlineConfiguration.getMedicineChest()
+                        .getMedicines()
+                        .add(medicineItem);
 
-                    CommonUtils.updateOfflineConfiguration(offlineConfiguration, getApplicationContext());
-                } catch (ParseException e) {
-                    Log.e("Parsing error", "Unable to parse dueDate. Adding new medicine failed.");
-                }
-                startActivity(intent);
-                break;
+                offlineConfiguration.getMedicineCategories().add(medicineItem.getCategory());
+
+                CommonUtils.updateOfflineConfiguration(offlineConfiguration, getApplicationContext());
+            } catch (ParseException e) {
+                Log.e("Parsing error", "Unable to parse dueDate. Adding new medicine failed.");
+            }catch (NumberFormatException e) {
+                Log.e("Parsing error", "Unable to parse amount. Adding new medicine failed.");
+            }
+            Intent intent = new Intent(this, MedicineListActivity.class);
+            startActivity(intent);
+            return true;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void initializeComponents() {
@@ -78,9 +91,6 @@ public class AddMedicineActivity extends AppCompatActivity implements View.OnCli
         medicineType = (Spinner) findViewById(R.id.medicineTypeEnum);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.dropdown_element_layout, MedicineTypeEnum.retrieveNames());
         medicineType.setAdapter(spinnerArrayAdapter);
-
-        saveNewMedicineBtn = (FloatingActionButton) findViewById(R.id.saveNewMedicine);
-        saveNewMedicineBtn.setOnClickListener(this);
     }
 
     private MedicineItem prepareMedicineItem() throws ParseException {

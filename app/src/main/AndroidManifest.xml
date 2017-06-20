@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MedicineListActivity" />
-        <activity android:name=".activity.AddMedicineActivity" />
+        <activity android:name=".activity.AddMedicineActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
