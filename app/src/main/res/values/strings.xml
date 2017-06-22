@@ -28,7 +28,7 @@
     <string name="addmedicine_medicineDescription">Opis leku</string>
     <string name="addmedicine_medicineAmountLabel">Ilość leku w opakowaniu:</string>
     <string name="addmedicine_dueDate">Data ważności:</string>
-    <string name="addmedicine_dueDateHint">YYYY-MM-DD</string>
+    <string name="addmedicine_dueDateHint">Wybierz datę</string>
     <string name="addmedicine_photo">Zdjęcie leku</string>
     <string name="addmedicine_notes">Notatki</string>
     <string name="addmedicine_descriptiion">Krótki opis</string>

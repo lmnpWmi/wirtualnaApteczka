@@ -1,18 +1,25 @@
 package lmnp.wirtualnaapteczka.activity;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 
 import lmnp.wirtualnaapteczka.R;
@@ -30,7 +37,7 @@ public class AddMedicineActivity extends AppCompatActivity {
 
     private EditText medicineAmount;
     private EditText medicineCategory;
-    private EditText medicineDueDate;
+    private TextView medicineDueDate;
     private EditText medicineName;
     private Spinner medicineType;
 
@@ -71,7 +78,7 @@ public class AddMedicineActivity extends AppCompatActivity {
                 CommonUtils.updateOfflineConfiguration(offlineConfiguration, getApplicationContext());
             } catch (ParseException e) {
                 Log.e("Parsing error", "Unable to parse dueDate. Adding new medicine failed.");
-            }catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 Log.e("Parsing error", "Unable to parse amount. Adding new medicine failed.");
             }
             Intent intent = new Intent(this, MedicineListActivity.class);
@@ -86,7 +93,7 @@ public class AddMedicineActivity extends AppCompatActivity {
         medicineAmount = (EditText) findViewById(R.id.medicineAmount);
         medicineName = (EditText) findViewById(R.id.medicineName);
         medicineCategory = (EditText) findViewById(R.id.medicineCategory);
-        medicineDueDate = (EditText) findViewById(R.id.medicineDueDate);
+        medicineDueDate = (TextView) findViewById(R.id.medicineDueDate);
 
         medicineType = (Spinner) findViewById(R.id.medicineTypeEnum);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.dropdown_element_layout, MedicineTypeEnum.retrieveNames());
@@ -108,10 +115,37 @@ public class AddMedicineActivity extends AppCompatActivity {
         Long amount = Long.valueOf(medicineAmount.getText().toString());
         medicineItem.setAmount(amount);
 
+
         String dateInTxt = medicineDueDate.getText().toString();
         Date dueDate = CommonUtils.parseStringToDate(dateInTxt);
         medicineItem.setDueDate(dueDate);
 
+
         return medicineItem;
+    }
+
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            TextView medicineDueDate = (TextView) getActivity().findViewById(R.id.medicineDueDate);
+            medicineDueDate.setText(year + "-" + month + "-" + day);
+
+        }
     }
 }

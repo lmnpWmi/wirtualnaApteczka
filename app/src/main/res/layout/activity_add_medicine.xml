@@ -110,15 +110,15 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="center"
-                    android:inputType="number"
-                    android:textSize="16sp" />
+                    android:inputType="number"/>
 
                 <TextView
                     android:id="@+id/amountSuffixLabel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="right"
+                    android:paddingRight="20dp"
                     android:text="tabletek" />
             </LinearLayout>
 
@@ -134,15 +134,15 @@
                     android:layout_weight="1"
                     android:text="@string/addmedicine_dueDate" />
 
-                <EditText
+                <TextView
                     android:id="@+id/medicineDueDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:ems="10"
                     android:hint="@string/addmedicine_dueDateHint"
-                    android:inputType="date"
-                    android:textSize="16sp" />
+                    android:gravity="right"
+                    android:paddingRight="20dp"
+                    android:onClick="showDatePickerDialog"/>
             </LinearLayout>
 
             <TextView
