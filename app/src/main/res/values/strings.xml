@@ -36,4 +36,6 @@
     <string name="addmedicine_generalInfo">Informacje ogólne</string>
     <string name="addmedicine_medicinePackLabel">Opakowanie</string>
     <string name="addmedicine_additionaLabel">Dodatkowo</string>
+    
+    <string name="addmedicine_add">Dodaj</string>
 </resources>
