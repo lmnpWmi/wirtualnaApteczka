@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +62,8 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<MedicineItem> {
         type.setText(medicine.getType().getName());
         amount.setText(AMOUNT_TEXT + medicine.getAmount());
 
-        SimpleDateFormat formatter = new SimpleDateFormat("d.M.yyyy");
-        String formattedDueDate = formatter.format(medicine.getDueDate());
+        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext().getApplicationContext());
+        String formattedDueDate = dateFormat.format(medicine.getDueDate());
         dueDate.setText(DUEDATE_TEXT + formattedDueDate);
 
         ImageButton deleteBtn = (ImageButton) view.findViewById(R.id.deleteMedicineBtn);
