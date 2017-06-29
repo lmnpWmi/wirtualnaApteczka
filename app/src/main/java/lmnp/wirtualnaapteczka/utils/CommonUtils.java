@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import lmnp.wirtualnaapteczka.R;
