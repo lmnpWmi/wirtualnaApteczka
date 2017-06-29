@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,9 +40,10 @@ public class CommonUtils {
         editor.apply();
     }
 
-    public static Date parseStringToDate(String dateInTxt) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat(DATE_PATTERN);
-        Date date = formatter.parse(dateInTxt);
+    public static Date parseStringToDate(String dateInTxt, Context applicationContext) throws ParseException {
+        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(applicationContext);
+
+        Date date = dateFormat.parse(dateInTxt);
 
         return date;
     }

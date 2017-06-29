@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
@@ -117,7 +118,7 @@ public class AddMedicineActivity extends AppCompatActivity {
 
 
         String dateInTxt = medicineDueDate.getText().toString();
-        Date dueDate = CommonUtils.parseStringToDate(dateInTxt);
+        Date dueDate = CommonUtils.parseStringToDate(dateInTxt, getApplicationContext());
         medicineItem.setDueDate(dueDate);
 
 
@@ -143,9 +144,13 @@ public class AddMedicineActivity extends AppCompatActivity {
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            TextView medicineDueDate = (TextView) getActivity().findViewById(R.id.medicineDueDate);
-            medicineDueDate.setText(year + "-" + month + "-" + day);
+            Calendar c = Calendar.getInstance();
+            c.set(year, month - 1, day);
+            Date date = c.getTime();
 
+            DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());
+            TextView medicineDueDate = (TextView) getActivity().findViewById(R.id.medicineDueDate);
+            medicineDueDate.setText(dateFormat.format(date));
         }
     }
 }
