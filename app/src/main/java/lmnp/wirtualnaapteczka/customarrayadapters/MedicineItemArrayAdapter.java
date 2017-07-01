@@ -95,6 +95,7 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<MedicineItem> {
             this.name = name;
         }
 
+        // TODO refractor this part
         @Override
         public void onClick(View v) {
             MedicineItem itemToDeletion = null;

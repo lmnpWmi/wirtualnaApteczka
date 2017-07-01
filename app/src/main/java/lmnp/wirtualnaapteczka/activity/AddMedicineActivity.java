@@ -1,7 +1,5 @@
 package lmnp.wirtualnaapteczka.activity;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,17 +11,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Calendar;
 import java.util.Date;
 
 import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.components.DatePickerFragment;
 import lmnp.wirtualnaapteczka.data.MedicineTypeEnum;
 import lmnp.wirtualnaapteczka.dto.MedicineItem;
 import lmnp.wirtualnaapteczka.dto.OfflineConfiguration;
@@ -41,8 +37,6 @@ public class AddMedicineActivity extends AppCompatActivity {
     private TextView medicineDueDate;
     private EditText medicineName;
     private Spinner medicineType;
-
-    private FloatingActionButton saveNewMedicineBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +60,8 @@ public class AddMedicineActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        boolean result = super.onOptionsItemSelected(item);
+
         if (id == R.id.action_add) {
             try {
                 MedicineItem medicineItem = prepareMedicineItem();
@@ -84,10 +80,10 @@ public class AddMedicineActivity extends AppCompatActivity {
             }
             Intent intent = new Intent(this, MedicineListActivity.class);
             startActivity(intent);
-            return true;
+            result = true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return result;
     }
 
     private void initializeComponents() {
@@ -128,29 +124,5 @@ public class AddMedicineActivity extends AppCompatActivity {
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
-    }
-
-    public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener {
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
-
-            return new DatePickerDialog(getActivity(), this, year, month, day);
-        }
-
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            Calendar c = Calendar.getInstance();
-            c.set(year, month - 1, day);
-            Date date = c.getTime();
-
-            DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());
-            TextView medicineDueDate = (TextView) getActivity().findViewById(R.id.medicineDueDate);
-            medicineDueDate.setText(dateFormat.format(date));
-        }
     }
 }
