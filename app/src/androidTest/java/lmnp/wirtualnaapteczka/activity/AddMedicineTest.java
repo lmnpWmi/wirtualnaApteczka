@@ -26,7 +26,6 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
 import static android.support.test.espresso.action.ViewActions.replaceText;
-import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
@@ -44,10 +43,11 @@ public class AddMedicineTest {
     @Rule
     public ActivityTestRule<IntroActivity> mActivityTestRule = new ActivityTestRule<>(IntroActivity.class);
 
-    @Rule public ClearPreferencesRule clearPreferencesRule = new ClearPreferencesRule();
+    @Rule
+    public ClearPreferencesRule clearPreferencesRule = new ClearPreferencesRule();
 
     @Test
-    public void addMedicineTest() {
+    public void addMedicineTest2() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.skipBtn), withText("Pomiń"), isDisplayed()));
         appCompatButton.perform(click());
@@ -58,23 +58,15 @@ public class AddMedicineTest {
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.medicineName), isDisplayed()));
-        appCompatEditText.perform(click());
+        appCompatEditText.perform(replaceText("witamina C"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.medicineName), isDisplayed()));
-        appCompatEditText2.perform(replaceText("witamina C"), closeSoftKeyboard());
+                allOf(withId(R.id.medicineCategory), isDisplayed()));
+        appCompatEditText2.perform(replaceText("witaminy"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.medicineName), withText("witamina C"), isDisplayed()));
-        appCompatEditText3.perform(pressImeActionButton());
-
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.medicineCategory), isDisplayed()));
-        appCompatEditText4.perform(replaceText("witaminy"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText5 = onView(
                 allOf(withId(R.id.medicineCategory), withText("witaminy"), isDisplayed()));
-        appCompatEditText5.perform(pressImeActionButton());
+        appCompatEditText3.perform(pressImeActionButton());
 
         ViewInteraction appCompatSpinner = onView(
                 allOf(withId(R.id.medicineTypeEnum), isDisplayed()));
@@ -84,28 +76,24 @@ public class AddMedicineTest {
                 allOf(withId(R.id.dropdownElement), withText("Tabletka"), isDisplayed()));
         appCompatTextView.perform(click());
 
-        ViewInteraction appCompatEditText6 = onView(
+        ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.medicineAmount), isDisplayed()));
-        appCompatEditText6.perform(replaceText("15"), closeSoftKeyboard());
+        appCompatEditText4.perform(replaceText("15"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText7 = onView(
+        ViewInteraction appCompatEditText5 = onView(
                 allOf(withId(R.id.medicineAmount), withText("15"), isDisplayed()));
-        appCompatEditText7.perform(pressImeActionButton());
+        appCompatEditText5.perform(pressImeActionButton());
 
         ViewInteraction appCompatTextView2 = onView(
                 allOf(withId(R.id.medicineDueDate), isDisplayed()));
         appCompatTextView2.perform(click());
 
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withClassName(is("android.support.v7.widget.AppCompatImageButton")), withContentDescription("Następny miesiąc"),
-                        withParent(allOf(withClassName(is("android.widget.DayPickerView")),
-                                withParent(withClassName(is("com.android.internal.widget.DialogViewAnimator"))))),
-                        isDisplayed()));
-        appCompatImageButton.perform(click());
-
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(android.R.id.button1), withText("OK")));
-        appCompatButton2.perform(scrollTo(), click());
+                allOf(withId(android.R.id.button1), withText("OK"),
+                        withParent(allOf(withClassName(is("android.widget.LinearLayout")),
+                                withParent(withClassName(is("android.widget.LinearLayout"))))),
+                        isDisplayed()));
+        appCompatButton2.perform(click());
 
         ViewInteraction actionMenuItemView = onView(
                 allOf(withId(R.id.action_add), withText("Dodaj"), withContentDescription("Dodaj"), isDisplayed()));
@@ -140,7 +128,6 @@ public class AddMedicineTest {
                                 2),
                         isDisplayed()));
         textView3.check(matches(withText("Ilość: 15")));
-
     }
 
     private static Matcher<View> childAtPosition(
