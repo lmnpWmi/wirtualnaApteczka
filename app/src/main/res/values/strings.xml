@@ -1,41 +1,5 @@
 <resources>
     <string name="app_name">Wirtualna Apteczka</string>
-    <string name="function_not_avaiable">Ta opcja nie jest jeszcze dostępna!</string>
 
-    <!-- Intro Activity -->
-    <string name="intro_welcome">Witamy!</string>
-    <string name="intro_message">Cieszymy się, że wybrałeś naszą aplikację do zarządzania Twoją domową apteczką.</string>
-    <string name="intro_createBtnTxt">Utwórz konto</string>
-    <string name="into_shareWithFriends">aby móc dzielić się swoją listą leków ze znajomymi</string>
-    <string name="intro_skipBtnTxt">Pomiń</string>
-
-    <!-- Medicine List Activity -->
-    <string name="medicinelist_medToBuyBtnTxt">DO KUPIENIA</string>
-    <string name="medicinelist_overdueBtnTxt">PRZETERMINOWANE</string>
-    <string name="medicinelist_categoryAll">Wszystkie</string>
-    <string name="medicinelist_cough">Kaszel</string>
-    <string name="medicinelist_headcold">Katar</string>
-    <string name="medicinelist_vitamins">Witaminy</string>
-    <string name="medicinelist_empty">Brak leków w wybranej kategorii.</string>
-
-    <!-- Add Medicine Activity -->
-    <string name="addmedicine_medicineName">Nazwa leku:</string>
-    <string name="addmedicine_medicineCategory">Kategoria leku:</string>
-    <string name="addmedicine_medicineType">Postać leku:</string>
-    <string name="addmedicine_medicineAmount">Podaj ilość leku</string>
-    <string name="addmedicine_medicinePhoto">Zdjęcie leku</string>
-    <string name="addmedicine_medicineNotes">Notatki</string>
-    <string name="addmedicine_medicineDescription">Opis leku</string>
-    <string name="addmedicine_medicineAmountLabel">Ilość leku w opakowaniu:</string>
-    <string name="addmedicine_dueDate">Data ważności:</string>
-    <string name="addmedicine_dueDateHint">Wybierz datę</string>
-    <string name="addmedicine_photo">Zdjęcie leku</string>
-    <string name="addmedicine_notes">Notatki</string>
-    <string name="addmedicine_descriptiion">Krótki opis</string>
-
-    <string name="addmedicine_generalInfo">Informacje ogólne</string>
-    <string name="addmedicine_medicinePackLabel">Opakowanie</string>
-    <string name="addmedicine_additionaLabel">Dodatkowo</string>
-    
-    <string name="addmedicine_add">Dodaj</string>
+    <string name="addMedicineBtnLabel">Dodaj lek</string>
 </resources>

@@ -1,44 +1,25 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:actionBarStyle">@style/AppActionBar</item>
+        <item name="actionBarStyle">@style/AppActionBar</item>
     </style>
 
-    <style name="DefaultButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:background">@color/defaultBtnColor</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/defaultBtnTextColor</item>
-        <item name="android:layout_margin">80px</item>
+    <style name="AppActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/black</item>
+        <item name="background">@color/black</item>
     </style>
 
-    <style name="MedicineListTopBtnStyle" parent="Widget.AppCompat.Button">
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:padding">5px</item>
-        <item name="android:minHeight">40dp</item>
-        <item name="android:minWidth">40dp</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:layout_weight">1</item>
+    <style name="MenuLayout">
+        <item name="android:padding">12sp</item>
     </style>
 
-    <style name="AddMedicineBtnStyle" parent="Widget.AppCompat.Button">
-        <item name="android:textAllCaps">false</item>
+    <style name="MenuTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">24sp</item>
+        <item name="android:layout_marginTop">10sp</item>
     </style>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

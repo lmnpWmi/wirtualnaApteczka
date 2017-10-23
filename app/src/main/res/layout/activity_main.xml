@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:background="@drawable/default_background"
+              android:weightSum="1">
+
+    <include layout="@layout/app_menu"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:weightSum="1"
+            android:background="@android:drawable/screen_background_light_transparent" android:padding="10dp"
+            android:layout_weight="0.14">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:layout_weight="0.05">
+            <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" app:srcCompat="@drawable/addMedicineIcon"
+                    android:id="@+id/addMedicineBtn"
+                    android:background="@android:drawable/screen_background_dark_transparent"
+            />
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPersonName"
+                    android:text="@string/addMedicineBtnLabel"
+                    android:ems="10"
+                    android:id="@+id/addMedicineLabel" android:textAlignment="center"
+                    android:background="@android:drawable/screen_background_dark_transparent"/>
+        </LinearLayout>
+        <ImageButton
+                android:layout_width="132dp"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/myMedicinesList"
+                android:id="@+id/myMedicineList"
+                android:background="@android:drawable/screen_background_dark_transparent"/>
+    </LinearLayout>
+</LinearLayout>
