@@ -18,7 +18,7 @@
                 android:layout_height="match_parent" android:layout_weight="0.05">
             <ImageButton
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" app:srcCompat="@drawable/addMedicineIcon"
+                    android:layout_height="wrap_content" app:srcCompat="@drawable/add_medicine_icon"
                     android:id="@+id/addMedicineBtn"
                     android:background="@android:drawable/screen_background_dark_transparent"
             />
@@ -33,7 +33,7 @@
         </LinearLayout>
         <ImageButton
                 android:layout_width="132dp"
-                android:layout_height="wrap_content" app:srcCompat="@drawable/myMedicinesList"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/my_medicine_list"
                 android:id="@+id/myMedicineList"
                 android:background="@android:drawable/screen_background_dark_transparent"/>
     </LinearLayout>
