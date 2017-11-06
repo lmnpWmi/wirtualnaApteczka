@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Wirtualna Apteczka</string>
-    <string name="addmedicine_add">Add</string>
+    <string name="appName">Wirtualna Apteczka</string>
+    <string name="add">Add</string>
+    <string name="addMedicine">Add medicine</string>
+    <string name="friends">Friends</string>
+    <string name="lastSearched">Last Searched:</string>
+    <string name="myListMedicine">My list medicines</string>
+    <string name="notSearchedMedicineYet">You have not searched for any medicines yet</string>
 </resources>

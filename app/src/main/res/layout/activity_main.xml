@@ -38,7 +38,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="20sp"
-                android:text="@string/addMedicineBtnLabel"
+                android:text="@string/addMedicine"
                />
         </LinearLayout>
 
@@ -111,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:inputType="textAutoComplete"
-            android:text="@string/notSerchedMedicineYet"
+            android:text="@string/notSearchedMedicineYet"
             android:gravity="start"
             android:textColor="@color/grey"
             android:background="@android:color/transparent"
