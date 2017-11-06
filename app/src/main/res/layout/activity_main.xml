@@ -49,7 +49,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/myMedicineList"
+                android:id="@+id/myMedicineListBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -58,6 +58,7 @@
                 app:srcCompat="@drawable/my_medicine_list" />
 
             <TextView
+                android:id="@+id/myMedicineListLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="20sp"
@@ -73,7 +74,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/myFriends"
+                android:id="@+id/myFriendsBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -81,6 +82,7 @@
                 app:srcCompat="@drawable/icons8_couple_96" />
 
             <TextView
+                android:id="@+id/myFriendsLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="20sp"
@@ -105,6 +107,7 @@
             android:text="@string/lastSearched" />
 
         <EditText
+            android:id="@+id/listLastSearch"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:inputType="textAutoComplete"
