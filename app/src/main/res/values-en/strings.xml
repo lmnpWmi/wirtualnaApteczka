@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Virtual MedKit</string>
-
-    <string name="addMedicineBtnLabel">Add Medicine</string>
+    <string name="app_name">Wirtualna Apteczka</string>
+    <string name="addmedicine_add">Add</string>
 </resources>

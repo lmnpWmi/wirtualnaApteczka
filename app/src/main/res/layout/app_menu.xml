@@ -19,9 +19,12 @@
             android:gravity="center" android:width="0dp"/>
     <ImageButton
             android:layout_width="0dp"
-            android:layout_height="43dp" app:srcCompat="@drawable/config_icon"
+            android:layout_height="43dp"
+            app:srcCompat="@drawable/icons8_services_96"
             android:id="@+id/menu_app_config_btn"
-            android:background="@android:color/transparent" android:scaleType="fitCenter"
-            android:adjustViewBounds="true" android:layout_weight="1"/>
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_weight="1"/>
 
 </LinearLayout>
