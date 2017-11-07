@@ -7,4 +7,5 @@
     <string name="lastSearched">Last Searched:</string>
     <string name="myListMedicine">My list medicines</string>
     <string name="notSearchedMedicineYet">You have not searched for any medicines yet</string>
+    <string name="options">Options</string>
 </resources>
