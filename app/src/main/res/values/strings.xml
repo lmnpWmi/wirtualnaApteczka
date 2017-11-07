@@ -1,9 +1,9 @@
 <resources>
     <string name="appName">Wirtualna Apteczka</string>
     <string name="addMedicine">Dodaj lek</string>
-    <string name ="lastSearched">Ostatnio wyszukiwane:</string>
-    <string name ="myListMedicine">Moja lista leków</string>
-    <string name ="friends">Znajomi</string>
+    <string name="lastSearched">Ostatnio wyszukiwane:</string>
+    <string name="myListMedicine">Moja lista leków</string>
+    <string name="friends">Znajomi</string>
     <string name="notSearchedMedicineYet">Nie wyszukiwałeś jeszcze żadnego leku</string>
     <string name="add">Dodaj</string>
 
