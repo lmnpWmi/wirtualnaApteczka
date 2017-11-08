@@ -1,8 +1,10 @@
 package lmnp.wirtualnaapteczka.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.View;
 
 import lmnp.wirtualnaapteczka.R;
 
@@ -20,4 +22,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public void openAddMedicine(View view) {
+        Intent i = new Intent(this, AddActivity.class);
+        startActivity(i);
+    }
 }

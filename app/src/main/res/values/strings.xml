@@ -7,6 +7,7 @@
     <string name="notSearchedMedicineYet">Nie wyszukiwałeś jeszcze żadnego leku</string>
     <string name="add">Dodaj</string>
     <string name="options">Opcje</string>
+    <string name="generalInformation">Informacje ogólne</string>
 
 
 </resources>
