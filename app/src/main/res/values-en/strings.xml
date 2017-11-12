@@ -9,4 +9,5 @@
     <string name="notSearchedMedicineYet">You have not searched for any medicines yet</string>
     <string name="options">Options</string>
     <string name="generalInformation">General information</string>
+    <string name="medicine_list_empty">No medicines in the selected category.</string>
 </resources>

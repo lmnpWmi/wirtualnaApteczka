@@ -26,4 +26,11 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, AddActivity.class);
         startActivity(i);
     }
+
+    public void openMyList(View view) {
+        Intent i = new Intent(this, MedicineListActivity.class);
+        startActivity(i);
+    }
+
+
 }
