@@ -17,74 +17,74 @@
         >
 
         <LinearLayout
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:onClick="openAddMedicine">
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:onClick="openAddMedicine" android:id="@+id/addMedicinePanel">
 
             <ImageButton
-                android:id="@+id/addMedicineBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/add_medicine_icon" />
+                    android:id="@+id/addMedicineBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/add_medicine_icon"/>
 
             <TextView
-                android:id="@+id/addMedicineLabel"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/addMedicine"
-                android:textSize="20sp" />
+                    android:id="@+id/addMedicineLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/addMedicine"
+                    android:textSize="20sp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical" android:id="@+id/medicineListPanel">
 
             <ImageButton
-                android:id="@+id/myMedicineListBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/my_medicine_list" />
+                    android:id="@+id/myMedicineListBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/my_medicine_list"/>
 
             <TextView
-                android:id="@+id/myMedicineListLabel"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/myListMedicine"
-                android:textSize="20sp" />
+                    android:id="@+id/myMedicineListLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/myListMedicine"
+                    android:textSize="20sp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical" android:id="@+id/friendsPanel">
 
             <ImageButton
-                android:id="@+id/myFriendsBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/icons8_couple_96" />
+                    android:id="@+id/myFriendsBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/icons8_couple_96"/>
 
             <TextView
-                android:id="@+id/myFriendsLabel"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/friends"
-                android:textSize="20sp" />
+                    android:id="@+id/myFriendsLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/friends"
+                    android:textSize="20sp"/>
         </LinearLayout>
 
     </LinearLayout>
