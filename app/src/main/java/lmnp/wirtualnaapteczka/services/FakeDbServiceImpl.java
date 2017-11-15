@@ -126,6 +126,13 @@ public class FakeDbServiceImpl implements DbService {
         return userMedicines;
     }
 
+    @Override
+    public List<Medicine> findRecentlyEditedMedicines(Long userId, int resultsLimit) {
+
+
+        return null;
+    }
+
     private static List<User> prepareSampleUsers() {
         List<User> users = new ArrayList<>();
 

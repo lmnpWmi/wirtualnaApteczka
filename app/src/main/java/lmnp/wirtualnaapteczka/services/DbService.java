@@ -16,4 +16,5 @@ public interface DbService {
     void deleteMedicine(Long userId, Long medicineId);
     void deleteMedicine(Long userId, Medicine medicine);
     List<Medicine> findAllMedicinesByUserId(Long userId);
+    List<Medicine> findRecentlyEditedMedicines(Long userId, int resultsLimit);
 }

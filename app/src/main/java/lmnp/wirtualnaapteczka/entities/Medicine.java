@@ -10,6 +10,7 @@ public class Medicine {
     private MedicineTypeEnum type;
     private Long amount;
     private Date dueDate;
+    private Date updatedAt;
     private String photoUri;
     private String userNotes;
     private String description;
@@ -59,6 +60,14 @@ public class Medicine {
         this.dueDate = dueDate;
     }
 
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public String getPhotoUri() {
         return photoUri;
     }
@@ -104,6 +113,7 @@ public class Medicine {
         if (type != medicine.type) return false;
         if (amount != null ? !amount.equals(medicine.amount) : medicine.amount != null) return false;
         if (dueDate != null ? !dueDate.equals(medicine.dueDate) : medicine.dueDate != null) return false;
+        if (updatedAt != null ? !updatedAt.equals(medicine.updatedAt) : medicine.updatedAt != null) return false;
         if (photoUri != null ? !photoUri.equals(medicine.photoUri) : medicine.photoUri != null) return false;
         if (userNotes != null ? !userNotes.equals(medicine.userNotes) : medicine.userNotes != null) return false;
         return description != null ? description.equals(medicine.description) : medicine.description == null;
@@ -116,6 +126,7 @@ public class Medicine {
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (amount != null ? amount.hashCode() : 0);
         result = 31 * result + (dueDate != null ? dueDate.hashCode() : 0);
+        result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
         result = 31 * result + (photoUri != null ? photoUri.hashCode() : 0);
         result = 31 * result + (userNotes != null ? userNotes.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
@@ -131,6 +142,7 @@ public class Medicine {
                 ", type=" + type +
                 ", amount=" + amount +
                 ", dueDate=" + dueDate +
+                ", updatedAt=" + updatedAt +
                 ", photoUri='" + photoUri + '\'' +
                 ", userNotes='" + userNotes + '\'' +
                 ", description='" + description + '\'' +

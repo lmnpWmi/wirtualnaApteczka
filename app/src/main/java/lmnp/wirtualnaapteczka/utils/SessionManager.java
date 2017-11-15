@@ -1,18 +1,20 @@
 package lmnp.wirtualnaapteczka.utils;
 
 import lmnp.wirtualnaapteczka.entities.User;
+import lmnp.wirtualnaapteczka.services.FakeDbServiceImpl;
 
 public class SessionManager {
-    private static User user;
+    private static User currentUser = FakeDbServiceImpl.createNewInstance()
+            .findUserById(1L);
 
-    private SessionManager(){
+    private SessionManager() {
     }
 
-    public static User getUser() {
-        return SessionManager.user;
+    public static User getCurrentUser() {
+        return SessionManager.currentUser;
     }
 
-    public static void setCurrentUser(User user) {
-        SessionManager.user = user;
+    public static void setCurrentUser(User currentUser) {
+        SessionManager.currentUser = currentUser;
     }
 }
