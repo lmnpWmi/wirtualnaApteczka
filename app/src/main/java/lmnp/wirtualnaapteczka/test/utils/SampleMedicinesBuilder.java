@@ -4,6 +4,7 @@ import lmnp.wirtualnaapteczka.data.MedicineTypeEnum;
 import lmnp.wirtualnaapteczka.entities.Medicine;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SampleMedicinesBuilder {
@@ -30,6 +31,7 @@ public class SampleMedicinesBuilder {
         medicine1.setShareWithFriends(true);
         medicine1.setUserNotes("Brać 3x dziennie");
         medicine1.setType(MedicineTypeEnum.PILL);
+        medicine1.setUpdatedAt(new Date());
 
         sampleMedicines.add(medicine1);
 
@@ -46,6 +48,7 @@ public class SampleMedicinesBuilder {
         medicine2.setShareWithFriends(true);
         medicine2.setUserNotes("Brać 1x dziennie. Max do tygodnia.");
         medicine2.setType(MedicineTypeEnum.SPRAY);
+        medicine2.setUpdatedAt(new Date());
 
         sampleMedicines.add(medicine2);
 
@@ -62,6 +65,7 @@ public class SampleMedicinesBuilder {
         medicine3.setShareWithFriends(false);
         medicine3.setUserNotes("Raz dziennie");
         medicine3.setType(MedicineTypeEnum.OTHER);
+        medicine3.setUpdatedAt(new Date());
 
         sampleMedicines.add(medicine3);
 
@@ -77,6 +81,7 @@ public class SampleMedicinesBuilder {
         medicine4.setName("Interferon");
         medicine4.setShareWithFriends(true);
         medicine4.setType(MedicineTypeEnum.SACHET);
+        medicine4.setUpdatedAt(new Date());
 
         sampleMedicines.add(medicine4);
 
@@ -92,6 +97,7 @@ public class SampleMedicinesBuilder {
         medicine5.setName("Rybawiryna");
         medicine5.setShareWithFriends(false);
         medicine5.setType(MedicineTypeEnum.SYRUP);
+        medicine5.setUpdatedAt(new Date());
 
         sampleMedicines.add(medicine5);
 

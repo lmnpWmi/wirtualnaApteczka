@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
         medicineListPanel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO My List
+                Intent intent = new Intent(v.getContext(), MedicineListActivity.class);
+                startActivity(intent);
             }
         });
 
