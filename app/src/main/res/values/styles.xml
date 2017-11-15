@@ -13,10 +13,7 @@
     <style name="AppActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/black</item>
 
-        <!--<item name="background">@color/black</item>-->
     </style>
-
-    <!--musze zmienic kolor czcionki w menu-->
 
     <style name="DefaultButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:textAllCaps">false</item>
@@ -24,7 +21,7 @@
         <item name="android:background">@color/defaultBtnColor</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/defaultBtnTextColor</item>
-        <item name="android:layout_margin">80px</item>
+        <item name="android:layout_margin">300px</item>
     </style>
 
     <style name="MedicineListTopBtnStyle" parent="Widget.AppCompat.Button">

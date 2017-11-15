@@ -8,6 +8,6 @@
     <string name="add">Dodaj</string>
     <string name="options">Opcje</string>
     <string name="generalInformation">Informacje ogólne</string>
-
+    <string name="medicine_list_empty">Brak leków w wybranej kategorii.</string>
 
 </resources>
