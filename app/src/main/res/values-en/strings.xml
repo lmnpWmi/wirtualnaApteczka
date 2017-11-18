@@ -10,4 +10,6 @@
     <string name="options">Options</string>
     <string name="generalInformation">General information</string>
     <string name="medicine_list_empty">No medicines in the selected category.</string>
+    <string name="foto">foto</string>
+    <string name="notes">notes</string>
 </resources>

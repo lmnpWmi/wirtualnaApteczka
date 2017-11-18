@@ -5,7 +5,7 @@ import lmnp.wirtualnaapteczka.services.FakeDbServiceImpl;
 
 public class SessionManager {
     private static User currentUser = FakeDbServiceImpl.createNewInstance()
-            .findUserById(1L);
+            .findUserById(4L);
 
     private SessionManager() {
     }

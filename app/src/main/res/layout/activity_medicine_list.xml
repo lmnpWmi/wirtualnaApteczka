@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
     <Spinner
-        android:id="@+id/categorySpinner"
+        android:id="@+id/category_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@color/colorPrimary" />
     <ListView
-        android:id="@+id/medicineListView"
+        android:id="@+id/medicine_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -24,19 +22,8 @@
         android:textSize="18sp"
         android:visibility="gone" />
 
-
-    <!--<GridView-->
-        <!--android:id="@+id/list"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:numColumns="1"-->
-        <!--tools:context="com.example.android.wirtualnaApteczka.MedicineListActivity"-->
-
-        <!--&gt;-->
-
-    <!--okrągły przycisk dodawania leku-->
     <android.support.design.widget.FloatingActionButton
-            android:id="@+id/button_new_medicine"
+            android:id="@+id/add_new_medicine_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

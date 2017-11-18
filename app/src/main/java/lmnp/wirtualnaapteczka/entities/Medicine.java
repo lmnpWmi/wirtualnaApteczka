@@ -11,7 +11,7 @@ public class Medicine {
     private Long amount;
     private Date dueDate;
     private Date updatedAt;
-    private String photoUri;
+    private String thumbnailUri;
     private String userNotes;
     private String description;
 
@@ -68,12 +68,12 @@ public class Medicine {
         this.updatedAt = updatedAt;
     }
 
-    public String getPhotoUri() {
-        return photoUri;
+    public String getThumbnailUri() {
+        return thumbnailUri;
     }
 
-    public void setPhotoUri(String photoUri) {
-        this.photoUri = photoUri;
+    public void setThumbnailUri(String thumbnailUri) {
+        this.thumbnailUri = thumbnailUri;
     }
 
     public String getUserNotes() {
@@ -114,7 +114,7 @@ public class Medicine {
         if (amount != null ? !amount.equals(medicine.amount) : medicine.amount != null) return false;
         if (dueDate != null ? !dueDate.equals(medicine.dueDate) : medicine.dueDate != null) return false;
         if (updatedAt != null ? !updatedAt.equals(medicine.updatedAt) : medicine.updatedAt != null) return false;
-        if (photoUri != null ? !photoUri.equals(medicine.photoUri) : medicine.photoUri != null) return false;
+        if (thumbnailUri != null ? !thumbnailUri.equals(medicine.thumbnailUri) : medicine.thumbnailUri != null) return false;
         if (userNotes != null ? !userNotes.equals(medicine.userNotes) : medicine.userNotes != null) return false;
         return description != null ? description.equals(medicine.description) : medicine.description == null;
     }
@@ -127,7 +127,7 @@ public class Medicine {
         result = 31 * result + (amount != null ? amount.hashCode() : 0);
         result = 31 * result + (dueDate != null ? dueDate.hashCode() : 0);
         result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
-        result = 31 * result + (photoUri != null ? photoUri.hashCode() : 0);
+        result = 31 * result + (thumbnailUri != null ? thumbnailUri.hashCode() : 0);
         result = 31 * result + (userNotes != null ? userNotes.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (shareWithFriends ? 1 : 0);
@@ -143,7 +143,7 @@ public class Medicine {
                 ", amount=" + amount +
                 ", dueDate=" + dueDate +
                 ", updatedAt=" + updatedAt +
-                ", photoUri='" + photoUri + '\'' +
+                ", thumbnailUri='" + thumbnailUri + '\'' +
                 ", userNotes='" + userNotes + '\'' +
                 ", description='" + description + '\'' +
                 ", shareWithFriends=" + shareWithFriends +

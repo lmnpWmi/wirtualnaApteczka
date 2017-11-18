@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -98,7 +97,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:gravity="center"
-                    android:inputType="number"/>
+                    android:inputType="number" />
 
                 <TextView
                     android:id="@+id/amountSuffixLabel"
@@ -127,10 +126,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint="Wybierz datę"
                     android:gravity="right"
-                    android:paddingRight="20dp"
-                    android:onClick="showDatePickerDialog"/>
+                    android:hint="Wybierz datę"
+                    android:onClick="showDatePickerDialog"
+                    android:paddingRight="20dp" />
             </LinearLayout>
 
             <TextView
@@ -143,39 +142,73 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/medicinePhotoBtn"
-                style="@style/AddMedicineBtnStyle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Zdjecie" />
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/medicineNotesBtn"
-                style="@style/AddMedicineBtnStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Notatki" />
+                <LinearLayout
+                    android:id="@+id/medicineNotesBtn"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <Button
-                android:id="@+id/medicineDescriptionBtn"
-                style="@style/AddMedicineBtnStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="informacje" />
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/icons8_wipes_96" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/notes"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/medicinePhotoBtn"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/icons8_picture_96" />
+
+                    <TextView
+                        android:id="@+id/addMedicineLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/foto"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
     <!--okrągły przycisk dodawania leku-->
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/button_new_medicine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:src="@drawable/ic_add_white_24dp"
-            android:layout_margin="30dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_new_medicine_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="30dp"
+        android:src="@drawable/ic_add_white_24dp" />
 
 </RelativeLayout>
