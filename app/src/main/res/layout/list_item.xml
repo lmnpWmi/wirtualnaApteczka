@@ -15,36 +15,35 @@
             android:layout_gravity="center"
             android:layout_weight="2"
             android:gravity="center"
-            android:orientation="vertical" android:background="@android:color/transparent">
+            android:orientation="vertical">
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
                 android:textSize="18sp"
-                tools:text="Witamina C" android:id="@+id/medicine_item_name" android:textStyle="bold"
-                android:background="@android:color/transparent"/>
+                tools:text="Witamina C" android:id="@+id/medicine_item_name" android:textStyle="bold"/>
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="tabletki"
 
-                android:id="@+id/medicine_item_type" android:background="@android:color/transparent"/>
+                android:id="@+id/medicine_item_type"/>
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="ilość"
 
-                android:id="@+id/medicine_item_amount" android:background="@android:color/transparent"/>
+                android:id="@+id/medicine_item_amount"/>
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="data ważności"
 
-                android:id="@+id/medicine_item_duedate" android:background="@android:color/transparent"/>
+                android:id="@+id/medicine_item_duedate"/>
 
 
     </LinearLayout>
@@ -55,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            app:srcCompat="@drawable/icons8_picture_96" android:background="@android:color/transparent"/>
+            app:srcCompat="@drawable/icons8_picture_96"/>
 
 
 </LinearLayout>

@@ -11,4 +11,15 @@
     <string name="medicine_list_empty">Brak leków w wybranej kategorii.</string>
     <string name="photo">zdjęcie</string>
     <string name="notes">notatki</string>
+
+    <!-- Medicine Types -->
+    <string name="type">Typ</string>
+    <string name="pill">Tabletki</string>
+    <string name="syrup">Syrop</string>
+    <string name="sachet">Saszetki</string>
+    <string name="spray">Spray</string>
+    <string name="other">Inny</string>
+
+    <string name="amount">Ilość</string>
+    <string name="due_date">Data ważności</string>
 </resources>

@@ -3,9 +3,7 @@ package lmnp.wirtualnaapteczka.test.utils;
 import lmnp.wirtualnaapteczka.data.MedicineTypeEnum;
 import lmnp.wirtualnaapteczka.entities.Medicine;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class SampleMedicinesBuilder {
 
@@ -32,6 +30,7 @@ public class SampleMedicinesBuilder {
         medicine1.setUserNotes("Brać 3x dziennie");
         medicine1.setType(MedicineTypeEnum.PILL);
         medicine1.setUpdatedAt(new Date());
+        medicine1.setDueDate(prepareDueDate());
 
         sampleMedicines.add(medicine1);
 
@@ -49,6 +48,7 @@ public class SampleMedicinesBuilder {
         medicine2.setUserNotes("Brać 1x dziennie. Max do tygodnia.");
         medicine2.setType(MedicineTypeEnum.SPRAY);
         medicine2.setUpdatedAt(new Date());
+        medicine2.setDueDate(prepareDueDate());
 
         sampleMedicines.add(medicine2);
 
@@ -66,6 +66,7 @@ public class SampleMedicinesBuilder {
         medicine3.setUserNotes("Raz dziennie");
         medicine3.setType(MedicineTypeEnum.OTHER);
         medicine3.setUpdatedAt(new Date());
+        medicine3.setDueDate(prepareDueDate());
 
         sampleMedicines.add(medicine3);
 
@@ -82,6 +83,7 @@ public class SampleMedicinesBuilder {
         medicine4.setShareWithFriends(true);
         medicine4.setType(MedicineTypeEnum.SACHET);
         medicine4.setUpdatedAt(new Date());
+        medicine4.setDueDate(prepareDueDate());
 
         sampleMedicines.add(medicine4);
 
@@ -98,6 +100,7 @@ public class SampleMedicinesBuilder {
         medicine5.setShareWithFriends(false);
         medicine5.setType(MedicineTypeEnum.SYRUP);
         medicine5.setUpdatedAt(new Date());
+        medicine5.setDueDate(prepareDueDate());
 
         sampleMedicines.add(medicine5);
 
@@ -116,5 +119,19 @@ public class SampleMedicinesBuilder {
 
     public List<Medicine> build() {
         return sampleMedicines;
+    }
+
+    private Date prepareDueDate() {
+        Calendar calendar = Calendar.getInstance();
+
+        Random random = new Random();
+
+        int randomDaysToAdd = random.nextInt(30) + 1;
+        int randomMonthsToAdd = random.nextInt(12) + 1;
+
+        calendar.add(Calendar.DAY_OF_MONTH, randomDaysToAdd);
+        calendar.add(Calendar.MONTH, randomMonthsToAdd);
+
+        return calendar.getTime();
     }
 }
