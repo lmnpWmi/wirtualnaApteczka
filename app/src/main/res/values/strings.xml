@@ -8,7 +8,7 @@
     <string name="add_medicine">Dodaj lek</string>
     <string name="my_list_medicine">Moja lista leków</string>
     <string name="friends">Znajomi</string>
-    <string name="last_searched">Ostatnio wyszukiwane:</string>
+    <string name="last_added">Ostatnio dodane:</string>
     <string name="not_searched_yet">Nie wyszukiwałeś jeszcze żadnego leku</string>
 
     <!-- Add medicine layout -->

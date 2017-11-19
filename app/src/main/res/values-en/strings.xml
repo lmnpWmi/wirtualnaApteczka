@@ -4,7 +4,7 @@
     <string name="add">Add</string>
     <string name="add_medicine">Add medicine</string>
     <string name="friends">Friends</string>
-    <string name="last_searched">Last Searched:</string>
+    <string name="last_added">Last Added:</string>
     <string name="my_list_medicine">My list medicines</string>
     <string name="not_searched_yet">You have not searched for any medicines yet</string>
     <string name="options">Options</string>

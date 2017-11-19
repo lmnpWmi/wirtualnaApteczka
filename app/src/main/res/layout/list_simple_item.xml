@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="10dp">
 
 
     <LinearLayout
@@ -22,31 +22,18 @@
             android:id="@+id/medicine_item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:textSize="18sp"
+            android:paddingBottom="5dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             tools:text="Witamina C" />
 
-        <TextView
-            android:id="@+id/medicine_item_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            tools:text="tabletki" />
 
         <TextView
             android:id="@+id/medicine_item_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            tools:text="ilość" />
-
-        <TextView
-            android:id="@+id/medicine_item_duedate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            tools:text="data ważności" />
+            tools:text="ilość:" />
 
 
     </LinearLayout>
@@ -54,7 +41,7 @@
     <ImageView
         android:id="@+id/medicine_item_thumbnail"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_gravity="center"
         android:layout_weight="1"
         app:srcCompat="@drawable/icons8_picture_96" />

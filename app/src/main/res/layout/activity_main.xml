@@ -8,107 +8,128 @@
 
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal"
 
-            android:background="@android:color/transparent">
+        android:padding="20dp">
 
         <LinearLayout
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical" android:id="@+id/add_medicine_panel">
+            android:id="@+id/add_medicine_panel"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <ImageButton
-                    android:id="@+id/add_medicine_img_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/add_medicine_icon" android:duplicateParentState="true"
-                    android:clickable="false"/>
+                android:id="@+id/add_medicine_img_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                app:srcCompat="@drawable/add_medicine_icon" />
 
             <TextView
-                    android:id="@+id/add_medicine_photo_label"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/add_medicine"
-                    android:textSize="20sp" android:duplicateParentState="true" android:clickable="false"/>
+                android:id="@+id/add_medicine_photo_label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:text="@string/add_medicine"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="openMyList"
-                android:orientation="vertical" android:id="@+id/medicine_list_panel">
+            android:id="@+id/medicine_list_panel"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="openMyList"
+            android:orientation="vertical">
 
             <ImageButton
-                    android:id="@+id/medicine_list_img_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
-                    android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/my_medicine_list" android:duplicateParentState="true"
-                    android:clickable="false"/>
+                android:id="@+id/medicine_list_img_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                app:srcCompat="@drawable/my_medicine_list" />
 
             <TextView
-                    android:id="@+id/medicine_list_label"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/my_list_medicine"
-                    android:textSize="20sp" android:duplicateParentState="true" android:clickable="false"/>
+                android:id="@+id/medicine_list_label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:text="@string/my_list_medicine"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical" android:id="@+id/friends_panel">
+            android:id="@+id/friends_panel"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <ImageButton
-                    android:id="@+id/my_friends_img_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/icons8_couple_96" android:duplicateParentState="true"
-                    android:clickable="false"/>
+                android:id="@+id/my_friends_img_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                app:srcCompat="@drawable/icons8_couple_96" />
+
             <TextView
-                    android:id="@+id/my_friends_label"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/friends"
-                    android:textSize="20sp" android:duplicateParentState="true" android:clickable="false"/>
+                android:id="@+id/my_friends_label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:text="@string/friends"
+                android:textSize="20sp" />
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/last_added"
+            android:textSize="20sp" />
+
+        <ListView
+            android:id="@+id/medicine_list_view_simple"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="20dp" android:background="@android:color/transparent">
+            android:background="@android:color/transparent" />
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/last_searched"
-                android:textSize="20sp"/>
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:text="@string/medicine_list_empty"
+            android:textSize="18sp"
+            android:visibility="gone" />
 
-        <TextView
-                android:id="@+id/empty_recently_used_medicines"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="start"
-                android:paddingTop="10dp"
-                android:text="@string/not_searched_yet"
-                android:textColor="@color/grey"/>
     </LinearLayout>
 </LinearLayout>
