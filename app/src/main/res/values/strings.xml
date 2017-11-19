@@ -31,4 +31,21 @@
     <string name="sachet">Saszetki</string>
     <string name="spray">Spray</string>
     <string name="other">Inny</string>
+
+
+    <!--Start layout-->
+    <string name="welcome">Witamy!</string>
+    <string name="we_happy">Cieszymy się, że wybrałeś naszą aplikacje do zarządzania swoją domową apteczką.</string>
+    <string name="create_konto">Utwórz konto</string>
+    <string name="log_in">Zaloguj</string>
+
+    <!--Login layout-->
+    <string name="facebook">Zaloguj się korzystając z facebook</string>
+    <string name="gmail">Zaloguj się korzystając z Gmail</string>
+    <string name="email">Email</string>
+    <string name="pass">Hasło</string>
+    <string name="required_fields">*pola obowiazkowe</string>
+    <string name="save_data">Zapamiętaj moje dane</string>
+
+
 </resources>
