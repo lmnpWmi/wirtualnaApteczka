@@ -10,7 +10,7 @@
     android:layout_margin="0dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
-    android:textColor="@color/defaultBtnTextColor"
-    android:background="@color/colorPrimary"
+    android:textColor="@color/default_btn_text_color"
+    android:background="@color/color_primary"
     tools:text="TextView"
     android:textSize="16sp" />

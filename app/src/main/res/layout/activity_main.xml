@@ -36,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="@string/addMedicine"
+                    android:text="@string/add_medicine"
                     android:textSize="20sp"/>
         </LinearLayout>
 
@@ -61,7 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="@string/myListMedicine"
+                    android:text="@string/my_list_medicine"
                     android:textSize="20sp"/>
         </LinearLayout>
 
@@ -99,7 +99,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/lastSearched"
+                android:text="@string/last_searched"
                 android:textSize="20sp"/>
 
         <TextView
@@ -108,7 +108,7 @@
                 android:layout_height="match_parent"
                 android:gravity="start"
                 android:paddingTop="10dp"
-                android:text="@string/notSearchedMedicineYet"
+                android:text="@string/not_searched_yet"
                 android:textColor="@color/grey"/>
     </LinearLayout>
 </LinearLayout>
