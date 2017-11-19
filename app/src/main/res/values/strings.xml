@@ -40,12 +40,15 @@
     <string name="log_in">Zaloguj</string>
 
     <!--Login layout-->
-    <string name="facebook">Zaloguj się korzystając z facebook</string>
-    <string name="gmail">Zaloguj się korzystając z Gmail</string>
+    <string name="facebook">Zaloguj się przez Facebook</string>
+    <string name="gmail">Zaloguj się przez Gmail</string>
     <string name="email">Email</string>
     <string name="pass">Hasło</string>
     <string name="required_fields">*pola obowiazkowe</string>
     <string name="save_data">Zapamiętaj moje dane</string>
+    <string name="log_in_2">Zaloguj się!</string>
+    <string name="register">Zarejestruj się</string>
+    <string name="forgotten">Zapomniałeś hasła?</string>
 
 
 </resources>
