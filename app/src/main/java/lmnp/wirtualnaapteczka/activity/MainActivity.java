@@ -1,12 +1,14 @@
 package lmnp.wirtualnaapteczka.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
 import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.listeners.AddNewMedicineListener;
+import lmnp.wirtualnaapteczka.listeners.FriendListListener;
+import lmnp.wirtualnaapteczka.listeners.MedicineListListener;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout addMedicinePanel;
@@ -32,28 +34,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeListeners() {
-        addMedicinePanel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AddActivity.class);
-                startActivity(intent);
-            }
-        });
+        addMedicinePanel.setOnClickListener(new AddNewMedicineListener());
 
-        medicineListPanel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MedicineListActivity.class);
-                startActivity(intent);
-            }
-        });
+        medicineListPanel.setOnClickListener(new MedicineListListener());
 
-        friendsPanel.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Friends List
-            }
-        });
+        friendsPanel.setOnClickListener(new FriendListListener());
     }
 }

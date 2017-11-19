@@ -1,6 +1,6 @@
 package lmnp.wirtualnaapteczka.utils;
 
-import lmnp.wirtualnaapteczka.entities.User;
+import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.services.FakeDbServiceImpl;
 
 public class SessionManager {

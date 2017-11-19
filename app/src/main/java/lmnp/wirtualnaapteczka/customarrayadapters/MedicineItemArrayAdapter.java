@@ -2,7 +2,6 @@ package lmnp.wirtualnaapteczka.customarrayadapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -12,9 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.entities.Medicine;
+import lmnp.wirtualnaapteczka.data.MedicineTypeEnum;
+import lmnp.wirtualnaapteczka.data.entities.Medicine;
 
 import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
@@ -43,21 +44,58 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
         ImageView thumbnail = (ImageView) view.findViewById(R.id.medicine_item_thumbnail);
 
         name.setText(currentMedicine.getName());
-        type.setText(currentMedicine.getType().name());
+        type.setText(prepareMedicineTypeText(currentMedicine.getType()));
+        dueDate.setText(prepareDueDateText(currentMedicine.getDueDate()));
+        amount.setText(prepareAmountText(currentMedicine.getAmount()));
 
-        amount.setText(String.valueOf(currentMedicine.getAmount()));
-
-//        if (!TextUtils.isEmpty(currentMedicine.getThumbnailUri())) {
-//            Uri thumbnailUri = new Uri.Builder().appendPath(currentMedicine.getThumbnailUri()).build();
-//            thumbnail.setImageURI(thumbnailUri);
-//        }
-
-        if (currentMedicine.getDueDate() != null) {
-            DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext().getApplicationContext());
-            String formattedDueDate = dateFormat.format(currentMedicine.getDueDate());
-            dueDate.setText(formattedDueDate);
+        if (!TextUtils.isEmpty(currentMedicine.getThumbnailUri())) {
+//            thumbnail.setImageURI(prepareThumbnailUri(currentMedicine.getThumbnailUri()));
         }
 
         return view;
+    }
+
+    private Uri prepareThumbnailUri(String thumbnailPath) {
+//        Uri thumbnailUri = new Uri.Builder().appendPath(thumbnailPath).build();
+
+        return null;
+    }
+
+    private String prepareMedicineTypeText(MedicineTypeEnum medicineType) {
+        String typeLowerCaseName = medicineType.name()
+                .toLowerCase();
+
+        int typeResourceId = context.getResources()
+                .getIdentifier(typeLowerCaseName, "string", context.getPackageName());
+
+        String result = context.getResources().getString(R.string.type) + ": " + context.getResources()
+                .getString(typeResourceId);
+
+        return result;
+    }
+
+    private String prepareAmountText(Long amount) {
+        String amountText = context.getResources()
+                .getString(R.string.amount);
+
+        if (amount == null) {
+            amount = 0L;
+        }
+
+        String result = amountText + ": " + amount;
+
+        return result;
+    }
+
+    private String prepareDueDateText(Date dueDate) {
+        String result = "";
+
+        if (dueDate != null) {
+            DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
+
+            result = context.getResources().getString(R.string.due_date) + ": " + dateFormat.format(dueDate);
+        }
+
+        return result;
     }
 }

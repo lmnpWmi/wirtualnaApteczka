@@ -1,7 +1,7 @@
 package lmnp.wirtualnaapteczka.services;
 
-import lmnp.wirtualnaapteczka.entities.Medicine;
-import lmnp.wirtualnaapteczka.entities.User;
+import lmnp.wirtualnaapteczka.data.entities.Medicine;
+import lmnp.wirtualnaapteczka.data.entities.User;
 
 import java.util.List;
 

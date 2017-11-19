@@ -1,4 +1,4 @@
-package lmnp.wirtualnaapteczka.entities;
+package lmnp.wirtualnaapteczka.data.entities;
 
 import java.util.List;
 
