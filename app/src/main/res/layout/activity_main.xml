@@ -19,11 +19,10 @@
                 android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:onClick="openAddMedicine"
-                android:orientation="vertical" android:id="@+id/addMedicinePanel">
+                android:orientation="vertical" android:id="@+id/add_medicine_panel">
 
             <ImageButton
-                    android:id="@+id/addMedicineBtn"
+                    android:id="@+id/add_medicine_img_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -32,7 +31,7 @@
                     android:clickable="false"/>
 
             <TextView
-                    android:id="@+id/addMedicineLabel"
+                    android:id="@+id/add_medicine_photo_label"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -45,10 +44,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="openMyList"
-                android:orientation="vertical" android:id="@+id/medicineListPanel">
+                android:orientation="vertical" android:id="@+id/medicine_list_panel">
 
             <ImageButton
-                    android:id="@+id/myMedicineListBtn"
+                    android:id="@+id/medicine_list_img_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -58,7 +57,7 @@
                     android:clickable="false"/>
 
             <TextView
-                    android:id="@+id/myMedicineListLabel"
+                    android:id="@+id/medicine_list_label"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -70,10 +69,10 @@
                 android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical" android:id="@+id/friendsPanel">
+                android:orientation="vertical" android:id="@+id/friends_panel">
 
             <ImageButton
-                    android:id="@+id/myFriendsBtn"
+                    android:id="@+id/my_friends_img_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -81,7 +80,7 @@
                     app:srcCompat="@drawable/icons8_couple_96" android:duplicateParentState="true"
                     android:clickable="false"/>
             <TextView
-                    android:id="@+id/myFriendsLabel"
+                    android:id="@+id/my_friends_label"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -104,7 +103,7 @@
                 android:textSize="20sp"/>
 
         <TextView
-                android:id="@+id/listLastSearch"
+                android:id="@+id/empty_recently_used_medicines"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start"

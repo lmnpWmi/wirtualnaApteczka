@@ -1,16 +1,28 @@
 <resources>
+    <!-- General -->
     <string name="app_name">Wirtualna Apteczka</string>
+    <string name="amount">Ilość</string>
+    <string name="due_date">Data ważności</string>
+
+    <!-- Main activity layout -->
     <string name="add_medicine">Dodaj lek</string>
-    <string name="last_searched">Ostatnio wyszukiwane:</string>
     <string name="my_list_medicine">Moja lista leków</string>
     <string name="friends">Znajomi</string>
+    <string name="last_searched">Ostatnio wyszukiwane:</string>
     <string name="not_searched_yet">Nie wyszukiwałeś jeszcze żadnego leku</string>
-    <string name="add">Dodaj</string>
-    <string name="options">Opcje</string>
+
+    <!-- Add medicine layout -->
     <string name="general_info">Informacje ogólne</string>
-    <string name="medicine_list_empty">Brak leków w wybranej kategorii.</string>
-    <string name="photo">zdjęcie</string>
-    <string name="notes">notatki</string>
+    <string name="product_name">Nazwa leku</string>
+    <string name="pack">Opakowanie</string>
+    <string name="medicine_type">Postać leku</string>
+    <string name="medicine_amount_in_pack">Ilość leku w opakowaniu</string>
+    <string name="additional">Dodatkowo</string>
+    <string name="photo">Zdjęcie</string>
+    <string name="notes">Notatki</string>
+
+    <!-- Medicine List layout -->
+    <string name="medicine_list_empty">Nie znaleziono żadnych leków.</string>
 
     <!-- Medicine Types -->
     <string name="type">Typ</string>
@@ -19,7 +31,4 @@
     <string name="sachet">Saszetki</string>
     <string name="spray">Spray</string>
     <string name="other">Inny</string>
-
-    <string name="amount">Ilość</string>
-    <string name="due_date">Data ważności</string>
 </resources>
