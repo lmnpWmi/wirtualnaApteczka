@@ -43,8 +43,6 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
         ImageView thumbnail = (ImageView) view.findViewById(R.id.medicine_item_thumbnail);
 
         name.setText(currentMedicine.getName());
-        name.setTypeface(Typeface.DEFAULT_BOLD);
-
         type.setText(currentMedicine.getType().name());
 
         amount.setText(String.valueOf(currentMedicine.getAmount()));

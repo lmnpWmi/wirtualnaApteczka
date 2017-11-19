@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-    <Spinner
-        android:id="@+id/category_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary" />
+                android:layout_height="match_parent"
+                android:background="@drawable/default_background">
     <ListView
-        android:id="@+id/medicine_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+            android:id="@+id/medicine_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:background="@android:color/transparent"/>
 
     <TextView
         android:id="@+id/empty"

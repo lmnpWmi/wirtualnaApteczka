@@ -1,14 +1,14 @@
 <resources>
-    <string name="appName">Wirtualna Apteczka</string>
-    <string name="addMedicine">Dodaj lek</string>
-    <string name="lastSearched">Ostatnio wyszukiwane:</string>
-    <string name="myListMedicine">Moja lista leków</string>
+    <string name="app_name">Wirtualna Apteczka</string>
+    <string name="add_medicine">Dodaj lek</string>
+    <string name="last_searched">Ostatnio wyszukiwane:</string>
+    <string name="my_list_medicine">Moja lista leków</string>
     <string name="friends">Znajomi</string>
-    <string name="notSearchedMedicineYet">Nie wyszukiwałeś jeszcze żadnego leku</string>
+    <string name="not_searched_yet">Nie wyszukiwałeś jeszcze żadnego leku</string>
     <string name="add">Dodaj</string>
     <string name="options">Opcje</string>
-    <string name="generalInformation">Informacje ogólne</string>
+    <string name="general_info">Informacje ogólne</string>
     <string name="medicine_list_empty">Brak leków w wybranej kategorii.</string>
-    <string name="foto">zdjęcie</string>
+    <string name="photo">zdjęcie</string>
     <string name="notes">notatki</string>
 </resources>
