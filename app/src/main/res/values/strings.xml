@@ -53,4 +53,11 @@
     <string name="sign_accept">Logujac się akceptujesz </string>
     <string name="regulations">Regulamin</string>
 
+    <!--Registration layout-->
+
+    <string name="registration">Rejestracja</string>
+    <string name="name">Imię</string>
+    <string name="repeat_pass">Powtórz hasło</string>
+    <string name="registration_accept">Rejestrujac się akceptujesz </string>
+    <string name="surname">Nazwisko</string>
 </resources>
