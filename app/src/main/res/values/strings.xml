@@ -38,6 +38,7 @@
     <string name="we_happy">Cieszymy się, że wybrałeś naszą aplikacje do zarządzania swoją domową apteczką.</string>
     <string name="create_konto">Utwórz konto</string>
     <string name="log_in">Zaloguj</string>
+    <string name="lets_go">Zaczynajmy!</string>
 
     <!--Login layout-->
     <string name="facebook">Zaloguj się przez Facebook</string>
@@ -49,6 +50,7 @@
     <string name="log_in_2">Zaloguj się!</string>
     <string name="register">Zarejestruj się</string>
     <string name="forgotten">Zapomniałeś hasła?</string>
-
+    <string name="sign_accept">Logujac się akceptujesz </string>
+    <string name="regulations">Regulamin</string>
 
 </resources>

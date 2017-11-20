@@ -9,8 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
+               android:gravity="center"
         android:padding="20dp"
         android:text="@string/log_in_2"
         android:textSize="32sp"
@@ -20,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="12dp"
+        android:layout_margin="10dp"
         android:background="@color/black_transparent_25"
         android:gravity="center"
         android:padding="10dp"
@@ -36,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="12dp"
+        android:layout_margin="10dp"
         android:background="@color/black_transparent_25"
         android:gravity="center"
         android:padding="10dp"
@@ -75,13 +74,11 @@
     <Button
 
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@android:dimen/thumbnail_width"
+        android:layout_height="@android:dimen/app_icon_size"
         android:layout_gravity="center"
-        android:layout_margin="10dp"
         android:background="@color/black_transparent_25"
         android:gravity="center"
-        android:padding="5dp"
         android:text="@string/log_in"
         android:textAllCaps="false"
         android:textSize="18sp" />
@@ -97,6 +94,7 @@
             android:layout_weight="1"
             android:gravity="left"
             android:padding="10dp"
+            android:layout_marginTop="10dp"
             android:text="@string/register"
             android:textSize="16sp" />
 
@@ -106,8 +104,35 @@
             android:layout_weight="1"
             android:gravity="right"
             android:padding="10dp"
+            android:layout_marginTop="10dp"
             android:text="@string/forgotten"
             android:textSize="16sp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+
+            android:text="@string/sign_accept"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+           android:layout_marginLeft="2dp"
+            android:text="@string/regulations"
+            android:textSize="16sp"
+            android:textColor="@color/color_primary"/>
 
     </LinearLayout>
 </LinearLayout>
