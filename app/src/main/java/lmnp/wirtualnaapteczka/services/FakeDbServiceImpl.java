@@ -159,7 +159,6 @@ public class FakeDbServiceImpl implements DbService {
         user1.setId(1L);
         user1.setFirstName("Paulina");
         user1.setLastName("Preś");
-        user1.setUsername("palpres");
         user1.setPassword("password");
         user1.setMedicines(medicines1);
         user1.setFriendsIds(Arrays.asList(2L));
@@ -168,7 +167,6 @@ public class FakeDbServiceImpl implements DbService {
         user2.setId(2L);
         user2.setFirstName("Jowita");
         user2.setLastName("Mielnicka");
-        user2.setUsername("jowmiel");
         user2.setPassword("password");
         user2.setMedicines(medicines2);
         user2.setFriendsIds(Arrays.asList(1L, 3L));
@@ -177,7 +175,6 @@ public class FakeDbServiceImpl implements DbService {
         user3.setId(3L);
         user3.setFirstName("Przemysław");
         user3.setLastName("Lewkowicz");
-        user3.setUsername("przelew");
         user3.setPassword("password");
         user3.setMedicines(medicines3);
         user3.setFriendsIds(Arrays.asList(2L, 4L));
@@ -186,7 +183,6 @@ public class FakeDbServiceImpl implements DbService {
         user4.setId(4L);
         user4.setFirstName("Sebastian");
         user4.setLastName("Nowak");
-        user4.setUsername("sebnow");
         user4.setPassword("password");
         user4.setMedicines(medicines4);
         user4.setFriendsIds(Arrays.asList(3L));

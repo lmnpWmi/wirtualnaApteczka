@@ -16,7 +16,7 @@
     <string name="product_name">Nazwa leku</string>
     <string name="pack">Opakowanie</string>
     <string name="medicine_type">Postać leku</string>
-    <string name="medicine_amount_in_pack">Ilość leku w opakowaniu</string>
+    <string name="medicine_quantity_in_pack">Ilość leku w opakowaniu</string>
     <string name="additional">Dodatkowo</string>
     <string name="photo">Zdjęcie</string>
     <string name="notes">Notatki</string>
@@ -32,6 +32,9 @@
     <string name="spray">Spray</string>
     <string name="other">Inny</string>
 
+    <!-- Medicine Quantity Suffix -->
+    <string name="pieces">szt.</string>
+    <string name="milliliter">ml</string>
 
     <!--Start layout-->
     <string name="welcome">Witamy!</string>
@@ -54,10 +57,15 @@
     <string name="regulations">Regulamin</string>
 
     <!--Registration layout-->
-
     <string name="registration">Rejestracja</string>
     <string name="name">Imię</string>
     <string name="repeat_pass">Powtórz hasło</string>
     <string name="registration_accept">Rejestrujac się akceptujesz </string>
     <string name="surname">Nazwisko</string>
+
+    <!-- Notes Dialog Box -->
+    <string name="notes_message">Proszę podać notatki dotyczące leku.</string>
+    <string name="save_btn_text">Zapisz</string>
+    <string name="back_btn_text">Wróć</string>
+
 </resources>

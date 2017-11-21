@@ -5,9 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.widget.LinearLayout;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.listeners.AddNewMedicineListener;
-import lmnp.wirtualnaapteczka.listeners.FriendListListener;
-import lmnp.wirtualnaapteczka.listeners.MedicineListListener;
+import lmnp.wirtualnaapteczka.listeners.OpenAddNewMedicineListener;
+import lmnp.wirtualnaapteczka.listeners.OpenFriendListListener;
+import lmnp.wirtualnaapteczka.listeners.OpenMedicineListListener;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout addMedicinePanel;
@@ -33,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeListeners() {
-        addMedicinePanel.setOnClickListener(new AddNewMedicineListener());
+        addMedicinePanel.setOnClickListener(new OpenAddNewMedicineListener());
 
-        medicineListPanel.setOnClickListener(new MedicineListListener());
+        medicineListPanel.setOnClickListener(new OpenMedicineListListener());
 
-        friendsPanel.setOnClickListener(new FriendListListener());
+        friendsPanel.setOnClickListener(new OpenFriendListListener());
     }
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.MedicineTypeEnum;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
+import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -62,14 +63,7 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
     }
 
     private String prepareMedicineTypeText(MedicineTypeEnum medicineType) {
-        String typeLowerCaseName = medicineType.name()
-                .toLowerCase();
-
-        int typeResourceId = context.getResources()
-                .getIdentifier(typeLowerCaseName, "string", context.getPackageName());
-
-        String result = context.getResources().getString(R.string.type) + ": " + context.getResources()
-                .getString(typeResourceId);
+        String result = context.getResources().getString(R.string.type) + ": " + MedicineTypeUtils.prepareLocalizedMedicineType(medicineType, context);
 
         return result;
     }
