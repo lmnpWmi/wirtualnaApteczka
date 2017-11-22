@@ -199,6 +199,6 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="right|bottom"
             android:layout_margin="30dp"
-            android:src="@drawable/ic_add_white_24dp"/>
+            android:src="@drawable/ic_done_white_24dp"/>
 
 </RelativeLayout>
