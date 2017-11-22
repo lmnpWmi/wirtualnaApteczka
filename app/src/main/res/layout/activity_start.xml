@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/default_background"
+    android:background="@drawable/first_layer"
     android:orientation="vertical">
 
     <TextView
@@ -29,11 +29,13 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="@android:dimen/thumbnail_width"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
-        android:background="@color/black_transparent_25"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:background="@color/color_primary"
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/lets_go"

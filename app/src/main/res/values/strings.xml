@@ -45,7 +45,7 @@
 
     <!--Login layout-->
     <string name="facebook">Zaloguj się przez Facebook</string>
-    <string name="gmail">Zaloguj się przez Gmail</string>
+    <string name="gmail">Zaloguj się przez Smart Lock</string>
     <string name="email">Email</string>
     <string name="pass">Hasło</string>
     <string name="required_fields">*pola obowiazkowe</string>
