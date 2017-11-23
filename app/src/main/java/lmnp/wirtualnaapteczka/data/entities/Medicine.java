@@ -1,6 +1,6 @@
 package lmnp.wirtualnaapteczka.data.entities;
 
-import lmnp.wirtualnaapteczka.data.MedicineTypeEnum;
+import lmnp.wirtualnaapteczka.data.enums.MedicineTypeEnum;
 
 import java.util.Date;
 
@@ -8,8 +8,9 @@ public class Medicine {
     private Long id;
     private String name;
     private MedicineTypeEnum type;
-    private Long amount;
+    private Integer amount;
     private Date dueDate;
+    private Date createdAt;
     private Date updatedAt;
     private String thumbnailUri;
     private String userNotes;
@@ -44,11 +45,11 @@ public class Medicine {
         this.type = type;
     }
 
-    public Long getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
@@ -58,6 +59,14 @@ public class Medicine {
 
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Date getUpdatedAt() {
@@ -113,8 +122,10 @@ public class Medicine {
         if (type != medicine.type) return false;
         if (amount != null ? !amount.equals(medicine.amount) : medicine.amount != null) return false;
         if (dueDate != null ? !dueDate.equals(medicine.dueDate) : medicine.dueDate != null) return false;
+        if (createdAt != null ? !createdAt.equals(medicine.createdAt) : medicine.createdAt != null) return false;
         if (updatedAt != null ? !updatedAt.equals(medicine.updatedAt) : medicine.updatedAt != null) return false;
-        if (thumbnailUri != null ? !thumbnailUri.equals(medicine.thumbnailUri) : medicine.thumbnailUri != null) return false;
+        if (thumbnailUri != null ? !thumbnailUri.equals(medicine.thumbnailUri) : medicine.thumbnailUri != null)
+            return false;
         if (userNotes != null ? !userNotes.equals(medicine.userNotes) : medicine.userNotes != null) return false;
         return description != null ? description.equals(medicine.description) : medicine.description == null;
     }
@@ -126,6 +137,7 @@ public class Medicine {
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (amount != null ? amount.hashCode() : 0);
         result = 31 * result + (dueDate != null ? dueDate.hashCode() : 0);
+        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
         result = 31 * result + (thumbnailUri != null ? thumbnailUri.hashCode() : 0);
         result = 31 * result + (userNotes != null ? userNotes.hashCode() : 0);
@@ -142,6 +154,7 @@ public class Medicine {
                 ", type=" + type +
                 ", amount=" + amount +
                 ", dueDate=" + dueDate +
+                ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", thumbnailUri='" + thumbnailUri + '\'' +
                 ", userNotes='" + userNotes + '\'' +

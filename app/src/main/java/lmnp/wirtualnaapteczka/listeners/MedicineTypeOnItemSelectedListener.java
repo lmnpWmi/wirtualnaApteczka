@@ -5,18 +5,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import lmnp.wirtualnaapteczka.data.MedicineQuantitySuffix;
+import lmnp.wirtualnaapteczka.data.enums.MedicineQuantitySuffix;
 import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
 import lmnp.wirtualnaapteczka.utils.LocalizationUtils;
 
-public class MedicineTypeSelectedListener implements AdapterView.OnItemSelectedListener {
+public class MedicineTypeOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
     private ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter;
 
     private Context context;
     private TextView quantitySuffixLabel;
 
-    public MedicineTypeSelectedListener(ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter, TextView quantitySuffixLabel, Context context) {
+    public MedicineTypeOnItemSelectedListener(ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter, TextView quantitySuffixLabel, Context context) {
         this.medicineTypesAdapter = medicineTypesAdapter;
         this.quantitySuffixLabel = quantitySuffixLabel;
         this.context = context;

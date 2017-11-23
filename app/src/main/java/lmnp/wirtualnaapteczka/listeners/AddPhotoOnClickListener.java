@@ -5,14 +5,14 @@ import android.view.View;
 import lmnp.wirtualnaapteczka.activity.AddActivity;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 
-public class AddMedicinePhotoListener implements View.OnClickListener {
+public class AddPhotoOnClickListener implements View.OnClickListener {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private AddActivity addActivity;
     private Medicine medicine;
 
-    public AddMedicinePhotoListener(AddActivity addActivity, Medicine medicine) {
+    public AddPhotoOnClickListener(AddActivity addActivity, Medicine medicine) {
         this.addActivity = addActivity;
         this.medicine = medicine;
     }

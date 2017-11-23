@@ -8,7 +8,7 @@
     <string name="add_medicine">Dodaj lek</string>
     <string name="my_list_medicine">Moja lista leków</string>
     <string name="friends">Znajomi</string>
-    <string name="last_added">Ostatnio dodane:</string>
+    <string name="last_added">Ostatnio używane:</string>
     <string name="not_searched_yet">Nie wyszukiwałeś jeszcze żadnego leku</string>
 
     <!-- Add medicine layout -->
@@ -67,5 +67,10 @@
     <string name="notes_message">Proszę podać notatki dotyczące leku.</string>
     <string name="save_btn_text">Zapisz</string>
     <string name="back_btn_text">Wróć</string>
+
+    <!-- Edit amount Dialog Box -->
+    <string name="edit_amount">Edytuj ilość</string>
+    <string name="confirm_btn">Zatwierdź</string>
+    <string name="cancel_btn">Anuluj</string>
 
 </resources>

@@ -2,8 +2,6 @@ package lmnp.wirtualnaapteczka.customarrayadapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.data.MedicineTypeEnum;
+import lmnp.wirtualnaapteczka.data.enums.MedicineTypeEnum;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
+import lmnp.wirtualnaapteczka.utils.AdaptersCommonUtils;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
 
 import java.text.DateFormat;
@@ -47,36 +46,15 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
         name.setText(currentMedicine.getName());
         type.setText(prepareMedicineTypeText(currentMedicine.getType()));
         dueDate.setText(prepareDueDateText(currentMedicine.getDueDate()));
-        amount.setText(prepareAmountText(currentMedicine.getAmount()));
+        amount.setText(AdaptersCommonUtils.prepareAmountText(currentMedicine.getAmount(), context));
 
-        if (!TextUtils.isEmpty(currentMedicine.getThumbnailUri())) {
-//            thumbnail.setImageURI(prepareThumbnailUri(currentMedicine.getThumbnailUri()));
-        }
+//        thumbnail.setImageURI(AdaptersCommonUtils.prepareThumbnailUri(currentMedicine.getThumbnailUri()));
 
         return view;
     }
 
-    private Uri prepareThumbnailUri(String thumbnailPath) {
-//        Uri thumbnailUri = new Uri.Builder().appendPath(thumbnailPath).build();
-
-        return null;
-    }
-
     private String prepareMedicineTypeText(MedicineTypeEnum medicineType) {
         String result = context.getResources().getString(R.string.type) + ": " + MedicineTypeUtils.prepareLocalizedMedicineType(medicineType, context);
-
-        return result;
-    }
-
-    private String prepareAmountText(Long amount) {
-        String amountText = context.getResources()
-                .getString(R.string.amount);
-
-        if (amount == null) {
-            amount = 0L;
-        }
-
-        String result = amountText + ": " + amount;
 
         return result;
     }

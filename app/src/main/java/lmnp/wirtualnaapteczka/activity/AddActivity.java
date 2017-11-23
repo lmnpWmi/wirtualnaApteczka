@@ -1,18 +1,15 @@
 package lmnp.wirtualnaapteczka.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.*;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.components.DatePickerFragment;
 import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.listeners.AddMedicineNotesListener;
-import lmnp.wirtualnaapteczka.listeners.AddMedicinePhotoListener;
-import lmnp.wirtualnaapteczka.listeners.MedicineTypeSelectedListener;
-import lmnp.wirtualnaapteczka.listeners.OpenCalendarListener;
+import lmnp.wirtualnaapteczka.listeners.AddNotesOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.AddPhotoOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.MedicineTypeOnItemSelectedListener;
+import lmnp.wirtualnaapteczka.listeners.CalendarOnClickListener;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
 
 public class AddActivity extends AppCompatActivity {
@@ -44,14 +41,14 @@ public class AddActivity extends AppCompatActivity {
 
         initializeMedicineTypeSpinner();
 
-        dueDateCalendar.setOnClickListener(new OpenCalendarListener(getSupportFragmentManager()));
-        addMedicineNotesPanel.setOnClickListener(new AddMedicineNotesListener(this, newMedicine));
-        addMedicinePhotoPanel.setOnClickListener(new AddMedicinePhotoListener(this, newMedicine));
+        dueDateCalendar.setOnClickListener(new CalendarOnClickListener(getSupportFragmentManager()));
+        addMedicineNotesPanel.setOnClickListener(new AddNotesOnClickListener(this, newMedicine));
+        addMedicinePhotoPanel.setOnClickListener(new AddPhotoOnClickListener(this, newMedicine));
     }
 
     private void initializeMedicineTypeSpinner() {
         ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter = new ArrayAdapter<>(this, R.layout.dropdown_element, MedicineTypeUtils.prepareListOfLocalizedTypesTOs(getApplicationContext()));
         medicineTypeSpinner.setAdapter(medicineTypesAdapter);
-        medicineTypeSpinner.setOnItemSelectedListener(new MedicineTypeSelectedListener(medicineTypesAdapter, quantitySuffixLabel, getApplicationContext()));
+        medicineTypeSpinner.setOnItemSelectedListener(new MedicineTypeOnItemSelectedListener(medicineTypesAdapter, quantitySuffixLabel, getApplicationContext()));
     }
 }

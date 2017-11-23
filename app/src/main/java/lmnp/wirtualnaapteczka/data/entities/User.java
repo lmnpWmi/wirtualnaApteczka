@@ -14,6 +14,8 @@ public class User {
     private List<Medicine> medicines;
     private List<Long> friendsIds;
 
+    private UserPreferences userPreferences;
+
     public User() {
     }
 
@@ -73,6 +75,14 @@ public class User {
         this.friendsIds = friendsIds;
     }
 
+    public UserPreferences getUserPreferences() {
+        return userPreferences;
+    }
+
+    public void setUserPreferences(UserPreferences userPreferences) {
+        this.userPreferences = userPreferences;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,7 +96,8 @@ public class User {
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
         if (medicines != null ? !medicines.equals(user.medicines) : user.medicines != null) return false;
-        return friendsIds != null ? friendsIds.equals(user.friendsIds) : user.friendsIds == null;
+        if (friendsIds != null ? !friendsIds.equals(user.friendsIds) : user.friendsIds != null) return false;
+        return userPreferences != null ? userPreferences.equals(user.userPreferences) : user.userPreferences == null;
     }
 
     @Override
@@ -98,6 +109,7 @@ public class User {
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (medicines != null ? medicines.hashCode() : 0);
         result = 31 * result + (friendsIds != null ? friendsIds.hashCode() : 0);
+        result = 31 * result + (userPreferences != null ? userPreferences.hashCode() : 0);
         return result;
     }
 
@@ -111,6 +123,7 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", medicines=" + medicines +
                 ", friendsIds=" + friendsIds +
+                ", userPreferences=" + userPreferences +
                 '}';
     }
 }

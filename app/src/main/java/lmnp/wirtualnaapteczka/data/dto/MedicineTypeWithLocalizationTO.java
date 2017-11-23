@@ -1,6 +1,6 @@
 package lmnp.wirtualnaapteczka.data.dto;
 
-import lmnp.wirtualnaapteczka.data.MedicineTypeEnum;
+import lmnp.wirtualnaapteczka.data.enums.MedicineTypeEnum;
 
 public class MedicineTypeWithLocalizationTO {
     private MedicineTypeEnum medicineTypeEnum;

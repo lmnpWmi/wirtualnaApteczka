@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
-    android:orientation="horizontal"
-    android:padding="10dp">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@android:color/transparent"
+              android:orientation="horizontal"
+              android:padding="10dp" android:id="@+id/medicine_simple_item_panel">
 
 
     <LinearLayout
-        android:id="@+id/text_container"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_weight="2"
-        android:gravity="center"
-        android:orientation="vertical">
+            android:id="@+id/text_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical">
 
         <TextView
-            android:id="@+id/medicine_item_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:text="Witamina C" />
+                android:id="@+id/medicine_simple_item_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Witamina C"/>
 
 
         <TextView
-            android:id="@+id/medicine_item_amount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                android:id="@+id/medicine_simple_item_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-            tools:text="ilość:" />
+                tools:text="ilość:"/>
 
 
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/medicine_item_thumbnail"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/icons8_picture_96" />
+            android:id="@+id/medicine_simple_item_thumbnail"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/icons8_picture_96"/>
 
 
 </LinearLayout>

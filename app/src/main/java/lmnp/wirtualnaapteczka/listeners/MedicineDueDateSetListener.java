@@ -9,12 +9,12 @@ import lmnp.wirtualnaapteczka.R;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class MedicineDueDateSelectedListener implements DatePickerDialog.OnDateSetListener {
+public class MedicineDueDateSetListener implements DatePickerDialog.OnDateSetListener {
 
     private Activity activity;
     private TextView medicineDueDate;
 
-    public MedicineDueDateSelectedListener(Activity activity) {
+    public MedicineDueDateSetListener(Activity activity) {
         this.activity = activity;
         this.medicineDueDate = (TextView) activity.findViewById(R.id.medicine_due_date_calendar);
     }

@@ -1,40 +1,49 @@
 package lmnp.wirtualnaapteczka.activity;
 
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.listeners.OpenAddNewMedicineListener;
-import lmnp.wirtualnaapteczka.listeners.OpenFriendListListener;
-import lmnp.wirtualnaapteczka.listeners.OpenMedicineListListener;
+import lmnp.wirtualnaapteczka.comparators.MedicineByDueDateComparator;
+import lmnp.wirtualnaapteczka.customarrayadapters.MedicineItemSimpleArrayAdapter;
+import lmnp.wirtualnaapteczka.data.entities.Medicine;
+import lmnp.wirtualnaapteczka.data.entities.User;
+import lmnp.wirtualnaapteczka.listeners.AddNewMedicineOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.FriendListOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.MedicineListOnClickListener;
+import lmnp.wirtualnaapteczka.services.DbService;
+import lmnp.wirtualnaapteczka.utils.SessionManager;
+import lmnp.wirtualnaapteczka.utils.AppConstants;
+
+import java.util.Collections;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    private LinearLayout mainLayout;
-    private AnimationDrawable animationBackground;
+    private DbService dbService;
+    private User user;
 
     private LinearLayout addMedicinePanel;
     private LinearLayout medicineListPanel;
     private LinearLayout friendsPanel;
+    private ListView recentlyUsedMedicinesSimpleList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mainLayout = (LinearLayout) findViewById(R.id.main_layout);
-//        animationBackground = (AnimationDrawable) mainLayout.getBackground();
-//        animationBackground.setEnterFadeDuration(4500);
-//        animationBackground.setExitFadeDuration(4500);
-//        animationBackground.start();
+        dbService = SessionManager.obtainDbService();
+        user = SessionManager.getCurrentUser();
 
         addMedicinePanel = (LinearLayout) findViewById(R.id.add_medicine_panel);
         medicineListPanel = (LinearLayout) findViewById(R.id.medicine_list_panel);
         friendsPanel = (LinearLayout) findViewById(R.id.friends_panel);
+        recentlyUsedMedicinesSimpleList = (ListView) findViewById(R.id.medicine_list_view_simple);
 
         initializeListeners();
+        initializeRecentlyUsedMedicinesList();
     }
 
     @Override
@@ -44,10 +53,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeListeners() {
-        addMedicinePanel.setOnClickListener(new OpenAddNewMedicineListener());
+        addMedicinePanel.setOnClickListener(new AddNewMedicineOnClickListener());
+        medicineListPanel.setOnClickListener(new MedicineListOnClickListener());
+        friendsPanel.setOnClickListener(new FriendListOnClickListener());
+    }
 
-        medicineListPanel.setOnClickListener(new OpenMedicineListListener());
+    private void initializeRecentlyUsedMedicinesList() {
+        List<Medicine> recentlyUsedMedicinesList = prepareRecentlyUsedMedicinesList();
+        MedicineItemSimpleArrayAdapter recentlyUsedMedicinesAdapter = new MedicineItemSimpleArrayAdapter(this, R.id.medicine_list_view_simple, recentlyUsedMedicinesList);
 
-        friendsPanel.setOnClickListener(new OpenFriendListListener());
+        recentlyUsedMedicinesSimpleList.setAdapter(recentlyUsedMedicinesAdapter);
+    }
+
+    private List<Medicine> prepareRecentlyUsedMedicinesList() {
+        List<Medicine> currentUserMedicines = dbService.findAllMedicinesByUserId(SessionManager.getCurrentUser().getId());
+        Collections.sort(currentUserMedicines, new MedicineByDueDateComparator());
+
+        int entriesLimit = user.getUserPreferences().getRecentlyUsedMedicinesViewLimit();
+        entriesLimit = entriesLimit > currentUserMedicines.size() ? currentUserMedicines.size() : entriesLimit;
+
+        List<Medicine> recentlyUsedMedicines = currentUserMedicines.subList(AppConstants.FIRST_ITEM_INDEX, entriesLimit);
+
+        return recentlyUsedMedicines;
     }
 }

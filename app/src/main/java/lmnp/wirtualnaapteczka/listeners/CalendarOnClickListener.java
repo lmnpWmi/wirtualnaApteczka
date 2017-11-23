@@ -5,11 +5,11 @@ import android.support.v4.app.FragmentManager;
 import android.view.View;
 import lmnp.wirtualnaapteczka.components.DatePickerFragment;
 
-public class OpenCalendarListener implements View.OnClickListener {
+public class CalendarOnClickListener implements View.OnClickListener {
 
     private FragmentManager fragmentManager;
 
-    public OpenCalendarListener(FragmentManager fragmentManager) {
+    public CalendarOnClickListener(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
     }
 

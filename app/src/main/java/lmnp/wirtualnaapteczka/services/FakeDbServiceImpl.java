@@ -2,10 +2,12 @@ package lmnp.wirtualnaapteczka.services;
 
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.entities.User;
+import lmnp.wirtualnaapteczka.data.entities.UserPreferences;
 import lmnp.wirtualnaapteczka.test.utils.SampleMedicinesBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class FakeDbServiceImpl implements DbService {
@@ -77,11 +79,8 @@ public class FakeDbServiceImpl implements DbService {
 
     @Override
     public void addMedicine(Long userId, Medicine medicine) {
-        for (User user : users) {
-            if (user.getId().equals(userId)) {
-                user.getMedicines().add(medicine);
-            }
-        }
+        User user = findUserById(userId);
+        user.getMedicines().add(medicine);
     }
 
     @Override
@@ -111,6 +110,36 @@ public class FakeDbServiceImpl implements DbService {
             List<Medicine> userMedicines = medicineOwningUser.getMedicines();
             userMedicines.remove(medicine);
         }
+    }
+
+    @Override
+    public void updateMedicine(Long userId, Medicine medicine) {
+        Medicine medicineForUpdate = findMedicineById(userId, medicine.getId());
+
+        medicineForUpdate.setName(medicine.getName());
+        medicineForUpdate.setType(medicine.getType());
+        medicineForUpdate.setThumbnailUri(medicine.getThumbnailUri());
+        medicineForUpdate.setDescription(medicine.getDescription());
+        medicineForUpdate.setDueDate(medicine.getDueDate());
+        medicineForUpdate.setUserNotes(medicine.getUserNotes());
+        medicineForUpdate.setShareWithFriends(medicine.isShareWithFriends());
+        medicineForUpdate.setAmount(medicine.getAmount());
+    }
+
+    @Override
+    public Medicine findMedicineById(Long userId, Long medicineId) {
+        User user = findUserById(userId);
+        List<Medicine> medicines = user.getMedicines();
+
+        Medicine foundMedicine = null;
+
+        for (Medicine medicine : medicines) {
+            if (medicine.getId().equals(userId)) {
+                foundMedicine = medicine;
+            }
+        }
+
+        return foundMedicine;
     }
 
     @Override
@@ -155,6 +184,9 @@ public class FakeDbServiceImpl implements DbService {
                 .addAll()
                 .build();
 
+        UserPreferences globalPreferencesForTests = new UserPreferences();
+        globalPreferencesForTests.setRecentlyUsedMedicinesViewLimit(5);
+
         User user1 = new User();
         user1.setId(1L);
         user1.setFirstName("Paulina");
@@ -162,6 +194,7 @@ public class FakeDbServiceImpl implements DbService {
         user1.setPassword("password");
         user1.setMedicines(medicines1);
         user1.setFriendsIds(Arrays.asList(2L));
+        user1.setUserPreferences(globalPreferencesForTests);
 
         User user2 = new User();
         user2.setId(2L);
@@ -170,6 +203,7 @@ public class FakeDbServiceImpl implements DbService {
         user2.setPassword("password");
         user2.setMedicines(medicines2);
         user2.setFriendsIds(Arrays.asList(1L, 3L));
+        user2.setUserPreferences(globalPreferencesForTests);
 
         User user3 = new User();
         user3.setId(3L);
@@ -178,6 +212,7 @@ public class FakeDbServiceImpl implements DbService {
         user3.setPassword("password");
         user3.setMedicines(medicines3);
         user3.setFriendsIds(Arrays.asList(2L, 4L));
+        user3.setUserPreferences(globalPreferencesForTests);
 
         User user4 = new User();
         user4.setId(4L);
@@ -186,6 +221,7 @@ public class FakeDbServiceImpl implements DbService {
         user4.setPassword("password");
         user4.setMedicines(medicines4);
         user4.setFriendsIds(Arrays.asList(3L));
+        user4.setUserPreferences(globalPreferencesForTests);
 
         users.addAll(Arrays.asList(user1, user2, user3, user4));
 
