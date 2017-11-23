@@ -148,7 +148,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@android:color/transparent"
-                            app:srcCompat="@drawable/icons8_wipes_96" android:duplicateParentState="true"
+                            app:srcCompat="@drawable/icons8_add_column" android:duplicateParentState="true"
                             android:clickable="false"/>
 
                     <TextView
@@ -173,7 +173,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@android:color/transparent"
-                            app:srcCompat="@drawable/icons8_picture_96" android:clickable="false"
+                            app:srcCompat="@drawable/icons8_view_details" android:clickable="false"
                             android:duplicateParentState="true"/>
 
                     <TextView

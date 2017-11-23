@@ -41,7 +41,7 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
         TextView type = (TextView) view.findViewById(R.id.medicine_item_type);
         TextView amount = (TextView) view.findViewById(R.id.medicine_item_amount);
         TextView dueDate = (TextView) view.findViewById(R.id.medicine_item_duedate);
-        ImageView thumbnail = (ImageView) view.findViewById(R.id.medicine_item_thumbnail);
+        ImageView thumbnail = (ImageView) view.findViewById(R.id.medicine_simple_item_thumbnail);
 
         name.setText(currentMedicine.getName());
         type.setText(prepareMedicineTypeText(currentMedicine.getType()));
