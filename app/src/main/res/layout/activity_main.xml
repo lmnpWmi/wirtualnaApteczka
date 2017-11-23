@@ -1,104 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@drawable/first_layer"
-              android:orientation="vertical" android:id="@+id/main_layout">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/first_layer"
+    android:orientation="vertical">
 
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal"
 
-            android:padding="20dp">
+        android:padding="20dp">
 
         <LinearLayout
-                android:id="@+id/add_medicine_panel"
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            android:id="@+id/add_medicine_panel"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <ImageButton
-                    android:id="@+id/add_medicine_img_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:duplicateParentState="true"
-                    app:srcCompat="@drawable/add_medicine_icon"/>
+                android:id="@+id/add_medicine_img_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                app:srcCompat="@drawable/add_medicine_icon" />
 
             <TextView
-                    android:id="@+id/add_medicine_photo_label"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clickable="false"
-                    android:duplicateParentState="true"
-                    android:gravity="center"
-                    android:text="@string/add_medicine"
-                    android:textSize="20sp"/>
+                android:id="@+id/add_medicine_photo_label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:text="@string/add_medicine"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
-                android:id="@+id/medicine_list_panel"
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="openMyList"
-                android:orientation="vertical">
+            android:id="@+id/medicine_list_panel"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="openMyList"
+            android:orientation="vertical">
 
             <ImageButton
-                    android:id="@+id/medicine_list_img_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:duplicateParentState="true"
-                    app:srcCompat="@drawable/my_medicine_list"/>
+                android:id="@+id/medicine_list_img_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                app:srcCompat="@drawable/my_medicine_list" />
 
             <TextView
-                    android:id="@+id/medicine_list_label"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clickable="false"
-                    android:duplicateParentState="true"
-                    android:gravity="center"
-                    android:text="@string/my_list_medicine"
-                    android:textSize="20sp"/>
+                android:id="@+id/medicine_list_label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:text="@string/my_list_medicine"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
-                android:id="@+id/friends_panel"
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+            android:id="@+id/friends_panel"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <ImageButton
-                    android:id="@+id/my_friends_img_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:duplicateParentState="true"
-                    app:srcCompat="@drawable/icons8_couple_96"/>
+                android:id="@+id/my_friends_img_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                app:srcCompat="@drawable/icons8_couple_96" />
 
             <TextView
-                    android:id="@+id/my_friends_label"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clickable="false"
-                    android:duplicateParentState="true"
-                    android:gravity="center"
-                    android:text="@string/friends"
-                    android:textSize="20sp"/>
+                android:id="@+id/my_friends_label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                android:gravity="center"
+                android:text="@string/friends"
+                android:textSize="20sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -106,36 +108,36 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/color_primary"/>
+        android:background="@color/color_primary" />
 
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:orientation="vertical"
-            android:padding="20dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/last_added"
-                android:textSize="20sp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/last_added"
+            android:textSize="20sp" />
 
         <ListView
-                android:id="@+id/medicine_list_view_simple"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"/>
+            android:id="@+id/medicine_list_view_simple"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent" />
 
         <TextView
-                android:id="@+id/empty"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical|center_horizontal|center"
-                android:text="@string/medicine_list_empty"
-                android:textSize="18sp"
-                android:visibility="gone"/>
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:text="@string/medicine_list_empty"
+            android:textSize="18sp"
+            android:visibility="gone" />
 
     </LinearLayout>
 </LinearLayout>

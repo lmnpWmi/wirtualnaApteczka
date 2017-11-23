@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
-        app:srcCompat="@drawable/icons8_picture_96" />
+        app:srcCompat="@drawable/large_icons" />
 
 
 </LinearLayout>

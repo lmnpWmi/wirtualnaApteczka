@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:background="@drawable/first_layer"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/first_layer"
     android:padding="20dp">
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -147,7 +148,7 @@
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:duplicateParentState="true"
-                        app:srcCompat="@drawable/icons8_view_details" />
+                        app:srcCompat="@drawable/icons8_add_column" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -194,14 +195,14 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_new_medicine_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="right|bottom"
-            android:layout_margin="30dp"
-            android:src="@drawable/ic_done_white_24dp"/>
+        android:id="@+id/add_new_medicine_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="30dp"
+        android:src="@drawable/ic_done_white_24dp" />
 
 </RelativeLayout>
