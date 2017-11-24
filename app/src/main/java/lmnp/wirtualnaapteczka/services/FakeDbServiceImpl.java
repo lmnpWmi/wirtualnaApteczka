@@ -185,7 +185,7 @@ public class FakeDbServiceImpl implements DbService {
                 .build();
 
         UserPreferences globalPreferencesForTests = new UserPreferences();
-        globalPreferencesForTests.setRecentlyUsedMedicinesViewLimit(5);
+        globalPreferencesForTests.setRecentlyUsedMedicinesViewLimit(4);
 
         User user1 = new User();
         user1.setId(1L);

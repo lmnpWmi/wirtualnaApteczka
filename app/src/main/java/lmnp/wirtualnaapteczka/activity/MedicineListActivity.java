@@ -8,7 +8,7 @@ import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.customarrayadapters.MedicineItemArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.entities.User;
-import lmnp.wirtualnaapteczka.listeners.AddNewMedicineOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.utils.CollectionUtils;
 import lmnp.wirtualnaapteczka.utils.SessionManager;
@@ -28,7 +28,7 @@ public class MedicineListActivity extends AppCompatActivity {
 
         dbService = SessionManager.obtainDbService();
         medicineListView = (ListView) findViewById(R.id.medicine_list_view);
-        floatingActionButton = (FloatingActionButton) findViewById(R.id.add_new_medicine_btn);
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.save_new_medicine_btn);
         floatingActionButton.setOnClickListener(new AddNewMedicineOnClickListener());
 
         initializeMedicineList();

@@ -11,8 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.listeners.RecentlyUsedMedicineOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.mainactivity.RecentlyUsedMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.utils.AdaptersCommonUtils;
+import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class MedicineItemSimpleArrayAdapter extends ArrayAdapter<Medicine> {
 
         name.setText(currentMedicine.getName());
 
-        String amountText = AdaptersCommonUtils.prepareAmountText(currentMedicine.getAmount(), context);
+        String amountText = AdaptersCommonUtils.prepareAmountText(currentMedicine.getAmount(), context) + " " + MedicineTypeUtils.prepareLocalizedTypeSuffix(currentMedicine.getType(), context);
         amount.setText(amountText);
 
 //        thumbnail.setImageURI(AdaptersCommonUtils.prepareThumbnailUri(currentMedicine.getThumbnailUri()));
