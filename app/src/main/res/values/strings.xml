@@ -3,6 +3,8 @@
     <string name="app_name">Wirtualna Apteczka</string>
     <string name="amount">Ilość</string>
     <string name="due_date">Data ważności</string>
+    <string name="information_medicine">Informacje o leku</string>
+    <string name="list_medicines">Lista leków</string>
 
     <!-- Main activity layout -->
     <string name="add_medicine">Dodaj lek</string>
