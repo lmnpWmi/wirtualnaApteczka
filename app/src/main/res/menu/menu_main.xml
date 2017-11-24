@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/options"
-        android:icon="@drawable/icons8_services_96"
+        android:icon="@drawable/config_icon"
         android:title="@string/options"
         app:showAsAction="always" />
 

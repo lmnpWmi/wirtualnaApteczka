@@ -46,7 +46,9 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
         name.setText(currentMedicine.getName());
         type.setText(prepareMedicineTypeText(currentMedicine.getType()));
         dueDate.setText(prepareDueDateText(currentMedicine.getDueDate()));
-        amount.setText(AdaptersCommonUtils.prepareAmountText(currentMedicine.getAmount(), context));
+
+        String amountText = AdaptersCommonUtils.prepareAmountText(currentMedicine.getAmount(), context) + " " + MedicineTypeUtils.prepareLocalizedTypeSuffix(currentMedicine.getType(), context);
+        amount.setText(amountText);
 
 //        thumbnail.setImageURI(AdaptersCommonUtils.prepareThumbnailUri(currentMedicine.getThumbnailUri()));
 

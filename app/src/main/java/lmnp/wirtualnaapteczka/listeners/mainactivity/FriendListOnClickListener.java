@@ -1,4 +1,4 @@
-package lmnp.wirtualnaapteczka.listeners;
+package lmnp.wirtualnaapteczka.listeners.mainactivity;
 
 import android.view.View;
 import android.widget.Toast;

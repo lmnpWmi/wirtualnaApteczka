@@ -4,11 +4,14 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import lmnp.wirtualnaapteczka.listeners.MedicineDueDateSetListener;
+import lmnp.wirtualnaapteczka.data.entities.Medicine;
+import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.MedicineDueDateSetListener;
 
 import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment {
+
+    private Medicine medicineForUpdate;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -17,6 +20,10 @@ public class DatePickerFragment extends DialogFragment {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        return new DatePickerDialog(getActivity(), new MedicineDueDateSetListener(getActivity()), year, month, day);
+        return new DatePickerDialog(getActivity(), new MedicineDueDateSetListener(medicineForUpdate, getActivity()), year, month, day);
+    }
+
+    public void setMedicineForUpdate(Medicine medicineForUpdate) {
+        this.medicineForUpdate = medicineForUpdate;
     }
 }

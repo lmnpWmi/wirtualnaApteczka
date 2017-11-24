@@ -10,9 +10,9 @@ import lmnp.wirtualnaapteczka.comparators.MedicineByDueDateComparator;
 import lmnp.wirtualnaapteczka.customarrayadapters.MedicineItemSimpleArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.entities.User;
-import lmnp.wirtualnaapteczka.listeners.AddNewMedicineOnClickListener;
-import lmnp.wirtualnaapteczka.listeners.FriendListOnClickListener;
-import lmnp.wirtualnaapteczka.listeners.MedicineListOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.mainactivity.FriendListOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.mainactivity.MedicineListOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.utils.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
@@ -52,17 +52,17 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void initializeListeners() {
-        addMedicinePanel.setOnClickListener(new AddNewMedicineOnClickListener());
-        medicineListPanel.setOnClickListener(new MedicineListOnClickListener());
-        friendsPanel.setOnClickListener(new FriendListOnClickListener());
-    }
-
-    private void initializeRecentlyUsedMedicinesList() {
+    public void initializeRecentlyUsedMedicinesList() {
         List<Medicine> recentlyUsedMedicinesList = prepareRecentlyUsedMedicinesList();
         MedicineItemSimpleArrayAdapter recentlyUsedMedicinesAdapter = new MedicineItemSimpleArrayAdapter(this, R.id.medicine_list_view_simple, recentlyUsedMedicinesList);
 
         recentlyUsedMedicinesSimpleList.setAdapter(recentlyUsedMedicinesAdapter);
+    }
+
+    private void initializeListeners() {
+        addMedicinePanel.setOnClickListener(new AddNewMedicineOnClickListener());
+        medicineListPanel.setOnClickListener(new MedicineListOnClickListener());
+        friendsPanel.setOnClickListener(new FriendListOnClickListener());
     }
 
     private List<Medicine> prepareRecentlyUsedMedicinesList() {

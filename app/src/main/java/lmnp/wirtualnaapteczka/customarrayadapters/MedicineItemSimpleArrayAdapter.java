@@ -10,34 +10,36 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.activity.MainActivity;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.listeners.RecentlyUsedMedicineOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.mainactivity.RecentlyUsedMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.utils.AdaptersCommonUtils;
+import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
 
 import java.util.List;
 
 public class MedicineItemSimpleArrayAdapter extends ArrayAdapter<Medicine> {
 
     private List<Medicine> medicines;
-    private Context context;
+    private MainActivity mainActivity;
 
     private LinearLayout itemPanel;
     private TextView name;
     private TextView amount;
     private ImageView thumbnail;
 
-    public MedicineItemSimpleArrayAdapter(Context context, int resource, List<Medicine> medicines) {
-        super(context, resource, medicines);
+    public MedicineItemSimpleArrayAdapter(MainActivity mainActivity, int resource, List<Medicine> medicines) {
+        super(mainActivity, resource, medicines);
 
         this.medicines = medicines;
-        this.context = context;
+        this.mainActivity = mainActivity;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Medicine currentMedicine = medicines.get(position);
 
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) mainActivity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.list_simple_item, null);
 
         itemPanel = (LinearLayout) view.findViewById(R.id.medicine_simple_item_panel);
@@ -47,12 +49,12 @@ public class MedicineItemSimpleArrayAdapter extends ArrayAdapter<Medicine> {
 
         name.setText(currentMedicine.getName());
 
-        String amountText = AdaptersCommonUtils.prepareAmountText(currentMedicine.getAmount(), context);
+        String amountText = AdaptersCommonUtils.prepareAmountText(currentMedicine.getAmount(), mainActivity) + " " + MedicineTypeUtils.prepareLocalizedTypeSuffix(currentMedicine.getType(), mainActivity);
         amount.setText(amountText);
 
 //        thumbnail.setImageURI(AdaptersCommonUtils.prepareThumbnailUri(currentMedicine.getThumbnailUri()));
 
-        itemPanel.setOnClickListener(new RecentlyUsedMedicineOnClickListener(context, currentMedicine, amount));
+        itemPanel.setOnClickListener(new RecentlyUsedMedicineOnClickListener(mainActivity, currentMedicine, amount));
 
         return view;
     }
