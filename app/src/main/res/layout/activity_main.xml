@@ -4,7 +4,9 @@
               xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@drawable/background_gradient"
-              android:orientation="vertical" android:id="@+id/main_layout">
+              android:orientation="vertical"
+    android:padding="20dp"
+    android:id="@+id/main_layout">
 
 
     <LinearLayout
@@ -12,8 +14,8 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:orientation="horizontal"
-
-            android:padding="20dp">
+            android:paddingBottom="20dp"
+            >
 
         <LinearLayout
                 android:id="@+id/add_medicine_panel"
@@ -114,7 +116,8 @@
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:orientation="vertical"
-            android:padding="20dp">
+        android:paddingTop="20dp"
+        >
 
         <TextView
                 android:layout_width="wrap_content"

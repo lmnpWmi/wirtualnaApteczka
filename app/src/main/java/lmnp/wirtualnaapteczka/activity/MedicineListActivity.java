@@ -3,6 +3,7 @@ package lmnp.wirtualnaapteczka.activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.widget.ListView;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.customarrayadapters.MedicineItemArrayAdapter;
@@ -53,4 +54,11 @@ public class MedicineListActivity extends AppCompatActivity {
 
         return medicineList;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        return true;
+    }
+
 }

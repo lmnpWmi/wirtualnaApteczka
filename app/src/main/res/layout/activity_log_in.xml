@@ -9,26 +9,18 @@
         android:layout_height="match_parent"
         android:background="@drawable/background_gradient"
         android:orientation="vertical"
+        android:padding="20dp"
         >
 
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="20dp"
-            android:text="@string/log_in_2"
-            android:textSize="30sp"
-            android:textStyle="bold" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
             android:background="@color/color_primary"
             android:drawableLeft="@drawable/facebook"
             android:gravity="center"
@@ -47,9 +39,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@color/white"
             android:drawableLeft="@drawable/google"
             android:gravity="center"
@@ -58,11 +50,6 @@
             android:textAllCaps="false"
 
             android:textSize="18sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/color_primary" />
 
         <TextView
             android:layout_width="match_parent"
@@ -78,8 +65,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:ems="10"
             android:hint="@string/email"
@@ -91,8 +78,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
 
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:ems="10"
             android:hint="@string/pass"
             android:inputType="textPersonName"
@@ -105,9 +92,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
+            android:padding="10dp"
             android:background="@color/color_primary"
             android:gravity="center"
             android:text="@string/log_in"
@@ -125,7 +113,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:padding="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="@string/register"
                 android:textSize="18sp" />
 
@@ -135,7 +124,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:padding="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="@string/forgotten"
                 android:textSize="18sp" />
 
@@ -145,7 +135,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <TextView
                 android:layout_width="wrap_content"

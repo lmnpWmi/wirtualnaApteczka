@@ -3,6 +3,10 @@
     <string name="app_name">Wirtualna Apteczka</string>
     <string name="amount">Ilość</string>
     <string name="due_date">Data ważności</string>
+    <string name="information_medicine">Informacje o leku</string>
+    <string name="list_medicines">Lista leków</string>
+    <string name="search">szukaj</string>
+    <string name="config">ustawienia</string>
 
     <!-- Main activity layout -->
     <string name="add_medicine">Dodaj lek</string>
@@ -45,7 +49,7 @@
 
     <!--Login layout-->
     <string name="facebook">Zaloguj się przez Facebook</string>
-    <string name="gmail">Zaloguj się przez Smart Lock</string>
+    <string name="gmail">Zaloguj się przez konto Google</string>
     <string name="email">Email</string>
     <string name="pass">Hasło</string>
     <string name="required_fields">*pola obowiazkowe</string>
