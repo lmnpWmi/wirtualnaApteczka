@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.comparators.MedicineByDueDateComparator;
+import lmnp.wirtualnaapteczka.comparators.MedicineByUpdatedAtComparator;
 import lmnp.wirtualnaapteczka.customarrayadapters.MedicineItemSimpleArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.entities.User;
@@ -34,13 +34,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dbService = SessionManager.obtainDbService();
+        dbService = SessionManager.getDbService();
         user = SessionManager.getCurrentUser();
 
         addMedicinePanel = (LinearLayout) findViewById(R.id.add_medicine_panel);
         medicineListPanel = (LinearLayout) findViewById(R.id.medicine_list_panel);
         friendsPanel = (LinearLayout) findViewById(R.id.friends_panel);
         recentlyUsedMedicinesSimpleList = (ListView) findViewById(R.id.medicine_list_view_simple);
+        recentlyUsedMedicinesSimpleList.setEmptyView(findViewById(R.id.medicine_list_simple_empty));
 
         initializeListeners();
         initializeRecentlyUsedMedicinesList();
@@ -50,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_config, menu);
         return true;
+    }
+
+    @Override
+    public void finish() {
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     public void initializeRecentlyUsedMedicinesList() {
@@ -67,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Medicine> prepareRecentlyUsedMedicinesList() {
         List<Medicine> currentUserMedicines = dbService.findAllMedicinesByUserId(SessionManager.getCurrentUser().getId());
-        Collections.sort(currentUserMedicines, new MedicineByDueDateComparator());
+        Collections.sort(currentUserMedicines, new MedicineByUpdatedAtComparator());
 
         int entriesLimit = user.getUserPreferences().getRecentlyUsedMedicinesViewLimit();
         entriesLimit = entriesLimit > currentUserMedicines.size() ? currentUserMedicines.size() : entriesLimit;

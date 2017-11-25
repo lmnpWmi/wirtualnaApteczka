@@ -1,19 +1,27 @@
 package lmnp.wirtualnaapteczka.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ListView;
 import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.comparators.MedicineByUpdatedAtComparator;
 import lmnp.wirtualnaapteczka.customarrayadapters.MedicineItemArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.utils.CollectionUtils;
+import lmnp.wirtualnaapteczka.utils.MedicineFilter;
 import lmnp.wirtualnaapteczka.utils.SessionManager;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MedicineListActivity extends AppCompatActivity {
@@ -27,21 +35,25 @@ public class MedicineListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicine_list);
 
-        dbService = SessionManager.obtainDbService();
+        dbService = SessionManager.getDbService();
         medicineListView = (ListView) findViewById(R.id.medicine_list_view);
+        medicineListView.setEmptyView(findViewById(R.id.medicine_list_empty));
         floatingActionButton = (FloatingActionButton) findViewById(R.id.save_new_medicine_btn);
         floatingActionButton.setOnClickListener(new AddNewMedicineOnClickListener());
 
-        initializeMedicineList();
+        List<Medicine> medicines = retrieveCurrentUserMedicines();
+        initializeMedicineList(medicines);
     }
 
-    private void initializeMedicineList() {
-        List<Medicine> userMedicines = retrieveCurrentUserMedicines();
-
-        if (CollectionUtils.isNotEmpty(userMedicines)) {
-            MedicineItemArrayAdapter medicineItemArrayAdapter = new MedicineItemArrayAdapter(this, R.id.medicine_list_view, userMedicines);
-            medicineListView.setAdapter(medicineItemArrayAdapter);
+    private void initializeMedicineList(List<Medicine> medicines) {
+        if (medicines == null) {
+            medicines = new ArrayList<>();
         }
+
+        Collections.sort(medicines, new MedicineByUpdatedAtComparator());
+
+        MedicineItemArrayAdapter medicineItemArrayAdapter = new MedicineItemArrayAdapter(this, R.id.medicine_list_view, medicines);
+        medicineListView.setAdapter(medicineItemArrayAdapter);
     }
 
     private List<Medicine> retrieveCurrentUserMedicines() {
@@ -61,4 +73,48 @@ public class MedicineListActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean result;
+
+        switch (item.getItemId()) {
+            case R.id.search_medicine_btn:
+                openSearchDialog();
+                result = true;
+                break;
+            default:
+                result = super.onOptionsItemSelected(item);
+        }
+
+        return result;
+    }
+
+    @Override
+    public void finish() {
+        Intent intent = new Intent(this, MainActivity.class);
+        this.startActivity(intent);
+    }
+
+    private void openSearchDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle(R.string.search_medicine_msg);
+
+        final EditText input = new EditText(this);
+        input.setSingleLine();
+        dialog.setView(input);
+
+        dialog.setPositiveButton(R.string.search, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String searchValue = input.getText().toString();
+                List<Medicine> medicines = retrieveCurrentUserMedicines();
+                List<Medicine> filteredMedicines = MedicineFilter.filterMedicines(searchValue, medicines, false);
+
+                initializeMedicineList(filteredMedicines);
+            }
+        });
+
+        dialog.setNegativeButton(R.string.go_back, null);
+
+        dialog.show();
+    }
 }

@@ -132,7 +132,7 @@
                 android:background="@android:color/transparent"/>
 
         <TextView
-                android:id="@+id/empty"
+                android:id="@+id/medicine_list_simple_empty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|center_horizontal|center"

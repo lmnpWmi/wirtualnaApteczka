@@ -5,10 +5,8 @@ import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.data.entities.UserPreferences;
 import lmnp.wirtualnaapteczka.test.utils.SampleMedicinesBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class FakeDbServiceImpl implements DbService {
 
@@ -78,9 +76,23 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public void addMedicine(Long userId, Medicine medicine) {
+    public void saveMedicine(Long userId, Medicine medicine) {
         User user = findUserById(userId);
+
+        medicine.setId(Long.valueOf(new Random().nextInt(1000000000)));
+        medicine.setUpdatedAt(new Date());
+        medicine.setCreatedAt(new Date());
+
         user.getMedicines().add(medicine);
+    }
+
+    @Override
+    public void saveOrUpdateMedicine(Long userId, Medicine medicine) {
+        if (medicine.getId() != null) {
+            updateMedicine(userId, medicine);
+        } else {
+            saveMedicine(userId, medicine);
+        }
     }
 
     @Override
@@ -124,6 +136,8 @@ public class FakeDbServiceImpl implements DbService {
         medicineForUpdate.setUserNotes(medicine.getUserNotes());
         medicineForUpdate.setShareWithFriends(medicine.isShareWithFriends());
         medicineForUpdate.setAmount(medicine.getAmount());
+
+        medicineForUpdate.setUpdatedAt(new Date());
     }
 
     @Override
@@ -134,7 +148,7 @@ public class FakeDbServiceImpl implements DbService {
         Medicine foundMedicine = null;
 
         for (Medicine medicine : medicines) {
-            if (medicine.getId().equals(userId)) {
+            if (medicine.getId().equals(medicineId)) {
                 foundMedicine = medicine;
             }
         }
