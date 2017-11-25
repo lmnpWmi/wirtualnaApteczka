@@ -7,4 +7,4 @@
           android:gravity="center"
           android:padding="10dp"
           android:text="TextView"
-          android:textSize="18sp" android:textAllCaps="false"/>
+          android:textSize="16sp" android:textAllCaps="false"/>

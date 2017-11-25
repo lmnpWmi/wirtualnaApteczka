@@ -20,10 +20,10 @@
 
     <!-- Add medicine layout -->
     <string name="general_info">Informacje ogólne</string>
-    <string name="product_name">Nazwa leku (wymagane)</string>
+    <string name="product_name">Nazwa leku</string>
     <string name="pack">Opakowanie</string>
-    <string name="medicine_type">Postać leku(*)</string>
-    <string name="medicine_quantity_in_pack">Ilość leku w opakowaniu(*)</string>
+    <string name="medicine_type">Postać leku</string>
+    <string name="medicine_quantity_in_pack">Ilość leku w opakowaniu</string>
     <string name="additional">Dodatkowo</string>
     <string name="photo">Zdjęcie</string>
     <string name="notes">Notatki</string>
