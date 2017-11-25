@@ -23,7 +23,7 @@ public class AddPhotoOnClickListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        addMedicineActivity.startActivityForResult(intent, REQUEST_IMAGE_CAPTUREgit);
+        addMedicineActivity.startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
 //        Intent intent = new Intent(v.getContext(), ImageCaptureActivity.class);
 //        intent.putExtra(AppConstants.EXISTING_MEDICINE, medicine);
 //
