@@ -1,6 +1,7 @@
 package lmnp.wirtualnaapteczka.listeners.addmedicineactivity;
 
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.view.View;
 import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
 import lmnp.wirtualnaapteczka.activity.ImageCaptureActivity;
@@ -21,9 +22,11 @@ public class AddPhotoOnClickListener implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(v.getContext(), ImageCaptureActivity.class);
-        intent.putExtra(AppConstants.EXISTING_MEDICINE, medicine);
-
-        v.getContext().startActivity(intent);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        addMedicineActivity.startActivityForResult(intent, REQUEST_IMAGE_CAPTUREgit);
+//        Intent intent = new Intent(v.getContext(), ImageCaptureActivity.class);
+//        intent.putExtra(AppConstants.EXISTING_MEDICINE, medicine);
+//
+//        v.getContext().startActivity(intent);
     }
 }
