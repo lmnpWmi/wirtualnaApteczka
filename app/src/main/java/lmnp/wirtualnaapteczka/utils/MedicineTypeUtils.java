@@ -3,9 +3,9 @@ package lmnp.wirtualnaapteczka.utils;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
+import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
 import lmnp.wirtualnaapteczka.data.enums.MedicineQuantitySuffix;
 import lmnp.wirtualnaapteczka.data.enums.MedicineTypeEnum;
-import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +19,18 @@ public class MedicineTypeUtils {
         List<MedicineTypeWithLocalizationTO> localizedTypes = new ArrayList<>();
 
         for (MedicineTypeEnum medicineType : MedicineTypeEnum.values()) {
-            String localizedType = prepareLocalizedMedicineType(medicineType, context);
-
-            localizedTypes.add(new MedicineTypeWithLocalizationTO(medicineType, localizedType));
+            MedicineTypeWithLocalizationTO medicineTypeWithLocalization = prepareLocalizedTypeTO(medicineType, context);
+            localizedTypes.add(medicineTypeWithLocalization);
         }
 
         return localizedTypes;
+    }
+
+    public static MedicineTypeWithLocalizationTO prepareLocalizedTypeTO(MedicineTypeEnum medicineType, Context context) {
+        String localizedType = prepareLocalizedMedicineType(medicineType, context);
+        MedicineTypeWithLocalizationTO medicineTypeWithLocalization = new MedicineTypeWithLocalizationTO(medicineType, localizedType);
+
+        return medicineTypeWithLocalization;
     }
 
     public static String prepareLocalizedMedicineType(MedicineTypeEnum medicineType, Context context) {

@@ -11,13 +11,13 @@ import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
 import lmnp.wirtualnaapteczka.utils.LocalizationUtils;
 
 public class MedicineTypeOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
-    private Medicine newMedicine;
+    private Medicine medicine;
     private Context context;
     private TextView quantitySuffixLabel;
     private ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter;
 
-    public MedicineTypeOnItemSelectedListener(Medicine newMedicine, ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter, TextView quantitySuffixLabel, Context context) {
-        this.newMedicine = newMedicine;
+    public MedicineTypeOnItemSelectedListener(Medicine medicine, ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter, TextView quantitySuffixLabel, Context context) {
+        this.medicine = medicine;
         this.medicineTypesAdapter = medicineTypesAdapter;
         this.quantitySuffixLabel = quantitySuffixLabel;
         this.context = context;
@@ -31,7 +31,7 @@ public class MedicineTypeOnItemSelectedListener implements AdapterView.OnItemSel
         String localizedQuantitySuffix = LocalizationUtils.retrieveLocalizationForString(quantitySuffix.name(), context);
 
         quantitySuffixLabel.setText(localizedQuantitySuffix);
-        newMedicine.setType(item.getMedicineTypeEnum());
+        medicine.setType(item.getMedicineTypeEnum());
     }
 
     @Override

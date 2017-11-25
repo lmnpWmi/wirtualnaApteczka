@@ -12,13 +12,13 @@
         android:background="@android:color/transparent" />
 
     <TextView
-        android:id="@+id/empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical|center_horizontal|center"
-        android:text="@string/medicine_list_empty"
-        android:textSize="18sp"
-        android:visibility="gone" />
+            android:id="@+id/medicine_list_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:text="@string/medicine_list_empty"
+            android:textSize="18sp"
+            android:visibility="gone"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/save_new_medicine_btn"

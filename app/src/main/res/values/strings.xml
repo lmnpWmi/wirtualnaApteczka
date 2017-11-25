@@ -2,11 +2,14 @@
     <!-- General -->
     <string name="app_name">Wirtualna Apteczka</string>
     <string name="amount">Ilość</string>
+    <string name="created_at">Data dodania</string>
     <string name="due_date">Data ważności</string>
     <string name="information_medicine">Informacje o leku</string>
     <string name="list_medicines">Lista leków</string>
-    <string name="search">szukaj</string>
     <string name="config">ustawienia</string>
+    <string name="not_specified">Nie podano</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
 
     <!-- Main activity layout -->
     <string name="add_medicine">Dodaj lek</string>
@@ -17,13 +20,16 @@
 
     <!-- Add medicine layout -->
     <string name="general_info">Informacje ogólne</string>
-    <string name="product_name">Nazwa leku</string>
+    <string name="product_name">Nazwa leku (wymagane)</string>
     <string name="pack">Opakowanie</string>
-    <string name="medicine_type">Postać leku</string>
-    <string name="medicine_quantity_in_pack">Ilość leku w opakowaniu</string>
+    <string name="medicine_type">Postać leku(*)</string>
+    <string name="medicine_quantity_in_pack">Ilość leku w opakowaniu(*)</string>
     <string name="additional">Dodatkowo</string>
     <string name="photo">Zdjęcie</string>
     <string name="notes">Notatki</string>
+
+    <string name="medicine_added_msg">Lek został zapisany.</string>
+    <string name="medicine_updated_msg">Zapisano zmiany.</string>
 
     <!-- Medicine List layout -->
     <string name="medicine_list_empty">Nie znaleziono żadnych leków.</string>
@@ -76,5 +82,19 @@
     <string name="edit_amount">Edytuj ilość</string>
     <string name="confirm_btn">Zatwierdź</string>
     <string name="cancel_btn">Anuluj</string>
+
+    <!-- Delete medicine Dialog Box -->
+    <string name="delete_medicine">Usuń lek</string>
+    <string name="delete_medicine_msg">Czy na pewno chcesz usunąć ten lek?</string>
+
+    <!-- Search medicine Dialog Box -->
+    <string name="search_medicine_msg">Znajdź lek</string>
+    <string name="search">Szukaj</string>
+    <string name="go_back">Wróć</string>
+
+    <!-- Validation error messages -->
+    <string name="name_cannot_be_empty_msg">Proszę uzupełnić nazwę leku.</string>
+    <string name="type_cannot_be_empty_msg">Proszę wybrać poprawny typ leku.</string>
+    <string name="amount_cannot_be_empty_msg">Proszę podać ilość leku w opakowaniu.</string>
 
 </resources>

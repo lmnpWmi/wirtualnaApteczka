@@ -6,6 +6,7 @@ import android.widget.Toast;
 public class FriendListOnClickListener implements View.OnClickListener{
     @Override
     public void onClick(View v) {
-        Toast.makeText(v.getContext(), "Not implemented yet!", Toast.LENGTH_SHORT);
+        Toast.makeText(v.getContext(), "Przeglądanie leków znajomych jest niedostępne w wersji offline.", Toast.LENGTH_SHORT)
+                .show();
     }
 }

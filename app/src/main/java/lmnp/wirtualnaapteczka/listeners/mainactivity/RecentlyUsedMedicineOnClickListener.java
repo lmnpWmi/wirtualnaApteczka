@@ -2,7 +2,6 @@ package lmnp.wirtualnaapteczka.listeners.mainactivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,11 +49,9 @@ public class RecentlyUsedMedicineOnClickListener implements View.OnClickListener
             public void onClick(DialogInterface dialog, int which) {
                 int amountValue = numberPicker.getValue();
                 currentMedicine.setAmount(amountValue);
-                currentMedicine.setUpdatedAt(new Date());
-                DbService dbService = SessionManager.obtainDbService();
+                DbService dbService = SessionManager.getDbService();
                 dbService.updateMedicine(SessionManager.getCurrentUser().getId(), currentMedicine);
 
-                amount.setText(AdaptersCommonUtils.prepareAmountText(currentMedicine.getAmount(), mainActivity) + " " + MedicineTypeUtils.prepareLocalizedTypeSuffix(currentMedicine.getType(), mainActivity));
                 mainActivity.initializeRecentlyUsedMedicinesList();
             }
         });
