@@ -1,23 +1,27 @@
 package lmnp.wirtualnaapteczka.services;
 
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
+import lmnp.wirtualnaapteczka.data.entities.Pharmacy;
 import lmnp.wirtualnaapteczka.data.entities.User;
 
 import java.util.List;
 
 public interface DbService {
     void createUser(User user);
-    void deleteUser(Long userId);
+    void deleteUser(String userId);
     void deleteUser(User user);
-    User findUserById(Long userId);
-    List<User> findUsersByIds(List<Long> userIds);
+    User findUserById(String userId);
+    List<User> findUsersByIds(List<String> userIds);
 
-    void saveMedicine(Long userId, Medicine medicine);
-    void saveOrUpdateMedicine(Long userId, Medicine medicine);
-    void deleteMedicine(Long userId, Long medicineId);
-    void deleteMedicine(Long userId, Medicine medicine);
-    void updateMedicine(Long userId, Medicine medicine);
-    Medicine findMedicineById(Long userId, Long medicineId);
-    List<Medicine> findAllMedicinesByUserId(Long userId);
-    List<Medicine> findRecentlyEditedMedicines(Long userId, int resultsLimit);
+    void createPharmacy(String userId, Pharmacy pharmacy);
+    Pharmacy findPharmacyById(String pharmacyId);
+
+    void saveOrUpdateMedicine(String userId, Medicine medicine);
+    void saveMedicine(String userId, Medicine medicine);
+    void updateMedicine(String userId, Medicine medicine);
+    void deleteMedicine(String userId, String medicineId);
+    void deleteMedicine(String userId, Medicine medicine);
+    Medicine findMedicineById(String userId, String medicineId);
+    List<Medicine> findAllMedicinesByUserId(String userId);
+    List<Medicine> findRecentlyEditedMedicines(String userId, int resultsLimit);
 }

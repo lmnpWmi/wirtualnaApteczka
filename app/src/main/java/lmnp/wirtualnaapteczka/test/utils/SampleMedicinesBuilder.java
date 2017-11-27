@@ -21,7 +21,7 @@ public class SampleMedicinesBuilder {
 
     public SampleMedicinesBuilder addFirstMedicine() {
         Medicine medicine1 = new Medicine();
-        medicine1.setId(1L);
+        medicine1.setId("1L");
         medicine1.setAmount(3);
         medicine1.setDescription(SAMPLE_DESCRIPTION);
         medicine1.setName("Ibuprom Zatoki");
@@ -39,7 +39,7 @@ public class SampleMedicinesBuilder {
 
     public SampleMedicinesBuilder addSecondMedicine() {
         Medicine medicine2 = new Medicine();
-        medicine2.setId(2L);
+        medicine2.setId("2L");
         medicine2.setAmount(10);
         medicine2.setDescription(SAMPLE_DESCRIPTION);
         medicine2.setName("Acatar Control");
@@ -57,7 +57,7 @@ public class SampleMedicinesBuilder {
 
     public SampleMedicinesBuilder addThirdMedicine() {
         Medicine medicine3 = new Medicine();
-        medicine3.setId(3L);
+        medicine3.setId("3L");
         medicine3.setAmount(0);
         medicine3.setDescription(SAMPLE_DESCRIPTION);
         medicine3.setName("Acyklowir");
@@ -75,7 +75,7 @@ public class SampleMedicinesBuilder {
 
     public SampleMedicinesBuilder addFourthMedicine() {
         Medicine medicine4 = new Medicine();
-        medicine4.setId(4L);
+        medicine4.setId("4L");
         medicine4.setAmount(1);
         medicine4.setDescription(SAMPLE_DESCRIPTION);
         medicine4.setName("Interferon");
@@ -92,7 +92,7 @@ public class SampleMedicinesBuilder {
 
     public SampleMedicinesBuilder addFifthMedicine() {
         Medicine medicine5 = new Medicine();
-        medicine5.setId(5L);
+        medicine5.setId("5L");
         medicine5.setAmount(10);
         medicine5.setDescription(SAMPLE_DESCRIPTION);
         medicine5.setName("Rybawiryna");

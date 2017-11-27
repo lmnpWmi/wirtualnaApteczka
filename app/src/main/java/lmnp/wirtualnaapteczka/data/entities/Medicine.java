@@ -5,10 +5,10 @@ import lmnp.wirtualnaapteczka.data.enums.MedicineTypeEnum;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Medicine implements Serializable{
-    private static final Long serialVersionUID = 1L;
+public class Medicine implements Serializable {
+    private static final long serialVersionUID = -7115888632811968571L;
 
-    private Long id;
+    private String id;
     private String name;
     private MedicineTypeEnum type;
     private Integer amount;
@@ -24,11 +24,11 @@ public class Medicine implements Serializable{
     public Medicine() {
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

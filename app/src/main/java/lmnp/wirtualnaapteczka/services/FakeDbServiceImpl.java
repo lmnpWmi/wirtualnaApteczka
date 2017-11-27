@@ -1,25 +1,28 @@
 package lmnp.wirtualnaapteczka.services;
 
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
+import lmnp.wirtualnaapteczka.data.entities.Pharmacy;
 import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.data.entities.UserPreferences;
 import lmnp.wirtualnaapteczka.test.utils.SampleMedicinesBuilder;
 
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class FakeDbServiceImpl implements DbService {
 
     private List<User> users;
+    private List<Pharmacy> pharmacies;
 
     public static DbService createNewInstance() {
         List<User> users = prepareSampleUsers();
+        List<Pharmacy> pharmacies = prepareSamplePhamarcies();
 
-        return new FakeDbServiceImpl(users);
+        return new FakeDbServiceImpl(users, pharmacies);
     }
 
-    private FakeDbServiceImpl(List<User> users) {
+    private FakeDbServiceImpl(List<User> users, List<Pharmacy> pharmacies) {
         this.users = users;
+        this.pharmacies = pharmacies;
     }
 
     @Override
@@ -28,7 +31,7 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public void deleteUser(Long userId) {
+    public void deleteUser(String userId) {
         for (int i = 0; i < users.size(); i++) {
             User currentUser = users.get(i);
 
@@ -46,7 +49,7 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public User findUserById(Long userId) {
+    public User findUserById(String userId) {
         User userWithMatchingId = null;
 
         for (User user : users) {
@@ -61,7 +64,7 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public List<User> findUsersByIds(List<Long> userIds) {
+    public List<User> findUsersByIds(List<String> userIds) {
         List<User> matchingUsers = new ArrayList<>();
 
         for (User user : users) {
@@ -76,18 +79,34 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public void saveMedicine(Long userId, Medicine medicine) {
+    public void createPharmacy(String userId, Pharmacy pharmacy) {
         User user = findUserById(userId);
 
-        medicine.setId(Long.valueOf(new Random().nextInt(1000000000)));
-        medicine.setUpdatedAt(new Date());
-        medicine.setCreatedAt(new Date());
+        if (pharmacy.getId() == null) {
+            pharmacy.setId(String.valueOf(new Random().nextInt(1000000000)));
+        }
 
-        user.getMedicines().add(medicine);
+        user.setPharmacyId(pharmacy.getId());
+
+        pharmacies.add(pharmacy);
     }
 
     @Override
-    public void saveOrUpdateMedicine(Long userId, Medicine medicine) {
+    public Pharmacy findPharmacyById(String pharmacyId) {
+        Pharmacy foundPharmacy = null;
+
+        for (Pharmacy pharmacy : pharmacies) {
+            if (pharmacy.getId().equals(pharmacyId)) {
+                foundPharmacy = pharmacy;
+                break;
+            }
+        }
+
+        return foundPharmacy;
+    }
+
+    @Override
+    public void saveOrUpdateMedicine(String userId, Medicine medicine) {
         if (medicine.getId() != null) {
             updateMedicine(userId, medicine);
         } else {
@@ -96,36 +115,19 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public void deleteMedicine(Long userId, Long medicineId) {
-        User medicineOwningUser = findUserById(userId);
+    public void saveMedicine(String userId, Medicine medicine) {
+        User user = findUserById(userId);
 
-        if (medicineOwningUser != null) {
-            List<Medicine> userMedicines = medicineOwningUser.getMedicines();
+        medicine.setId(String.valueOf(new Random().nextInt(1000000000)));
+        medicine.setUpdatedAt(new Date());
+        medicine.setCreatedAt(new Date());
 
-            for (int i = 0; i < userMedicines.size(); i++) {
-                Medicine currentMedicine = userMedicines.get(i);
-
-                if (currentMedicine.getId().equals(medicineId)) {
-                    userMedicines.remove(i);
-
-                    break;
-                }
-            }
-        }
+        Pharmacy pharmacy = findPharmacyById(user.getPharmacyId());
+        pharmacy.getMedicines().add(medicine);
     }
 
     @Override
-    public void deleteMedicine(Long userId, Medicine medicine) {
-        User medicineOwningUser = findUserById(userId);
-
-        if (medicineOwningUser != null) {
-            List<Medicine> userMedicines = medicineOwningUser.getMedicines();
-            userMedicines.remove(medicine);
-        }
-    }
-
-    @Override
-    public void updateMedicine(Long userId, Medicine medicine) {
+    public void updateMedicine(String userId, Medicine medicine) {
         Medicine medicineForUpdate = findMedicineById(userId, medicine.getId());
 
         medicineForUpdate.setName(medicine.getName());
@@ -141,15 +143,56 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public Medicine findMedicineById(Long userId, Long medicineId) {
-        User user = findUserById(userId);
-        List<Medicine> medicines = user.getMedicines();
+    public void deleteMedicine(String userId, String medicineId) {
+        User medicineOwningUser = findUserById(userId);
+        Pharmacy pharmacy = findPharmacyById(medicineOwningUser.getPharmacyId());
 
+        if (pharmacy != null) {
+            List<Medicine> userMedicines = pharmacy.getMedicines();
+
+            for (int i = 0; i < userMedicines.size(); i++) {
+                Medicine currentMedicine = userMedicines.get(i);
+
+                if (currentMedicine.getId().equals(medicineId)) {
+                    userMedicines.remove(i);
+
+                    break;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void deleteMedicine(String userId, Medicine medicine) {
+        User medicineOwningUser = findUserById(userId);
+
+        if (medicineOwningUser != null) {
+            Pharmacy pharmacy = findPharmacyById(medicineOwningUser.getPharmacyId());
+
+            if (pharmacy != null) {
+                List<Medicine> userMedicines = pharmacy.getMedicines();
+                userMedicines.remove(medicine);
+            }
+        }
+    }
+
+    @Override
+    public Medicine findMedicineById(String userId, String medicineId) {
         Medicine foundMedicine = null;
 
-        for (Medicine medicine : medicines) {
-            if (medicine.getId().equals(medicineId)) {
-                foundMedicine = medicine;
+        User user = findUserById(userId);
+
+        if (user != null) {
+            Pharmacy pharmacy = findPharmacyById(user.getPharmacyId());
+
+            if (pharmacy != null) {
+                List<Medicine> medicines = pharmacy.getMedicines();
+
+                for (Medicine medicine : medicines) {
+                    if (medicine.getId().equals(medicineId)) {
+                        foundMedicine = medicine;
+                    }
+                }
             }
         }
 
@@ -157,20 +200,24 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public List<Medicine> findAllMedicinesByUserId(Long userId) {
-        List<Medicine> userMedicines = null;
-
+    public List<Medicine> findAllMedicinesByUserId(String userId) {
         User userById = findUserById(userId);
 
-        if (userById != null) {
-            userMedicines = userById.getMedicines();
+        Pharmacy userPharmacy = null;
+
+        for (Pharmacy pharmacy : pharmacies) {
+            if (pharmacy.getId().equals(userById.getPharmacyId())) {
+                userPharmacy = pharmacy;
+            }
         }
+
+        List<Medicine> userMedicines = userPharmacy != null ? userPharmacy.getMedicines() : null;
 
         return userMedicines;
     }
 
     @Override
-    public List<Medicine> findRecentlyEditedMedicines(Long userId, int resultsLimit) {
+    public List<Medicine> findRecentlyEditedMedicines(String userId, int resultsLimit) {
 
 
         return null;
@@ -179,6 +226,47 @@ public class FakeDbServiceImpl implements DbService {
     private static List<User> prepareSampleUsers() {
         List<User> users = new ArrayList<>();
 
+        UserPreferences globalPreferencesForTests = new UserPreferences();
+        globalPreferencesForTests.setRecentlyUsedMedicinesViewLimit(4);
+
+        User user1 = new User();
+        user1.setId("1L");
+        user1.setFirstName("Paulina");
+        user1.setLastName("Preś");
+        user1.setPassword("password");
+        user1.setPharmacyId("1L");
+        user1.setUserPreferences(globalPreferencesForTests);
+
+        User user2 = new User();
+        user2.setId("2L");
+        user2.setFirstName("Jowita");
+        user2.setLastName("Mielnicka");
+        user2.setPassword("password");
+        user2.setPharmacyId("2L");
+        user2.setUserPreferences(globalPreferencesForTests);
+
+        User user3 = new User();
+        user3.setId("3L");
+        user3.setFirstName("Przemysław");
+        user3.setLastName("Lewkowicz");
+        user3.setPassword("password");
+        user3.setPharmacyId("3L");
+        user3.setUserPreferences(globalPreferencesForTests);
+
+        User user4 = new User();
+        user4.setId("4L");
+        user4.setFirstName("Sebastian");
+        user4.setLastName("Nowak");
+        user4.setPassword("password");
+        user4.setPharmacyId("4L");
+        user4.setUserPreferences(globalPreferencesForTests);
+
+        users.addAll(Arrays.asList(user1, user2, user3, user4));
+
+        return users;
+    }
+
+    private static List<Pharmacy> prepareSamplePhamarcies() {
         List<Medicine> medicines1 = SampleMedicinesBuilder.prepareBuilder()
                 .addFirstMedicine()
                 .build();
@@ -198,47 +286,13 @@ public class FakeDbServiceImpl implements DbService {
                 .addAll()
                 .build();
 
-        UserPreferences globalPreferencesForTests = new UserPreferences();
-        globalPreferencesForTests.setRecentlyUsedMedicinesViewLimit(4);
+        Pharmacy pharmacy1 = new Pharmacy("1L", medicines1);
+        Pharmacy pharmacy2 = new Pharmacy("2L", medicines2);
+        Pharmacy pharmacy3 = new Pharmacy("3L", medicines3);
+        Pharmacy pharmacy4 = new Pharmacy("4L", medicines4);
 
-        User user1 = new User();
-        user1.setId(1L);
-        user1.setFirstName("Paulina");
-        user1.setLastName("Preś");
-        user1.setPassword("password");
-        user1.setMedicines(medicines1);
-        user1.setFriendsIds(Arrays.asList(2L));
-        user1.setUserPreferences(globalPreferencesForTests);
+        List<Pharmacy> pharmacies = Arrays.asList(pharmacy1, pharmacy2, pharmacy3, pharmacy4);
 
-        User user2 = new User();
-        user2.setId(2L);
-        user2.setFirstName("Jowita");
-        user2.setLastName("Mielnicka");
-        user2.setPassword("password");
-        user2.setMedicines(medicines2);
-        user2.setFriendsIds(Arrays.asList(1L, 3L));
-        user2.setUserPreferences(globalPreferencesForTests);
-
-        User user3 = new User();
-        user3.setId(3L);
-        user3.setFirstName("Przemysław");
-        user3.setLastName("Lewkowicz");
-        user3.setPassword("password");
-        user3.setMedicines(medicines3);
-        user3.setFriendsIds(Arrays.asList(2L, 4L));
-        user3.setUserPreferences(globalPreferencesForTests);
-
-        User user4 = new User();
-        user4.setId(4L);
-        user4.setFirstName("Sebastian");
-        user4.setLastName("Nowak");
-        user4.setPassword("password");
-        user4.setMedicines(medicines4);
-        user4.setFriendsIds(Arrays.asList(3L));
-        user4.setUserPreferences(globalPreferencesForTests);
-
-        users.addAll(Arrays.asList(user1, user2, user3, user4));
-
-        return users;
+        return pharmacies;
     }
 }

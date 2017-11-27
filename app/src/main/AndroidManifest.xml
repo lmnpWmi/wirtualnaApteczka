@@ -22,7 +22,6 @@
                   android:label="@string/information_medicine"></activity>
         <activity android:name=".activity.MedicineListActivity"
                   android:label="@string/list_medicines"></activity>
-        <activity android:name=".activity.ImageCaptureActivity"></activity>
     </application>
 
 </manifest>

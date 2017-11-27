@@ -1,11 +1,12 @@
 package lmnp.wirtualnaapteczka.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -20,9 +21,6 @@ import lmnp.wirtualnaapteczka.utils.AppConstants;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.text.DateFormat;
 
 public class AddMedicineActivity extends AppCompatActivity {
@@ -51,7 +49,7 @@ public class AddMedicineActivity extends AppCompatActivity {
 
         initializeViewComponents();
 
-        Medicine medicineForEditing = (Medicine) getIntent().getSerializableExtra(AppConstants.EXISTING_MEDICINE);
+        Medicine medicineForEditing = (Medicine) getIntent().getSerializableExtra(AppConstants.MEDICINE);
 
         if (medicineForEditing != null) {
             medicine = medicineForEditing;
@@ -63,6 +61,19 @@ public class AddMedicineActivity extends AppCompatActivity {
 
         initializeMedicineTypeSpinner();
         initializeListeners();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == AppConstants.REQUEST_IMAGE_CAPTURE) {
+            if (resultCode == Activity.RESULT_OK) {
+                try {
+                    setMedicineThumbnail();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     private void initializeViewComponents() {
@@ -100,15 +111,7 @@ public class AddMedicineActivity extends AppCompatActivity {
         }
 
         if (!TextUtils.isEmpty(medicine.getThumbnailUri())) {
-            Uri uri = Uri.parse(medicine.getThumbnailUri());
-            Log.w("URI!!", uri.toString());
-            Bitmap photoBitmap = null;
-            try {
-                photoBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            photoImgBtn.setImageBitmap(ThumbnailUtils.extractThumbnail(photoBitmap, photoBitmap.getWidth(), photoBitmap.getHeight()));
+            setMedicineThumbnail();
         }
 
     }
@@ -131,5 +134,21 @@ public class AddMedicineActivity extends AppCompatActivity {
         addMedicineNotesPanel.setOnClickListener(new AddNotesOnClickListener(this, medicine));
         addMedicinePhotoPanel.setOnClickListener(new AddPhotoOnClickListener(this, medicine));
         saveMedicineBtn.setOnClickListener(new SaveNewMedicineOnClickListener(medicine, editingExistingMedicine, this));
+    }
+
+    private void setMedicineThumbnail() {
+        Uri uri = Uri.parse(medicine.getThumbnailUri());
+        File file = new File(uri.toString());
+        Log.w("URI!!", file.exists() ? "Plik istnieje" : "Plik nie istnieje");
+        Log.w("URI!!", uri.toString());
+
+        File medicineDir = new File(getFilesDir(), AppConstants.MEDICINE_PHOTOS);
+        File testFile = new File(medicineDir, "plik.png");
+
+        Bitmap bitmap = BitmapFactory.decodeFile(testFile.getAbsolutePath());
+
+        Log.w("TEST FILE URI!!", testFile.exists() ? "Plik istnieje" : "Plik nie istnieje");
+
+        photoImgBtn.setImageBitmap(ThumbnailUtils.extractThumbnail(bitmap, bitmap.getWidth(), bitmap.getHeight()));
     }
 }

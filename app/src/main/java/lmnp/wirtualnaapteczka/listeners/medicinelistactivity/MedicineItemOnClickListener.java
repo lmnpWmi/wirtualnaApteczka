@@ -17,7 +17,7 @@ public class MedicineItemOnClickListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(v.getContext(), AddMedicineActivity.class);
-        intent.putExtra(AppConstants.EXISTING_MEDICINE, medicine);
+        intent.putExtra(AppConstants.MEDICINE, medicine);
 
         v.getContext().startActivity(intent);
     }

@@ -1,9 +1,11 @@
 package lmnp.wirtualnaapteczka.data.entities;
 
-import java.util.List;
+import java.io.Serializable;
 
-public class User {
-    private Long id;
+public class User implements Serializable {
+    private static final long serialVersionUID = 4551099958890877311L;
+
+    private String id;
 
     private String email;
     private String password;
@@ -11,19 +13,17 @@ public class User {
     private String firstName;
     private String lastName;
 
-    private List<Medicine> medicines;
-    private List<Long> friendsIds;
-
+    private String pharmacyId;
     private UserPreferences userPreferences;
 
     public User() {
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -59,20 +59,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public List<Medicine> getMedicines() {
-        return medicines;
+    public String getPharmacyId() {
+        return pharmacyId;
     }
 
-    public void setMedicines(List<Medicine> medicines) {
-        this.medicines = medicines;
-    }
-
-    public List<Long> getFriendsIds() {
-        return friendsIds;
-    }
-
-    public void setFriendsIds(List<Long> friendsIds) {
-        this.friendsIds = friendsIds;
+    public void setPharmacyId(String pharmacyId) {
+        this.pharmacyId = pharmacyId;
     }
 
     public UserPreferences getUserPreferences() {
@@ -95,8 +87,7 @@ public class User {
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
-        if (medicines != null ? !medicines.equals(user.medicines) : user.medicines != null) return false;
-        if (friendsIds != null ? !friendsIds.equals(user.friendsIds) : user.friendsIds != null) return false;
+        if (pharmacyId != null ? !pharmacyId.equals(user.pharmacyId) : user.pharmacyId != null) return false;
         return userPreferences != null ? userPreferences.equals(user.userPreferences) : user.userPreferences == null;
     }
 
@@ -107,8 +98,7 @@ public class User {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (medicines != null ? medicines.hashCode() : 0);
-        result = 31 * result + (friendsIds != null ? friendsIds.hashCode() : 0);
+        result = 31 * result + (pharmacyId != null ? pharmacyId.hashCode() : 0);
         result = 31 * result + (userPreferences != null ? userPreferences.hashCode() : 0);
         return result;
     }
@@ -116,13 +106,12 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", medicines=" + medicines +
-                ", friendsIds=" + friendsIds +
+                ", pharmacyId='" + pharmacyId + '\'' +
                 ", userPreferences=" + userPreferences +
                 '}';
     }
