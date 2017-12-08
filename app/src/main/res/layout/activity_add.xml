@@ -17,16 +17,35 @@
                 android:orientation="vertical"
                 android:id="@+id/linearLayout">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
             <EditText
                     android:id="@+id/medicine_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/product_name"
                     android:inputType="textPersonName"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:layout_gravity="center"
+                android:layout_weight="1"
+                />
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:duplicateParentState="true"
+                app:srcCompat="@drawable/no_photo_icon"
+                android:layout_weight="1
+                "/>
+
+        </LinearLayout>
             <TextView
                     android:id="@+id/pack_label"
                     android:layout_width="match_parent"
@@ -115,16 +134,34 @@
                         android:textSize="16sp"/>
             </LinearLayout>
 
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                android:text="@string/medicine_share" />
+
             <TextView
-                    android:id="@+id/additional_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="40dp"
+                    android:paddingTop="20dp"
                     android:paddingBottom="10dp"
-                    android:gravity="center"
-                    android:text="@string/additional"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
+
+                    android:text="@string/notes"
+                    android:textSize="16sp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/start_write"
+                android:inputType="textPersonName"
+                android:textSize="16sp"
+
+                />
+
+
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -137,7 +174,8 @@
                         android:layout_width="0px"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                    >
 
                     <ImageButton
                             android:layout_width="wrap_content"
@@ -174,7 +212,8 @@
                             android:background="@android:color/transparent"
                             android:clickable="false"
                             android:duplicateParentState="true"
-                            app:srcCompat="@drawable/no_photo_icon" android:id="@+id/medicine_photo_img"/>
+                            app:srcCompat="@drawable/no_photo_icon"
+                        android:id="@+id/medicine_photo_img"/>
 
                     <TextView
                             android:id="@+id/add_medicine_photo_label"

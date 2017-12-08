@@ -27,9 +27,10 @@
     <string name="additional">Dodatkowo</string>
     <string name="photo">Zdjęcie</string>
     <string name="notes">Notatki</string>
-
+    <string name="medicine_share">Udostępnij lek rodzinie</string>
     <string name="medicine_added_msg">Lek został zapisany.</string>
     <string name="medicine_updated_msg">Zapisano zmiany.</string>
+    <string name="start_write">zacznij pisać...</string>
 
     <!-- Medicine List layout -->
     <string name="medicine_list_empty">Nie znaleziono żadnych leków.</string>
