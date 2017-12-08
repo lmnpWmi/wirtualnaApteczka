@@ -98,4 +98,8 @@
     <string name="type_cannot_be_empty_msg">Proszę wybrać poprawny typ leku.</string>
     <string name="amount_cannot_be_empty_msg">Proszę podać ilość leku w opakowaniu.</string>
 
+    <!--Family layout-->
+    <string name="family_list_empty">Nie masz dodanej żadnej osoby.</string>
+    <string name="medicines_my">Leki, które ja udostępniam</string>
+    <string name="medicines_share_me">Leki udostęnione dla mnie</string>
 </resources>
