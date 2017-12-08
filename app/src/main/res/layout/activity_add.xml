@@ -242,5 +242,16 @@
                 android:layout_margin="10dp"
                 android:src="@drawable/ic_done_white_24dp"/>
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/delete_medicine_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="right|bottom"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_clear_white_24dp"/>
+
     </RelativeLayout>
 </ScrollView>
