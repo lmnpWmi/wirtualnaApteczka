@@ -9,79 +9,34 @@
         android:orientation="vertical">
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="30dp"
-            android:ems="10"
+            style="@style/MyEditText"
             android:hint="@string/name"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
+            android:inputType="textPersonName" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:ems="10"
+            style="@style/MyEditText"
             android:hint="@string/surname"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
+            android:inputType="textPersonName" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:ems="10"
+            style="@style/MyEditText"
             android:hint="@string/email"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
+            android:inputType="textPersonName" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:ems="10"
+            style="@style/MyEditText"
             android:hint="@string/pass"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
+            android:inputType="textPersonName" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:ems="10"
+            style="@style/MyEditText"
             android:hint="@string/repeat_pass"
-            android:inputType="textPersonName"
-            android:textSize="18sp" />
+            android:inputType="textPersonName" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            style="@style/MyButton"
             android:layout_marginTop="40dp"
-            android:background="@color/color_primary"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/register"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:text="@string/register" />
 
         <LinearLayout
             android:layout_width="match_parent"

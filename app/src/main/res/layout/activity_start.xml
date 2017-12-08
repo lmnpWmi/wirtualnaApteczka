@@ -29,19 +29,9 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        style="@style/MyButton"
         android:layout_marginTop="60dp"
-        android:textColor="@color/white"
-        android:background="@color/color_primary"
-        android:gravity="center"
-        android:padding="10dp"
         android:text="@string/lets_go"
-        android:textAllCaps="false"
-        android:textSize="18sp"
 
         />
 
