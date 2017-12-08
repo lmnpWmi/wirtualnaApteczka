@@ -35,16 +35,15 @@
         <item name="android:padding">10dp</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
+
     </style>
 
     <!--styl edit text-->
     <style name="MyEditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">10dp</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
-        <item name="android:layout_marginTop">10dp</item>
         <item name="android:ems">10</item>
         <item name="android:textSize">18sp</item>
 

@@ -10,26 +10,31 @@
 
         <EditText
             style="@style/MyEditText"
+            android:layout_weight="1"
             android:hint="@string/name"
             android:inputType="textPersonName" />
 
         <EditText
             style="@style/MyEditText"
+            android:layout_weight="1"
             android:hint="@string/surname"
             android:inputType="textPersonName" />
 
         <EditText
             style="@style/MyEditText"
+            android:layout_weight="1"
             android:hint="@string/email"
             android:inputType="textPersonName" />
 
         <EditText
             style="@style/MyEditText"
+            android:layout_weight="1"
             android:hint="@string/pass"
             android:inputType="textPersonName" />
 
         <EditText
             style="@style/MyEditText"
+            android:layout_weight="1"
             android:hint="@string/repeat_pass"
             android:inputType="textPersonName" />
 

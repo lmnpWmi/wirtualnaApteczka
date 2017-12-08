@@ -19,12 +19,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/medicine_name"
                     style="@style/MyEditText"
                     android:layout_width="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:hint="@string/product_name"
                     android:inputType="textPersonName" />
@@ -46,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="Opakowanie"
                 android:textSize="18sp"
@@ -55,6 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_weight="1"
                 android:orientation="horizontal"
                 android:paddingBottom="10dp">
 
@@ -76,6 +80,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
@@ -107,6 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
@@ -134,6 +140,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_weight="1"
                 android:text="@string/medicine_share"
                 android:textColor="@color/grey"
                 android:textSize="16sp" />
@@ -141,20 +148,19 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:paddingBottom="10dp"
                 android:paddingTop="20dp"
-
                 android:text="@string/notes"
                 android:textSize="16sp" />
 
             <EditText
                 style="@style/MyEditText"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:hint="@string/start_write"
                 android:inputType="textPersonName"
-                android:textSize="16sp"
-
-                />
+                android:textSize="16sp" />
 
 
             <LinearLayout
