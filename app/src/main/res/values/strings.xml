@@ -14,7 +14,7 @@
     <!-- Main activity layout -->
     <string name="add_medicine">Dodaj lek</string>
     <string name="my_list_medicine">Moja lista leków</string>
-    <string name="friends">Znajomi</string>
+    <string name="family">Rodzina</string>
     <string name="last_added">Ostatnio używane:</string>
     <string name="not_searched_yet">Nie wyszukiwałeś jeszcze żadnego leku</string>
 
