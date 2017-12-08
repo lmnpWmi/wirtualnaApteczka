@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="20dp"
-    android:background="@drawable/background_gradient">
+    style="@style/AppTheme.Blue">
 
     <ListView
         android:id="@+id/medicine_list_view"
@@ -12,13 +9,13 @@
         android:background="@android:color/transparent" />
 
     <TextView
-            android:id="@+id/medicine_list_empty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|center_horizontal|center"
-            android:text="@string/medicine_list_empty"
-            android:textSize="18sp"
-            android:visibility="gone"/>
+        android:id="@+id/medicine_list_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|center_horizontal|center"
+        android:text="@string/medicine_list_empty"
+        android:textSize="18sp"
+        android:visibility="gone" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/save_new_medicine_btn"

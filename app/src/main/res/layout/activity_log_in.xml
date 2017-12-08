@@ -5,11 +5,8 @@
     android:fillViewport="true"> <!--IMPORTANT otherwise backgrnd img. will not fill the whole screen -->
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background_gradient"
+        style="@style/AppTheme.Blue"
         android:orientation="vertical"
-        android:padding="20dp"
         >
 
 
