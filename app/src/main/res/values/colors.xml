@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#3366cc</color>
-    <color name="color_primary_dark">#000000</color>
-    <color name="color_accent">#3366CC</color>
+    <!--<color name="color_primary">#3366cc</color>-->
+    <!--<color name="color_primary_dark">#000000</color>-->
+    <!--<color name="color_accent">#3366CC</color>-->
+
+    <color name="color_primary">#c92215</color>
+    <color name="color_primary_dark">#c92215</color>
+    <color name="color_accent">#f44336</color>
+
+
 
     <color name="black">#000000</color>
     <color name="grey">#6f6f72</color>
@@ -11,6 +17,7 @@
     <color name="default_btn_color">#c92215</color>
     <color name="default_btn_text_color">#ffffff</color>
 
+    <color name="facebook">#3366CC</color>
     <color name="black_transparent_25">#40000000</color>
     <color name="black_transparent_10">#1A000000</color>
 

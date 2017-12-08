@@ -6,6 +6,7 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="android:actionBarStyle">@style/AppActionBar</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="AppActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
@@ -14,13 +15,14 @@
     </style>
 
     <!--styl głowny-->
-<style name="AppTheme.Blue">
-    <item name="android:background">@drawable/background_gradient</item>
+<style name="AppTheme.Background">
+    <item name="android:background">@drawable/background_gradient_red</item>
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">match_parent</item>
     <item name="android:padding">20dp</item>
-
 </style>
+
+
     <!--<style name="MedicineListTopBtnStyle" parent="Widget.AppCompat.Button">-->
         <!--<item name="android:background">@android:color/transparent</item>-->
         <!--<item name="android:textSize">14sp</item>-->

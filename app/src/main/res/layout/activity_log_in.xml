@@ -5,9 +5,8 @@
     android:fillViewport="true"> <!--IMPORTANT otherwise backgrnd img. will not fill the whole screen -->
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        style="@style/AppTheme.Blue"
-        android:orientation="vertical"
-        >
+        style="@style/AppTheme.Background"
+        android:orientation="vertical">
 
 
         <Button
@@ -18,12 +17,13 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="20dp"
-            android:background="@color/color_primary"
+            android:background="@color/facebook"
             android:drawableLeft="@drawable/facebook"
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/facebook"
             android:textAllCaps="false"
+            android:textColor="@color/white"
             android:textSize="18sp"
 
 
@@ -36,10 +36,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@color/white"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/my_button"
             android:drawableLeft="@drawable/google"
             android:gravity="center"
             android:padding="10dp"
@@ -92,11 +92,12 @@ android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:padding="10dp"
             android:background="@color/color_primary"
             android:gravity="center"
+            android:padding="10dp"
             android:text="@string/log_in"
             android:textAllCaps="false"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -110,8 +111,8 @@ android:layout_marginTop="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:paddingTop="10dp"
                 android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 android:text="@string/register"
                 android:textSize="18sp" />
 
@@ -121,8 +122,8 @@ android:layout_marginTop="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:paddingTop="10dp"
                 android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 android:text="@string/forgotten"
                 android:textSize="18sp" />
 
@@ -132,8 +133,7 @@ android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
