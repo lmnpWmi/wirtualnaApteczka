@@ -9,20 +9,21 @@ import lmnp.wirtualnaapteczka.test.utils.SampleMedicinesBuilder;
 import java.util.*;
 
 public class FakeDbServiceImpl implements DbService {
-
     private List<User> users;
     private List<Pharmacy> pharmacies;
+    private String userId;
 
-    public static DbService createNewInstance() {
+    public static DbService createNewInstance(String userId) {
         List<User> users = prepareSampleUsers();
         List<Pharmacy> pharmacies = prepareSamplePhamarcies();
 
-        return new FakeDbServiceImpl(users, pharmacies);
+        return new FakeDbServiceImpl(users, pharmacies, userId);
     }
 
-    private FakeDbServiceImpl(List<User> users, List<Pharmacy> pharmacies) {
+    private FakeDbServiceImpl(List<User> users, List<Pharmacy> pharmacies, String userId) {
         this.users = users;
         this.pharmacies = pharmacies;
+        this.userId = userId;
     }
 
     @Override
@@ -79,7 +80,7 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public void createPharmacy(String userId, Pharmacy pharmacy) {
+    public void createPharmacy(Pharmacy pharmacy) {
         User user = findUserById(userId);
 
         if (pharmacy.getId() == null) {
@@ -106,16 +107,16 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public void saveOrUpdateMedicine(String userId, Medicine medicine) {
+    public void saveOrUpdateMedicine(Medicine medicine) {
         if (medicine.getId() != null) {
-            updateMedicine(userId, medicine);
+            updateMedicine(medicine);
         } else {
-            saveMedicine(userId, medicine);
+            saveMedicine(medicine);
         }
     }
 
     @Override
-    public void saveMedicine(String userId, Medicine medicine) {
+    public void saveMedicine(Medicine medicine) {
         User user = findUserById(userId);
 
         medicine.setId(String.valueOf(new Random().nextInt(1000000000)));
@@ -127,8 +128,8 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public void updateMedicine(String userId, Medicine medicine) {
-        Medicine medicineForUpdate = findMedicineById(userId, medicine.getId());
+    public void updateMedicine(Medicine medicine) {
+        Medicine medicineForUpdate = findMedicineById(medicine.getId());
 
         medicineForUpdate.setName(medicine.getName());
         medicineForUpdate.setType(medicine.getType());
@@ -143,7 +144,7 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public void deleteMedicine(String userId, String medicineId) {
+    public void deleteMedicine(String medicineId) {
         User medicineOwningUser = findUserById(userId);
         Pharmacy pharmacy = findPharmacyById(medicineOwningUser.getPharmacyId());
 
@@ -163,7 +164,7 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public void deleteMedicine(String userId, Medicine medicine) {
+    public void deleteMedicine(Medicine medicine) {
         User medicineOwningUser = findUserById(userId);
 
         if (medicineOwningUser != null) {
@@ -177,7 +178,7 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public Medicine findMedicineById(String userId, String medicineId) {
+    public Medicine findMedicineById(String medicineId) {
         Medicine foundMedicine = null;
 
         User user = findUserById(userId);
@@ -200,6 +201,12 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
+    public List<Medicine> findAllMedicinesForCurrentUser() {
+        List<Medicine> allMedicinesByUserId = findAllMedicinesByUserId(userId);
+        return allMedicinesByUserId;
+    }
+
+    @Override
     public List<Medicine> findAllMedicinesByUserId(String userId) {
         User userById = findUserById(userId);
 
@@ -217,7 +224,7 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public List<Medicine> findRecentlyEditedMedicines(String userId, int resultsLimit) {
+    public List<Medicine> findRecentlyEditedMedicines(int resultsLimit) {
 
 
         return null;

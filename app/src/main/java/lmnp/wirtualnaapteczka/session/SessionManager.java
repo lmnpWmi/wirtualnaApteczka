@@ -1,4 +1,4 @@
-package lmnp.wirtualnaapteczka.utils;
+package lmnp.wirtualnaapteczka.session;
 
 import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.services.DbService;
@@ -6,7 +6,7 @@ import lmnp.wirtualnaapteczka.services.FakeDbServiceImpl;
 
 public class SessionManager {
     private static String currentUserId = "4L";
-    private static DbService dbService = FakeDbServiceImpl.createNewInstance();
+    private static DbService dbService = FakeDbServiceImpl.createNewInstance(currentUserId);
 
     private SessionManager() {
     }

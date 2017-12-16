@@ -1,5 +1,8 @@
 package lmnp.wirtualnaapteczka.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -14,7 +17,7 @@ import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListen
 import lmnp.wirtualnaapteczka.listeners.mainactivity.FriendListOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.MedicineListOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.utils.SessionManager;
+import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 
 import java.util.Collections;
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
-        android.os.Process.killProcess(android.os.Process.myPid());
+        displayLogoutPopup();
     }
 
     public void initializeRecentlyUsedMedicinesList() {
@@ -81,5 +84,22 @@ public class MainActivity extends AppCompatActivity {
         List<Medicine> recentlyUsedMedicines = currentUserMedicines.subList(AppConstants.FIRST_ITEM_INDEX, entriesLimit);
 
         return recentlyUsedMedicines;
+    }
+
+    private void displayLogoutPopup() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle(R.string.log_out_popup_msg);
+
+        dialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // logout
+                Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(intent);
+            }
+        });
+
+        dialog.setNegativeButton(R.string.no, null);
+        dialog.show();
     }
 }

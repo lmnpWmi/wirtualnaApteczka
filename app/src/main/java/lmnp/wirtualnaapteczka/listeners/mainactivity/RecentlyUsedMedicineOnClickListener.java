@@ -12,11 +12,7 @@ import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.MainActivity;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.utils.AdaptersCommonUtils;
-import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
-import lmnp.wirtualnaapteczka.utils.SessionManager;
-
-import java.util.Date;
+import lmnp.wirtualnaapteczka.session.SessionManager;
 
 public class RecentlyUsedMedicineOnClickListener implements View.OnClickListener {
     private MainActivity mainActivity;
@@ -50,7 +46,7 @@ public class RecentlyUsedMedicineOnClickListener implements View.OnClickListener
                 int amountValue = numberPicker.getValue();
                 currentMedicine.setAmount(amountValue);
                 DbService dbService = SessionManager.getDbService();
-                dbService.updateMedicine(SessionManager.getCurrentUser().getId(), currentMedicine);
+                dbService.updateMedicine(currentMedicine);
 
                 mainActivity.initializeRecentlyUsedMedicinesList();
             }

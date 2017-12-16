@@ -13,15 +13,16 @@ public interface DbService {
     User findUserById(String userId);
     List<User> findUsersByIds(List<String> userIds);
 
-    void createPharmacy(String userId, Pharmacy pharmacy);
+    void createPharmacy(Pharmacy pharmacy);
     Pharmacy findPharmacyById(String pharmacyId);
 
-    void saveOrUpdateMedicine(String userId, Medicine medicine);
-    void saveMedicine(String userId, Medicine medicine);
-    void updateMedicine(String userId, Medicine medicine);
-    void deleteMedicine(String userId, String medicineId);
-    void deleteMedicine(String userId, Medicine medicine);
-    Medicine findMedicineById(String userId, String medicineId);
+    void saveOrUpdateMedicine(Medicine medicine);
+    void saveMedicine(Medicine medicine);
+    void updateMedicine(Medicine medicine);
+    void deleteMedicine(String medicineId);
+    void deleteMedicine(Medicine medicine);
+    Medicine findMedicineById(String medicineId);
+    List<Medicine> findAllMedicinesForCurrentUser();
     List<Medicine> findAllMedicinesByUserId(String userId);
-    List<Medicine> findRecentlyEditedMedicines(String userId, int resultsLimit);
+    List<Medicine> findRecentlyEditedMedicines(int resultsLimit);
 }

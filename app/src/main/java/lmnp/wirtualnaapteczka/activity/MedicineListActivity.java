@@ -14,11 +14,10 @@ import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.comparators.MedicineByUpdatedAtComparator;
 import lmnp.wirtualnaapteczka.customarrayadapters.MedicineItemArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.utils.MedicineFilter;
-import lmnp.wirtualnaapteczka.utils.SessionManager;
+import lmnp.wirtualnaapteczka.session.SessionManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,7 +40,7 @@ public class MedicineListActivity extends AppCompatActivity {
         floatingActionButton = (FloatingActionButton) findViewById(R.id.save_new_medicine_btn);
         floatingActionButton.setOnClickListener(new AddNewMedicineOnClickListener());
 
-        List<Medicine> medicines = retrieveCurrentUserMedicines();
+        List<Medicine> medicines = dbService.findAllMedicinesForCurrentUser();
         initializeMedicineList(medicines);
     }
 
@@ -54,17 +53,6 @@ public class MedicineListActivity extends AppCompatActivity {
 
         MedicineItemArrayAdapter medicineItemArrayAdapter = new MedicineItemArrayAdapter(this, R.id.medicine_list_view, medicines);
         medicineListView.setAdapter(medicineItemArrayAdapter);
-    }
-
-    private List<Medicine> retrieveCurrentUserMedicines() {
-        List<Medicine> medicineList = null;
-        User currentUser = SessionManager.getCurrentUser();
-
-        if (currentUser != null) {
-            medicineList = dbService.findAllMedicinesByUserId(currentUser.getId());
-        }
-
-        return medicineList;
     }
 
     @Override
@@ -106,7 +94,7 @@ public class MedicineListActivity extends AppCompatActivity {
         dialog.setPositiveButton(R.string.search, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String searchValue = input.getText().toString();
-                List<Medicine> medicines = retrieveCurrentUserMedicines();
+                List<Medicine> medicines = dbService.findAllMedicinesForCurrentUser();
                 List<Medicine> filteredMedicines = MedicineFilter.filterMedicines(searchValue, medicines, false);
 
                 initializeMedicineList(filteredMedicines);

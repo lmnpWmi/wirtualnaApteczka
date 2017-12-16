@@ -9,39 +9,38 @@
         android:orientation="vertical">
 
         <EditText
-            style="@style/MyEditText"
-            android:layout_weight="1"
-            android:hint="@string/name"
-            android:inputType="textPersonName" />
+                style="@style/MyEditText"
+                android:layout_weight="1"
+                android:hint="@string/name"
+                android:inputType="textPersonName" android:id="@+id/register_first_name_text"/>
 
         <EditText
-            style="@style/MyEditText"
-            android:layout_weight="1"
-            android:hint="@string/surname"
-            android:inputType="textPersonName" />
+                style="@style/MyEditText"
+                android:layout_weight="1"
+                android:hint="@string/surname"
+                android:inputType="textPersonName" android:id="@+id/register_last_name_text"/>
+        <EditText
+                style="@style/MyEditText"
+                android:layout_weight="1"
+                android:hint="@string/email"
+                android:inputType="textPersonName" android:id="@+id/register_email_text"/>
 
         <EditText
-            style="@style/MyEditText"
-            android:layout_weight="1"
-            android:hint="@string/email"
-            android:inputType="textPersonName" />
+                style="@style/MyEditText"
+                android:layout_weight="1"
+                android:hint="@string/pass"
+                android:inputType="textPassword" android:id="@+id/register_password_text"/>
 
         <EditText
-            style="@style/MyEditText"
-            android:layout_weight="1"
-            android:hint="@string/pass"
-            android:inputType="textPersonName" />
-
-        <EditText
-            style="@style/MyEditText"
-            android:layout_weight="1"
-            android:hint="@string/repeat_pass"
-            android:inputType="textPersonName" />
+                style="@style/MyEditText"
+                android:layout_weight="1"
+                android:hint="@string/repeat_pass"
+                android:id="@+id/register_password_repeat_text" android:inputType="textPassword"/>
 
         <Button
-            style="@style/MyButton"
-            android:layout_marginTop="40dp"
-            android:text="@string/register" />
+                style="@style/MyButton"
+                android:layout_marginTop="40dp"
+                android:text="@string/register" android:id="@+id/register_new_user_btn"/>
 
         <LinearLayout
             android:layout_width="match_parent"

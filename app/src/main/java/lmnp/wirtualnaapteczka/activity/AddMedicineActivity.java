@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.*;
 import lmnp.wirtualnaapteczka.R;
@@ -30,15 +31,14 @@ public class AddMedicineActivity extends AppCompatActivity {
 
     private EditText nameEdit;
     private EditText amountEdit;
+    private EditText notesEdit;
     private TextView quantitySuffixLabel;
     private TextView dueDateCalendar;
     private FloatingActionButton saveMedicineBtn;
+    private FloatingActionButton deleteMedicineBtn;
     private Spinner medicineTypeSpinner;
-    private ImageButton notesImgBtn;
-    private ImageButton photoImgBtn;
-
-    private LinearLayout addMedicineNotesPanel;
-    private LinearLayout addMedicinePhotoPanel;
+    private ImageButton addMedicinePhotoImg;
+    private CheckBox shareMedicineWithFriends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class AddMedicineActivity extends AppCompatActivity {
         } else {
             medicine = new Medicine();
         }
+
 
         initializeMedicineTypeSpinner();
         initializeListeners();
@@ -81,19 +82,24 @@ public class AddMedicineActivity extends AppCompatActivity {
         nameEdit.setSelected(false);
         amountEdit = (EditText) findViewById(R.id.medicine_amount);
         amountEdit.setSelected(false);
+        notesEdit = (EditText) findViewById(R.id.notes_text);
+        notesEdit.setSelected(false);
+
         quantitySuffixLabel = (TextView) findViewById(R.id.medicine_quantity_suffix_label);
         dueDateCalendar = (TextView) findViewById(R.id.medicine_due_date_calendar);
         saveMedicineBtn = (FloatingActionButton) findViewById(R.id.save_new_medicine_btn);
         medicineTypeSpinner = (Spinner) findViewById(R.id.medicine_type_spinner);
-        notesImgBtn = (ImageButton) findViewById(R.id.medicine_notes_img);
-        photoImgBtn = (ImageButton) findViewById(R.id.medicine_photo_img);
+        addMedicinePhotoImg = (ImageButton) findViewById(R.id.add_medicine_photo);
+        shareMedicineWithFriends = (CheckBox) findViewById(R.id.share_medicine_checkbox);
 
-        addMedicineNotesPanel = (LinearLayout) findViewById(R.id.add_medicine_notes_panel);
-        addMedicinePhotoPanel = (LinearLayout) findViewById(R.id.add_medicine_photo_panel);
+        deleteMedicineBtn = (FloatingActionButton) findViewById(R.id.delete_medicine_btn);
     }
 
     private void updateComponentsValues() {
         nameEdit.setText(medicine.getName());
+        deleteMedicineBtn.setVisibility(View.VISIBLE);
+        notesEdit.setText(medicine.getUserNotes());
+        shareMedicineWithFriends.setChecked(medicine.isShareWithFriends());
 
         if (medicine.getDueDate() != null) {
             DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
@@ -106,14 +112,9 @@ public class AddMedicineActivity extends AppCompatActivity {
             amountEdit.setText(String.valueOf(medicine.getAmount()));
         }
 
-        if (!TextUtils.isEmpty(medicine.getUserNotes())) {
-            notesImgBtn.setImageResource(R.drawable.notes_defined_icon);
-        }
-
         if (!TextUtils.isEmpty(medicine.getThumbnailUri())) {
             setMedicineThumbnail();
         }
-
     }
 
     private void initializeMedicineTypeSpinner() {
@@ -131,9 +132,12 @@ public class AddMedicineActivity extends AppCompatActivity {
 
     private void initializeListeners() {
         dueDateCalendar.setOnClickListener(new CalendarOnClickListener(getSupportFragmentManager(), medicine));
-        addMedicineNotesPanel.setOnClickListener(new AddNotesOnClickListener(this, medicine));
-        addMedicinePhotoPanel.setOnClickListener(new AddPhotoOnClickListener(this, medicine));
+        addMedicinePhotoImg.setOnClickListener(new AddPhotoOnClickListener(this, medicine));
         saveMedicineBtn.setOnClickListener(new SaveNewMedicineOnClickListener(medicine, editingExistingMedicine, this));
+
+        if (editingExistingMedicine) {
+            deleteMedicineBtn.setOnClickListener(new DeleteMedicineOnClickListener(medicine.getId()));
+        }
     }
 
     private void setMedicineThumbnail() {
@@ -149,6 +153,6 @@ public class AddMedicineActivity extends AppCompatActivity {
 
         Log.w("TEST FILE URI!!", testFile.exists() ? "Plik istnieje" : "Plik nie istnieje");
 
-        photoImgBtn.setImageBitmap(ThumbnailUtils.extractThumbnail(bitmap, bitmap.getWidth(), bitmap.getHeight()));
+        addMedicinePhotoImg.setImageBitmap(ThumbnailUtils.extractThumbnail(bitmap, bitmap.getWidth(), bitmap.getHeight()));
     }
 }

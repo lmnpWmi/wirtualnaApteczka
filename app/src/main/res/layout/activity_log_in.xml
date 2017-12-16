@@ -1,117 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fillViewport="true"> <!--IMPORTANT otherwise backgrnd img. will not fill the whole screen -->
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:fillViewport="true"
+            > <!--IMPORTANT otherwise backgrnd img. will not fill the whole screen -->
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        style="@style/AppTheme.Background"
-        android:orientation="vertical">
-
-
-        <Button
-            style="@style/MyButton"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/facebook"
-            android:drawableLeft="@drawable/facebook"
-            android:text="@string/facebook" />
+                  style="@style/AppTheme.Background"
+                  android:orientation="vertical" android:descendantFocusability="beforeDescendants"
+                  android:focusableInTouchMode="true" >>
 
         <Button
-            android:id="@+id/button2"
-            style="@style/MyButton"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/my_button"
-            android:drawableLeft="@drawable/google"
-            android:text="@string/gmail"
-            android:textColor="@color/black" />
+                style="@style/MyButton"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/facebook"
+                android:drawableLeft="@drawable/facebook"
+                android:text="@string/facebook" android:id="@+id/log_in_fb_btn"/>
+
+        <Button
+                android:id="@+id/log_in_google_btn"
+                style="@style/MyButton"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/my_button"
+                android:drawableLeft="@drawable/google"
+                android:text="@string/gmail"
+                android:textColor="@color/black"/>
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="lub"
-            android:textSize="24sp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="lub"
+                android:textSize="24sp"/>
 
         <EditText
-            style="@style/MyEditText"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:hint="@string/email"
-            android:inputType="textPersonName" />
+                style="@style/MyEditText"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:hint="@string/email"
+                android:inputType="textPersonName" android:id="@+id/email_login_text"/>
 
         <EditText
-            style="@style/MyEditText"
-            android:layout_marginTop="0dp"
-            android:layout_weight="1"
-            android:hint="@string/pass"
-            android:inputType="textPersonName" />
+                style="@style/MyEditText"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:hint="@string/pass"
+                android:inputType="textPassword" android:id="@+id/password_login_text"/>
 
         <Button
-            style="@style/MyButton"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/log_in" />
+                style="@style/MyButton"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/log_in" android:id="@+id/log_in_default_btn"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:text="@string/register"
-                android:textSize="18sp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="@string/register"
+                    android:textSize="18sp" android:id="@+id/register_btn"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:text="@string/forgotten"
-                android:textSize="18sp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="@string/forgotten"
+                    android:textSize="18sp" android:id="@+id/forgot_password_btn"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
 
-                android:text="@string/sign_accept"
-                android:textSize="16sp" />
+                    android:text="@string/sign_accept"
+                    android:textSize="16sp"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="@string/regulations"
-                android:textColor="@color/color_primary"
-                android:textSize="16sp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/regulations"
+                    android:textColor="@color/color_primary"
+                    android:textSize="16sp"/>
 
         </LinearLayout>
     </LinearLayout>

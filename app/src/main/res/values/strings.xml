@@ -17,6 +17,7 @@
     <string name="family">Rodzina</string>
     <string name="last_added">Ostatnio używane:</string>
     <string name="not_searched_yet">Nie wyszukiwałeś jeszcze żadnego leku</string>
+    <string name="log_out_popup_msg">Czy na pewno chcesz się wylogować?</string>
 
     <!-- Add medicine layout -->
     <string name="general_info">Informacje ogólne</string>
@@ -98,8 +99,17 @@
     <string name="type_cannot_be_empty_msg">Proszę wybrać poprawny typ leku.</string>
     <string name="amount_cannot_be_empty_msg">Proszę podać ilość leku w opakowaniu.</string>
 
-    <!--Family layout-->
+    <!-- Family layout -->
     <string name="family_list_empty">Nie masz dodanej żadnej osoby.</string>
     <string name="medicines_my">Leki, które ja udostępniam</string>
     <string name="medicines_share_me">Leki udostęnione dla mnie</string>
+
+    <!-- Registration layout -->
+    <string name="first_name_empty_err_msg">Proszę podać imię.</string>
+    <string name="last_name_empty_err_msg">Proszę podać nazwisko.</string>
+    <string name="email_empty_err_msg">Proszę podać email.</string>
+    <string name="password_empty_err_msg">Proszę podać hasło.</string>
+    <string name="repeat_password_empty_err_msg">Proszę powtórzyć hasło.</string>
+    <string name="incorrect_passwords_err_msg">Hasła muszą się zgadzać.</string>
+
 </resources>

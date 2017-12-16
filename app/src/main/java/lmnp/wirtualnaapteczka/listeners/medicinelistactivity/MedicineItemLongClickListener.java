@@ -8,7 +8,7 @@ import android.view.View;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.utils.SessionManager;
+import lmnp.wirtualnaapteczka.session.SessionManager;
 
 public class MedicineItemLongClickListener implements View.OnLongClickListener {
     private Medicine medicine;
@@ -30,7 +30,7 @@ public class MedicineItemLongClickListener implements View.OnLongClickListener {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 DbService dbService = SessionManager.getDbService();
-                dbService.deleteMedicine(SessionManager.getCurrentUser().getId(), medicine.getId());
+                dbService.deleteMedicine(medicine.getId());
 
                 Activity activity = (Activity) context;
                 activity.recreate();

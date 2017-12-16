@@ -6,8 +6,6 @@ import android.os.Bundle;
 import lmnp.wirtualnaapteczka.R;
 
 public class FamilyActivity extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
