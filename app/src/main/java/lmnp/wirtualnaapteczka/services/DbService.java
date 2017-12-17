@@ -1,5 +1,7 @@
 package lmnp.wirtualnaapteczka.services;
 
+import lmnp.wirtualnaapteczka.data.dto.UserLoginTO;
+import lmnp.wirtualnaapteczka.data.dto.UserRegistrationTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.entities.Pharmacy;
 import lmnp.wirtualnaapteczka.data.entities.User;
@@ -7,7 +9,11 @@ import lmnp.wirtualnaapteczka.data.entities.User;
 import java.util.List;
 
 public interface DbService {
-    void createUser(User user);
+    boolean logInUsingFirebase(UserLoginTO userLoginTO);
+    boolean logInUsingFacebook();
+    boolean logInUsingGoogle();
+    void createUserAccountInFirebase(UserRegistrationTO user);
+
     void deleteUser(String userId);
     void deleteUser(User user);
     User findUserById(String userId);
@@ -24,5 +30,4 @@ public interface DbService {
     Medicine findMedicineById(String medicineId);
     List<Medicine> findAllMedicinesForCurrentUser();
     List<Medicine> findAllMedicinesByUserId(String userId);
-    List<Medicine> findRecentlyEditedMedicines(int resultsLimit);
 }

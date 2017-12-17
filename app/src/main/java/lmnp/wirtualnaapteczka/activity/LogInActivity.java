@@ -31,7 +31,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     @Override
-    public void finish() {
+    public void onBackPressed() {
         android.os.Process.killProcess(android.os.Process.myPid());
     }
 

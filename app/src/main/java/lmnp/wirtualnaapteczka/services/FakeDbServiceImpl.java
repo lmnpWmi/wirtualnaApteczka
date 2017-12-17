@@ -1,5 +1,7 @@
 package lmnp.wirtualnaapteczka.services;
 
+import lmnp.wirtualnaapteczka.data.dto.UserLoginTO;
+import lmnp.wirtualnaapteczka.data.dto.UserRegistrationTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.entities.Pharmacy;
 import lmnp.wirtualnaapteczka.data.entities.User;
@@ -27,8 +29,23 @@ public class FakeDbServiceImpl implements DbService {
     }
 
     @Override
-    public void createUser(User user) {
-        users.add(user);
+    public boolean logInUsingFirebase(UserLoginTO userLoginTO) {
+        return true;
+    }
+
+    @Override
+    public boolean logInUsingFacebook() {
+        return true;
+    }
+
+    @Override
+    public boolean logInUsingGoogle() {
+        return true;
+    }
+
+    @Override
+    public void createUserAccountInFirebase(UserRegistrationTO user) {
+        // Creates user in Firebase
     }
 
     @Override
@@ -221,13 +238,6 @@ public class FakeDbServiceImpl implements DbService {
         List<Medicine> userMedicines = userPharmacy != null ? userPharmacy.getMedicines() : null;
 
         return userMedicines;
-    }
-
-    @Override
-    public List<Medicine> findRecentlyEditedMedicines(int resultsLimit) {
-
-
-        return null;
     }
 
     private static List<User> prepareSampleUsers() {
