@@ -67,6 +67,8 @@
     <string name="forgotten">Zapomniałeś hasła?</string>
     <string name="sign_accept">Logujac się akceptujesz </string>
     <string name="regulations">Regulamin</string>
+    <string name="or">lub</string>
+    <string name="remember_me">Zapamiętaj mnie</string>
 
     <!--Registration layout-->
     <string name="registration">Rejestracja</string>

@@ -13,7 +13,7 @@
         <Button
                 style="@style/MyButton"
                 android:layout_marginBottom="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/facebook"
                 android:drawableLeft="@drawable/facebook"
                 android:text="@string/facebook" android:id="@+id/log_in_fb_btn"/>
@@ -32,10 +32,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="lub"
+                android:text="@string/or"
                 android:textSize="24sp"/>
 
         <EditText
@@ -57,6 +57,13 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/log_in" android:id="@+id/log_in_default_btn"/>
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/remember_me"
+            android:textSize="18sp"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
