@@ -57,6 +57,7 @@
     <string name="lets_go">Zaczynajmy!</string>
 
     <!--Login layout-->
+    <string name="log_in_app">Logowanie</string>
     <string name="facebook">Zaloguj się przez Facebook</string>
     <string name="gmail">Zaloguj się przez konto Google</string>
     <string name="email">Email</string>
@@ -116,6 +117,7 @@
     <string name="incorrect_passwords_err_msg">Hasła muszą się zgadzać.</string>
 
     <!--Forget the password layout-->
+    <string name="reminder">Przypomnienie hasła</string>
     <string name="not_remember_1">Jeżeli nie pamiętasz swojego hasła, podaj nam swój adres mailowy w celu jego zresetowania.</string>
     <string name="not_remember_2">Po kliknięciu "Zresetuj" na Twój adres mailowy zostanie wysłany mail z dalszą instrukcją.</string>
     <string name="reset">Zresetuj</string>

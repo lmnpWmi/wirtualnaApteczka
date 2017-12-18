@@ -10,16 +10,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-                android:name=".activity.LauncherActivity">
+        <activity android:name=".activity.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.FirstTimeWelcomeActivity" />
-        <activity android:name=".activity.LogInActivity" />
-        <activity android:name=".activity.RegistrationActivity" />
+        <activity
+            android:name=".activity.LogInActivity"
+            android:label="@string/log_in_app" />
+        <activity android:name=".activity.RegistrationActivity"
+            android:label="@string/registration"/>
         <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.AddMedicineActivity"
@@ -27,9 +29,11 @@
         <activity
             android:name=".activity.MedicineListActivity"
             android:label="@string/list_medicines" />
-        <activity android:name=".activity.FamilyActivity"
+        <activity
+            android:name=".activity.FamilyActivity"
             android:label="@string/family" />
-
+        <activity android:name=".activity.PasswordReminderActivity"
+            android:label="@string/reminder" />
     </application>
 
 </manifest>
