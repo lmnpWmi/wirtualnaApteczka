@@ -119,7 +119,7 @@
     <!--Forget the password layout-->
     <string name="reminder">Przypomnienie hasła</string>
     <string name="not_remember_1">Jeżeli nie pamiętasz swojego hasła, podaj nam swój adres mailowy w celu jego zresetowania.</string>
-    <string name="not_remember_2">Po kliknięciu "Zresetuj" na Twój adres mailowy zostanie wysłany mail z dalszą instrukcją.</string>
+    <string name="not_remember_2">Po kliknięciu \"Zresetuj\" na Twój adres mailowy zostanie wysłany mail z dalszą instrukcją.</string>
     <string name="reset">Zresetuj</string>
 
 </resources>

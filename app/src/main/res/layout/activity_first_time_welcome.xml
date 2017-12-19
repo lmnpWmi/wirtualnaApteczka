@@ -30,7 +30,8 @@
             android:paddingTop="10dp"
             android:text="@string/we_happy"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:lines="3"/>
 
         <Button
             android:id="@+id/start_btn"
