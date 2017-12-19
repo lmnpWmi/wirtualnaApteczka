@@ -24,7 +24,8 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/my_button"
-                android:drawableLeft="@drawable/google"
+                android:drawableLeft="@drawable/google_favicon_vector_small"
+
                 android:text="@string/gmail"
                 android:textColor="@color/black"/>
 

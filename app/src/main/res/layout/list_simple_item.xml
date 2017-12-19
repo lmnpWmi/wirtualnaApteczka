@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_weight="2"
+        android:layout_weight="2.5"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -41,9 +41,9 @@
     <ImageView
         android:id="@+id/medicine_simple_item_thumbnail"
         android:layout_width="wrap_content"
-        android:layout_height="70dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         app:srcCompat="@drawable/no_photo_icon" />
 
 
