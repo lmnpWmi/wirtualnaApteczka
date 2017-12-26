@@ -22,17 +22,4 @@ public class AdaptersCommonUtils {
 
         return result;
     }
-
-
-    public static Uri prepareThumbnailUri(String thumbnailPath) {
-        Uri thumbnailUri = null;
-
-        if (!TextUtils.isEmpty(thumbnailPath)) {
-            thumbnailUri = new Uri.Builder()
-                    .appendPath(thumbnailPath)
-                    .build();
-        }
-
-        return thumbnailUri;
-    }
 }

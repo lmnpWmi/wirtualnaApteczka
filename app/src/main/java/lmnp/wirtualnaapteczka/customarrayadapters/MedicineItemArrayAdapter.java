@@ -2,7 +2,9 @@ package lmnp.wirtualnaapteczka.customarrayadapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import lmnp.wirtualnaapteczka.listeners.medicinelistactivity.MedicineItemOnClick
 import lmnp.wirtualnaapteczka.utils.AdaptersCommonUtils;
 import lmnp.wirtualnaapteczka.utils.DateUtils;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
+import lmnp.wirtualnaapteczka.utils.ThumbnailUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -80,7 +83,11 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
         String amountText = AdaptersCommonUtils.prepareAmountText(currentMedicine.getAmount(), context) + " " + MedicineTypeUtils.prepareLocalizedTypeSuffix(currentMedicine.getType(), context);
         amount.setText(amountText);
 
-//        thumbnail.setImageURI(AdaptersCommonUtils.prepareThumbnailUri(currentMedicine.getThumbnailUri()));
+        String thumbnailUri = currentMedicine.getThumbnailUri();
+        if (!TextUtils.isEmpty(thumbnailUri)) {
+            Bitmap thumbnailBitmap = ThumbnailUtils.prepareBitmap(thumbnailUri, thumbnail);
+            thumbnail.setImageBitmap(thumbnailBitmap);
+        }
     }
 
     private String prepareCreatedAtText(Date createdAt) {

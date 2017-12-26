@@ -5,9 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.ThumbnailUtils;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -24,14 +21,12 @@ import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.AddPhotoOnClickListe
 import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.CalendarOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.MedicineTypeOnItemSelectedListener;
 import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.SaveNewMedicineOnClickListener;
-import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AlertDialogPreparator;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
+import lmnp.wirtualnaapteczka.utils.ThumbnailUtils;
 import lmnp.wirtualnaapteczka.utils.functionalinterfaces.Consumer;
 
-import java.io.File;
 import java.text.DateFormat;
 
 public class AddMedicineActivity extends AppCompatActivity {
@@ -106,7 +101,7 @@ public class AddMedicineActivity extends AppCompatActivity {
                 try {
                     setMedicineThumbnail();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.e(getClass().getSimpleName(), "Unable to set medicine thumbnail.");
                 }
             }
         }
@@ -180,19 +175,8 @@ public class AddMedicineActivity extends AppCompatActivity {
     }
 
     private void setMedicineThumbnail() {
-        Uri uri = Uri.parse(medicine.getThumbnailUri());
-        File file = new File(uri.toString());
-        Log.w("URI!!", file.exists() ? "Plik istnieje" : "Plik nie istnieje");
-        Log.w("URI!!", uri.toString());
-
-        File medicineDir = new File(getFilesDir(), AppConstants.MEDICINE_PHOTOS);
-        File testFile = new File(medicineDir, "plik.png");
-
-        Bitmap bitmap = BitmapFactory.decodeFile(testFile.getAbsolutePath());
-
-        Log.w("TEST FILE URI!!", testFile.exists() ? "Plik istnieje" : "Plik nie istnieje");
-
-        addMedicinePhotoImg.setImageBitmap(ThumbnailUtils.extractThumbnail(bitmap, bitmap.getWidth(), bitmap.getHeight()));
+        Bitmap thumbnailBitmap = ThumbnailUtils.prepareBitmap(medicine.getThumbnailUri(), addMedicinePhotoImg);
+        addMedicinePhotoImg.setImageBitmap(thumbnailBitmap);
     }
 
     private void updateMedicineTypeInSpinner(ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter) {

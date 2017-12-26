@@ -2,6 +2,8 @@ package lmnp.wirtualnaapteczka.customarrayadapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.RecentlyUsedMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.utils.AdaptersCommonUtils;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
+import lmnp.wirtualnaapteczka.utils.ThumbnailUtils;
 
 import java.util.List;
 
@@ -51,7 +54,12 @@ public class MedicineItemSimpleArrayAdapter extends ArrayAdapter<Medicine> {
         String amountText = AdaptersCommonUtils.prepareAmountText(currentMedicine.getAmount(), context) + " " + MedicineTypeUtils.prepareLocalizedTypeSuffix(currentMedicine.getType(), context);
         amount.setText(amountText);
 
-//        thumbnail.setImageURI(AdaptersCommonUtils.prepareThumbnailUri(currentMedicine.getThumbnailUri()));
+        String thumbnailUri = currentMedicine.getThumbnailUri();
+
+        if (!TextUtils.isEmpty(thumbnailUri)) {
+            Bitmap thumbnailBitmap = ThumbnailUtils.prepareBitmap(thumbnailUri, thumbnail);
+            thumbnail.setImageBitmap(thumbnailBitmap);
+        }
 
         itemPanel.setOnClickListener(new RecentlyUsedMedicineOnClickListener(context, currentMedicine, amount));
 
