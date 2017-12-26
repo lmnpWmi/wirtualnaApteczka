@@ -1,59 +1,26 @@
 package lmnp.wirtualnaapteczka.listeners.mainactivity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.view.LayoutInflater;
+import android.content.Context;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 import android.widget.TextView;
-import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.activity.MainActivity;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.utils.AlertDialogPreparator;
 
 public class RecentlyUsedMedicineOnClickListener implements View.OnClickListener {
-    private MainActivity mainActivity;
-    private Medicine currentMedicine;
+    private Context context;
+    private Medicine medicine;
     private TextView amount;
 
-    public RecentlyUsedMedicineOnClickListener(MainActivity mainActivity, Medicine currentMedicine, TextView amount) {
-        this.mainActivity = mainActivity;
-        this.currentMedicine = currentMedicine;
+    public RecentlyUsedMedicineOnClickListener(Context context, Medicine medicine, TextView amount) {
+        this.context = context;
+        this.medicine = medicine;
         this.amount = amount;
     }
 
     @Override
     public void onClick(View v) {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(mainActivity);
-        dialog.setTitle(R.string.edit_amount);
-
-        LayoutInflater inflater = (LayoutInflater) mainActivity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.number_picker, null);
-
-        final NumberPicker numberPicker = (NumberPicker) view.findViewById(R.id.amount_picker);
-        numberPicker.setMinValue(0);
-        numberPicker.setMaxValue(10000);
-        numberPicker.setValue(currentMedicine.getAmount());
-
-        LinearLayout amountPickerPanel = (LinearLayout) view.findViewById(R.id.amount_picker_panel);
-        dialog.setView(amountPickerPanel);
-        dialog.setPositiveButton(R.string.confirm_btn, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                int amountValue = numberPicker.getValue();
-                currentMedicine.setAmount(amountValue);
-                DbService dbService = SessionManager.getDbService();
-                dbService.updateMedicine(currentMedicine);
-
-                mainActivity.initializeRecentlyUsedMedicinesList();
-            }
-        });
-
-        dialog.setNegativeButton(R.string.cancel_btn, null);
-
+        AlertDialog.Builder dialog = AlertDialogPreparator.prepareEditMedicineAmountDialog(context, medicine);
         dialog.show();
     }
 }

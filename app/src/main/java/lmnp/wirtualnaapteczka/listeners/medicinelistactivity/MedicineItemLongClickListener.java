@@ -3,12 +3,10 @@ package lmnp.wirtualnaapteczka.listeners.medicinelistactivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.View;
-import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.utils.AlertDialogPreparator;
+import lmnp.wirtualnaapteczka.utils.functionalinterfaces.Consumer;
 
 public class MedicineItemLongClickListener implements View.OnLongClickListener {
     private Medicine medicine;
@@ -21,24 +19,15 @@ public class MedicineItemLongClickListener implements View.OnLongClickListener {
 
     @Override
     public boolean onLongClick(View v) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(
-                context);
-        alert.setTitle(context.getResources().getString(R.string.delete_medicine));
-        alert.setMessage(context.getResources().getString(R.string.delete_medicine_msg));
-        alert.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-
+        Consumer invokeAfterMedicineDeleted = new Consumer() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                DbService dbService = SessionManager.getDbService();
-                dbService.deleteMedicine(medicine.getId());
-
+            public void accept(Context context) {
                 Activity activity = (Activity) context;
                 activity.recreate();
             }
-        });
+        };
 
-        alert.setNegativeButton(R.string.no, null);
-
+        AlertDialog.Builder alert = AlertDialogPreparator.prepareDeleteMedicineDialog(context, medicine, invokeAfterMedicineDeleted);
         alert.show();
 
         return true;

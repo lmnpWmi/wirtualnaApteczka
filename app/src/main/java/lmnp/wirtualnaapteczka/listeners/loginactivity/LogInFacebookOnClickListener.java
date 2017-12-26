@@ -2,7 +2,6 @@ package lmnp.wirtualnaapteczka.listeners.loginactivity;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.Toast;
 import lmnp.wirtualnaapteczka.activity.MainActivity;
 
 public class LogInFacebookOnClickListener implements View.OnClickListener {

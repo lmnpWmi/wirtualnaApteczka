@@ -16,8 +16,8 @@ import lmnp.wirtualnaapteczka.customarrayadapters.MedicineItemArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.utils.MedicineFilter;
 import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.utils.MedicineFilter;
 
 import java.util.ArrayList;
 import java.util.Collections;

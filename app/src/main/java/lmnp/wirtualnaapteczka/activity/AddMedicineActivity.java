@@ -1,6 +1,8 @@
 package lmnp.wirtualnaapteczka.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,15 +14,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
+import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.*;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.*;
+import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.AddPhotoOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.CalendarOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.MedicineTypeOnItemSelectedListener;
+import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.SaveNewMedicineOnClickListener;
+import lmnp.wirtualnaapteczka.services.DbService;
+import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.utils.AlertDialogPreparator;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
+import lmnp.wirtualnaapteczka.utils.functionalinterfaces.Consumer;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -36,7 +45,6 @@ public class AddMedicineActivity extends AppCompatActivity {
     private TextView quantitySuffixLabel;
     private TextView dueDateCalendar;
     private FloatingActionButton saveMedicineBtn;
-    private FloatingActionButton deleteMedicineBtn;
     private Spinner medicineTypeSpinner;
     private ImageButton addMedicinePhotoImg;
     private CheckBox shareMedicineWithFriends;
@@ -49,17 +57,7 @@ public class AddMedicineActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         initializeViewComponents();
-
-        Medicine medicineForEditing = (Medicine) getIntent().getSerializableExtra(AppConstants.MEDICINE);
-
-        if (medicineForEditing != null) {
-            medicine = medicineForEditing;
-            editingExistingMedicine = true;
-            updateComponentsValues();
-        } else {
-            medicine = new Medicine();
-        }
-
+        initializeActivityState();
 
         initializeMedicineTypeSpinner();
         initializeListeners();
@@ -67,8 +65,38 @@ public class AddMedicineActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_delete, menu);
+        if (editingExistingMedicine) {
+            getMenuInflater().inflate(R.menu.menu_delete, menu);
+        }
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean result;
+
+        switch (item.getItemId()) {
+            case R.id.delete_med_options_item:
+                Consumer invokeAfterMedicineDeleted = new Consumer() {
+                    @Override
+                    public void accept(Context context) {
+                        Intent intent = new Intent(context, MedicineListActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                        context.startActivity(intent);
+                    }
+                };
+
+                AlertDialog.Builder dialog = AlertDialogPreparator.prepareDeleteMedicineDialog(AddMedicineActivity.this, medicine, invokeAfterMedicineDeleted);
+                dialog.show();
+
+                result = true;
+                break;
+            default:
+                result = super.onOptionsItemSelected(item);
+        }
+
+        return result;
     }
 
     @Override
@@ -81,6 +109,19 @@ public class AddMedicineActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    private void initializeActivityState() {
+        Medicine medicineForEditing = (Medicine) getIntent().getSerializableExtra(AppConstants.MEDICINE);
+
+        editingExistingMedicine = medicineForEditing != null;
+
+        if (editingExistingMedicine) {
+            medicine = medicineForEditing;
+            updateComponentsValues();
+        } else {
+            medicine = new Medicine();
         }
     }
 
@@ -98,13 +139,10 @@ public class AddMedicineActivity extends AppCompatActivity {
         medicineTypeSpinner = (Spinner) findViewById(R.id.medicine_type_spinner);
         addMedicinePhotoImg = (ImageButton) findViewById(R.id.add_medicine_photo);
         shareMedicineWithFriends = (CheckBox) findViewById(R.id.share_medicine_checkbox);
-
-        deleteMedicineBtn = (FloatingActionButton) findViewById(R.id.delete_medicine_btn);
     }
 
     private void updateComponentsValues() {
         nameEdit.setText(medicine.getName());
-        deleteMedicineBtn.setVisibility(View.VISIBLE);
         notesEdit.setText(medicine.getUserNotes());
         shareMedicineWithFriends.setChecked(medicine.isShareWithFriends());
 
@@ -129,9 +167,7 @@ public class AddMedicineActivity extends AppCompatActivity {
         medicineTypeSpinner.setAdapter(medicineTypesAdapter);
 
         if (medicine.getType() != null) {
-            MedicineTypeWithLocalizationTO medicineTypeWithLocalizationTO = MedicineTypeUtils.prepareLocalizedTypeTO(medicine.getType(), this);
-            int position = medicineTypesAdapter.getPosition(medicineTypeWithLocalizationTO);
-            medicineTypeSpinner.setSelection(position);
+            updateMedicineTypeInSpinner(medicineTypesAdapter);
         }
 
         medicineTypeSpinner.setOnItemSelectedListener(new MedicineTypeOnItemSelectedListener(medicine, medicineTypesAdapter, quantitySuffixLabel, getApplicationContext()));
@@ -141,10 +177,6 @@ public class AddMedicineActivity extends AppCompatActivity {
         dueDateCalendar.setOnClickListener(new CalendarOnClickListener(getSupportFragmentManager(), medicine));
         addMedicinePhotoImg.setOnClickListener(new AddPhotoOnClickListener(this, medicine));
         saveMedicineBtn.setOnClickListener(new SaveNewMedicineOnClickListener(medicine, editingExistingMedicine, this));
-
-        if (editingExistingMedicine) {
-            deleteMedicineBtn.setOnClickListener(new DeleteMedicineOnClickListener(medicine.getId()));
-        }
     }
 
     private void setMedicineThumbnail() {
@@ -161,5 +193,12 @@ public class AddMedicineActivity extends AppCompatActivity {
         Log.w("TEST FILE URI!!", testFile.exists() ? "Plik istnieje" : "Plik nie istnieje");
 
         addMedicinePhotoImg.setImageBitmap(ThumbnailUtils.extractThumbnail(bitmap, bitmap.getWidth(), bitmap.getHeight()));
+    }
+
+    private void updateMedicineTypeInSpinner(ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter) {
+        MedicineTypeWithLocalizationTO medicineTypeWithLocalizationTO = MedicineTypeUtils.prepareLocalizedTypeTO(medicine.getType(), this);
+        int position = medicineTypesAdapter.getPosition(medicineTypeWithLocalizationTO);
+
+        medicineTypeSpinner.setSelection(position);
     }
 }

@@ -1,6 +1,5 @@
 package lmnp.wirtualnaapteczka.listeners.addmedicineactivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,8 +15,8 @@ import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
 import lmnp.wirtualnaapteczka.data.dto.MedicineValidationResultTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.utils.MedicineValidator;
 import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.utils.MedicineValidator;
 
 public class SaveNewMedicineOnClickListener implements View.OnClickListener {
     private Medicine newMedicine;
@@ -85,13 +84,12 @@ public class SaveNewMedicineOnClickListener implements View.OnClickListener {
         dbService.saveOrUpdateMedicine(newMedicine);
     }
 
-    private void displaySavedToastMessage(Context context) {
+    private void displaySavedToastMessage(android.content.Context context) {
         String savedMessage;
 
         if (editingExistingMedicine) {
             savedMessage = context.getResources().getString(R.string.medicine_updated_msg);
-        }
-        else {
+        } else {
             savedMessage = context.getResources().getString(R.string.medicine_added_msg);
         }
 

@@ -1,15 +1,125 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- General -->
     <string name="app_name">Wirtualna Apteczka</string>
-    <string name="add">Add</string>
-    <string name="add_medicine">Add medicine</string>
-    <string name="friends">Friends</string>
-    <string name="last_added">Last Added:</string>
-    <string name="my_list_medicine">My list medicines</string>
-    <string name="not_searched_yet">You have not searched for any medicines yet</string>
-    <string name="options">Options</string>
-    <string name="general_info">General information</string>
-    <string name="medicine_list_empty">No medicines in the selected category.</string>
-    <string name="photo">foto</string>
-    <string name="notes">notes</string>
+    <string name="amount">Ilość</string>
+    <string name="created_at">Data dodania</string>
+    <string name="due_date">Data ważności</string>
+    <string name="information_medicine">Informacje o leku</string>
+    <string name="list_medicines">Lista leków</string>
+    <string name="config">ustawienia</string>
+    <string name="not_specified">Nie podano</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+
+    <!-- Main activity layout -->
+    <string name="add_medicine">Dodaj lek</string>
+    <string name="my_list_medicine">Moja lista leków</string>
+    <string name="family">Rodzina</string>
+    <string name="last_added">Ostatnio używane:</string>
+    <string name="not_searched_yet">Nie wyszukiwałeś jeszcze żadnego leku</string>
+    <string name="log_out_popup_msg">Czy na pewno chcesz się wylogować?</string>
+
+    <!-- Add medicine layout -->
+    <string name="general_info">Informacje ogólne</string>
+    <string name="product_name">Nazwa leku</string>
+    <string name="pack">Opakowanie</string>
+    <string name="medicine_type">Postać leku</string>
+    <string name="medicine_quantity_in_pack">Ilość leku w opakowaniu</string>
+    <string name="additional">Dodatkowo</string>
+    <string name="photo">Zdjęcie</string>
+    <string name="notes">Notatki</string>
+    <string name="medicine_share">Udostępnij lek rodzinie</string>
+    <string name="medicine_added_msg">Lek został zapisany.</string>
+    <string name="medicine_updated_msg">Zapisano zmiany.</string>
+    <string name="start_write">zacznij pisać...</string>
+    <string name="delete">usuń</string>
+
+    <!-- Medicine List layout -->
+    <string name="medicine_list_empty">Nie znaleziono żadnych leków.</string>
+
+    <!-- Medicine Types -->
+    <string name="type">Typ</string>
+    <string name="pill">Tabletki</string>
+    <string name="syrup">Syrop</string>
+    <string name="sachet">Saszetki</string>
+    <string name="spray">Spray</string>
+    <string name="other">Inny</string>
+
+    <!-- Medicine Quantity Suffix -->
+    <string name="pieces">szt.</string>
+    <string name="milliliter">ml</string>
+
+    <!--Start layout-->
+    <string name="welcome">Witamy!</string>
+    <string name="we_happy">Cieszymy się, że wybrałeś naszą aplikacje do zarządzania swoją domową apteczką.</string>
+    <string name="create_konto">Utwórz konto</string>
+    <string name="log_in">Zaloguj</string>
+    <string name="lets_go">Zaczynajmy!</string>
+
+    <!--Login layout-->
+    <string name="log_in_app">Logowanie</string>
+    <string name="facebook">Zaloguj się przez Facebook</string>
+    <string name="gmail">Zaloguj się przez konto Google</string>
+    <string name="email">Email</string>
+    <string name="pass">Hasło</string>
+    <string name="required_fields">*pola obowiazkowe</string>
+    <string name="save_data">Zapamiętaj moje dane</string>
+    <string name="log_in_2">Zaloguj się!</string>
+    <string name="register">Zarejestruj się</string>
+    <string name="forgotten">Zapomniałeś hasła?</string>
+    <string name="sign_accept">Logując się akceptujesz </string>
+    <string name="regulations">Regulamin</string>
+    <string name="or">lub</string>
+    <string name="remember_me">Zapamiętaj mnie</string>
+
+    <!--Registration layout-->
+    <string name="registration">Rejestracja</string>
+    <string name="name">Imię</string>
+    <string name="repeat_pass">Powtórz hasło</string>
+    <string name="registration_accept">Rejestrujac się akceptujesz </string>
+    <string name="surname">Nazwisko</string>
+
+    <!-- Notes Dialog Box -->
+    <string name="notes_message">Proszę podać notatki dotyczące leku.</string>
+    <string name="save_btn_text">Zapisz</string>
+    <string name="back_btn_text">Wróć</string>
+
+    <!-- Edit amount Dialog Box -->
+    <string name="edit_amount">Edytuj ilość</string>
+    <string name="confirm_btn">Zatwierdź</string>
+    <string name="cancel_btn">Anuluj</string>
+
+    <!-- Delete medicine Dialog Box -->
+    <string name="delete_medicine">Usuń lek</string>
+    <string name="delete_medicine_msg">Czy na pewno chcesz usunąć ten lek?</string>
+
+    <!-- Search medicine Dialog Box -->
+    <string name="search_medicine_msg">Znajdź lek</string>
+    <string name="search">Szukaj</string>
+    <string name="go_back">Wróć</string>
+
+    <!-- Validation error messages -->
+    <string name="name_cannot_be_empty_msg">Proszę uzupełnić nazwę leku.</string>
+    <string name="type_cannot_be_empty_msg">Proszę wybrać poprawny typ leku.</string>
+    <string name="amount_cannot_be_empty_msg">Proszę podać ilość leku w opakowaniu.</string>
+
+    <!-- Family layout -->
+    <string name="family_list_empty">Nie masz dodanej żadnej osoby.</string>
+    <string name="medicines_my">Leki, które ja udostępniam</string>
+    <string name="medicines_share_me">Leki udostęnione dla mnie</string>
+
+    <!-- Registration layout -->
+    <string name="first_name_empty_err_msg">Proszę podać imię.</string>
+    <string name="last_name_empty_err_msg">Proszę podać nazwisko.</string>
+    <string name="email_empty_err_msg">Proszę podać email.</string>
+    <string name="password_empty_err_msg">Proszę podać hasło.</string>
+    <string name="repeat_password_empty_err_msg">Proszę powtórzyć hasło.</string>
+    <string name="incorrect_passwords_err_msg">Hasła muszą się zgadzać.</string>
+
+    <!--Forget the password layout-->
+    <string name="reminder">Przypomnienie hasła</string>
+    <string name="not_remember_1">Jeżeli nie pamiętasz swojego hasła, podaj nam swój adres mailowy w celu jego zresetowania.</string>
+    <string name="not_remember_2">Po kliknięciu \"Zresetuj\" na Twój adres mailowy zostanie wysłany mail z dalszą instrukcją.</string>
+    <string name="reset">Zresetuj</string>
+
 </resources>
