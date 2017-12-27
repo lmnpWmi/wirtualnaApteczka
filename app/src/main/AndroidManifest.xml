@@ -36,6 +36,9 @@
             android:label="@string/family" />
         <activity android:name=".activity.PasswordReminderActivity"
             android:label="@string/reminder" />
+        <activity android:name=".activity.PreviewPhotoActivity"
+            android:label="@string/medicine_photo" />
+
     </application>
 
 </manifest>

@@ -123,4 +123,7 @@
     <string name="not_remember_2">Po kliknięciu \"Zresetuj\" na Twój adres mailowy zostanie wysłany mail z dalszą instrukcją.</string>
     <string name="reset">Zresetuj</string>
 
+    <!-- Preview photo layout -->
+    <string name="back">Wróć</string>
+    <string name="medicine_photo">Zdjęcie leku</string>
 </resources>
