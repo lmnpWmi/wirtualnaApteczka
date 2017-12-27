@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_weight="2.5"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -40,11 +40,13 @@
 
     <ImageView
         android:id="@+id/medicine_simple_item_thumbnail"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="@android:dimen/app_icon_size"
+        android:layout_height="@android:dimen/app_icon_size"
+        android:scaleType="fitCenter"
+        android:minHeight="@android:dimen/app_icon_size"
+        android:minWidth="@android:dimen/app_icon_size"
         android:layout_gravity="center"
-        android:layout_weight="0.5"
-        app:srcCompat="@drawable/no_photo_icon" />
+        app:srcCompat="@drawable/butelka" />
 
 
 </LinearLayout>
