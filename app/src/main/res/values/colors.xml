@@ -7,7 +7,7 @@
     <color name="color_primary">#c92215</color>
     <color name="color_primary_dark">#c92215</color>
     <color name="color_accent">#f44336</color>
-
+    <color name="color_primary_transparent">#53c92215</color>
 
 
     <color name="black">#000000</color>

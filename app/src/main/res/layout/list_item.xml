@@ -22,16 +22,29 @@
                 android:id="@+id/medicine_item_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="Witamina C" android:duplicateParentState="true" android:clickable="false"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:textAllCaps="false"
+            android:layout_gravity="left"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
+            android:text="udostępniony"
+            android:textColor="@color/white"
+            android:background="@color/color_primary_transparent"
+            android:gravity="center"
+            android:textSize="12sp"
+            />
 
         <TextView
                 android:id="@+id/medicine_item_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="tabletki" android:duplicateParentState="true" android:clickable="false"/>
+
 
         <TextView
                 android:id="@+id/medicine_item_amount"
@@ -55,8 +68,8 @@
 
     <ImageView
             android:id="@+id/medicine_simple_item_thumbnail"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
             android:scaleType="fitCenter"
             android:minHeight="@android:dimen/app_icon_size"
             android:minWidth="@android:dimen/app_icon_size"
