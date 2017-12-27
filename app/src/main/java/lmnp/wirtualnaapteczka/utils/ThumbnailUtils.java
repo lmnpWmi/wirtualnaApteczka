@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.util.Log;
 import android.widget.ImageView;
 
 import java.io.IOException;
@@ -39,9 +40,10 @@ public class ThumbnailUtils {
         bmOptions.inJustDecodeBounds = false;
         bmOptions.inSampleSize = scaleFactor;
 
-        int rotateBy = getRotationAngleFromExif(photoUrl);
         Bitmap bitmap = BitmapFactory.decodeFile(photoUrl, bmOptions);
-        if(rotateBy != 0){
+        int rotateBy = getRotationAngleFromExif(photoUrl);
+
+        if (rotateBy != 0) {
             bitmap = rotateBitmapByDegrees(bitmap, rotateBy);
         }
 
@@ -51,25 +53,42 @@ public class ThumbnailUtils {
     private static Bitmap rotateBitmapByDegrees(Bitmap bitmap, int rotateBy) {
         Matrix matrix = new Matrix();
         matrix.postRotate(rotateBy);
+
         Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+
         return rotatedBitmap;
     }
 
     public static int getRotationAngleFromExif(String photoFilePath) {
-        ExifInterface exif = null;
+        ExifInterface exif;
+
         try {
             exif = new ExifInterface(photoFilePath);
         } catch (IOException e) {
-            //dodac logowanie
+            Log.e(ThumbnailUtils.class.getSimpleName(), "Unable to prepare ExifInterface for file: " + photoFilePath);
             return 0;
         }
+
         String orientString = exif.getAttribute(ExifInterface.TAG_ORIENTATION);
+
         int orientation = orientString != null ? Integer.parseInt(orientString) : ExifInterface.ORIENTATION_NORMAL;
-        int rotationAngle = 0;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_90) rotationAngle = 90;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_180) rotationAngle = 180;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_270) rotationAngle = 270;
-        return  rotationAngle;
+        int rotationAngle;
+
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                rotationAngle = 90;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                rotationAngle = 180;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                rotationAngle = 270;
+                break;
+            default:
+                rotationAngle = 0;
+        }
+
+        return rotationAngle;
     }
 
 }

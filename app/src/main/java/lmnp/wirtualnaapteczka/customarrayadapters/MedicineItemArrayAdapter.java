@@ -13,8 +13,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.enums.MedicineTypeEnum;
+import lmnp.wirtualnaapteczka.listeners.common.PreviewPhotoOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.medicinelistactivity.MedicineItemLongClickListener;
 import lmnp.wirtualnaapteczka.listeners.medicinelistactivity.MedicineItemOnClickListener;
 import lmnp.wirtualnaapteczka.utils.AdaptersCommonUtils;
@@ -87,6 +89,8 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
         if (!TextUtils.isEmpty(thumbnailUri)) {
             Bitmap thumbnailBitmap = ThumbnailUtils.prepareBitmap(thumbnailUri, thumbnail);
             thumbnail.setImageBitmap(thumbnailBitmap);
+
+            thumbnail.setOnClickListener(new PreviewPhotoOnClickListener(thumbnailUri, MedicineListActivity.class));
         }
     }
 

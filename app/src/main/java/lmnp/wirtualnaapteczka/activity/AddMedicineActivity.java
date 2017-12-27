@@ -29,8 +29,14 @@ import lmnp.wirtualnaapteczka.utils.functionalinterfaces.Consumer;
 
 import java.text.DateFormat;
 
+/**
+ * Activity responsible for handling events on the layout for adding new medicines.
+ *
+ * @author Sebastian Nowak
+ * @createdAt 27.12.2017
+ */
 public class AddMedicineActivity extends AppCompatActivity {
-    private Medicine medicine;
+    private Medicine currentMedicine;
 
     private boolean editingExistingMedicine;
 
@@ -47,6 +53,11 @@ public class AddMedicineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            currentMedicine = (Medicine) savedInstanceState.getSerializable(AppConstants.MEDICINE);
+        }
+
         setContentView(R.layout.activity_add);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -82,7 +93,7 @@ public class AddMedicineActivity extends AppCompatActivity {
                     }
                 };
 
-                AlertDialog.Builder dialog = AlertDialogPreparator.prepareDeleteMedicineDialog(AddMedicineActivity.this, medicine, invokeAfterMedicineDeleted);
+                AlertDialog.Builder dialog = AlertDialogPreparator.prepareDeleteMedicineDialog(AddMedicineActivity.this, currentMedicine, invokeAfterMedicineDeleted);
                 dialog.show();
 
                 result = true;
@@ -107,16 +118,23 @@ public class AddMedicineActivity extends AppCompatActivity {
         }
     }
 
-    private void initializeActivityState() {
-        Medicine medicineForEditing = (Medicine) getIntent().getSerializableExtra(AppConstants.MEDICINE);
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(AppConstants.MEDICINE, currentMedicine);
+    }
 
-        editingExistingMedicine = medicineForEditing != null;
+    private void initializeActivityState() {
+        if (currentMedicine == null) {
+            currentMedicine = (Medicine) getIntent().getSerializableExtra(AppConstants.MEDICINE);
+        }
+
+        editingExistingMedicine = currentMedicine != null;
 
         if (editingExistingMedicine) {
-            medicine = medicineForEditing;
             updateComponentsValues();
         } else {
-            medicine = new Medicine();
+            currentMedicine = new Medicine();
         }
     }
 
@@ -137,22 +155,22 @@ public class AddMedicineActivity extends AppCompatActivity {
     }
 
     private void updateComponentsValues() {
-        nameEdit.setText(medicine.getName());
-        notesEdit.setText(medicine.getUserNotes());
-        shareMedicineWithFriends.setChecked(medicine.isShareWithFriends());
+        nameEdit.setText(currentMedicine.getName());
+        notesEdit.setText(currentMedicine.getUserNotes());
+        shareMedicineWithFriends.setChecked(currentMedicine.isShareWithFriends());
 
-        if (medicine.getDueDate() != null) {
+        if (currentMedicine.getDueDate() != null) {
             DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
-            String formattedDate = dateFormat.format(medicine.getDueDate());
+            String formattedDate = dateFormat.format(currentMedicine.getDueDate());
 
             dueDateCalendar.setText(formattedDate);
         }
 
-        if (medicine.getAmount() != null) {
-            amountEdit.setText(String.valueOf(medicine.getAmount()));
+        if (currentMedicine.getAmount() != null) {
+            amountEdit.setText(String.valueOf(currentMedicine.getAmount()));
         }
 
-        if (!TextUtils.isEmpty(medicine.getThumbnailUri())) {
+        if (!TextUtils.isEmpty(currentMedicine.getThumbnailUri())) {
             setMedicineThumbnail();
         }
     }
@@ -161,26 +179,26 @@ public class AddMedicineActivity extends AppCompatActivity {
         ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter = new ArrayAdapter<>(this, R.layout.dropdown_element, MedicineTypeUtils.prepareListOfLocalizedTypesTOs(getApplicationContext()));
         medicineTypeSpinner.setAdapter(medicineTypesAdapter);
 
-        if (medicine.getType() != null) {
+        if (currentMedicine.getType() != null) {
             updateMedicineTypeInSpinner(medicineTypesAdapter);
         }
 
-        medicineTypeSpinner.setOnItemSelectedListener(new MedicineTypeOnItemSelectedListener(medicine, medicineTypesAdapter, quantitySuffixLabel, getApplicationContext()));
+        medicineTypeSpinner.setOnItemSelectedListener(new MedicineTypeOnItemSelectedListener(currentMedicine, medicineTypesAdapter, quantitySuffixLabel, getApplicationContext()));
     }
 
     private void initializeListeners() {
-        dueDateCalendar.setOnClickListener(new CalendarOnClickListener(getSupportFragmentManager(), medicine));
-        addMedicinePhotoImg.setOnClickListener(new AddPhotoOnClickListener(this, medicine));
-        saveMedicineBtn.setOnClickListener(new SaveNewMedicineOnClickListener(medicine, editingExistingMedicine, this));
+        dueDateCalendar.setOnClickListener(new CalendarOnClickListener(getSupportFragmentManager(), currentMedicine));
+        addMedicinePhotoImg.setOnClickListener(new AddPhotoOnClickListener(this, currentMedicine));
+        saveMedicineBtn.setOnClickListener(new SaveNewMedicineOnClickListener(currentMedicine, editingExistingMedicine, this));
     }
 
     private void setMedicineThumbnail() {
-        Bitmap thumbnailBitmap = ThumbnailUtils.prepareBitmap(medicine.getThumbnailUri(), addMedicinePhotoImg);
+        Bitmap thumbnailBitmap = ThumbnailUtils.prepareBitmap(currentMedicine.getThumbnailUri(), addMedicinePhotoImg);
         addMedicinePhotoImg.setImageBitmap(thumbnailBitmap);
     }
 
     private void updateMedicineTypeInSpinner(ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter) {
-        MedicineTypeWithLocalizationTO medicineTypeWithLocalizationTO = MedicineTypeUtils.prepareLocalizedTypeTO(medicine.getType(), this);
+        MedicineTypeWithLocalizationTO medicineTypeWithLocalizationTO = MedicineTypeUtils.prepareLocalizedTypeTO(currentMedicine.getType(), this);
         int position = medicineTypesAdapter.getPosition(medicineTypeWithLocalizationTO);
 
         medicineTypeSpinner.setSelection(position);

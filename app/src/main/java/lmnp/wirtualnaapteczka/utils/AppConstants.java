@@ -11,6 +11,8 @@ public final class AppConstants {
     public static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final String MEDICINE = "medicine";
     public static final String MEDICINE_PHOTOS_DIR = "medicine_photos";
+    public static final String MEDICINE_PHOTO_URI = "medicine_photo_uri";
+    public static final String INVOKING_CLASS = "invoking_class";
 
     private AppConstants() {
     }

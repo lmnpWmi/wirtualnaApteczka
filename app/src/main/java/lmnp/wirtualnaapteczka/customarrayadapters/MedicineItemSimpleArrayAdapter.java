@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.activity.MainActivity;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
+import lmnp.wirtualnaapteczka.listeners.common.PreviewPhotoOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.RecentlyUsedMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.utils.AdaptersCommonUtils;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
@@ -59,6 +61,8 @@ public class MedicineItemSimpleArrayAdapter extends ArrayAdapter<Medicine> {
         if (!TextUtils.isEmpty(thumbnailUri)) {
             Bitmap thumbnailBitmap = ThumbnailUtils.prepareBitmap(thumbnailUri, thumbnail);
             thumbnail.setImageBitmap(thumbnailBitmap);
+
+            thumbnail.setOnClickListener(new PreviewPhotoOnClickListener(thumbnailUri, MainActivity.class));
         }
 
         itemPanel.setOnClickListener(new RecentlyUsedMedicineOnClickListener(context, currentMedicine, amount));

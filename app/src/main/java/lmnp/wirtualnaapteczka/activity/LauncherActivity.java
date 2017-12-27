@@ -21,7 +21,6 @@ public class LauncherActivity extends AppCompatActivity {
         boolean isFirstLaunch = sharedPreferences.getBoolean(IS_FIRST_LAUNCH, true);
 
         if (isFirstLaunch) {
-//        if (true) {
             markFirstLaunchStatus(sharedPreferences);
             startActivity(FirstTimeWelcomeActivity.class);
         } else {
