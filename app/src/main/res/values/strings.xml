@@ -11,7 +11,7 @@
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
     <string name="camera_required">Brak wymaganych uprawnień dla aplikacji by zrobić zdjęcie.</string>
-
+    <string name="sort">sortowanie</string>
     <!-- Main activity layout -->
     <string name="add_medicine">Dodaj lek</string>
     <string name="my_list_medicine">Moja lista leków</string>
