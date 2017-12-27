@@ -28,8 +28,8 @@
 
                 <ImageButton
                     android:id="@+id/add_medicine_img_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
                     android:clickable="false"
@@ -57,8 +57,8 @@
 
                 <ImageButton
                     android:id="@+id/medicine_list_img_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
                     android:background="@android:color/transparent"
@@ -86,8 +86,8 @@
 
                 <ImageButton
                     android:id="@+id/my_friends_img_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
                     android:clickable="false"
