@@ -10,6 +10,8 @@
     <string name="not_specified">Nie podano</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
+    <string name="camera_required">Brak wymaganych uprawnień dla aplikacji by zrobić zdjęcie.</string>
+    <string name="sort">sortowanie</string>
 
     <!-- Main activity layout -->
     <string name="add_medicine">Dodaj lek</string>
@@ -121,5 +123,17 @@
     <string name="not_remember_1">Jeżeli nie pamiętasz swojego hasła, podaj nam swój adres mailowy w celu jego zresetowania.</string>
     <string name="not_remember_2">Po kliknięciu \"Zresetuj\" na Twój adres mailowy zostanie wysłany mail z dalszą instrukcją.</string>
     <string name="reset">Zresetuj</string>
+
+    <!-- Preview photo layout -->
+    <string name="back">Wróć</string>
+    <string name="medicine_photo">Zdjęcie leku</string>
+
+    <!-- popup sort list -->
+    <string name="sort_name_A_Z">Nazwa: od A do Z</string>
+    <string name="sort_name_Z_A">Nazwa: od Z do A</string>
+    <string name="sort_date_down">Data ważności: od najstarszej</string>
+    <string name="sort_date_up">Data ważności: od najnowszej</string>
+    <string name="sort_date_add_down">Data dodania: od najstarszej</string>
+    <string name="sort_date_add_up">Data dodania: od najnowszej</string>
 
 </resources>

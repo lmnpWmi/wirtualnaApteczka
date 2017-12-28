@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/sort_list_panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/sort_name_a_z_btn"
+            style="@style/SortButton"
+            android:text="@string/sort_name_A_Z"/>
+
+
+        <Button
+            android:id="@+id/sort_name_z_a_btn"
+            style="@style/SortButton"
+            android:text="@string/sort_name_Z_A"/>
+
+        <Button
+            android:id="@+id/sort_date_down_btn"
+            style="@style/SortButton"
+            android:text="@string/sort_date_down"/>
+
+        <Button
+            android:id="@+id/sort_date_up_btn"
+            style="@style/SortButton"
+            android:text="@string/sort_date_up"/>
+
+        <Button
+            android:id="@+id/sort_date_add_down_btn"
+            style="@style/SortButton"
+            android:text="@string/sort_date_add_down"/>
+
+        <Button
+            android:id="@+id/sort_date_add_up_btn"
+            style="@style/SortButton"
+            android:text="@string/sort_date_add_up"/>
+
+
+    </LinearLayout>
+</ScrollView>
