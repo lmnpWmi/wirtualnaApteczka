@@ -38,7 +38,11 @@
 
     <!-- Medicine List layout -->
     <string name="medicine_list_empty">Nie znaleziono żadnych leków.</string>
-
+    <string name="share">udostępniony</string>
+    <string name="pills">tabletki</string>
+    <string name="quantity">ilość</string>
+    <string name="date_add">data dodania:</string>
+    <string name="date_expiration">data ważności:</string>
     <!-- Medicine Types -->
     <string name="type">Typ</string>
     <string name="pill">Tabletki</string>

@@ -32,9 +32,9 @@
             android:layout_gravity="left"
             android:paddingLeft="1dp"
             android:paddingRight="1dp"
-            android:text="udostępniony"
-            android:textColor="@color/white"
-            android:background="@color/color_primary_transparent"
+            android:text="@string/share"
+            android:textColor="@color/black"
+            android:background="#FFC107"
             android:gravity="center"
             android:textSize="12sp"
             />
@@ -43,25 +43,25 @@
                 android:id="@+id/medicine_item_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="tabletki" android:duplicateParentState="true" android:clickable="false"/>
+                tools:text="@string/pills" android:duplicateParentState="true" android:clickable="false"/>
 
 
         <TextView
                 android:id="@+id/medicine_item_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="ilość" android:duplicateParentState="true" android:clickable="false"/>
+                tools:text="@string/quantity" android:duplicateParentState="true" android:clickable="false"/>
 
         <TextView
                 android:text="TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/medicine_item_createdat"
-                tools:text="data utworzenia"/>
+                tools:text="@string/date_add"/>
         <TextView
                 android:id="@+id/medicine_item_duedate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="data ważności" android:duplicateParentState="true" android:clickable="false"/>
+                tools:text="@string/date_expiration" android:duplicateParentState="true" android:clickable="false"/>
 
 
     </LinearLayout>

@@ -5,8 +5,10 @@
     android:fillViewport="true">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        style="@style/AppTheme.Background"
-        android:orientation="vertical">
+            android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+                    android:orientation="vertical">
 
         <ImageView
             android:id="@+id/photo_image"
@@ -19,7 +21,8 @@
         <Button
             android:id="@+id/back_btn"
             style="@style/MyButton"
-            android:layout_marginTop="20dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
             android:text="@string/back"
 
             />
