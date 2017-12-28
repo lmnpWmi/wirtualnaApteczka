@@ -26,18 +26,18 @@
                 android:textStyle="bold"
                 tools:text="Witamina C" android:duplicateParentState="true" android:clickable="false"/>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="18dp"
-            android:textAllCaps="false"
-            android:layout_gravity="left"
-            android:paddingLeft="1dp"
-            android:paddingRight="1dp"
-            android:text="@string/share"
-            android:textColor="@color/black"
-            android:background="#FFC107"
-            android:gravity="center"
-            android:textSize="12sp"
-            />
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:textAllCaps="false"
+                android:layout_gravity="left"
+                android:paddingLeft="1dp"
+                android:paddingRight="1dp"
+                android:text="@string/share"
+                android:textColor="@color/black"
+                android:background="#FFC107"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:id="@+id/share_medicine_btn"/>
 
         <TextView
                 android:id="@+id/medicine_item_type"

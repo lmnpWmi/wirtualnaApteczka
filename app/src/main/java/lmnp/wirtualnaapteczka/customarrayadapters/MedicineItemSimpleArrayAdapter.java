@@ -22,6 +22,12 @@ import lmnp.wirtualnaapteczka.utils.ThumbnailUtils;
 
 import java.util.List;
 
+/**
+ * Adapter for filling layouts of recently used medicines.
+ *
+ * @author Sebastian Nowak
+ * @createdAt 28.12.2017
+ */
 public class MedicineItemSimpleArrayAdapter extends ArrayAdapter<Medicine> {
 
     private List<Medicine> medicines;

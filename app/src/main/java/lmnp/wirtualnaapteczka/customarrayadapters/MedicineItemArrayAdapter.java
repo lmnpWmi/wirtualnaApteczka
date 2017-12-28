@@ -4,14 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.LightingColorFilter;
+import android.graphics.PorterDuff;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
@@ -27,6 +26,12 @@ import lmnp.wirtualnaapteczka.utils.ThumbnailUtils;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Adapter for medicines in medicine list.
+ *
+ * @author Sebastian Nowak
+ * @createdAt 28.12.2017
+ */
 public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
 
     private List<Medicine> medicines;
@@ -40,6 +45,7 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
     private TextView createdAt;
     private TextView dueDate;
     private ImageView thumbnail;
+    private Button sharedMedicineBtn;
 
 
     public MedicineItemArrayAdapter(Context context, int resource, List<Medicine> medicines) {
@@ -71,6 +77,7 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
         createdAt = (TextView) view.findViewById(R.id.medicine_item_createdat);
         dueDate = (TextView) view.findViewById(R.id.medicine_item_duedate);
         thumbnail = (ImageView) view.findViewById(R.id.medicine_simple_item_thumbnail);
+        sharedMedicineBtn = (Button) view.findViewById(R.id.share_medicine_btn);
     }
 
     private void updateComponentsValues(Medicine currentMedicine) {
@@ -91,6 +98,14 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
             thumbnail.setImageBitmap(thumbnailBitmap);
 
             thumbnail.setOnClickListener(new PreviewPhotoOnClickListener(thumbnailUri, MedicineListActivity.class));
+        }
+
+        if (currentMedicine.isShareWithFriends()) {
+            sharedMedicineBtn.getBackground().setColorFilter(null);
+            sharedMedicineBtn.setText(R.string.shared_medicine);
+        } else {
+            sharedMedicineBtn.getBackground().setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_IN);
+            sharedMedicineBtn.setText(R.string.private_medicine);
         }
     }
 
