@@ -28,13 +28,14 @@
 
                 <ImageButton
                     android:id="@+id/add_medicine_img_btn"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
                     android:layout_gravity="center"
+                    android:scaleType="centerInside"
                     android:background="@android:color/transparent"
                     android:clickable="false"
                     android:duplicateParentState="true"
-                    app:srcCompat="@drawable/add_medicine_icon" />
+                    app:srcCompat="@drawable/icon_add_medicine" />
 
                 <TextView
                     android:id="@+id/add_medicine_photo_label"
@@ -57,14 +58,15 @@
 
                 <ImageButton
                     android:id="@+id/medicine_list_img_btn"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
                     android:layout_gravity="center"
+                    android:scaleType="centerInside"
                     android:layout_marginBottom="10dp"
                     android:background="@android:color/transparent"
                     android:clickable="false"
                     android:duplicateParentState="true"
-                    app:srcCompat="@drawable/my_medicine_list" />
+                    app:srcCompat="@drawable/icon_list" />
 
                 <TextView
                     android:id="@+id/medicine_list_label"
@@ -86,13 +88,14 @@
 
                 <ImageButton
                     android:id="@+id/my_friends_img_btn"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
                     android:layout_gravity="center"
+                    android:scaleType="centerInside"
                     android:background="@android:color/transparent"
                     android:clickable="false"
                     android:duplicateParentState="true"
-                    app:srcCompat="@drawable/icons8_couple_96" />
+                    app:srcCompat="@drawable/icon_family" />
 
                 <TextView
                     android:id="@+id/my_friends_label"

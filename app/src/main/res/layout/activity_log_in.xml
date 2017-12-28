@@ -15,7 +15,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/facebook"
-                android:drawableLeft="@drawable/facebook"
+                android:drawableLeft="@drawable/icon_facebook"
                 android:text="@string/facebook" android:id="@+id/log_in_fb_btn"/>
 
         <Button
@@ -23,8 +23,8 @@
                 style="@style/MyButton"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/my_button"
-                android:drawableLeft="@drawable/google_favicon_vector_small"
+                android:background="@drawable/my_button_google"
+                android:drawableLeft="@drawable/icon_google"
 
                 android:text="@string/gmail"
                 android:textColor="@color/black"/>

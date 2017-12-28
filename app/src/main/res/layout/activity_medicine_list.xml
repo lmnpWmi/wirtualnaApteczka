@@ -25,6 +25,6 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="right|bottom"
         android:layout_margin="10dp"
-        android:src="@drawable/ic_add_white_24dp" />
+        android:src="@drawable/icon_add_small" />
 
 </RelativeLayout>

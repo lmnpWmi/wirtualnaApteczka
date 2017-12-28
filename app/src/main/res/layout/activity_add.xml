@@ -31,15 +31,15 @@
                     android:inputType="textPersonName" />
 
                 <ImageButton
-                        android:layout_width="@android:dimen/notification_large_icon_width"
-                        android:layout_height="@android:dimen/notification_large_icon_height"
+                        android:layout_width="88dp"
+                        android:layout_height="88dp"
                         android:scaleType="fitCenter"
                         android:minHeight="@android:dimen/app_icon_size"
                         android:minWidth="@android:dimen/app_icon_size"
                         android:background="@android:color/transparent"
                         android:clickable="false"
                         android:duplicateParentState="true"
-                        app:srcCompat="@drawable/camera"
+                        app:srcCompat="@drawable/icon_camera1"
                         android:id="@+id/add_medicine_photo"/>
 
             </LinearLayout>
@@ -176,7 +176,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="right|bottom"
             android:layout_margin="10dp"
-            android:src="@drawable/ic_done_white_24dp" />
+            android:src="@drawable/icon_done" />
 
     </RelativeLayout>
 </ScrollView>

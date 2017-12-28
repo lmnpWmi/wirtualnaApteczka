@@ -46,7 +46,7 @@
         android:minHeight="@android:dimen/app_icon_size"
         android:minWidth="@android:dimen/app_icon_size"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/butelka" />
+        app:srcCompat="@drawable/icon_no_photo" />
 
 
 </LinearLayout>

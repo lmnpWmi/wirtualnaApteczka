@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/sort_btn"
-        android:icon="@drawable/ic_sort_white_24dp"
+        android:icon="@drawable/icon_sort"
         android:title="@string/sort"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/search_medicine_btn"
-        android:icon="@drawable/ic_search_white_24dp"
+        android:icon="@drawable/icon_search"
         android:title="@string/search"
         app:showAsAction="always" />
 </menu>
