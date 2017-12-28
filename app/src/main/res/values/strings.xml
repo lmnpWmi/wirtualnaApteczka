@@ -45,6 +45,7 @@
     <string name="date_expiration">data ważności:</string>
     <string name="shared_medicine">udostępniony</string>
     <string name="private_medicine">prywatny</string>
+    <string name="details">szczegóły</string>
 
     <!-- Medicine Types -->
     <string name="type">Typ</string>

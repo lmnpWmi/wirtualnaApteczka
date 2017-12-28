@@ -4,6 +4,14 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent" android:id="@+id/amount_picker_panel"
               android:background="@android:color/transparent">
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/details"
+    android:background="@color/white"
+    android:gravity="right"
+    android:paddingRight="10dp"
+    android:textColor="@color/grey"/>
 
     <NumberPicker
             android:layout_width="match_parent"
