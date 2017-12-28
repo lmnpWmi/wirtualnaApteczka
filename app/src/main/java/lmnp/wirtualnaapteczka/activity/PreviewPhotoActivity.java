@@ -3,6 +3,7 @@ package lmnp.wirtualnaapteczka.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 import android.view.Menu;
@@ -37,6 +38,10 @@ public class PreviewPhotoActivity extends AppCompatActivity {
 
         Bitmap bitmap = ThumbnailUtils.prepareBitmap(photoUri, photoImage);
         photoImage.setImageBitmap(bitmap);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle(R.string.medicine_photo);
+
     }
 
     private void initializeMembers() {
@@ -48,11 +53,6 @@ public class PreviewPhotoActivity extends AppCompatActivity {
         invokingClass = (Class<? extends AppCompatActivity>) intent.getSerializableExtra(AppConstants.INVOKING_CLASS);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_undo, menu);
-        return true;
-    }
 
 
 }
