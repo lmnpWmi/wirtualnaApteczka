@@ -10,7 +10,8 @@
     <Button
             android:id="@+id/sort_name_a_z_btn"
             style="@style/SortButton"
-            android:text="@string/sort_name_A_Z"/>
+            android:text="@string/sort_name_A_Z"
+        android:layout_marginTop="20dp"/>
 
 
     <Button
@@ -46,5 +47,6 @@
             android:id="@+id/sort_modified_date_ascending"
             style="@style/SortButton"
             android:text="@string/sort_modified_date_ascending" android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+        />
 </LinearLayout>

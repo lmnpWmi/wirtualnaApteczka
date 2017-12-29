@@ -38,6 +38,14 @@
 
     <!-- Medicine List layout -->
     <string name="medicine_list_empty">Nie znaleziono żadnych leków.</string>
+    <string name="share">udostępniony</string>
+    <string name="pills">tabletki</string>
+    <string name="quantity">ilość</string>
+    <string name="date_add">data dodania:</string>
+    <string name="date_expiration">data ważności:</string>
+    <string name="shared_medicine">udostępniony</string>
+    <string name="private_medicine">prywatny</string>
+    <string name="details">szczegóły</string>
 
     <!-- Medicine Types -->
     <string name="type">Typ</string>
@@ -129,11 +137,14 @@
     <string name="medicine_photo">Zdjęcie leku</string>
 
     <!-- popup sort list -->
+    <string name="sort_medicines">Sortowanie</string>
     <string name="sort_name_A_Z">Nazwa: od A do Z</string>
     <string name="sort_name_Z_A">Nazwa: od Z do A</string>
-    <string name="sort_due_date_descending">Data ważności: od najstarszej</string>
-    <string name="sort_due_date_ascending">Data ważności: od najnowszej</string>
-    <string name="sort_date_created_descending">Data dodania: od najstarszej</string>
-    <string name="sort_date_created_ascending">Data dodania: od najnowszej</string>
+    <string name="sort_due_date_descending">Data ważności: od najnowszej</string>
+    <string name="sort_due_date_ascending">Data ważności: od najstarszej</string>
+    <string name="sort_date_created_descending">Data dodania: od najnowszej</string>
+    <string name="sort_date_created_ascending">Data dodania: od najstarszej</string>
+    <string name="sort_modified_date_descending">Data modyfikacji: od najnowszej</string>
+    <string name="sort_modified_date_ascending">Data modyfikacji: od najstarszej</string>
 
 </resources>

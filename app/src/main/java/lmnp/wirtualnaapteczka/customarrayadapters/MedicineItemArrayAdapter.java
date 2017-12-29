@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -103,7 +104,7 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
             sharedMedicineBtn.getBackground().setColorFilter(null);
             sharedMedicineBtn.setText(R.string.shared_medicine);
         } else {
-            sharedMedicineBtn.getBackground().setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_IN);
+            sharedMedicineBtn.getBackground().setColorFilter(Color.parseColor("#FF8F00"), PorterDuff.Mode.SRC_IN);
             sharedMedicineBtn.setText(R.string.private_medicine);
         }
     }
