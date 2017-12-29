@@ -20,12 +20,12 @@ public class MedicineDueDateComparator implements Comparator<Medicine> {
 
         if (medicine1.getDueDate() != null && medicine2.getDueDate() != null) {
             result = medicine1.getDueDate().compareTo(medicine2.getDueDate());
-        } else if (medicine1.getDueDate() == null || medicine2.getDueDate() == null) {
-            result = 0;
-        } else if (medicine1.getDueDate() != null || medicine2.getDueDate() == null) {
+        } else if (medicine1.getDueDate() != null && medicine2.getDueDate() == null) {
             result = 1;
-        } else {
+        } else if (medicine1.getDueDate() == null && medicine2.getDueDate() != null){
             result = -1;
+        } else {
+            result = 0;
         }
 
         if (!isAscending) {

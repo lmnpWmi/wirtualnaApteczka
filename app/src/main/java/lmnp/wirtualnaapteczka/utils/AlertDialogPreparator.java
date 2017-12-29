@@ -95,6 +95,7 @@ public class AlertDialogPreparator {
             public void onClick(DialogInterface dialog, int which) {
                 int amountValue = numberPicker.getValue();
                 medicine.setAmount(amountValue);
+
                 DbService dbService = SessionManager.getDbService();
                 dbService.updateMedicine(medicine);
 

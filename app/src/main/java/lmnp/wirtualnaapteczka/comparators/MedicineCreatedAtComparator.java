@@ -18,7 +18,7 @@ public class MedicineCreatedAtComparator implements Comparator<Medicine> {
     @Override
     public int compare(Medicine medicine1, Medicine medicine2) {
         if (medicine1.getCreatedAt() == null || medicine2.getCreatedAt() == null) {
-            throw new IncorrectMedicineDataException("UpdatedAt field in Medicine cannot be empty!");
+            throw new IncorrectMedicineDataException("CreatedAt field in Medicine cannot be empty!");
         }
 
         int result;
