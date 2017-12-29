@@ -71,7 +71,7 @@ public class MedicineItemSimpleArrayAdapter extends ArrayAdapter<Medicine> {
             thumbnail.setOnClickListener(new PreviewPhotoOnClickListener(thumbnailUri, MainActivity.class));
         }
 
-        itemPanel.setOnClickListener(new RecentlyUsedMedicineOnClickListener(context, currentMedicine, amount));
+        itemPanel.setOnClickListener(new RecentlyUsedMedicineOnClickListener(context, currentMedicine));
 
         return view;
     }

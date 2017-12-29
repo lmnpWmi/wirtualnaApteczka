@@ -9,6 +9,8 @@ package lmnp.wirtualnaapteczka.utils;
 public final class AppConstants {
     public static final int FIRST_ITEM_INDEX = 0;
     public static final int REQUEST_IMAGE_CAPTURE = 1;
+    public static final String APP_SETTINGS = "app_settings";
+    public static final String DEFAULT_COMPARATOR = "current_comparator";
     public static final String MEDICINE = "medicine";
     public static final String MEDICINE_PHOTOS_DIR = "medicine_photos";
     public static final String MEDICINE_PHOTO_URI = "medicine_photo_uri";

@@ -27,8 +27,7 @@ public class MedicineItemLongClickListener implements View.OnLongClickListener {
             }
         };
 
-        AlertDialog.Builder alert = AlertDialogPreparator.prepareDeleteMedicineDialog(context, medicine, invokeAfterMedicineDeleted);
-        alert.show();
+        AlertDialogPreparator.showDeleteMedicineDialog(context, medicine, invokeAfterMedicineDeleted);
 
         return true;
     }

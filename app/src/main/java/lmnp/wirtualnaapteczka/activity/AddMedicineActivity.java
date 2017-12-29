@@ -93,9 +93,7 @@ public class AddMedicineActivity extends AppCompatActivity {
                     }
                 };
 
-                AlertDialog.Builder dialog = AlertDialogPreparator.prepareDeleteMedicineDialog(AddMedicineActivity.this, currentMedicine, invokeAfterMedicineDeleted);
-                dialog.show();
-
+                AlertDialogPreparator.showDeleteMedicineDialog(AddMedicineActivity.this, currentMedicine, invokeAfterMedicineDeleted);
                 result = true;
                 break;
             default:

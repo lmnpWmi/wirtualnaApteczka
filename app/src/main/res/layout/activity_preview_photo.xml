@@ -18,13 +18,5 @@
             android:scaleType="fitCenter"
             />
 
-        <Button
-            android:id="@+id/back_btn"
-            style="@style/MyButton"
-            android:layout_marginRight="0dp"
-            android:layout_marginLeft="0dp"
-            android:text="@string/back"
-
-            />
     </LinearLayout>
 </ScrollView>

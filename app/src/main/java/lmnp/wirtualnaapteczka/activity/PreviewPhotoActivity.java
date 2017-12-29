@@ -5,12 +5,10 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-
-import android.view.Menu;
-import android.widget.Button;
+import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.listeners.previewphotoactivity.GoBackOnClickListener;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 import lmnp.wirtualnaapteczka.utils.ThumbnailUtils;
 
@@ -22,7 +20,6 @@ import lmnp.wirtualnaapteczka.utils.ThumbnailUtils;
  */
 public class PreviewPhotoActivity extends AppCompatActivity {
     private ImageView photoImage;
-    private Button backBtn;
 
     private String photoUri;
     private Class<? extends AppCompatActivity> invokingClass;
@@ -34,25 +31,34 @@ public class PreviewPhotoActivity extends AppCompatActivity {
 
         initializeMembers();
 
-        backBtn.setOnClickListener(new GoBackOnClickListener(invokingClass));
-
         Bitmap bitmap = ThumbnailUtils.prepareBitmap(photoUri, photoImage);
         photoImage.setImageBitmap(bitmap);
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
         actionBar.setTitle(R.string.medicine_photo);
-
+        actionBar.show();
     }
 
     private void initializeMembers() {
         photoImage = (ImageView) findViewById(R.id.photo_image);
-        backBtn = (Button) findViewById(R.id.back_btn);
 
         Intent intent = getIntent();
         photoUri = intent.getStringExtra(AppConstants.MEDICINE_PHOTO_URI);
         invokingClass = (Class<? extends AppCompatActivity>) intent.getSerializableExtra(AppConstants.INVOKING_CLASS);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return true;
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), invokingClass);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getApplicationContext().startActivity(intent);
+    }
 }

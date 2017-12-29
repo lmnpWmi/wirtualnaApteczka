@@ -7,8 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import lmnp.wirtualnaapteczka.R;
 
+import static lmnp.wirtualnaapteczka.utils.AppConstants.APP_SETTINGS;
+
 public class LauncherActivity extends AppCompatActivity {
-    private static final String APP_SETTINGS = "app_settings";
     private static final String IS_FIRST_LAUNCH = "is_first_launch";
 
     @Override

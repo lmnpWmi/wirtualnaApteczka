@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.comparators.MedicineByUpdatedAtComparator;
+import lmnp.wirtualnaapteczka.comparators.MedicineModifiedComparator;
 import lmnp.wirtualnaapteczka.customarrayadapters.MedicineItemSimpleArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.entities.User;
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Medicine> prepareRecentlyUsedMedicinesList() {
         List<Medicine> currentUserMedicines = dbService.findAllMedicinesByUserId(SessionManager.getCurrentUser().getId());
-        Collections.sort(currentUserMedicines, new MedicineByUpdatedAtComparator());
+        Collections.sort(currentUserMedicines, new MedicineModifiedComparator(false));
 
         int entriesLimit = user.getUserPreferences().getRecentlyUsedMedicinesViewLimit();
         entriesLimit = entriesLimit > currentUserMedicines.size() ? currentUserMedicines.size() : entriesLimit;
