@@ -24,8 +24,6 @@ public class AddPhotoOnClickListener implements View.OnClickListener {
 
     private String mCurrentPhotoPath;
 
-    private Uri createdPhotoUri;
-
     public AddPhotoOnClickListener(AddMedicineActivity addMedicineActivity, Medicine medicine) {
         this.addMedicineActivity = addMedicineActivity;
         this.medicine = medicine;

@@ -35,9 +35,8 @@ import java.util.List;
  * @createdAt 27.12.2017
  */
 public class AddMedicineActivity extends AppCompatActivity {
-    private Medicine currentMedicine;
-
     private boolean editingExistingMedicine;
+    private Medicine currentMedicine;
 
     private EditText nameEdit;
     private EditText amountEdit;
@@ -106,7 +105,7 @@ public class AddMedicineActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && data != null) {
+        if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case AppConstants.REQUEST_IMAGE_CAPTURE:
                     try {
