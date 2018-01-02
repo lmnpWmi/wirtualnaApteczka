@@ -3,7 +3,7 @@ package lmnp.wirtualnaapteczka.listeners.mainactivity;
 import android.content.Context;
 import android.view.View;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.utils.AlertDialogPreparator;
+import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
 
 public class RecentlyUsedMedicineOnClickListener implements View.OnClickListener {
     private Context context;

@@ -1,5 +1,6 @@
 package lmnp.wirtualnaapteczka.listeners.addmedicineactivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -32,12 +33,13 @@ public class AddPhotoOnClickListener implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        boolean isAllowedToTakePicture = v.getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
+        Context context = v.getContext();
+        boolean isAllowedToTakePicture = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
 
         if (isAllowedToTakePicture) {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-            if (takePictureIntent.resolveActivity(v.getContext().getPackageManager()) != null) {
+            if (takePictureIntent.resolveActivity(context.getPackageManager()) != null) {
                 File photoFile = preparePhotoFile();
                 Uri photoURI = Uri.fromFile(photoFile);
 
@@ -49,7 +51,7 @@ public class AddPhotoOnClickListener implements View.OnClickListener {
                 addMedicineActivity.startActivityForResult(takePictureIntent, AppConstants.REQUEST_IMAGE_CAPTURE);
             }
         } else {
-            Toast.makeText(v.getContext(), R.string.camera_required, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.camera_required, Toast.LENGTH_SHORT).show();
         }
     }
 

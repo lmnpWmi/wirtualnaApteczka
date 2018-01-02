@@ -18,7 +18,8 @@ import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.*;
-import lmnp.wirtualnaapteczka.utils.AlertDialogPreparator;
+import lmnp.wirtualnaapteczka.listeners.common.LaunchVoiceRecognitionOnClickListener;
+import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
 import lmnp.wirtualnaapteczka.utils.ThumbnailUtils;
@@ -148,7 +149,7 @@ public class AddMedicineActivity extends AppCompatActivity {
         editingExistingMedicine = currentMedicine != null;
 
         if (editingExistingMedicine) {
-            updateComponentsValues();
+            updateComponentsValuesUsingExistingMedicine();
         } else {
             currentMedicine = new Medicine();
         }
@@ -173,7 +174,7 @@ public class AddMedicineActivity extends AppCompatActivity {
         voiceInputMedicineNotesBtn = (ImageButton) findViewById(R.id.voice_input_medicine_notes_btn);
     }
 
-    private void updateComponentsValues() {
+    private void updateComponentsValuesUsingExistingMedicine() {
         nameEdit.setText(currentMedicine.getName());
         notesEdit.setText(currentMedicine.getUserNotes());
         shareMedicineWithFriends.setChecked(currentMedicine.isShareWithFriends());
@@ -209,8 +210,8 @@ public class AddMedicineActivity extends AppCompatActivity {
         dueDateCalendar.setOnClickListener(new CalendarOnClickListener(getSupportFragmentManager(), currentMedicine));
         addMedicinePhotoBtn.setOnClickListener(new AddPhotoOnClickListener(this, currentMedicine));
         saveMedicineBtn.setOnClickListener(new SaveNewMedicineOnClickListener(currentMedicine, editingExistingMedicine, this));
-        voiceInputMedicineNameBtn.setOnClickListener(new LaunchVoiceRecognitionOnClickListener(this, AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NAME));
-        voiceInputMedicineNotesBtn.setOnClickListener(new LaunchVoiceRecognitionOnClickListener(this, AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NOTES));
+        voiceInputMedicineNameBtn.setOnClickListener(new LaunchVoiceRecognitionOnClickListener(AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NAME));
+        voiceInputMedicineNotesBtn.setOnClickListener(new LaunchVoiceRecognitionOnClickListener(AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NOTES));
     }
 
     private void setMedicineThumbnail() {

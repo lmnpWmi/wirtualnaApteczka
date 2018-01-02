@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
 
     <ImageButton
-        android:id="@+id/mic_search_medicine_name_btn"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="3dp"
-        android:background="@drawable/icon_mic" />
+            android:id="@+id/voice_input_medicine_name_search_btn"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/icon_mic"/>
 
     <EditText
-        android:id="@+id/search_medicine_name_edit"
-        style="@style/MyEditText"
-        android:layout_gravity="center"
-        android:layout_marginLeft="0dp"
-        android:hint="@string/product_name"
-        android:inputType="textPersonName" />
+            android:id="@+id/search_medicine_name_edit"
+            style="@style/MyEditText"
+            android:layout_gravity="center"
+            android:layout_marginLeft="0dp"
+            android:hint="@string/product_name"
+            android:inputType="textPersonName"/>
 
 </LinearLayout>

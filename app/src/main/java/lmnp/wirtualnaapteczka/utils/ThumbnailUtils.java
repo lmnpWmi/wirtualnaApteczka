@@ -16,6 +16,8 @@ import java.io.IOException;
  * @createdAt 26.12.2017
  */
 public class ThumbnailUtils {
+    private ThumbnailUtils() {
+    }
 
     public static Bitmap prepareBitmap(String photoUrl, ImageView imageView) {
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();

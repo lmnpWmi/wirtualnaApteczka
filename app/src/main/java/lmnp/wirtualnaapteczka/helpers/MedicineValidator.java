@@ -1,4 +1,4 @@
-package lmnp.wirtualnaapteczka.utils;
+package lmnp.wirtualnaapteczka.helpers;
 
 import android.content.res.Resources;
 import android.text.TextUtils;

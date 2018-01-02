@@ -1,23 +1,26 @@
 package lmnp.wirtualnaapteczka.activity;
 
-import android.app.AlertDialog;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ListView;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.customarrayadapters.MedicineItemArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
+import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
+import lmnp.wirtualnaapteczka.helpers.SearchMedicineDialogHelper;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.session.SessionManager;
-import lmnp.wirtualnaapteczka.utils.AlertDialogPreparator;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 
 import java.util.ArrayList;
@@ -30,6 +33,8 @@ public class MedicineListActivity extends AppCompatActivity {
     private DbService dbService;
     private ListView medicineListView;
     private FloatingActionButton floatingActionButton;
+
+    private SearchMedicineDialogHelper searchMedicineDialogHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,21 @@ public class MedicineListActivity extends AppCompatActivity {
 
         List<Medicine> medicines = dbService.findAllMedicinesForCurrentUser();
         initializeMedicineList(medicines);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            if (requestCode == AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NAME && searchMedicineDialogHelper != null) {
+                List<String> voiceRecognizedData = data
+                        .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+                String potentialMedicineName = voiceRecognizedData.get(0);
+
+                EditText searchMedicineEditText = searchMedicineDialogHelper.getSearchMedicineEditText();
+                searchMedicineEditText.setText(potentialMedicineName);
+            }
+        }
     }
 
     public void initializeMedicineList(List<Medicine> medicines) {
@@ -71,7 +91,8 @@ public class MedicineListActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.search_medicine_btn:
-                AlertDialogPreparator.showSearchMedicineDialog(this);
+                searchMedicineDialogHelper = new SearchMedicineDialogHelper();
+                searchMedicineDialogHelper.initializeDialog(this);
                 break;
             case R.id.sort_btn:
                 AlertDialogPreparator.showSortListDialog(this);

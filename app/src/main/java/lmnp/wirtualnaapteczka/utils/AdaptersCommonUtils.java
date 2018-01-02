@@ -5,8 +5,13 @@ import android.net.Uri;
 import android.text.TextUtils;
 import lmnp.wirtualnaapteczka.R;
 
+/**
+ * Common utils for adapters.
+ *
+ * @author Sebastian Nowak
+ * @createdAt 02.01.2018
+ */
 public class AdaptersCommonUtils {
-
     private AdaptersCommonUtils() {
     }
 

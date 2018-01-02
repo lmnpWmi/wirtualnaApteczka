@@ -1,11 +1,10 @@
 package lmnp.wirtualnaapteczka.listeners.medicinelistactivity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.View;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.utils.AlertDialogPreparator;
+import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
 import lmnp.wirtualnaapteczka.utils.functionalinterfaces.Consumer;
 
 public class MedicineItemLongClickListener implements View.OnLongClickListener {

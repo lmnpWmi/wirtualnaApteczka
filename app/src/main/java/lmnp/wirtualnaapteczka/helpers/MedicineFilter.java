@@ -1,7 +1,8 @@
-package lmnp.wirtualnaapteczka.utils;
+package lmnp.wirtualnaapteczka.helpers;
 
 import android.text.TextUtils;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
+import lmnp.wirtualnaapteczka.utils.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;

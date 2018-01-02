@@ -1,27 +1,26 @@
-package lmnp.wirtualnaapteczka.utils;
+package lmnp.wirtualnaapteczka.helpers;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.NumberPicker;
+import android.widget.*;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.MainActivity;
 import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
-import lmnp.wirtualnaapteczka.listeners.mainactivity.ShowMedicineDetailsOnClickListener;
-import lmnp.wirtualnaapteczka.listeners.medicinelistactivity.MedicineItemOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.common.SaveDefaultSortingComparatorOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.mainactivity.ShowMedicineDetailsOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.functionalinterfaces.Consumer;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -31,30 +30,6 @@ import java.util.List;
  * @createdAt 29.12.2017
  */
 public class AlertDialogPreparator {
-    public static void showSearchMedicineDialog(final MedicineListActivity medicineListActivity) {
-        AlertDialog.Builder searchMedicineDialogBuilder = new AlertDialog.Builder(medicineListActivity);
-        searchMedicineDialogBuilder.setTitle(R.string.search_medicine_msg);
-
-        final EditText input = new EditText(medicineListActivity);
-        input.setSingleLine();
-        searchMedicineDialogBuilder.setView(input);
-
-        final DbService dbService = SessionManager.getDbService();
-
-        searchMedicineDialogBuilder.setPositiveButton(R.string.search, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String searchValue = input.getText().toString();
-                List<Medicine> medicines = dbService.findAllMedicinesForCurrentUser();
-                List<Medicine> filteredMedicines = MedicineFilter.filterMedicines(searchValue, medicines, false);
-
-                medicineListActivity.initializeMedicineList(filteredMedicines);
-            }
-        });
-
-        searchMedicineDialogBuilder.setNegativeButton(R.string.go_back, null);
-        searchMedicineDialogBuilder.show();
-    }
-
     public static void showDeleteMedicineDialog(final Context context, final Medicine medicine, final Consumer invokeAfterActionConsumer) {
         AlertDialog.Builder deleteMedicineDialogBuilder = new AlertDialog.Builder(
                 context);
@@ -64,10 +39,29 @@ public class AlertDialogPreparator {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                String thumbnailUri = medicine.getThumbnailUri();
+                if (!TextUtils.isEmpty(thumbnailUri)) {
+                    deleteThumbnailFile(thumbnailUri);
+                }
+
                 DbService dbService = SessionManager.getDbService();
                 dbService.deleteMedicine(medicine.getId());
 
                 invokeAfterActionConsumer.accept(context);
+            }
+
+            private void deleteThumbnailFile(String thumbnailUri) {
+                File file = new File(thumbnailUri);
+
+                if (file.exists()) {
+                    boolean hasFileBeenDeleted = file.delete();
+
+                    if (hasFileBeenDeleted) {
+                        Log.i(getClass().getSimpleName(), "File(" + thumbnailUri + ") has been successfuly deleted.");
+                    } else {
+                        Log.w(getClass().getSimpleName(), "Could not delete file: " + thumbnailUri);
+                    }
+                }
             }
         });
 

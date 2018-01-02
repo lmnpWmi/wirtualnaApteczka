@@ -16,7 +16,7 @@ import lmnp.wirtualnaapteczka.data.dto.MedicineValidationResultTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.session.SessionManager;
-import lmnp.wirtualnaapteczka.utils.MedicineValidator;
+import lmnp.wirtualnaapteczka.helpers.MedicineValidator;
 
 public class SaveNewMedicineOnClickListener implements View.OnClickListener {
     private Medicine newMedicine;
