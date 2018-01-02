@@ -1,150 +1,150 @@
 <resources>
     <!-- General -->
-    <string name="app_name">Wirtualna Apteczka</string>
-    <string name="amount">Ilość</string>
-    <string name="created_at">Data dodania</string>
-    <string name="due_date">Data ważności</string>
-    <string name="information_medicine">Informacje o leku</string>
-    <string name="list_medicines">Lista leków</string>
-    <string name="config">ustawienia</string>
-    <string name="not_specified">Nie podano</string>
-    <string name="yes">Tak</string>
-    <string name="no">Nie</string>
-    <string name="camera_required">Brak wymaganych uprawnień dla aplikacji by zrobić zdjęcie.</string>
-    <string name="sort">sortowanie</string>
+    <string name="app_name">Virtual Med Kit</string>
+    <string name="amount">Amount</string>
+    <string name="created_at">Created at</string>
+    <string name="due_date">Expiry date</string>
+    <string name="information_medicine">Medicine information</string>
+    <string name="list_medicines">The list of medications</string>
+    <string name="config">settings</string>
+    <string name="not_specified">Not indicated</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="camera_required">You do not have required permissions to take the picture</string>
+    <string name="sort">sort</string>
 
     <!-- Main activity layout -->
-    <string name="add_medicine">Dodaj lek</string>
-    <string name="my_list_medicine">Moja lista leków</string>
-    <string name="family">Rodzina</string>
-    <string name="last_added">Ostatnio używane:</string>
-    <string name="not_searched_yet">Nie wyszukiwałeś jeszcze żadnego leku</string>
-    <string name="log_out_popup_msg">Czy na pewno chcesz się wylogować?</string>
+    <string name="add_medicine">Add the medicine</string>
+    <string name="my_list_medicine">My list of medicines</string>
+    <string name="family">Family</string>
+    <string name="last_added">Recently used:</string>
+    <string name="not_searched_yet">You did not search any medicine yet.</string>
+    <string name="log_out_popup_msg">Are you sure you want to sing out?</string>
 
     <!-- Add medicine layout -->
-    <string name="general_info">Informacje ogólne</string>
-    <string name="product_name">Nazwa leku</string>
-    <string name="pack">Opakowanie</string>
-    <string name="medicine_type">Postać leku</string>
-    <string name="medicine_quantity_in_pack">Ilość leku w opakowaniu</string>
-    <string name="additional">Dodatkowo</string>
-    <string name="photo">Zdjęcie</string>
-    <string name="notes">Notatki</string>
-    <string name="medicine_share">Udostępnij lek rodzinie</string>
-    <string name="medicine_added_msg">Lek został zapisany.</string>
-    <string name="medicine_updated_msg">Zapisano zmiany.</string>
-    <string name="start_write">zacznij pisać...</string>
-    <string name="delete">usuń</string>
+    <string name="general_info">General information</string>
+    <string name="product_name">Name of the medicine</string>
+    <string name="pack">Pack</string>
+    <string name="medicine_type">Medicine type</string>
+    <string name="medicine_quantity_in_pack">Medicine quantity in a pack.</string>
+    <string name="additional">Additional</string>
+    <string name="photo">Picture</string>
+    <string name="notes">Notes</string>
+    <string name="medicine_share">Share the medicine with your family.</string>
+    <string name="medicine_added_msg">Medicine has been saved.</string>
+    <string name="medicine_updated_msg">Changes have been saved.</string>
+    <string name="start_write">start write...</string>
+    <string name="delete">delete</string>
 
     <!-- Medicine List layout -->
-    <string name="medicine_list_empty">Nie znaleziono żadnych leków.</string>
-    <string name="share">udostępniony</string>
-    <string name="pills">tabletki</string>
-    <string name="quantity">ilość</string>
-    <string name="date_add">data dodania:</string>
-    <string name="date_expiration">data ważności:</string>
-    <string name="shared_medicine">udostępniony</string>
-    <string name="private_medicine">prywatny</string>
-    <string name="details">szczegóły</string>
+    <string name="medicine_list_empty">We did not find any medicine.</string>
+    <string name="share">share</string>
+    <string name="pills">pills</string>
+    <string name="quantity">quantity</string>
+    <string name="date_add">created at:</string>
+    <string name="date_expiration">expiry date:</string>
+    <string name="shared_medicine">share</string>
+    <string name="private_medicine">private</string>
+    <string name="details">details</string>
 
     <!-- Medicine Types -->
-    <string name="type">Typ</string>
-    <string name="pill">Tabletki</string>
-    <string name="syrup">Syrop</string>
-    <string name="sachet">Saszetki</string>
+    <string name="type">Type</string>
+    <string name="pill">Pills</string>
+    <string name="syrup">Syrup</string>
+    <string name="sachet">Sachets</string>
     <string name="spray">Spray</string>
-    <string name="other">Inny</string>
+    <string name="other">Other</string>
 
     <!-- Medicine Quantity Suffix -->
-    <string name="pieces">szt.</string>
+    <string name="pieces">pcs.</string>
     <string name="milliliter">ml</string>
 
     <!--Start layout-->
-    <string name="welcome">Witamy!</string>
-    <string name="we_happy">Cieszymy się, że wybrałeś naszą aplikacje do zarządzania swoją domową apteczką.</string>
-    <string name="create_konto">Utwórz konto</string>
-    <string name="log_in">Zaloguj</string>
-    <string name="lets_go">Zaczynajmy!</string>
+    <string name="welcome">Welcome!</string>
+    <string name="we_happy">We are glad, that you chose our application to manage your home med kit.</string>
+    <string name="create_konto">Sign up</string>
+    <string name="log_in">Sign in</string>
+    <string name="lets_go">Get started!</string>
 
     <!--Login layout-->
-    <string name="log_in_app">Logowanie</string>
-    <string name="facebook">Zaloguj się przez Facebook</string>
-    <string name="gmail">Zaloguj się przez konto Google</string>
-    <string name="email">Email</string>
-    <string name="pass">Hasło</string>
-    <string name="required_fields">*pola obowiazkowe</string>
-    <string name="save_data">Zapamiętaj moje dane</string>
-    <string name="log_in_2">Zaloguj się!</string>
-    <string name="register">Zarejestruj się</string>
-    <string name="forgotten">Zapomniałeś hasła?</string>
-    <string name="sign_accept">Logując się akceptujesz </string>
-    <string name="regulations">Regulamin</string>
-    <string name="or">lub</string>
-    <string name="remember_me">Zapamiętaj mnie</string>
+    <string name="log_in_app">Create an account</string>
+    <string name="facebook">Sign in with Facebook</string>
+    <string name="gmail">Sign in using Google account</string>
+    <string name="email">E-mail</string>
+    <string name="pass">Password</string>
+    <string name="required_fields">*required fileds</string>
+    <string name="save_data">Remember my credentials</string>
+    <string name="log_in_2">Sign in!</string>
+    <string name="register">Sign up</string>
+    <string name="forgotten">Forgot your password?</string>
+    <string name="sign_accept">By signing in, you agree to Virtual Med Kit</string>
+    <string name="regulations">Terms and Conditions</string>
+    <string name="or">or</string>
+    <string name="remember_me">Keep me signed in</string>
 
     <!--Registration layout-->
-    <string name="registration">Rejestracja</string>
-    <string name="name">Imię</string>
-    <string name="repeat_pass">Powtórz hasło</string>
-    <string name="registration_accept">Rejestrujac się akceptujesz </string>
-    <string name="surname">Nazwisko</string>
+    <string name="registration">Registrations</string>
+    <string name="name">Name</string>
+    <string name="repeat_pass">Confirm password</string>
+    <string name="registration_accept">By signing up, you agree to Virtual Med Kit</string>
+    <string name="surname">Surname</string>
 
     <!-- Notes Dialog Box -->
-    <string name="notes_message">Proszę podać notatki dotyczące leku.</string>
-    <string name="save_btn_text">Zapisz</string>
-    <string name="back_btn_text">Wróć</string>
+    <string name="notes_message">Please, create a note about the medicine.</string>
+    <string name="save_btn_text">Save</string>
+    <string name="back_btn_text">Return</string>
 
     <!-- Edit amount Dialog Box -->
-    <string name="edit_amount">Edytuj ilość</string>
-    <string name="confirm_btn">Zatwierdź</string>
-    <string name="cancel_btn">Anuluj</string>
+    <string name="edit_amount">Edit the quantity</string>
+    <string name="confirm_btn">Confirm</string>
+    <string name="cancel_btn">Cancel</string>
 
     <!-- Delete medicine Dialog Box -->
-    <string name="delete_medicine">Usuń lek</string>
-    <string name="delete_medicine_msg">Czy na pewno chcesz usunąć ten lek?</string>
+    <string name="delete_medicine">Delete</string>
+    <string name="delete_medicine_msg">Are you sure that you want to delete the medicine?</string>
 
     <!-- Search medicine Dialog Box -->
-    <string name="search_medicine_msg">Znajdź lek</string>
-    <string name="search">Szukaj</string>
-    <string name="go_back">Wróć</string>
+    <string name="search_medicine_msg">Find medicine</string>
+    <string name="search">Search</string>
+    <string name="go_back">Return</string>
 
     <!-- Validation error messages -->
-    <string name="name_cannot_be_empty_msg">Proszę uzupełnić nazwę leku.</string>
-    <string name="type_cannot_be_empty_msg">Proszę wybrać poprawny typ leku.</string>
-    <string name="amount_cannot_be_empty_msg">Proszę podać ilość leku w opakowaniu.</string>
+    <string name="name_cannot_be_empty_msg">Please, fill in the medicine name.</string>
+    <string name="type_cannot_be_empty_msg">Please, choose correct medicine type.</string>
+    <string name="amount_cannot_be_empty_msg">Plese, fill in the quantity of the medicine in the pack.</string>
 
     <!-- Family layout -->
-    <string name="family_list_empty">Nie masz dodanej żadnej osoby.</string>
-    <string name="medicines_my">Leki, które ja udostępniam</string>
-    <string name="medicines_share_me">Leki udostęnione dla mnie</string>
+    <string name="family_list_empty">You do not have any family member yet.</string>
+    <string name="medicines_my">Medicines I am sharing</string>
+    <string name="medicines_share_me">Medicined shared for me</string>
 
     <!-- Registration layout -->
-    <string name="first_name_empty_err_msg">Proszę podać imię.</string>
-    <string name="last_name_empty_err_msg">Proszę podać nazwisko.</string>
-    <string name="email_empty_err_msg">Proszę podać email.</string>
-    <string name="password_empty_err_msg">Proszę podać hasło.</string>
-    <string name="repeat_password_empty_err_msg">Proszę powtórzyć hasło.</string>
-    <string name="incorrect_passwords_err_msg">Hasła muszą się zgadzać.</string>
+    <string name="first_name_empty_err_msg">Please state your name.</string>
+    <string name="last_name_empty_err_msg">Please state your surname.</string>
+    <string name="email_empty_err_msg">Please enter your e-mail.</string>
+    <string name="password_empty_err_msg">Please enter your password.</string>
+    <string name="repeat_password_empty_err_msg">Please confirm your password.</string>
+    <string name="incorrect_passwords_err_msg">Passwords must be the same.</string>
 
     <!--Forget the password layout-->
-    <string name="reminder">Przypomnienie hasła</string>
-    <string name="not_remember_1">Jeżeli nie pamiętasz swojego hasła, podaj nam swój adres mailowy w celu jego zresetowania.</string>
-    <string name="not_remember_2">Po kliknięciu \"Zresetuj\" na Twój adres mailowy zostanie wysłany mail z dalszą instrukcją.</string>
-    <string name="reset">Zresetuj</string>
+    <string name="reminder">Remind me the password</string>
+    <string name="not_remember_1">If you do not remember your password, please give us your e-mail address.</string>
+    <string name="not_remember_2">By clicking \"Reset\" further instruction will be send to your e-mail address.</string>
+    <string name="reset">Reset</string>
 
     <!-- Preview photo layout -->
-    <string name="back">Wróć</string>
-    <string name="medicine_photo">Zdjęcie leku</string>
+    <string name="back">Return</string>
+    <string name="medicine_photo">Medicine picture</string>
 
     <!-- popup sort list -->
-    <string name="sort_medicines">Sortowanie</string>
-    <string name="sort_name_A_Z">Nazwa: od A do Z</string>
-    <string name="sort_name_Z_A">Nazwa: od Z do A</string>
-    <string name="sort_due_date_descending">Data ważności: od najnowszej</string>
-    <string name="sort_due_date_ascending">Data ważności: od najstarszej</string>
-    <string name="sort_date_created_descending">Data dodania: od najnowszej</string>
-    <string name="sort_date_created_ascending">Data dodania: od najstarszej</string>
-    <string name="sort_modified_date_descending">Data modyfikacji: od najnowszej</string>
-    <string name="sort_modified_date_ascending">Data modyfikacji: od najstarszej</string>
+    <string name="sort_medicines">Sort</string>
+    <string name="sort_name_A_Z">Name: from A to Z</string>
+    <string name="sort_name_Z_A">Name: from Z to A</string>
+    <string name="sort_due_date_descending">Expiry date: from the latest</string>
+    <string name="sort_due_date_ascending">Expiry date: from the oldest</string>
+    <string name="sort_date_created_descending">Creation date: from the latest</string>
+    <string name="sort_date_created_ascending">Creation date: from the oldest</string>
+    <string name="sort_modified_date_descending">Modification date: from the latest</string>
+    <string name="sort_modified_date_ascending">Modification date: from the oldest</string>
 
 </resources>
