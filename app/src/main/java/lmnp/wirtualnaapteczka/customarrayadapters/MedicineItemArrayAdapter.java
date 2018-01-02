@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -21,7 +20,7 @@ import lmnp.wirtualnaapteczka.listeners.medicinelistactivity.MedicineItemOnClick
 import lmnp.wirtualnaapteczka.utils.AdaptersCommonUtils;
 import lmnp.wirtualnaapteczka.utils.DateUtils;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
-import lmnp.wirtualnaapteczka.utils.ThumbnailUtils;
+import lmnp.wirtualnaapteczka.utils.PhotoUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -81,7 +80,7 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
     }
 
     private void updateComponentsValues(Medicine currentMedicine) {
-        listItemPanel.setOnClickListener(new MedicineItemOnClickListener(currentMedicine));
+        listItemPanel.setOnClickListener(new MedicineItemOnClickListener(currentMedicine, MedicineListActivity.class));
         listItemPanel.setOnLongClickListener(new MedicineItemLongClickListener(currentMedicine, context));
 
         name.setText(currentMedicine.getName());
@@ -94,7 +93,7 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
 
         String thumbnailUri = currentMedicine.getThumbnailUri();
         if (!TextUtils.isEmpty(thumbnailUri)) {
-            Bitmap thumbnailBitmap = ThumbnailUtils.prepareBitmap(thumbnailUri, thumbnail);
+            Bitmap thumbnailBitmap = PhotoUtils.prepareBitmap(thumbnailUri, thumbnail);
             thumbnail.setImageBitmap(thumbnailBitmap);
 
             thumbnail.setOnClickListener(new PreviewPhotoOnClickListener(thumbnailUri, MedicineListActivity.class));

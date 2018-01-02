@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeListeners() {
-        addMedicinePanel.setOnClickListener(new AddNewMedicineOnClickListener());
+        addMedicinePanel.setOnClickListener(new AddNewMedicineOnClickListener(this.getClass()));
         medicineListPanel.setOnClickListener(new MedicineListOnClickListener());
         friendsPanel.setOnClickListener(new FriendListOnClickListener());
     }

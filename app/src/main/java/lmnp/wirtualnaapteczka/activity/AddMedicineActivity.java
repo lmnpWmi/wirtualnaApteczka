@@ -17,12 +17,15 @@ import android.widget.*;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.*;
-import lmnp.wirtualnaapteczka.listeners.common.LaunchVoiceRecognitionOnClickListener;
 import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
+import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.AddPhotoOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.CalendarOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.MedicineTypeOnItemSelectedListener;
+import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.SaveNewMedicineOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.common.LaunchVoiceRecognitionOnClickListener;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
-import lmnp.wirtualnaapteczka.utils.ThumbnailUtils;
+import lmnp.wirtualnaapteczka.utils.PhotoUtils;
 import lmnp.wirtualnaapteczka.utils.functionalinterfaces.Consumer;
 
 import java.text.DateFormat;
@@ -37,6 +40,8 @@ import java.util.List;
 public class AddMedicineActivity extends AppCompatActivity {
     private boolean editingExistingMedicine;
     private Medicine currentMedicine;
+
+    private Class<? extends AppCompatActivity> invokingClass;
 
     private EditText nameEdit;
     private EditText amountEdit;
@@ -56,6 +61,7 @@ public class AddMedicineActivity extends AppCompatActivity {
 
         if (savedInstanceState != null) {
             currentMedicine = (Medicine) savedInstanceState.getSerializable(AppConstants.MEDICINE);
+            invokingClass = (Class<? extends AppCompatActivity>) savedInstanceState.getSerializable(AppConstants.INVOKING_CLASS);
         }
 
         setContentView(R.layout.activity_add);
@@ -138,11 +144,27 @@ public class AddMedicineActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable(AppConstants.MEDICINE, currentMedicine);
+        outState.putSerializable(AppConstants.INVOKING_CLASS, invokingClass);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), invokingClass);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        currentMedicine.setThumbnailUri(currentMedicine.getOldThumbnailToDelete());
+        currentMedicine.setOldThumbnailToDelete(null);
+
+        getApplicationContext().startActivity(intent);
     }
 
     private void initializeActivityState() {
         if (currentMedicine == null) {
             currentMedicine = (Medicine) getIntent().getSerializableExtra(AppConstants.MEDICINE);
+        }
+
+        if (invokingClass == null) {
+            invokingClass = (Class<? extends AppCompatActivity>) getIntent().getSerializableExtra(AppConstants.INVOKING_CLASS);
         }
 
         editingExistingMedicine = currentMedicine != null;
@@ -195,7 +217,8 @@ public class AddMedicineActivity extends AppCompatActivity {
     }
 
     private void initializeMedicineTypeSpinner() {
-        ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter = new ArrayAdapter<>(this, R.layout.dropdown_element, MedicineTypeUtils.prepareListOfLocalizedTypesTOs(getApplicationContext()));
+        List<MedicineTypeWithLocalizationTO> localizedTypesTOs = MedicineTypeUtils.prepareListOfLocalizedTypesTOs(getApplicationContext());
+        ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter = new ArrayAdapter<>(this, R.layout.dropdown_element, localizedTypesTOs);
         medicineTypeSpinner.setAdapter(medicineTypesAdapter);
 
         if (currentMedicine.getType() != null) {
@@ -207,14 +230,14 @@ public class AddMedicineActivity extends AppCompatActivity {
 
     private void initializeListeners() {
         dueDateCalendar.setOnClickListener(new CalendarOnClickListener(getSupportFragmentManager(), currentMedicine));
-        addMedicinePhotoBtn.setOnClickListener(new AddPhotoOnClickListener(this, currentMedicine));
+        addMedicinePhotoBtn.setOnClickListener(new AddPhotoOnClickListener(this, currentMedicine, invokingClass));
         saveMedicineBtn.setOnClickListener(new SaveNewMedicineOnClickListener(currentMedicine, editingExistingMedicine, this));
         voiceInputMedicineNameBtn.setOnClickListener(new LaunchVoiceRecognitionOnClickListener(AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NAME));
         voiceInputMedicineNotesBtn.setOnClickListener(new LaunchVoiceRecognitionOnClickListener(AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NOTES));
     }
 
     private void setMedicineThumbnail() {
-        Bitmap thumbnailBitmap = ThumbnailUtils.prepareBitmap(currentMedicine.getThumbnailUri(), addMedicinePhotoBtn);
+        Bitmap thumbnailBitmap = PhotoUtils.prepareBitmap(currentMedicine.getThumbnailUri(), addMedicinePhotoBtn);
         addMedicinePhotoBtn.setImageBitmap(thumbnailBitmap);
     }
 

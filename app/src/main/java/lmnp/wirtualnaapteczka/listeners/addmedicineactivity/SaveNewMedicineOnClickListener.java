@@ -14,12 +14,13 @@ import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
 import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
 import lmnp.wirtualnaapteczka.data.dto.MedicineValidationResultTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
+import lmnp.wirtualnaapteczka.helpers.MedicineValidator;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.session.SessionManager;
-import lmnp.wirtualnaapteczka.helpers.MedicineValidator;
+import lmnp.wirtualnaapteczka.utils.PhotoUtils;
 
 public class SaveNewMedicineOnClickListener implements View.OnClickListener {
-    private Medicine newMedicine;
+    private Medicine medicine;
     private boolean editingExistingMedicine;
 
     private AddMedicineActivity addMedicineActivity;
@@ -30,8 +31,8 @@ public class SaveNewMedicineOnClickListener implements View.OnClickListener {
     private Spinner medicineType;
     private CheckBox shareMedicineCheckbox;
 
-    public SaveNewMedicineOnClickListener(Medicine newMedicine, boolean editingExistingMedicine, AddMedicineActivity addMedicineActivity) {
-        this.newMedicine = newMedicine;
+    public SaveNewMedicineOnClickListener(Medicine medicine, boolean editingExistingMedicine, AddMedicineActivity addMedicineActivity) {
+        this.medicine = medicine;
         this.editingExistingMedicine = editingExistingMedicine;
         this.addMedicineActivity = addMedicineActivity;
     }
@@ -41,9 +42,10 @@ public class SaveNewMedicineOnClickListener implements View.OnClickListener {
         initializeViewComponents();
         updateNewMedicineValues();
 
-        MedicineValidationResultTO validationResult = MedicineValidator.validateMedicine(newMedicine, addMedicineActivity.getResources());
+        MedicineValidationResultTO validationResult = MedicineValidator.validateMedicine(medicine, addMedicineActivity.getResources());
 
         if (validationResult.isMedicineValid()) {
+            deleteOldThumbnailIfExists();
             saveMedicineToDatabase();
 
             Class<?> targetActivity = editingExistingMedicine ? MedicineListActivity.class : MainActivity.class;
@@ -72,16 +74,25 @@ public class SaveNewMedicineOnClickListener implements View.OnClickListener {
         MedicineTypeWithLocalizationTO medicineType = (MedicineTypeWithLocalizationTO) this.medicineType.getSelectedItem();
         boolean shareWithFriends = shareMedicineCheckbox.isChecked();
 
-        newMedicine.setName(name);
-        newMedicine.setAmount(amount);
-        newMedicine.setType(medicineType.getMedicineTypeEnum());
-        newMedicine.setShareWithFriends(shareWithFriends);
-        newMedicine.setUserNotes(notes);
+        medicine.setName(name);
+        medicine.setAmount(amount);
+        medicine.setType(medicineType.getMedicineTypeEnum());
+        medicine.setShareWithFriends(shareWithFriends);
+        medicine.setUserNotes(notes);
+    }
+
+    private void deleteOldThumbnailIfExists() {
+        String oldThumbnailToDelete = medicine.getOldThumbnailToDelete();
+
+        if (!TextUtils.isEmpty(oldThumbnailToDelete)) {
+            PhotoUtils.deleteThumbnailFile(oldThumbnailToDelete);
+            medicine.setOldThumbnailToDelete(null);
+        }
     }
 
     private void saveMedicineToDatabase() {
         DbService dbService = SessionManager.getDbService();
-        dbService.saveOrUpdateMedicine(newMedicine);
+        dbService.saveOrUpdateMedicine(medicine);
     }
 
     private void displaySavedToastMessage(android.content.Context context) {

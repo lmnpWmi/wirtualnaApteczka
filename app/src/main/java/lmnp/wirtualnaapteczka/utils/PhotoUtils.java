@@ -1,22 +1,64 @@
 package lmnp.wirtualnaapteczka.utils;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
+import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
+import lmnp.wirtualnaapteczka.data.entities.Medicine;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 /**
- * Prepares bitmaps/thumbnails for layouts.
+ * Utils related to capturing and displaying photos.
  *
  * @author Sebastian Nowak
  * @createdAt 26.12.2017
  */
-public class ThumbnailUtils {
-    private ThumbnailUtils() {
+public class PhotoUtils {
+    private PhotoUtils() {
+    }
+
+    public static void takePicture(AddMedicineActivity addMedicineActivity, Medicine medicine) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (takePictureIntent.resolveActivity(addMedicineActivity.getPackageManager()) != null) {
+            File photoFile = preparePhotoFile(addMedicineActivity);
+            String photoAbsolutePath = photoFile.getAbsolutePath();
+            Uri photoURI = Uri.fromFile(photoFile);
+
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+
+            Log.i(PhotoUtils.class.getSimpleName(), "Picture saved to: " + photoAbsolutePath);
+
+            medicine.setOldThumbnailToDelete(medicine.getThumbnailUri());
+            medicine.setThumbnailUri(photoAbsolutePath);
+            addMedicineActivity.startActivityForResult(takePictureIntent, AppConstants.REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    public static void deleteThumbnailFile(String thumbnailUri) {
+        File file = new File(thumbnailUri);
+
+        if (file.exists()) {
+            boolean hasFileBeenDeleted = file.delete();
+
+            if (hasFileBeenDeleted) {
+                Log.i(PhotoUtils.class.getSimpleName(), "File(" + thumbnailUri + ") has been successfully deleted.");
+            } else {
+                Log.w(PhotoUtils.class.getSimpleName(), "Could not delete file: " + thumbnailUri);
+            }
+        }
     }
 
     public static Bitmap prepareBitmap(String photoUrl, ImageView imageView) {
@@ -67,7 +109,7 @@ public class ThumbnailUtils {
         try {
             exif = new ExifInterface(photoFilePath);
         } catch (IOException e) {
-            Log.e(ThumbnailUtils.class.getSimpleName(), "Unable to prepare ExifInterface for file: " + photoFilePath);
+            Log.e(PhotoUtils.class.getSimpleName(), "Unable to prepare ExifInterface for file: " + photoFilePath);
             return 0;
         }
 
@@ -91,6 +133,26 @@ public class ThumbnailUtils {
         }
 
         return rotationAngle;
+    }
+
+    private static File preparePhotoFile(AddMedicineActivity addMedicineActivity) {
+        File medicinesPhotosDir = new File(addMedicineActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES), AppConstants.MEDICINE_PHOTOS_DIR);
+
+        if (!medicinesPhotosDir.exists()) {
+            medicinesPhotosDir.mkdir();
+        }
+
+        String fileName = String.valueOf(new Random().nextInt()) + ".jpg";
+
+        File photoFile = new File(medicinesPhotosDir, fileName);
+
+        try {
+            photoFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return photoFile;
     }
 
 }

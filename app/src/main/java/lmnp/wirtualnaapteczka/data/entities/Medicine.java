@@ -16,6 +16,7 @@ public class Medicine implements Serializable {
     private Date createdAt;
     private Date updatedAt;
     private String thumbnailUri;
+    private String oldThumbnailToDelete;
     private String userNotes;
     private String description;
 
@@ -88,6 +89,14 @@ public class Medicine implements Serializable {
         this.thumbnailUri = thumbnailUri;
     }
 
+    public String getOldThumbnailToDelete() {
+        return oldThumbnailToDelete;
+    }
+
+    public void setOldThumbnailToDelete(String oldThumbnailToDelete) {
+        this.oldThumbnailToDelete = oldThumbnailToDelete;
+    }
+
     public String getUserNotes() {
         return userNotes;
     }
@@ -129,6 +138,8 @@ public class Medicine implements Serializable {
         if (updatedAt != null ? !updatedAt.equals(medicine.updatedAt) : medicine.updatedAt != null) return false;
         if (thumbnailUri != null ? !thumbnailUri.equals(medicine.thumbnailUri) : medicine.thumbnailUri != null)
             return false;
+        if (oldThumbnailToDelete != null ? !oldThumbnailToDelete.equals(medicine.oldThumbnailToDelete) : medicine.oldThumbnailToDelete != null)
+            return false;
         if (userNotes != null ? !userNotes.equals(medicine.userNotes) : medicine.userNotes != null) return false;
         return description != null ? description.equals(medicine.description) : medicine.description == null;
     }
@@ -143,6 +154,7 @@ public class Medicine implements Serializable {
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
         result = 31 * result + (thumbnailUri != null ? thumbnailUri.hashCode() : 0);
+        result = 31 * result + (oldThumbnailToDelete != null ? oldThumbnailToDelete.hashCode() : 0);
         result = 31 * result + (userNotes != null ? userNotes.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (shareWithFriends ? 1 : 0);
@@ -152,7 +164,7 @@ public class Medicine implements Serializable {
     @Override
     public String toString() {
         return "Medicine{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", type=" + type +
                 ", amount=" + amount +
@@ -160,6 +172,7 @@ public class Medicine implements Serializable {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", thumbnailUri='" + thumbnailUri + '\'' +
+                ", oldThumbnailToDelete='" + oldThumbnailToDelete + '\'' +
                 ", userNotes='" + userNotes + '\'' +
                 ", description='" + description + '\'' +
                 ", shareWithFriends=" + shareWithFriends +

@@ -45,7 +45,7 @@ public class MedicineListActivity extends AppCompatActivity {
         medicineListView = (ListView) findViewById(R.id.medicine_list_view);
         medicineListView.setEmptyView(findViewById(R.id.medicine_list_empty));
         floatingActionButton = (FloatingActionButton) findViewById(R.id.save_new_medicine_btn);
-        floatingActionButton.setOnClickListener(new AddNewMedicineOnClickListener());
+        floatingActionButton.setOnClickListener(new AddNewMedicineOnClickListener(this.getClass()));
 
         List<Medicine> medicines = dbService.findAllMedicinesForCurrentUser();
         initializeMedicineList(medicines);

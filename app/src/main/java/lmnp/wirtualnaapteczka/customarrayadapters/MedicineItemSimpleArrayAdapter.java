@@ -18,7 +18,7 @@ import lmnp.wirtualnaapteczka.listeners.common.PreviewPhotoOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.RecentlyUsedMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.utils.AdaptersCommonUtils;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
-import lmnp.wirtualnaapteczka.utils.ThumbnailUtils;
+import lmnp.wirtualnaapteczka.utils.PhotoUtils;
 
 import java.util.List;
 
@@ -65,13 +65,13 @@ public class MedicineItemSimpleArrayAdapter extends ArrayAdapter<Medicine> {
         String thumbnailUri = currentMedicine.getThumbnailUri();
 
         if (!TextUtils.isEmpty(thumbnailUri)) {
-            Bitmap thumbnailBitmap = ThumbnailUtils.prepareBitmap(thumbnailUri, thumbnail);
+            Bitmap thumbnailBitmap = PhotoUtils.prepareBitmap(thumbnailUri, thumbnail);
             thumbnail.setImageBitmap(thumbnailBitmap);
 
             thumbnail.setOnClickListener(new PreviewPhotoOnClickListener(thumbnailUri, MainActivity.class));
         }
 
-        itemPanel.setOnClickListener(new RecentlyUsedMedicineOnClickListener(context, currentMedicine));
+        itemPanel.setOnClickListener(new RecentlyUsedMedicineOnClickListener(context, currentMedicine, MainActivity.class));
 
         return view;
     }

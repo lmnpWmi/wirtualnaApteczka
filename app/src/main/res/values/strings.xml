@@ -37,6 +37,9 @@
     <string name="delete">usuń</string>
     <string name="speech_prompt">Powiedz coś...</string>
     <string name="speech_not_supported">Przykro nam, ale twoje urządzenie nie obsługuje rozpoznawania mowy.</string>
+    <string name="choose_action">Co chcesz zrobić?</string>
+    <string name="view_medicine_photo">Wyświetl zdjęcie</string>
+    <string name="take_new_photo">Zrób nowe</string>
 
     <!-- Medicine List layout -->
     <string name="medicine_list_empty">Nie znaleziono żadnych leków.</string>

@@ -9,6 +9,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Class for filtering medicines by search values that is compared to name.
+ *
+ * @author Sebastian Nowak
+ * @createdAt 02.01.2018
+ */
 public class MedicineFilter {
     private static final String CASE_INSENSITIVITY_SIGN = "(?i)";
 

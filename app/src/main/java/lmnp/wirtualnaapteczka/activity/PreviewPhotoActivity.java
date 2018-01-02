@@ -5,12 +5,12 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
-import lmnp.wirtualnaapteczka.utils.ThumbnailUtils;
+import lmnp.wirtualnaapteczka.utils.PhotoUtils;
 
 /**
  * Activity responsible for handling events on the layout for previewing photo of the medicine.
@@ -21,8 +21,10 @@ import lmnp.wirtualnaapteczka.utils.ThumbnailUtils;
 public class PreviewPhotoActivity extends AppCompatActivity {
     private ImageView photoImage;
 
+    private Medicine medicine;
     private String photoUri;
     private Class<? extends AppCompatActivity> invokingClass;
+    private Class<? extends AppCompatActivity> addMedicineInvokingClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public class PreviewPhotoActivity extends AppCompatActivity {
 
         initializeMembers();
 
-        Bitmap bitmap = ThumbnailUtils.prepareBitmap(photoUri, photoImage);
+        Bitmap bitmap = PhotoUtils.prepareBitmap(photoUri, photoImage);
         photoImage.setImageBitmap(bitmap);
 
         ActionBar actionBar = getSupportActionBar();
@@ -47,6 +49,8 @@ public class PreviewPhotoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         photoUri = intent.getStringExtra(AppConstants.MEDICINE_PHOTO_URI);
         invokingClass = (Class<? extends AppCompatActivity>) intent.getSerializableExtra(AppConstants.INVOKING_CLASS);
+        addMedicineInvokingClass = (Class<? extends AppCompatActivity>) intent.getSerializableExtra(AppConstants.ADD_MEDICINE_INVOKING_CLASS);
+        medicine = (Medicine) intent.getSerializableExtra(AppConstants.MEDICINE);
     }
 
     @Override
@@ -59,6 +63,9 @@ public class PreviewPhotoActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), invokingClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(AppConstants.MEDICINE, medicine);
+        intent.putExtra(AppConstants.INVOKING_CLASS, addMedicineInvokingClass);
+
         getApplicationContext().startActivity(intent);
     }
 }
