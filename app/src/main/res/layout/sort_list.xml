@@ -1,52 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/sort_list_panel"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_gravity="center"
-              android:layout_margin="10dp"
-              android:background="@android:color/transparent"
-              android:orientation="vertical">
+    android:id="@+id/sort_list_panel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
     <Button
-            android:id="@+id/sort_name_a_z_btn"
-            style="@style/SortButton"
-            android:text="@string/sort_name_A_Z"
-        android:layout_marginTop="20dp"/>
+        android:id="@+id/sort_name_a_z_btn"
+        style="@style/SortButton"
+        android:layout_marginTop="20dp"
+        android:text="@string/sort_name_A_Z" />
 
 
     <Button
-            android:id="@+id/sort_name_z_a_btn"
-            style="@style/SortButton"
-            android:text="@string/sort_name_Z_A"/>
+        android:id="@+id/sort_name_z_a_btn"
+        style="@style/SortButton"
+        android:text="@string/sort_name_Z_A" />
 
     <Button
-            android:id="@+id/sort_due_date_descending_btn"
-            style="@style/SortButton"
-            android:text="@string/sort_due_date_descending"/>
+        android:id="@+id/sort_due_date_descending_btn"
+        style="@style/SortButton"
+        android:text="@string/sort_due_date_descending" />
 
     <Button
-            android:id="@+id/sort_due_date_ascending_btn"
-            style="@style/SortButton"
-            android:text="@string/sort_due_date_ascending"/>
+        android:id="@+id/sort_due_date_ascending_btn"
+        style="@style/SortButton"
+        android:text="@string/sort_due_date_ascending" />
 
     <Button
-            android:id="@+id/sort_date_created_descending_btn"
-            style="@style/SortButton"
-            android:text="@string/sort_date_created_descending"/>
+        android:id="@+id/sort_date_created_descending_btn"
+        style="@style/SortButton"
+        android:text="@string/sort_date_created_descending" />
 
     <Button
-            android:id="@+id/sort_date_created_ascending_btn"
-            style="@style/SortButton"
-            android:text="@string/sort_date_created_ascending"/>
+        android:id="@+id/sort_date_created_ascending_btn"
+        style="@style/SortButton"
+        android:text="@string/sort_date_created_ascending" />
+
     <Button
-            android:id="@+id/sort_modified_date_descending"
-            style="@style/SortButton"
-            android:text="@string/sort_modified_date_descending" android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        android:id="@+id/sort_modified_date_descending"
+        style="@style/SortButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sort_modified_date_descending" />
+
     <Button
-            android:id="@+id/sort_modified_date_ascending"
-            style="@style/SortButton"
-            android:text="@string/sort_modified_date_ascending" android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-        />
+        android:id="@+id/sort_modified_date_ascending"
+        style="@style/SortButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sort_modified_date_ascending" />
 </LinearLayout>
