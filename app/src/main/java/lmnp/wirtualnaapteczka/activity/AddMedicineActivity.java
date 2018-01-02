@@ -1,11 +1,11 @@
 package lmnp.wirtualnaapteczka.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -17,10 +17,7 @@ import android.widget.*;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.AddPhotoOnClickListener;
-import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.CalendarOnClickListener;
-import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.MedicineTypeOnItemSelectedListener;
-import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.SaveNewMedicineOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.*;
 import lmnp.wirtualnaapteczka.utils.AlertDialogPreparator;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
@@ -28,6 +25,7 @@ import lmnp.wirtualnaapteczka.utils.ThumbnailUtils;
 import lmnp.wirtualnaapteczka.utils.functionalinterfaces.Consumer;
 
 import java.text.DateFormat;
+import java.util.List;
 
 /**
  * Activity responsible for handling events on the layout for adding new medicines.
@@ -47,8 +45,10 @@ public class AddMedicineActivity extends AppCompatActivity {
     private TextView dueDateCalendar;
     private FloatingActionButton saveMedicineBtn;
     private Spinner medicineTypeSpinner;
-    private ImageButton addMedicinePhotoImg;
     private CheckBox shareMedicineWithFriends;
+    private ImageButton addMedicinePhotoBtn;
+    private ImageButton voiceInputMedicineNameBtn;
+    private ImageButton voiceInputMedicineNotesBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,13 +105,31 @@ public class AddMedicineActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == AppConstants.REQUEST_IMAGE_CAPTURE) {
-            if (resultCode == Activity.RESULT_OK) {
-                try {
-                    setMedicineThumbnail();
-                } catch (Exception e) {
-                    Log.e(getClass().getSimpleName(), "Unable to set medicine thumbnail.");
-                }
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            switch (requestCode) {
+                case AppConstants.REQUEST_IMAGE_CAPTURE:
+                    try {
+                        setMedicineThumbnail();
+                    } catch (Exception e) {
+                        Log.e(getClass().getSimpleName(), "Unable to set medicine thumbnail.");
+                    }
+                    break;
+                case AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NAME:
+                    String potentialMedicineName = retrievePotentialMedicineNameFromVoiceRecognizedData(data);
+
+                    if (!TextUtils.isEmpty(potentialMedicineName)) {
+                        nameEdit.setText(potentialMedicineName);
+                    }
+                    break;
+                case AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NOTES:
+                    String potentialMedicineNotes = retrievePotentialMedicineNameFromVoiceRecognizedData(data);
+
+                    if (!TextUtils.isEmpty(potentialMedicineNotes)) {
+                        notesEdit.setText(potentialMedicineNotes);
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -148,8 +166,11 @@ public class AddMedicineActivity extends AppCompatActivity {
         dueDateCalendar = (TextView) findViewById(R.id.medicine_due_date_calendar);
         saveMedicineBtn = (FloatingActionButton) findViewById(R.id.save_new_medicine_btn);
         medicineTypeSpinner = (Spinner) findViewById(R.id.medicine_type_spinner);
-        addMedicinePhotoImg = (ImageButton) findViewById(R.id.add_medicine_photo);
         shareMedicineWithFriends = (CheckBox) findViewById(R.id.share_medicine_checkbox);
+
+        addMedicinePhotoBtn = (ImageButton) findViewById(R.id.add_medicine_photo);
+        voiceInputMedicineNameBtn = (ImageButton) findViewById(R.id.voice_input_medicine_name_btn);
+        voiceInputMedicineNotesBtn = (ImageButton) findViewById(R.id.voice_input_medicine_notes_btn);
     }
 
     private void updateComponentsValues() {
@@ -186,13 +207,15 @@ public class AddMedicineActivity extends AppCompatActivity {
 
     private void initializeListeners() {
         dueDateCalendar.setOnClickListener(new CalendarOnClickListener(getSupportFragmentManager(), currentMedicine));
-        addMedicinePhotoImg.setOnClickListener(new AddPhotoOnClickListener(this, currentMedicine));
+        addMedicinePhotoBtn.setOnClickListener(new AddPhotoOnClickListener(this, currentMedicine));
         saveMedicineBtn.setOnClickListener(new SaveNewMedicineOnClickListener(currentMedicine, editingExistingMedicine, this));
+        voiceInputMedicineNameBtn.setOnClickListener(new LaunchVoiceRecognitionOnClickListener(this, AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NAME));
+        voiceInputMedicineNotesBtn.setOnClickListener(new LaunchVoiceRecognitionOnClickListener(this, AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NOTES));
     }
 
     private void setMedicineThumbnail() {
-        Bitmap thumbnailBitmap = ThumbnailUtils.prepareBitmap(currentMedicine.getThumbnailUri(), addMedicinePhotoImg);
-        addMedicinePhotoImg.setImageBitmap(thumbnailBitmap);
+        Bitmap thumbnailBitmap = ThumbnailUtils.prepareBitmap(currentMedicine.getThumbnailUri(), addMedicinePhotoBtn);
+        addMedicinePhotoBtn.setImageBitmap(thumbnailBitmap);
     }
 
     private void updateMedicineTypeInSpinner(ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter) {
@@ -200,5 +223,13 @@ public class AddMedicineActivity extends AppCompatActivity {
         int position = medicineTypesAdapter.getPosition(medicineTypeWithLocalizationTO);
 
         medicineTypeSpinner.setSelection(position);
+    }
+
+    private String retrievePotentialMedicineNameFromVoiceRecognizedData(Intent data) {
+        List<String> voiceRecognizedData = data
+                .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+        String potentialMedicineName = voiceRecognizedData.get(0);
+        return potentialMedicineName;
     }
 }

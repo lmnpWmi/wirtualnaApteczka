@@ -35,6 +35,8 @@
     <string name="medicine_updated_msg">Zapisano zmiany.</string>
     <string name="start_write">zacznij pisać...</string>
     <string name="delete">usuń</string>
+    <string name="speech_prompt">Powiedz coś...</string>
+    <string name="speech_not_supported">Przykro nam, ale twoje urządzenie nie obsługuje rozpoznawania mowy.</string>
 
     <!-- Medicine List layout -->
     <string name="medicine_list_empty">Nie znaleziono żadnych leków.</string>

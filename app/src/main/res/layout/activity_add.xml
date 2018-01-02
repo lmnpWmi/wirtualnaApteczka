@@ -22,13 +22,13 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/mic_medicine_name_btn"
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="-4dp"
-                    android:layout_marginTop="3dp"
-                    android:background="@drawable/icon_mic" />
+                        android:id="@+id/voice_input_medicine_name_btn"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="-4dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/icon_mic"/>
 
                 <EditText
                     android:id="@+id/medicine_name"
@@ -174,13 +174,13 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/mic_notes_btn"
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="-4dp"
-                    android:layout_marginTop="3dp"
-                    android:background="@drawable/icon_mic" />
+                        android:id="@+id/voice_input_medicine_notes_btn"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="-4dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/icon_mic"/>
 
                 <EditText
                     android:id="@+id/notes_text"
