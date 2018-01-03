@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
+import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.enums.MedicineTypeEnum;
 import lmnp.wirtualnaapteczka.listeners.common.PreviewPhotoOnClickListener;
@@ -91,12 +92,12 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
         String amountText = AdaptersCommonUtils.prepareAmountText(currentMedicine.getAmount(), context) + " " + MedicineTypeUtils.prepareLocalizedTypeSuffix(currentMedicine.getType(), context);
         amount.setText(amountText);
 
-        String thumbnailUri = currentMedicine.getThumbnailUri();
-        if (!TextUtils.isEmpty(thumbnailUri)) {
-            Bitmap thumbnailBitmap = PhotoUtils.prepareBitmap(thumbnailUri, thumbnail);
+        PhotoDescriptionTO photoDescriptionTO = currentMedicine.getPhotoDescriptionTO();
+        if (!photoDescriptionTO.isEmpty()) {
+            Bitmap thumbnailBitmap = PhotoUtils.prepareBitmap(photoDescriptionTO.getSmallSizePhotoUri(), thumbnail);
             thumbnail.setImageBitmap(thumbnailBitmap);
 
-            thumbnail.setOnClickListener(new PreviewPhotoOnClickListener(thumbnailUri, MedicineListActivity.class));
+            thumbnail.setOnClickListener(new PreviewPhotoOnClickListener(photoDescriptionTO.getFullSizePhotoUri(), MedicineListActivity.class));
         }
 
         if (currentMedicine.isShareWithFriends()) {

@@ -13,11 +13,16 @@ import lmnp.wirtualnaapteczka.activity.MainActivity;
 import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
 import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
 import lmnp.wirtualnaapteczka.data.dto.MedicineValidationResultTO;
+import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.helpers.MedicineValidator;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.utils.CollectionUtils;
 import lmnp.wirtualnaapteczka.utils.PhotoUtils;
+import org.w3c.dom.Text;
+
+import java.util.List;
 
 public class SaveNewMedicineOnClickListener implements View.OnClickListener {
     private Medicine medicine;
@@ -45,7 +50,7 @@ public class SaveNewMedicineOnClickListener implements View.OnClickListener {
         MedicineValidationResultTO validationResult = MedicineValidator.validateMedicine(medicine, addMedicineActivity.getResources());
 
         if (validationResult.isMedicineValid()) {
-            deleteOldThumbnailIfExists();
+            deleteOldThumbnailsIfExists();
             saveMedicineToDatabase();
 
             Class<?> targetActivity = editingExistingMedicine ? MedicineListActivity.class : MainActivity.class;
@@ -81,12 +86,18 @@ public class SaveNewMedicineOnClickListener implements View.OnClickListener {
         medicine.setUserNotes(notes);
     }
 
-    private void deleteOldThumbnailIfExists() {
-        String oldThumbnailToDelete = medicine.getOldThumbnailToDelete();
+    private void deleteOldThumbnailsIfExists() {
+        PhotoDescriptionTO photoDescriptionTO = medicine.getPhotoDescriptionTO();
+        List<String> oldPhotoUrisToDelete = photoDescriptionTO.getOldPhotoUrisToDelete();
 
-        if (!TextUtils.isEmpty(oldThumbnailToDelete)) {
-            PhotoUtils.deleteThumbnailFile(oldThumbnailToDelete);
-            medicine.setOldThumbnailToDelete(null);
+        if (CollectionUtils.isNotEmpty(oldPhotoUrisToDelete)) {
+            for(String oldPhotoUriToDelete : oldPhotoUrisToDelete) {
+                if (!TextUtils.isEmpty(oldPhotoUriToDelete)) {
+                    PhotoUtils.deleteThumbnailFile(oldPhotoUriToDelete);
+                }
+            }
+
+            photoDescriptionTO.setOldPhotoUrisToDelete(null);
         }
     }
 

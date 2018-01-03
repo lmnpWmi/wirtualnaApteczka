@@ -17,6 +17,7 @@ import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
 import lmnp.wirtualnaapteczka.activity.MainActivity;
 import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
 import lmnp.wirtualnaapteczka.activity.PreviewPhotoActivity;
+import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
 import lmnp.wirtualnaapteczka.listeners.common.PreviewPhotoOnClickListener;
@@ -25,10 +26,12 @@ import lmnp.wirtualnaapteczka.listeners.common.SaveDefaultSortingComparatorOnCli
 import lmnp.wirtualnaapteczka.listeners.mainactivity.ShowMedicineDetailsOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.utils.CollectionUtils;
 import lmnp.wirtualnaapteczka.utils.PhotoUtils;
 import lmnp.wirtualnaapteczka.utils.functionalinterfaces.Consumer;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Preparator for Alert Dialogs.
@@ -46,15 +49,25 @@ public class AlertDialogPreparator {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String thumbnailUri = medicine.getThumbnailUri();
-                if (!TextUtils.isEmpty(thumbnailUri)) {
-                    PhotoUtils.deleteThumbnailFile(thumbnailUri);
-                }
+                PhotoDescriptionTO photoDescriptionTO = medicine.getPhotoDescriptionTO();
+                List<String> oldPhotoUrisToDelete = photoDescriptionTO.getOldPhotoUrisToDelete();
+
+                deleteMedicinePhotos(oldPhotoUrisToDelete);
 
                 DbService dbService = SessionManager.getDbService();
                 dbService.deleteMedicine(medicine.getId());
 
                 invokeAfterActionConsumer.accept(context);
+            }
+
+            private void deleteMedicinePhotos(List<String> oldPhotoUrisToDelete) {
+                if (CollectionUtils.isNotEmpty(oldPhotoUrisToDelete)) {
+                    for (String thumbnailUriToDelete : oldPhotoUrisToDelete) {
+                        if (!TextUtils.isEmpty(thumbnailUriToDelete)) {
+                            PhotoUtils.deleteThumbnailFile(thumbnailUriToDelete);
+                        }
+                    }
+                }
             }
         });
 

@@ -13,11 +13,16 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
 import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
+import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * Utils related to capturing and displaying photos.
@@ -26,6 +31,12 @@ import java.util.Random;
  * @createdAt 26.12.2017
  */
 public class PhotoUtils {
+    private static final String DEFAULT_PHOTO_EXTENSION = ".jpg";
+    private static final String SMALL_PHOTO_APPENDIX = "_sm";
+
+    private static final int DEFAULT_HEIGHT_FOR_THUMBNAIL = 300;
+    private static final int DEFAULT_WIDTH_FOR_THUMBNAIL = 200;
+
     private PhotoUtils() {
     }
 
@@ -33,16 +44,22 @@ public class PhotoUtils {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (takePictureIntent.resolveActivity(addMedicineActivity.getPackageManager()) != null) {
-            File photoFile = preparePhotoFile(addMedicineActivity);
-            String photoAbsolutePath = photoFile.getAbsolutePath();
-            Uri photoURI = Uri.fromFile(photoFile);
+            File fullSizePhoto = preparePhotoFile(addMedicineActivity);
+            String fullSizePhotoAbsolutePath = fullSizePhoto.getAbsolutePath();
+            Uri fullSizePhotoURI = Uri.fromFile(fullSizePhoto);
 
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fullSizePhotoURI);
 
-            Log.i(PhotoUtils.class.getSimpleName(), "Picture saved to: " + photoAbsolutePath);
+            Log.i(PhotoUtils.class.getSimpleName(), "Picture saved to: " + fullSizePhotoAbsolutePath);
 
-            medicine.setOldThumbnailToDelete(medicine.getThumbnailUri());
-            medicine.setThumbnailUri(photoAbsolutePath);
+//            File smallSizePhoto = prepareSmallSizePhotoFile(fullSizePhoto);
+//            String smallSizePhotoAbsolutePath = smallSizePhoto.getAbsolutePath();
+
+            PhotoDescriptionTO photoDescriptionTO = medicine.getPhotoDescriptionTO();
+            photoDescriptionTO.setOldPhotoUrisToDelete(Arrays.asList(photoDescriptionTO.getFullSizePhotoUri(), photoDescriptionTO.getSmallSizePhotoUri()));
+            photoDescriptionTO.setFullSizePhotoUri(fullSizePhotoAbsolutePath);
+//            photoDescriptionTO.setSmallSizePhotoUri(smallSizePhotoAbsolutePath);
+
             addMedicineActivity.startActivityForResult(takePictureIntent, AppConstants.REQUEST_IMAGE_CAPTURE);
         }
     }
@@ -62,11 +79,12 @@ public class PhotoUtils {
     }
 
     public static Bitmap prepareBitmap(String photoUrl, ImageView imageView) {
+        return prepareBitmap(photoUrl, imageView.getWidth(), imageView.getHeight());
+    }
+
+    public static Bitmap prepareBitmap(String photoUrl, int targetW, int targetH) {
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         bmOptions.inJustDecodeBounds = true;
-
-        int targetW = imageView.getWidth();
-        int targetH = imageView.getHeight();
 
         if (targetW == 0 || targetH == 0) {
             targetH = 200;
@@ -94,6 +112,32 @@ public class PhotoUtils {
         return bitmap;
     }
 
+    public static File prepareSmallSizePhotoFile(File fullSizePhoto) {
+        String fullSizePhotoAbsolutePath = fullSizePhoto.getAbsolutePath();
+
+        Bitmap smallSizeThumbnailBitmap = prepareBitmap(fullSizePhotoAbsolutePath, DEFAULT_WIDTH_FOR_THUMBNAIL, DEFAULT_HEIGHT_FOR_THUMBNAIL);
+
+        String fullSizePhotoFileName = fullSizePhoto.getName();
+        String smallSizePhotoFileName = fullSizePhotoFileName.replace(DEFAULT_PHOTO_EXTENSION, "") + SMALL_PHOTO_APPENDIX + DEFAULT_PHOTO_EXTENSION;
+
+        File parentDirectory = fullSizePhoto.getParentFile();
+        File smallSizePhoto = new File(parentDirectory, smallSizePhotoFileName);
+
+        try {
+            smallSizePhoto.createNewFile();
+
+            FileOutputStream fileOutputStream = new FileOutputStream(smallSizePhoto);
+
+            smallSizeThumbnailBitmap.compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            Log.e(PhotoUtils.class.getSimpleName(), "Unable to prepare a small size thumbnail");
+        }
+
+        return smallSizePhoto;
+    }
+
     private static Bitmap rotateBitmapByDegrees(Bitmap bitmap, int rotateBy) {
         Matrix matrix = new Matrix();
         matrix.postRotate(rotateBy);
@@ -103,7 +147,7 @@ public class PhotoUtils {
         return rotatedBitmap;
     }
 
-    public static int getRotationAngleFromExif(String photoFilePath) {
+    private static int getRotationAngleFromExif(String photoFilePath) {
         ExifInterface exif;
 
         try {
@@ -142,7 +186,7 @@ public class PhotoUtils {
             medicinesPhotosDir.mkdir();
         }
 
-        String fileName = String.valueOf(new Random().nextInt()) + ".jpg";
+        String fileName = UUID.randomUUID().toString() + DEFAULT_PHOTO_EXTENSION;
 
         File photoFile = new File(medicinesPhotosDir, fileName);
 

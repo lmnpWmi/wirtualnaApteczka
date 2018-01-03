@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.MainActivity;
+import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.listeners.common.PreviewPhotoOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.RecentlyUsedMedicineOnClickListener;
@@ -62,13 +63,13 @@ public class MedicineItemSimpleArrayAdapter extends ArrayAdapter<Medicine> {
         String amountText = AdaptersCommonUtils.prepareAmountText(currentMedicine.getAmount(), context) + " " + MedicineTypeUtils.prepareLocalizedTypeSuffix(currentMedicine.getType(), context);
         amount.setText(amountText);
 
-        String thumbnailUri = currentMedicine.getThumbnailUri();
+        PhotoDescriptionTO photoDescriptionTO = currentMedicine.getPhotoDescriptionTO();
 
-        if (!TextUtils.isEmpty(thumbnailUri)) {
-            Bitmap thumbnailBitmap = PhotoUtils.prepareBitmap(thumbnailUri, thumbnail);
+        if (!photoDescriptionTO.isEmpty()) {
+            Bitmap thumbnailBitmap = PhotoUtils.prepareBitmap(photoDescriptionTO.getSmallSizePhotoUri(), thumbnail);
             thumbnail.setImageBitmap(thumbnailBitmap);
 
-            thumbnail.setOnClickListener(new PreviewPhotoOnClickListener(thumbnailUri, MainActivity.class));
+            thumbnail.setOnClickListener(new PreviewPhotoOnClickListener(photoDescriptionTO.getFullSizePhotoUri(), MainActivity.class));
         }
 
         itemPanel.setOnClickListener(new RecentlyUsedMedicineOnClickListener(context, currentMedicine, MainActivity.class));

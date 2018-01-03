@@ -150,7 +150,7 @@ public class FakeDbServiceImpl implements DbService {
 
         medicineForUpdate.setName(medicine.getName());
         medicineForUpdate.setType(medicine.getType());
-        medicineForUpdate.setThumbnailUri(medicine.getThumbnailUri());
+        medicineForUpdate.setPhotoDescriptionTO(medicine.getPhotoDescriptionTO());
         medicineForUpdate.setDescription(medicine.getDescription());
         medicineForUpdate.setDueDate(medicine.getDueDate());
         medicineForUpdate.setUserNotes(medicine.getUserNotes());

@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.*;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
+import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
 import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.AddPhotoOnClickListener;
@@ -28,6 +29,7 @@ import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
 import lmnp.wirtualnaapteczka.utils.PhotoUtils;
 import lmnp.wirtualnaapteczka.utils.functionalinterfaces.Consumer;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.util.List;
 
@@ -115,7 +117,16 @@ public class AddMedicineActivity extends AppCompatActivity {
             switch (requestCode) {
                 case AppConstants.REQUEST_IMAGE_CAPTURE:
                     try {
-                        setMedicineThumbnail();
+                        PhotoDescriptionTO photoDescriptionTO = currentMedicine.getPhotoDescriptionTO();
+
+                        File fullSizePhoto = new File(photoDescriptionTO.getFullSizePhotoUri());
+                        File smallSizePhoto = PhotoUtils.prepareSmallSizePhotoFile(fullSizePhoto);
+                        String smallSizePhotoAbsolutePath = smallSizePhoto.getAbsolutePath();
+                        photoDescriptionTO.setSmallSizePhotoUri(smallSizePhotoAbsolutePath);
+
+                        Log.e("UWAGA!!", photoDescriptionTO.toString());
+
+                        setMedicineThumbnail(photoDescriptionTO);
                     } catch (Exception e) {
                         Log.e(getClass().getSimpleName(), "Unable to set medicine thumbnail.");
                     }
@@ -151,9 +162,6 @@ public class AddMedicineActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), invokingClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        currentMedicine.setThumbnailUri(currentMedicine.getOldThumbnailToDelete());
-        currentMedicine.setOldThumbnailToDelete(null);
 
         getApplicationContext().startActivity(intent);
     }
@@ -211,8 +219,11 @@ public class AddMedicineActivity extends AppCompatActivity {
             amountEdit.setText(String.valueOf(currentMedicine.getAmount()));
         }
 
-        if (!TextUtils.isEmpty(currentMedicine.getThumbnailUri())) {
-            setMedicineThumbnail();
+        PhotoDescriptionTO photoDescriptionTO = currentMedicine.getPhotoDescriptionTO();
+
+        if (!photoDescriptionTO.isEmpty()) {
+            Log.e("UWAGA!!", photoDescriptionTO.toString());
+            setMedicineThumbnail(photoDescriptionTO);
         }
     }
 
@@ -236,8 +247,8 @@ public class AddMedicineActivity extends AppCompatActivity {
         voiceInputMedicineNotesBtn.setOnClickListener(new LaunchVoiceRecognitionOnClickListener(AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NOTES));
     }
 
-    private void setMedicineThumbnail() {
-        Bitmap thumbnailBitmap = PhotoUtils.prepareBitmap(currentMedicine.getThumbnailUri(), addMedicinePhotoBtn);
+    private void setMedicineThumbnail(PhotoDescriptionTO photoDescriptionTO) {
+        Bitmap thumbnailBitmap = PhotoUtils.prepareBitmap(photoDescriptionTO.getSmallSizePhotoUri(), addMedicinePhotoBtn);
         addMedicinePhotoBtn.setImageBitmap(thumbnailBitmap);
     }
 

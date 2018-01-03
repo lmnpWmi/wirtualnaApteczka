@@ -17,7 +17,7 @@ public class PreviewPhotoWithMedicineOnClickListener extends PreviewPhotoOnClick
     private Class<? extends AppCompatActivity> addMedicineInvokingClass;
 
     public PreviewPhotoWithMedicineOnClickListener(Medicine medicine, Class<? extends AppCompatActivity> invokingClass, Class<? extends AppCompatActivity> addMedicineInvokingClass) {
-        super(medicine.getThumbnailUri(), invokingClass);
+        super(medicine.getPhotoDescriptionTO().getFullSizePhotoUri(), invokingClass);
         this.medicine = medicine;
         this.addMedicineInvokingClass = addMedicineInvokingClass;
     }
