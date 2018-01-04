@@ -22,13 +22,13 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                        android:id="@+id/voice_input_medicine_name_btn"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="-4dp"
-                        android:layout_marginTop="3dp"
-                        android:background="@drawable/icon_mic"/>
+                    android:id="@+id/voice_input_medicine_name_btn"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="-4dp"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/icon_mic" />
 
                 <EditText
                     android:id="@+id/medicine_name"
@@ -162,49 +162,48 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingBottom="10dp"
                 android:paddingTop="20dp"
                 android:text="@string/notes"
                 android:textSize="16sp" />
+        </LinearLayout>
 
-            <LinearLayout
+        <LinearLayout
+            android:id="@+id/content_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/linearLayout"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/voice_input_medicine_notes_btn"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="-4dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/icon_mic" />
+
+            <EditText
+                android:id="@+id/notes_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <ImageButton
-                        android:id="@+id/voice_input_medicine_notes_btn"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="-4dp"
-                        android:layout_marginTop="3dp"
-                        android:background="@drawable/icon_mic"/>
-
-                <EditText
-                    android:id="@+id/notes_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/linearLayout"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="@string/start_write"
-                    android:inputType="textMultiLine" />
-            </LinearLayout>
-
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/linearLayout"
+                android:layout_marginBottom="0dp"
+                android:ems="10"
+                android:hint="@string/start_write"
+                android:inputType="textMultiLine" />
         </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/save_new_medicine_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="right|bottom"
+            android:layout_below="@+id/content_notes"
             android:layout_margin="10dp"
             android:src="@drawable/icon_done" />
 
