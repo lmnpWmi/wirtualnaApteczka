@@ -12,6 +12,9 @@ public final class AppConstants {
     public static final int REQUEST_VOICE_INPUT_MEDICINE_NAME = 2;
     public static final int REQUEST_VOICE_INPUT_MEDICINE_NOTES = 3;
 
+    public static final String REGULATIONS_URL = "https://wirtualna-apteczka.herokuapp.com/resources/images/regulamin.pdf";
+    public static final String GOOGLE_DOCS_READER_URL = "https://docs.google.com/viewer?url=";
+
     public static final String ADD_MEDICINE_INVOKING_CLASS = "add_medicine_invoking_class";
     public static final String APP_SETTINGS = "app_settings";
     public static final String DEFAULT_COMPARATOR = "current_comparator";
@@ -19,6 +22,7 @@ public final class AppConstants {
     public static final String MEDICINE_PHOTOS_DIR = "medicine_photos";
     public static final String MEDICINE_PHOTO_URI = "medicine_photo_uri";
     public static final String INVOKING_CLASS = "invoking_class";
+    public static final String URL_LINK = "url_link";
 
     private AppConstants() {
     }

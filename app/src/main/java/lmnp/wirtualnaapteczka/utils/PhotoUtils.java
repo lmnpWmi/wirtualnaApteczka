@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -52,13 +53,11 @@ public class PhotoUtils {
 
             Log.i(PhotoUtils.class.getSimpleName(), "Picture saved to: " + fullSizePhotoAbsolutePath);
 
-//            File smallSizePhoto = prepareSmallSizePhotoFile(fullSizePhoto);
-//            String smallSizePhotoAbsolutePath = smallSizePhoto.getAbsolutePath();
-
             PhotoDescriptionTO photoDescriptionTO = medicine.getPhotoDescriptionTO();
-            photoDescriptionTO.setOldPhotoUrisToDelete(Arrays.asList(photoDescriptionTO.getFullSizePhotoUri(), photoDescriptionTO.getSmallSizePhotoUri()));
+            List<String> oldPhotoUrisToDelete = Arrays.asList(photoDescriptionTO.getFullSizePhotoUri(), photoDescriptionTO.getSmallSizePhotoUri());
+
+            photoDescriptionTO.setOldPhotoUrisToDelete(oldPhotoUrisToDelete);
             photoDescriptionTO.setFullSizePhotoUri(fullSizePhotoAbsolutePath);
-//            photoDescriptionTO.setSmallSizePhotoUri(smallSizePhotoAbsolutePath);
 
             addMedicineActivity.startActivityForResult(takePictureIntent, AppConstants.REQUEST_IMAGE_CAPTURE);
         }
@@ -198,5 +197,4 @@ public class PhotoUtils {
 
         return photoFile;
     }
-
 }

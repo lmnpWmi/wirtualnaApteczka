@@ -6,10 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.listeners.loginactivity.LogInDefaultOnClickListener;
-import lmnp.wirtualnaapteczka.listeners.loginactivity.LogInFacebookOnClickListener;
-import lmnp.wirtualnaapteczka.listeners.loginactivity.LogInGoogleOnClickListener;
-import lmnp.wirtualnaapteczka.listeners.loginactivity.RegisterOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.loginactivity.*;
 
 public class LogInActivity extends AppCompatActivity {
     private Button logInFBBtn;
@@ -17,6 +14,7 @@ public class LogInActivity extends AppCompatActivity {
     private Button logInDefaultBtn;
     private TextView registerBtn;
     private TextView forgotPasswordBtn;
+    private TextView regulations;
 
     private EditText emailText;
     private EditText passwordText;
@@ -41,6 +39,7 @@ public class LogInActivity extends AppCompatActivity {
         logInDefaultBtn = (Button) findViewById(R.id.log_in_default_btn);
         registerBtn = (TextView) findViewById(R.id.register_btn);
         forgotPasswordBtn = (TextView) findViewById(R.id.forgot_password_btn);
+        regulations = (TextView) findViewById(R.id.regulations_btn);
 
         emailText = (EditText) findViewById(R.id.email_login_text);
         emailText.setSelected(false);
@@ -56,6 +55,8 @@ public class LogInActivity extends AppCompatActivity {
         String password = passwordText.getText().toString();
         logInDefaultBtn.setOnClickListener(new LogInDefaultOnClickListener(email, password));
 
+        regulations.setOnClickListener(new RegulationsOnClickListener());
+        forgotPasswordBtn.setOnClickListener(new ForgotPasswordOnClickListener());
         registerBtn.setOnClickListener(new RegisterOnClickListener());
     }
 }

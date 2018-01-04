@@ -3,6 +3,7 @@
     package="lmnp.wirtualnaapteczka">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-feature android:name="android.hardware.camera"
                   android:required="true" />
 
@@ -38,6 +39,7 @@
             android:label="@string/reminder" />
         <activity android:name=".activity.PreviewPhotoActivity"
             android:label="@string/medicine_photo" />
+        <activity android:name=".activity.WebViewActivity" />
 
     </application>
 
