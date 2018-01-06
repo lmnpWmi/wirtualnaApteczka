@@ -3,9 +3,11 @@
     package="lmnp.wirtualnaapteczka">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-feature android:name="android.hardware.camera"
-                  android:required="true" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +18,7 @@
         <activity android:name=".activity.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,8 +26,9 @@
         <activity
             android:name=".activity.LogInActivity"
             android:label="@string/log_in_app" />
-        <activity android:name=".activity.RegistrationActivity"
-            android:label="@string/registration"/>
+        <activity
+            android:name=".activity.RegistrationActivity"
+            android:label="@string/registration" />
         <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.AddMedicineActivity"
@@ -33,14 +37,15 @@
             android:name=".activity.MedicineListActivity"
             android:label="@string/list_medicines" />
         <activity
-            android:name=".activity.FamilyActivity"
-            android:label="@string/family" />
-        <activity android:name=".activity.PasswordReminderActivity"
+            android:name=".activity.PasswordReminderActivity"
             android:label="@string/reminder" />
-        <activity android:name=".activity.PreviewPhotoActivity"
+        <activity
+            android:name=".activity.PreviewPhotoActivity"
             android:label="@string/medicine_photo" />
         <activity android:name=".activity.WebViewActivity" />
-
+        <activity
+            android:name=".FamilyActivity"
+            android:label="@string/family" />
     </application>
 
 </manifest>

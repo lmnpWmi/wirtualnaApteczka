@@ -1,61 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="lmnp.wirtualnaapteczka.FamilyActivity">
 
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/AppTheme.Background"
-    android:orientation="vertical"
-    android:weightSum="1">
-
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:paddingTop="@dimen/appbar_padding_top"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <TextView
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="tutaj będzie lista rodziny" />
+            android:layout_height="wrap_content" />
 
-        <ListView
+    </android.support.design.widget.AppBarLayout>
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent" />
-
-
-        <TextView
-
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|center_horizontal|center"
-            android:text="@string/family_list_empty"
-            android:textSize="18sp"
-            android:visibility="gone" />
-
-    </LinearLayout>
-
-    <LinearLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
-        <Button
-            style="@style/MyButton"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="0.5"
-            android:text="@string/medicines_my" />
-
-        <Button
-            style="@style/MyButton"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:text="@string/medicines_share_me"
-
-            />
-
-    </LinearLayout>
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
