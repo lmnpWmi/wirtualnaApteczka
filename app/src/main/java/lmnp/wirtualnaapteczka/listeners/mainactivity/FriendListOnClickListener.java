@@ -3,7 +3,7 @@ package lmnp.wirtualnaapteczka.listeners.mainactivity;
 import android.content.Intent;
 import android.view.View;
 
-import lmnp.wirtualnaapteczka.FamilyActivity;
+import lmnp.wirtualnaapteczka.activity.FamilyActivity;
 
 public class FriendListOnClickListener implements View.OnClickListener {
 //    @Override

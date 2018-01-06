@@ -146,5 +146,16 @@
     <string name="sort_date_created_ascending">Creation date: from the oldest</string>
     <string name="sort_modified_date_descending">Modification date: from the latest</string>
     <string name="sort_modified_date_ascending">Modification date: from the oldest</string>
+    <string name="belongs_to">belongs to:</string>
+    <string name="contacts">Contacts</string>
+    <string name="medicines_my_family">List of medications</string>
+    <string name="take_new_photo">Take new</string>
+    <string name="choose_action">What are you going to do?</string>
+    <string name="contacts_list_empty">You do not have any contacts.</string>
+    <string name="speech_not_supported">Sorry, but your devide does not allow the voice recognition.</string>
+    <string name="speech_prompt">Say something...</string>
+    <string name="view_medicine_photo">Display the picture</string>
+    <string name="waiting">Invitations</string>
+    <string name="waiting_contacts_list_empty">You do not have any pending invitations.</string>
 
 </resources>

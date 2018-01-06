@@ -1,4 +1,4 @@
-package lmnp.wirtualnaapteczka;
+package lmnp.wirtualnaapteczka.activity;
 
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+
+import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.TabContacts;
+import lmnp.wirtualnaapteczka.TabMedicinesFamilyList;
+import lmnp.wirtualnaapteczka.TabWaiting;
 
 /**
  * Created by Jowita on 2018-01-06.

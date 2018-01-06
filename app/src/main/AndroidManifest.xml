@@ -44,7 +44,7 @@
             android:label="@string/medicine_photo" />
         <activity android:name=".activity.WebViewActivity" />
         <activity
-            android:name=".FamilyActivity"
+            android:name=".activity.FamilyActivity"
             android:label="@string/family" />
     </application>
 
