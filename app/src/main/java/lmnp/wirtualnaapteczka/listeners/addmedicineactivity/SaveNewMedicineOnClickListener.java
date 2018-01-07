@@ -17,10 +17,9 @@ import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.helpers.MedicineValidator;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.session.SessionManager2;
 import lmnp.wirtualnaapteczka.utils.CollectionUtils;
 import lmnp.wirtualnaapteczka.utils.PhotoUtils;
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -102,7 +101,7 @@ public class SaveNewMedicineOnClickListener implements View.OnClickListener {
     }
 
     private void saveMedicineToDatabase() {
-        DbService dbService = SessionManager.getDbService();
+        DbService dbService = SessionManager2.getDbService();
         dbService.saveOrUpdateMedicine(medicine);
     }
 

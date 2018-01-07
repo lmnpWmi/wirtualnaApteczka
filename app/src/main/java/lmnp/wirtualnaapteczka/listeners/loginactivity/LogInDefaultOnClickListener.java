@@ -1,21 +1,43 @@
 package lmnp.wirtualnaapteczka.listeners.loginactivity;
 
-import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
-import lmnp.wirtualnaapteczka.activity.MainActivity;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Toast;
+import com.google.firebase.auth.FirebaseAuth;
+import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.activity.LogInActivity;
+import lmnp.wirtualnaapteczka.session.FirebaseSession;
+import lmnp.wirtualnaapteczka.session.SessionManager;
 
 public class LogInDefaultOnClickListener implements View.OnClickListener {
-    private String email;
-    private String password;
+    private LogInActivity logInActivity;
 
-    public LogInDefaultOnClickListener(String email, String password) {
-        this.email = email;
-        this.password = password;
+    private CheckBox rememberMeCheckBox;
+    private EditText emailEditText;
+    private EditText passwordEditText;
+
+    public LogInDefaultOnClickListener(LogInActivity logInActivity) {
+        this.logInActivity = logInActivity;
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(v.getContext(), MainActivity.class);
-        v.getContext().startActivity(intent);
+        rememberMeCheckBox = (CheckBox) logInActivity.findViewById(R.id.remember_me);
+        emailEditText = (EditText) logInActivity.findViewById(R.id.email_login_text);
+        passwordEditText = (EditText) logInActivity.findViewById(R.id.password_login_text);
+
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+        boolean isRememberMeChecked = rememberMeCheckBox.isChecked();
+
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+            FirebaseSession firebaseSession = SessionManager.getFirebaseSession();
+            FirebaseAuth firebaseAuth = firebaseSession.getFirebaseAuth();
+            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(logInActivity, new LogInOnCompleteListener(v.getContext(), email, password, isRememberMeChecked));
+        } else {
+            Toast.makeText(v.getContext(), R.string.empty_email_or_password_msg, Toast.LENGTH_SHORT).show();
+        }
     }
 }

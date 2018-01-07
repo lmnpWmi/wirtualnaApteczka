@@ -11,6 +11,8 @@ public final class AppConstants {
     public static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int REQUEST_VOICE_INPUT_MEDICINE_NAME = 2;
     public static final int REQUEST_VOICE_INPUT_MEDICINE_NOTES = 3;
+    public static final int GOOGLE_SIGN_IN = 4;
+    public static final int MINIMUM_PASSWORD_LENGTH = 6;
 
     public static final String REGULATIONS_URL = "https://wirtualna-apteczka.herokuapp.com/resources/images/regulamin.pdf";
     public static final String GOOGLE_DOCS_READER_URL = "https://docs.google.com/viewer?url=";
@@ -23,6 +25,10 @@ public final class AppConstants {
     public static final String MEDICINE_PHOTO_URI = "medicine_photo_uri";
     public static final String INVOKING_CLASS = "invoking_class";
     public static final String URL_LINK = "url_link";
+
+    public static final String REMEMBER_ME = "remember_me";
+    public static final String EMAIL = "email";
+    public static final String PASSWORD = "password";
 
     private AppConstants() {
     }

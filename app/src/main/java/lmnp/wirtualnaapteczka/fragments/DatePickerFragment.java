@@ -1,4 +1,4 @@
-package lmnp.wirtualnaapteczka.components;
+package lmnp.wirtualnaapteczka.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

@@ -2,7 +2,7 @@ package lmnp.wirtualnaapteczka.listeners.addmedicineactivity;
 
 import android.support.v4.app.FragmentManager;
 import android.view.View;
-import lmnp.wirtualnaapteczka.components.DatePickerFragment;
+import lmnp.wirtualnaapteczka.fragments.DatePickerFragment;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 
 public class CalendarOnClickListener implements View.OnClickListener {
