@@ -8,7 +8,7 @@ import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.session.SessionManager2;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class SaveDefaultSortingComparatorOnClickListener implements View.OnClick
 
         sortListDialog.dismiss();
 
-        DbService dbService = SessionManager.getDbService();
+        DbService dbService = SessionManager2.getDbService();
         List<Medicine> allMedicinesForCurrentUser = dbService.findAllMedicinesForCurrentUser();
         medicineListActivity.initializeMedicineList(allMedicinesForCurrentUser);
     }

@@ -5,8 +5,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.google.firebase.auth.FirebaseAuth;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.dto.UserRegistrationTO;
+import lmnp.wirtualnaapteczka.session.FirebaseSession;
+import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.utils.AppConstants;
 
 public class RegisterNewUserOnClickListener implements View.OnClickListener {
     private EditText firstNameText;
@@ -26,6 +30,13 @@ public class RegisterNewUserOnClickListener implements View.OnClickListener {
         UserRegistrationTO userRegistrationTO = prepareUserRegistrationTO();
 
         boolean isValidUserRegistrationData = validateUserRegistrationData(v.getContext(), userRegistrationTO);
+
+        if (isValidUserRegistrationData) {
+            FirebaseSession firebaseSession = SessionManager.getFirebaseSession();
+            FirebaseAuth firebaseAuth = firebaseSession.getFirebaseAuth();
+            firebaseAuth.createUserWithEmailAndPassword(userRegistrationTO.getEmail(), userRegistrationTO.getPassword())
+                    .addOnCompleteListener(new RegistrationOnCompleteListener(v.getContext()));
+        }
     }
 
     private void initializeViewComponents(View v) {
@@ -37,11 +48,11 @@ public class RegisterNewUserOnClickListener implements View.OnClickListener {
     }
 
     private UserRegistrationTO prepareUserRegistrationTO() {
-        String firstName = firstNameText.getText().toString();
-        String lastName = lastNameText.getText().toString();
-        String email = emailText.getText().toString();
-        String password = passwordText.getText().toString();
-        String repeatedPassword = repeatPasswordText.getText().toString();
+        String firstName = firstNameText.getText().toString().trim();
+        String lastName = lastNameText.getText().toString().trim();
+        String email = emailText.getText().toString().trim();
+        String password = passwordText.getText().toString().trim();
+        String repeatedPassword = repeatPasswordText.getText().toString().trim();
 
         return new UserRegistrationTO(firstName, lastName, email, password, repeatedPassword);
     }
@@ -68,9 +79,13 @@ public class RegisterNewUserOnClickListener implements View.OnClickListener {
         if (TextUtils.isEmpty(userRegistrationTO.getPassword())) {
             errorMessage = context.getResources().getString(R.string.password_empty_err_msg);
             appendErrorMessage(errorMessageBuilder, errorMessage);
+        } else if (userRegistrationTO.getPassword().length() < AppConstants.MINIMUM_PASSWORD_LENGTH) {
+            errorMessage = context.getResources().getString(R.string.password_length_err_msg);
+            appendErrorMessage(errorMessageBuilder, errorMessage);
         } else if (TextUtils.isEmpty(userRegistrationTO.getRepeatedPassword())) {
             errorMessage = context.getResources().getString(R.string.repeat_password_empty_err_msg);
             appendErrorMessage(errorMessageBuilder, errorMessage);
+
         } else if (!userRegistrationTO.getPassword().equals(userRegistrationTO.getRepeatedPassword())) {
             errorMessage = context.getResources().getString(R.string.incorrect_passwords_err_msg);
             appendErrorMessage(errorMessageBuilder, errorMessage);

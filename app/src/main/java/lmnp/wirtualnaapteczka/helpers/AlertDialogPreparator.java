@@ -4,33 +4,36 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import com.google.firebase.auth.FirebaseAuth;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
+import lmnp.wirtualnaapteczka.activity.LogInActivity;
 import lmnp.wirtualnaapteczka.activity.MainActivity;
 import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
-import lmnp.wirtualnaapteczka.activity.PreviewPhotoActivity;
 import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
-import lmnp.wirtualnaapteczka.listeners.common.PreviewPhotoOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.common.PreviewPhotoWithMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.common.SaveDefaultSortingComparatorOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.ShowMedicineDetailsOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
+import lmnp.wirtualnaapteczka.session.FirebaseSession;
 import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.session.SessionManager2;
+import lmnp.wirtualnaapteczka.utils.AppConstants;
 import lmnp.wirtualnaapteczka.utils.CollectionUtils;
 import lmnp.wirtualnaapteczka.utils.PhotoUtils;
 import lmnp.wirtualnaapteczka.utils.functionalinterfaces.Consumer;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -54,7 +57,7 @@ public class AlertDialogPreparator {
 
                 deleteMedicinePhotos(oldPhotoUrisToDelete);
 
-                DbService dbService = SessionManager.getDbService();
+                DbService dbService = SessionManager2.getDbService();
                 dbService.deleteMedicine(medicine.getId());
 
                 invokeAfterActionConsumer.accept(context);
@@ -74,6 +77,32 @@ public class AlertDialogPreparator {
         deleteMedicineDialogBuilder.setNegativeButton(R.string.no, null);
 
         deleteMedicineDialogBuilder.show();
+    }
+
+    public static void displayLogoutPopup(final Context context) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        dialog.setTitle(R.string.log_out_popup_msg);
+
+        dialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                FirebaseSession firebaseSession = SessionManager.getFirebaseSession();
+                FirebaseAuth firebaseAuth = firebaseSession.getFirebaseAuth();
+                firebaseAuth.signOut();
+
+                SharedPreferences sharedPreferences = context.getSharedPreferences(AppConstants.APP_SETTINGS, Context.MODE_PRIVATE);
+                SharedPreferences.Editor edit = sharedPreferences.edit();
+                edit.putBoolean(AppConstants.REMEMBER_ME, false);
+                edit.putString(AppConstants.PASSWORD, null);
+                edit.commit();
+
+                Intent intent = new Intent(context, LogInActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
+
+        dialog.setNegativeButton(R.string.no, null);
+        dialog.show();
     }
 
     public static void showEditMedicineAmountDialog(final Context context, final Medicine medicine, final Class<? extends AppCompatActivity> invokingClass) {
@@ -96,7 +125,7 @@ public class AlertDialogPreparator {
                 int amountValue = numberPicker.getValue();
                 medicine.setAmount(amountValue);
 
-                DbService dbService = SessionManager.getDbService();
+                DbService dbService = SessionManager2.getDbService();
                 dbService.updateMedicine(medicine);
 
                 MainActivity mainActivity = (MainActivity) context;

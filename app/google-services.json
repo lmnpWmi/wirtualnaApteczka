@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "729438692132",
+    "firebase_url": "https://fire-home-pharmacy.firebaseio.com",
+    "project_id": "fire-home-pharmacy",
+    "storage_bucket": "fire-home-pharmacy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729438692132:android:77762974aa1ba763",
+        "android_client_info": {
+          "package_name": "lmnp.wirtualnaapteczka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729438692132-mgfvvj7irnase8rg5poablip0b76ecf9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "lmnp.wirtualnaapteczka",
+            "certificate_hash": "4bdc520a9653f76958cb6d8e38b89f6cdbec896e"
+          }
+        },
+        {
+          "client_id": "729438692132-2ucvg3vrmjemdormku0et6frh1k83aeu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChtn-XY7_wSDw7RghpgjnqopBjfIy6RCA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "729438692132-2ucvg3vrmjemdormku0et6frh1k83aeu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

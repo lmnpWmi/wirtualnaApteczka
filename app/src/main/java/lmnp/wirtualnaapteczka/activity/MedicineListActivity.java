@@ -13,14 +13,14 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.customarrayadapters.MedicineItemArrayAdapter;
+import lmnp.wirtualnaapteczka.adapters.MedicineItemArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
 import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
 import lmnp.wirtualnaapteczka.helpers.SearchMedicineDialogHelper;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.session.SessionManager2;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class MedicineListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicine_list);
 
-        dbService = SessionManager.getDbService();
+        dbService = SessionManager2.getDbService();
         medicineListView = (ListView) findViewById(R.id.medicine_list_view);
         medicineListView.setEmptyView(findViewById(R.id.medicine_list_empty));
         floatingActionButton = (FloatingActionButton) findViewById(R.id.save_new_medicine_btn);

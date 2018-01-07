@@ -12,7 +12,7 @@ import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.listeners.common.LaunchVoiceRecognitionOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.session.SessionManager2;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class SearchMedicineDialogHelper {
 
         searchMedicineDialogBuilder.setView(view);
 
-        final DbService dbService = SessionManager.getDbService();
+        final DbService dbService = SessionManager2.getDbService();
 
         searchMedicineDialogBuilder.setPositiveButton(R.string.search, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {

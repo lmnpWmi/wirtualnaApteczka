@@ -155,7 +155,7 @@
     <string name="speech_not_supported">Sorry, but your devide does not allow the voice recognition.</string>
     <string name="speech_prompt">Say something...</string>
     <string name="view_medicine_photo">Display the picture</string>
-    <string name="waiting">Invitations</string>
-    <string name="waiting_contacts_list_empty">You do not have any pending invitations.</string>
+    <string name="invitations">Invitations</string>
+    <string name="invitation_contacts_list_empty">You do not have any pending invitations.</string>
 
 </resources>

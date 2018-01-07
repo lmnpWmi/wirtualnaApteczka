@@ -124,16 +124,17 @@
     <string name="medicines_share_me">Leki udostęnione dla mnie</string>
     <string name="medicines_my_family">Lista leków</string>
     <string name="contacts">Kontakty</string>
-    <string name="waiting">Zaproszenia</string>
+    <string name="invitations">Zaproszenia</string>
     <string name="contacts_list_empty">Nie masz dodanych kontaktów.</string>
     <string name="belongs_to">należy do:</string>
-    <string name="waiting_contacts_list_empty">Brak oczekujących zaproszeń.</string>
+    <string name="invitation_contacts_list_empty">Brak oczekujących zaproszeń.</string>
 
     <!-- Registration layout -->
     <string name="first_name_empty_err_msg">Proszę podać imię.</string>
     <string name="last_name_empty_err_msg">Proszę podać nazwisko.</string>
     <string name="email_empty_err_msg">Proszę podać email.</string>
     <string name="password_empty_err_msg">Proszę podać hasło.</string>
+    <string name="password_length_err_msg">Hasło musi się składać z przynajmniej 6 znaków.</string>
     <string name="repeat_password_empty_err_msg">Proszę powtórzyć hasło.</string>
     <string name="incorrect_passwords_err_msg">Hasła muszą się zgadzać.</string>
 
@@ -142,6 +143,8 @@
     <string name="not_remember_1">Jeżeli nie pamiętasz swojego hasła, podaj nam swój adres mailowy w celu jego zresetowania.</string>
     <string name="not_remember_2">Po kliknięciu \"Zresetuj\" na Twój adres mailowy zostanie wysłany mail z dalszą instrukcją.</string>
     <string name="reset">Zresetuj</string>
+    <string name="empty_email_err_msg">E-mail nie może być pusty.</string>
+    <string name="remind_password_email_sent">Wiadomość z instrukcjami odnośnie resetowania hasła została wysłana na podany e-mail.</string>
 
     <!-- Preview photo layout -->
     <string name="back">Wróć</string>
@@ -158,4 +161,16 @@
     <string name="sort_modified_date_descending">Data modyfikacji: od najnowszej</string>
     <string name="sort_modified_date_ascending">Data modyfikacji: od najstarszej</string>
 
+    <!-- Authentication -->
+    <string name="authentication_failed">Autentykacja się nie powiodła.</string>
+    <string name="invalid_email_or_password">Nieprawidłowy email lub hasło.</string>
+    <string name="empty_email_or_password_msg">Proszę uzupełnić email i hasło.</string>
+    <string name="user_not_registered">Nie udało się utworzyć nowego użytkownika.</string>
+    <string name="user_registered">Użytkownik został pomyślnie stworzony..</string>
+    <string name="email_not_verified">Podany e-mail nie został jeszcze zweryfikowany.</string>
+    <string name="verification_email_sent">Link weryfikacyjny został wysłany na podany e-mail</string>
+
+    <!-- For facebook -->
+    <string name="facebook_app_id">761655134044259</string>
+    <string name="fb_login_protocol_scheme">fb761655134044259</string>
 </resources>

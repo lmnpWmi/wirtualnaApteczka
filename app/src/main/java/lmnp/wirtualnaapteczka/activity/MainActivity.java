@@ -8,16 +8,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import com.google.firebase.auth.FirebaseAuth;
 import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.adapters.MedicineItemSimpleArrayAdapter;
 import lmnp.wirtualnaapteczka.comparators.MedicineModifiedComparator;
-import lmnp.wirtualnaapteczka.customarrayadapters.MedicineItemSimpleArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.entities.User;
+import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.FriendListOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.MedicineListOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
+import lmnp.wirtualnaapteczka.session.FirebaseSession;
 import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.session.SessionManager2;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 
 import java.util.Collections;
@@ -37,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dbService = SessionManager.getDbService();
-        user = SessionManager.getCurrentUser();
+        dbService = SessionManager2.getDbService();
+        user = SessionManager2.getCurrentUser();
 
         addMedicinePanel = (LinearLayout) findViewById(R.id.add_medicine_panel);
         medicineListPanel = (LinearLayout) findViewById(R.id.medicine_list_panel);
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
-        displayLogoutPopup();
+        AlertDialogPreparator.displayLogoutPopup(this);
     }
 
     public void initializeRecentlyUsedMedicinesList() {
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private List<Medicine> prepareRecentlyUsedMedicinesList() {
-        List<Medicine> currentUserMedicines = dbService.findAllMedicinesByUserId(SessionManager.getCurrentUser().getId());
+        List<Medicine> currentUserMedicines = dbService.findAllMedicinesByUserId(SessionManager2.getCurrentUser().getId());
         Collections.sort(currentUserMedicines, new MedicineModifiedComparator(false));
 
         int entriesLimit = user.getUserPreferences().getRecentlyUsedMedicinesViewLimit();
@@ -84,22 +88,5 @@ public class MainActivity extends AppCompatActivity {
         List<Medicine> recentlyUsedMedicines = currentUserMedicines.subList(AppConstants.FIRST_ITEM_INDEX, entriesLimit);
 
         return recentlyUsedMedicines;
-    }
-
-    private void displayLogoutPopup() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle(R.string.log_out_popup_msg);
-
-        dialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // logout
-                Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getApplicationContext().startActivity(intent);
-            }
-        });
-
-        dialog.setNegativeButton(R.string.no, null);
-        dialog.show();
     }
 }
