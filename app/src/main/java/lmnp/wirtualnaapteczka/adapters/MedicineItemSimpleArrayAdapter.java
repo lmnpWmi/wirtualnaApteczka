@@ -63,12 +63,15 @@ public class MedicineItemSimpleArrayAdapter extends ArrayAdapter<Medicine> {
         amount.setText(amountText);
 
         PhotoDescriptionTO photoDescriptionTO = currentMedicine.getPhotoDescriptionTO();
+        boolean arePhotosPhysicallyPresentOnDevice = PhotoUtils.arePhotosPhysicallyPresentOnDevice(photoDescriptionTO);
 
-        if (!photoDescriptionTO.isEmpty()) {
+        if (!photoDescriptionTO.isEmpty() && arePhotosPhysicallyPresentOnDevice) {
             Bitmap thumbnailBitmap = PhotoUtils.prepareBitmap(photoDescriptionTO.getSmallSizePhotoUri(), thumbnail);
-            thumbnail.setImageBitmap(thumbnailBitmap);
 
-            thumbnail.setOnClickListener(new PreviewPhotoOnClickListener(photoDescriptionTO.getFullSizePhotoUri(), MainActivity.class));
+            if (thumbnailBitmap != null) {
+                thumbnail.setImageBitmap(thumbnailBitmap);
+                thumbnail.setOnClickListener(new PreviewPhotoOnClickListener(photoDescriptionTO.getFullSizePhotoUri(), MainActivity.class));
+            }
         }
 
         itemPanel.setOnClickListener(new RecentlyUsedMedicineOnClickListener(context, currentMedicine, MainActivity.class));

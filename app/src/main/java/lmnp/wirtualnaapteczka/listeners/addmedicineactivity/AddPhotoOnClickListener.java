@@ -30,7 +30,9 @@ public class AddPhotoOnClickListener implements View.OnClickListener {
 
         PhotoDescriptionTO photoDescriptionTO = medicine.getPhotoDescriptionTO();
 
-        if (!photoDescriptionTO.isEmpty()) {
+        boolean arePhotosPhysicallyPresentOnDevice = PhotoUtils.arePhotosPhysicallyPresentOnDevice(photoDescriptionTO);
+
+        if (!photoDescriptionTO.isEmpty() && arePhotosPhysicallyPresentOnDevice) {
             AlertDialogPreparator.showTakeNewPictureOrViewExistingDialog(addMedicineActivity, medicine, addMedicineInvokingClass);
         } else {
             if (isAllowedToTakePicture) {
@@ -40,5 +42,4 @@ public class AddPhotoOnClickListener implements View.OnClickListener {
             }
         }
     }
-
 }

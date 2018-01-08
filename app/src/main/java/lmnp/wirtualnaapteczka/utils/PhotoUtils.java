@@ -192,4 +192,19 @@ public class PhotoUtils {
 
         return photoFile;
     }
+
+    /**
+     * It is a safe guard, if the user log-in from another device and won't have photos present on their local memory.
+     * TODO Store photos in DB
+     */
+    public static boolean arePhotosPhysicallyPresentOnDevice(PhotoDescriptionTO photoDescriptionTO) {
+        String fullSizePhotoUri = photoDescriptionTO.getFullSizePhotoUri();
+        File fullSizePhoto = new File(fullSizePhotoUri);
+
+        String smallSizePhotoUri = photoDescriptionTO.getSmallSizePhotoUri();
+        File smallSizePhoto = new File(smallSizePhotoUri);
+
+        boolean arePhotoPhysicallyPresentOnDevice = fullSizePhoto.exists() && smallSizePhoto.exists();
+        return arePhotoPhysicallyPresentOnDevice;
+    }
 }

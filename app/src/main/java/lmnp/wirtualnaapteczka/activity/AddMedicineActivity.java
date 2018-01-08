@@ -247,8 +247,15 @@ public class AddMedicineActivity extends AppCompatActivity {
     }
 
     private void setMedicineThumbnail(PhotoDescriptionTO photoDescriptionTO) {
-        Bitmap thumbnailBitmap = PhotoUtils.prepareBitmap(photoDescriptionTO.getSmallSizePhotoUri(), addMedicinePhotoBtn);
-        addMedicinePhotoBtn.setImageBitmap(thumbnailBitmap);
+        boolean arePhotosPhysicallyPresentOnDevice = PhotoUtils.arePhotosPhysicallyPresentOnDevice(photoDescriptionTO);
+
+        if (arePhotosPhysicallyPresentOnDevice) {
+            Bitmap thumbnailBitmap = PhotoUtils.prepareBitmap(photoDescriptionTO.getSmallSizePhotoUri(), addMedicinePhotoBtn);
+
+            if (thumbnailBitmap != null) {
+                addMedicinePhotoBtn.setImageBitmap(thumbnailBitmap);
+            }
+        }
     }
 
     private void updateMedicineTypeInSpinner(ArrayAdapter<MedicineTypeWithLocalizationTO> medicineTypesAdapter) {
