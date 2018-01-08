@@ -59,7 +59,7 @@
 
     <!--styl small button-->
     <style name="SmallButton">
-        <item name="android:layout_width">@android:dimen/notification_large_icon_width</item>
+        <item name="android:layout_width">@android:dimen/app_icon_size</item>
         <item name="android:layout_height">@android:dimen/app_icon_size</item>
         <item name="android:textSize">10sp</item>
         <item name="android:background">@color/color_primary</item>

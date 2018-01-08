@@ -51,14 +51,16 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             style="@style/SmallButton"
             android:layout_marginRight="10dp"
-            android:text="Akceptuj" />
+            android:background="@drawable/icon_check_green" />
 
-        <Button
+        <ImageButton
             style="@style/SmallButton"
-            android:text="Odrzuć" />
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/icon_clear_red" />
+
     </LinearLayout>
 
 
