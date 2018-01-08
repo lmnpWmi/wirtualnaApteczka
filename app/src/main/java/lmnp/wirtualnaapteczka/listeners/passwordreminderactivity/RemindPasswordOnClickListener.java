@@ -33,7 +33,7 @@ public class RemindPasswordOnClickListener implements View.OnClickListener {
             Intent intent = new Intent(context, LogInActivity.class);
             context.startActivity(intent);
 
-            Toast.makeText(context, R.string.remind_password_email_sent, Toast.LENGTH_SHORT);
+            messageId = R.string.remind_password_email_sent;
         }
 
         Toast.makeText(context, messageId, Toast.LENGTH_SHORT).show();
