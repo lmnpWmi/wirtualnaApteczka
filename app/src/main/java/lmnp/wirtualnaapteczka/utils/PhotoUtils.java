@@ -8,7 +8,6 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.ImageView;
 import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
 import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
@@ -47,7 +46,7 @@ public class PhotoUtils {
 
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fullSizePhotoURI);
 
-            Log.i(PhotoUtils.class.getSimpleName(), "Picture saved to: " + fullSizePhotoAbsolutePath);
+//            Log.i(PhotoUtils.class.getSimpleName(), "Picture saved to: " + fullSizePhotoAbsolutePath);
 
             PhotoDescriptionTO photoDescriptionTO = medicine.getPhotoDescriptionTO();
             List<String> oldPhotoUrisToDelete = Arrays.asList(photoDescriptionTO.getFullSizePhotoUri(), photoDescriptionTO.getSmallSizePhotoUri());
@@ -66,9 +65,9 @@ public class PhotoUtils {
             boolean hasFileBeenDeleted = file.delete();
 
             if (hasFileBeenDeleted) {
-                Log.i(PhotoUtils.class.getSimpleName(), "File(" + thumbnailUri + ") has been successfully deleted.");
+//                Log.i(PhotoUtils.class.getSimpleName(), "File(" + thumbnailUri + ") has been successfully deleted.");
             } else {
-                Log.w(PhotoUtils.class.getSimpleName(), "Could not delete file: " + thumbnailUri);
+//                Log.w(PhotoUtils.class.getSimpleName(), "Could not delete file: " + thumbnailUri);
             }
         }
     }
@@ -127,7 +126,7 @@ public class PhotoUtils {
             fileOutputStream.flush();
             fileOutputStream.close();
         } catch (IOException e) {
-            Log.e(PhotoUtils.class.getSimpleName(), "Unable to prepare a small size thumbnail");
+//            Log.e(PhotoUtils.class.getSimpleName(), "Unable to prepare a small size thumbnail");
         }
 
         return smallSizePhoto;
@@ -148,7 +147,7 @@ public class PhotoUtils {
         try {
             exif = new ExifInterface(photoFilePath);
         } catch (IOException e) {
-            Log.e(PhotoUtils.class.getSimpleName(), "Unable to prepare ExifInterface for file: " + photoFilePath);
+//            Log.e(PhotoUtils.class.getSimpleName(), "Unable to prepare ExifInterface for file: " + photoFilePath);
             return 0;
         }
 

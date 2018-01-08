@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -52,7 +51,7 @@ public class LogInOnCompleteListener implements OnCompleteListener<AuthResult> {
                 Toast.makeText(context, R.string.email_not_verified, Toast.LENGTH_SHORT).show();
             }
         } else {
-            Log.w(getClass().getSimpleName(), "Sign In Failure: " + task.getException());
+//            Log.w(getClass().getSimpleName(), "Sign In Failure: " + task.getException());
             Toast.makeText(context, R.string.invalid_email_or_password, Toast.LENGTH_SHORT).show();
         }
     }

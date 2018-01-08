@@ -2,7 +2,6 @@ package lmnp.wirtualnaapteczka.utils;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
 import lmnp.wirtualnaapteczka.data.enums.MedicineQuantitySuffix;
 import lmnp.wirtualnaapteczka.data.enums.MedicineTypeEnum;
@@ -36,7 +35,7 @@ public class MedicineTypeUtils {
         String medicineTypeLocalized = LocalizationUtils.retrieveLocalizationForString(medicineType.name(), context);
 
         if (TextUtils.isEmpty(medicineTypeLocalized)) {
-            Log.w(MedicineTypeEnum.class.getSimpleName(), "Could not find translation for enum: " + medicineType.name());
+//            Log.w(MedicineTypeEnum.class.getSimpleName(), "Could not find translation for enum: " + medicineType.name());
         }
 
         return medicineTypeLocalized;

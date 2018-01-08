@@ -9,7 +9,6 @@ import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -126,11 +125,9 @@ public class AddMedicineActivity extends AppCompatActivity {
                         String smallSizePhotoAbsolutePath = smallSizePhoto.getAbsolutePath();
                         photoDescriptionTO.setSmallSizePhotoUri(smallSizePhotoAbsolutePath);
 
-                        Log.e("UWAGA!!", photoDescriptionTO.toString());
-
                         setMedicineThumbnail(photoDescriptionTO);
                     } catch (Exception e) {
-                        Log.e(getClass().getSimpleName(), "Unable to set medicine thumbnail.");
+                        // Had to remove logs, becasue of google play
                     }
                     break;
                 case AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NAME:
@@ -224,7 +221,7 @@ public class AddMedicineActivity extends AppCompatActivity {
         PhotoDescriptionTO photoDescriptionTO = currentMedicine.getPhotoDescriptionTO();
 
         if (!photoDescriptionTO.isEmpty()) {
-            Log.e("UWAGA!!", photoDescriptionTO.toString());
+//            Log.e("UWAGA!!", photoDescriptionTO.toString());
             setMedicineThumbnail(photoDescriptionTO);
         }
     }
