@@ -25,10 +25,10 @@ public class MedicineNameComparator implements Comparator<Medicine> {
         int result;
 
         if (isAscending) {
-            result = medicine1.getName().compareTo(medicine2.getName());
+            result = medicine1.getName().compareToIgnoreCase(medicine2.getName());
         }
         else {
-            result = -1 * medicine1.getName().compareTo(medicine2.getName());
+            result = -1 * medicine1.getName().compareToIgnoreCase(medicine2.getName());
         }
 
         return result;

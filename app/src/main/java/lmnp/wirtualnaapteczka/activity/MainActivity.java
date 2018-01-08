@@ -1,14 +1,12 @@
 package lmnp.wirtualnaapteczka.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.*;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.adapters.MedicineItemSimpleArrayAdapter;
 import lmnp.wirtualnaapteczka.comparators.MedicineModifiedComparator;
@@ -18,19 +16,16 @@ import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.FriendListOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.MedicineListOnClickListener;
-import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.session.FirebaseSession;
 import lmnp.wirtualnaapteczka.session.SessionManager;
-import lmnp.wirtualnaapteczka.session.SessionManager2;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
+import lmnp.wirtualnaapteczka.utils.FirebaseConstants;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private DbService dbService;
-    private User user;
-
     private LinearLayout addMedicinePanel;
     private LinearLayout medicineListPanel;
     private LinearLayout friendsPanel;
@@ -41,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dbService = SessionManager2.getDbService();
-        user = SessionManager2.getCurrentUser();
+        SessionManager.clearSearchValueInUserSession();
 
         addMedicinePanel = (LinearLayout) findViewById(R.id.add_medicine_panel);
         medicineListPanel = (LinearLayout) findViewById(R.id.medicine_list_panel);
@@ -51,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         recentlyUsedMedicinesSimpleList.setEmptyView(findViewById(R.id.medicine_list_simple_empty));
 
         initializeListeners();
-        initializeRecentlyUsedMedicinesList();
+        initializeFirebaseListeners();
     }
 
     @Override
@@ -65,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         AlertDialogPreparator.displayLogoutPopup(this);
     }
 
-    public void initializeRecentlyUsedMedicinesList() {
-        List<Medicine> recentlyUsedMedicinesList = prepareRecentlyUsedMedicinesList();
+    public void initializeRecentlyUsedMedicinesList(List<Medicine> currentUserMedicines) {
+        List<Medicine> recentlyUsedMedicinesList = prepareRecentlyUsedMedicinesList(currentUserMedicines);
         MedicineItemSimpleArrayAdapter recentlyUsedMedicinesAdapter = new MedicineItemSimpleArrayAdapter(this, R.id.medicine_list_view_simple, recentlyUsedMedicinesList);
 
         recentlyUsedMedicinesSimpleList.setAdapter(recentlyUsedMedicinesAdapter);
@@ -78,11 +72,32 @@ public class MainActivity extends AppCompatActivity {
         friendsPanel.setOnClickListener(new FriendListOnClickListener());
     }
 
-    private List<Medicine> prepareRecentlyUsedMedicinesList() {
-        List<Medicine> currentUserMedicines = dbService.findAllMedicinesByUserId(SessionManager2.getCurrentUser().getId());
+    private void initializeFirebaseListeners() {
+        FirebaseUser firebaseUser = SessionManager.getFirebaseUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        DatabaseReference userRef = database.getReference().child(FirebaseConstants.USERS).child(firebaseUser.getUid());
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+
+                Map<String, Medicine> medicinesMap = user.getMedicines();
+                List<Medicine> currentUserMedicines = new ArrayList<>(medicinesMap.values());
+
+                initializeRecentlyUsedMedicinesList(currentUserMedicines);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    private List<Medicine> prepareRecentlyUsedMedicinesList(List<Medicine> currentUserMedicines) {
         Collections.sort(currentUserMedicines, new MedicineModifiedComparator(false));
 
-        int entriesLimit = user.getUserPreferences().getRecentlyUsedMedicinesViewLimit();
+        int entriesLimit = AppConstants.RECENTLY_USED_MEDICINES_DEFAULT_AMOUNT;
         entriesLimit = entriesLimit > currentUserMedicines.size() ? currentUserMedicines.size() : entriesLimit;
 
         List<Medicine> recentlyUsedMedicines = currentUserMedicines.subList(AppConstants.FIRST_ITEM_INDEX, entriesLimit);

@@ -2,8 +2,11 @@ package lmnp.wirtualnaapteczka.listeners.mainactivity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
+import lmnp.wirtualnaapteczka.services.DbService;
+import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 
 public class AddNewMedicineOnClickListener implements View.OnClickListener {
@@ -17,6 +20,7 @@ public class AddNewMedicineOnClickListener implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent = new Intent(v.getContext(), AddMedicineActivity.class);
         intent.putExtra(AppConstants.INVOKING_CLASS, invokingClass);
+
         v.getContext().startActivity(intent);
     }
 }

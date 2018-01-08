@@ -22,7 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.listeners.loginactivity.*;
-import lmnp.wirtualnaapteczka.session.FirebaseSession;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 
@@ -33,7 +32,6 @@ import lmnp.wirtualnaapteczka.utils.AppConstants;
  * @createdAt 07.01.2018
  */
 public class LogInActivity extends AppCompatActivity {
-    private Button logInFBBtn;
     private Button logInGoogleBtn;
     private Button logInDefaultBtn;
     private TextView registerBtn;
@@ -43,15 +41,11 @@ public class LogInActivity extends AppCompatActivity {
     private EditText emailText;
     private EditText passwordText;
 
-    private FirebaseSession firebaseSession;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-
-        firebaseSession = SessionManager.getFirebaseSession();
 
         initializeViewComponents();
         initializeComponentsListeners();
@@ -79,7 +73,6 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void initializeViewComponents() {
-        logInFBBtn = (Button) findViewById(R.id.log_in_fb_btn);
         logInGoogleBtn = (Button) findViewById(R.id.log_in_google_btn);
         logInDefaultBtn = (Button) findViewById(R.id.log_in_default_btn);
         registerBtn = (TextView) findViewById(R.id.register_btn);
@@ -96,7 +89,6 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void initializeComponentsListeners() {
-        logInFBBtn.setOnClickListener(new LogInFacebookOnClickListener());
         logInGoogleBtn.setOnClickListener(new LogInGoogleOnClickListener(this));
 
         logInDefaultBtn.setOnClickListener(new LogInDefaultOnClickListener(this));
@@ -116,7 +108,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        FirebaseAuth firebaseAuth = firebaseSession.getFirebaseAuth();
+        FirebaseAuth firebaseAuth = SessionManager.getFirebaseAuth();
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential)

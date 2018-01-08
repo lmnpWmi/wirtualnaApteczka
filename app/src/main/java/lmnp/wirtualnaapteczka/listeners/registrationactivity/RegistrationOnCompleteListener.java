@@ -11,15 +11,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.LogInActivity;
-import lmnp.wirtualnaapteczka.activity.MainActivity;
-import lmnp.wirtualnaapteczka.session.FirebaseSession;
+import lmnp.wirtualnaapteczka.data.dto.UserRegistrationTO;
+import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 
 public class RegistrationOnCompleteListener implements OnCompleteListener<AuthResult> {
     private Context context;
+    private UserRegistrationTO userRegistrationTO;
 
-    public RegistrationOnCompleteListener(Context context) {
+    public RegistrationOnCompleteListener(Context context, UserRegistrationTO userRegistrationTO) {
         this.context = context;
+        this.userRegistrationTO = userRegistrationTO;
     }
 
     @Override
@@ -32,6 +34,9 @@ public class RegistrationOnCompleteListener implements OnCompleteListener<AuthRe
 
             if (currentUser != null) {
                 currentUser.sendEmailVerification();
+                DbService dbService = SessionManager.getDbService();
+                dbService.createUserAccountInFirebase(userRegistrationTO);
+
                 messageId = R.string.verification_email_sent;
             }
 

@@ -8,7 +8,6 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.dto.UserRegistrationTO;
-import lmnp.wirtualnaapteczka.session.FirebaseSession;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 
@@ -32,10 +31,9 @@ public class RegisterNewUserOnClickListener implements View.OnClickListener {
         boolean isValidUserRegistrationData = validateUserRegistrationData(v.getContext(), userRegistrationTO);
 
         if (isValidUserRegistrationData) {
-            FirebaseSession firebaseSession = SessionManager.getFirebaseSession();
-            FirebaseAuth firebaseAuth = firebaseSession.getFirebaseAuth();
+            FirebaseAuth firebaseAuth = SessionManager.getFirebaseAuth();
             firebaseAuth.createUserWithEmailAndPassword(userRegistrationTO.getEmail(), userRegistrationTO.getPassword())
-                    .addOnCompleteListener(new RegistrationOnCompleteListener(v.getContext()));
+                    .addOnCompleteListener(new RegistrationOnCompleteListener(v.getContext(), userRegistrationTO));
         }
     }
 

@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.listeners.loginactivity.LogInOnCompleteListener;
-import lmnp.wirtualnaapteczka.session.FirebaseSession;
+import lmnp.wirtualnaapteczka.services.DbService;
+import lmnp.wirtualnaapteczka.services.FirebaseDbServiceImpl;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 
@@ -25,13 +27,12 @@ import static lmnp.wirtualnaapteczka.utils.AppConstants.APP_SETTINGS;
 public class LauncherActivity extends AppCompatActivity {
     private static final String IS_FIRST_LAUNCH = "is_first_launch";
 
-    private FirebaseSession firebaseSession;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
-        firebaseSession = prepareFirebaseSession();
+
+        prepareSessionManager();
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(APP_SETTINGS, Context.MODE_PRIVATE);
 
@@ -42,21 +43,27 @@ public class LauncherActivity extends AppCompatActivity {
         }
     }
 
+    private void prepareSessionManager() {
+        FirebaseApp.initializeApp(getApplicationContext());
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        DbService dbService = FirebaseDbServiceImpl.createNewInstance();
+
+        SessionManager.setFirebaseAuth(firebaseAuth);
+        SessionManager.setDbService(dbService);
+    }
+
     private boolean signInIfLoginDataHasBeenRemembered(SharedPreferences sharedPreferences) {
         boolean logInInitialized = false;
 
         boolean rememberMe = sharedPreferences.getBoolean(AppConstants.REMEMBER_ME, false);
 
-        Log.i(getClass().getSimpleName(), "rememberme:" + rememberMe);
-
         if (rememberMe) {
             String email = sharedPreferences.getString(AppConstants.EMAIL, null);
             String password = sharedPreferences.getString(AppConstants.PASSWORD, null);
 
-            Log.i(getClass().getSimpleName(), "email:" + email + "; pass:" + password);
-
             if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-                FirebaseAuth firebaseAuth = firebaseSession.getFirebaseAuth();
+                FirebaseAuth firebaseAuth = SessionManager.getFirebaseAuth();
                 firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new LogInOnCompleteListener(this, email, password, rememberMe));
                 logInInitialized = true;
             }
@@ -81,13 +88,6 @@ public class LauncherActivity extends AppCompatActivity {
 
         sharedPreferencesEditor.putBoolean(IS_FIRST_LAUNCH, false);
         sharedPreferencesEditor.commit();
-    }
-
-    private FirebaseSession prepareFirebaseSession() {
-        FirebaseSession firebaseSession = FirebaseSession.prepareInstance(getApplicationContext());
-        SessionManager.setFirebaseSession(firebaseSession);
-
-        return firebaseSession;
     }
 
     private void startActivity(Class<?> activityClass) {

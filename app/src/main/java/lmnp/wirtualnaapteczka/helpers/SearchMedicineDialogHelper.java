@@ -9,13 +9,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
-import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.listeners.common.LaunchVoiceRecognitionOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.session.SessionManager2;
+import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
-
-import java.util.List;
 
 /**
  * Helper class for search medicine alert dialog.
@@ -42,15 +39,12 @@ public class SearchMedicineDialogHelper {
 
         searchMedicineDialogBuilder.setView(view);
 
-        final DbService dbService = SessionManager2.getDbService();
-
         searchMedicineDialogBuilder.setPositiveButton(R.string.search, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String searchValue = searchMedicineEdit.getText().toString();
-                List<Medicine> medicines = dbService.findAllMedicinesForCurrentUser();
-                List<Medicine> filteredMedicines = MedicineFilter.filterMedicines(searchValue, medicines, false);
 
-                medicineListActivity.initializeMedicineList(filteredMedicines);
+                DbService dbService = SessionManager.getDbService();
+                dbService.updateSearchValueInSession(searchValue);
             }
         });
 

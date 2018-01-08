@@ -8,7 +8,6 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.LogInActivity;
-import lmnp.wirtualnaapteczka.session.FirebaseSession;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 
 public class LogInDefaultOnClickListener implements View.OnClickListener {
@@ -33,8 +32,7 @@ public class LogInDefaultOnClickListener implements View.OnClickListener {
         boolean isRememberMeChecked = rememberMeCheckBox.isChecked();
 
         if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-            FirebaseSession firebaseSession = SessionManager.getFirebaseSession();
-            FirebaseAuth firebaseAuth = firebaseSession.getFirebaseAuth();
+            FirebaseAuth firebaseAuth = SessionManager.getFirebaseAuth();
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(logInActivity, new LogInOnCompleteListener(v.getContext(), email, password, isRememberMeChecked));
         } else {
             Toast.makeText(v.getContext(), R.string.empty_email_or_password_msg, Toast.LENGTH_SHORT).show();

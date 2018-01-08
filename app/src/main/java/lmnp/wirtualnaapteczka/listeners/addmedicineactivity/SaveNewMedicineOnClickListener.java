@@ -17,7 +17,7 @@ import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.helpers.MedicineValidator;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.session.SessionManager2;
+import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.CollectionUtils;
 import lmnp.wirtualnaapteczka.utils.PhotoUtils;
 
@@ -90,7 +90,7 @@ public class SaveNewMedicineOnClickListener implements View.OnClickListener {
         List<String> oldPhotoUrisToDelete = photoDescriptionTO.getOldPhotoUrisToDelete();
 
         if (CollectionUtils.isNotEmpty(oldPhotoUrisToDelete)) {
-            for(String oldPhotoUriToDelete : oldPhotoUrisToDelete) {
+            for (String oldPhotoUriToDelete : oldPhotoUrisToDelete) {
                 if (!TextUtils.isEmpty(oldPhotoUriToDelete)) {
                     PhotoUtils.deleteThumbnailFile(oldPhotoUriToDelete);
                 }
@@ -101,7 +101,7 @@ public class SaveNewMedicineOnClickListener implements View.OnClickListener {
     }
 
     private void saveMedicineToDatabase() {
-        DbService dbService = SessionManager2.getDbService();
+        DbService dbService = SessionManager.getDbService();
         dbService.saveOrUpdateMedicine(medicine);
     }
 

@@ -13,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.MainActivity;
-import lmnp.wirtualnaapteczka.session.FirebaseSession;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 
@@ -39,11 +38,11 @@ public class LogInOnCompleteListener implements OnCompleteListener<AuthResult> {
     @Override
     public void onComplete(@NonNull Task<AuthResult> task) {
         if (task.isSuccessful()) {
-            FirebaseSession firebaseSession = SessionManager.getFirebaseSession();
-            FirebaseAuth firebaseAuth = firebaseSession.getFirebaseAuth();
-            FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+            FirebaseAuth firebaseAuth = SessionManager.getFirebaseAuth();
+            FirebaseUser currentUser = SessionManager.getFirebaseUser();
 
-            if (currentUser.isEmailVerified()) {
+            boolean isEmailVerified = currentUser.isEmailVerified();
+            if (true) {
                 updateLoginConfigInSharedPrefs();
 
                 Intent intent = new Intent(context, MainActivity.class);

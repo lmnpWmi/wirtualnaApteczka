@@ -7,9 +7,7 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
 import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
@@ -18,11 +16,9 @@ import lmnp.wirtualnaapteczka.data.entities.Medicine;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 /**

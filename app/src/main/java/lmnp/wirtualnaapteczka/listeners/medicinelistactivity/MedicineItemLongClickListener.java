@@ -18,15 +18,7 @@ public class MedicineItemLongClickListener implements View.OnLongClickListener {
 
     @Override
     public boolean onLongClick(View v) {
-        Consumer invokeAfterMedicineDeleted = new Consumer() {
-            @Override
-            public void accept(Context context) {
-                Activity activity = (Activity) context;
-                activity.recreate();
-            }
-        };
-
-        AlertDialogPreparator.showDeleteMedicineDialog(context, medicine, invokeAfterMedicineDeleted);
+        AlertDialogPreparator.showDeleteMedicineDialog(context, medicine, null);
 
         return true;
     }

@@ -24,6 +24,7 @@ import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.CalendarOnClickListe
 import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.MedicineTypeOnItemSelectedListener;
 import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.SaveNewMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.common.LaunchVoiceRecognitionOnClickListener;
+import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
 import lmnp.wirtualnaapteczka.utils.PhotoUtils;
@@ -60,6 +61,7 @@ public class AddMedicineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SessionManager.clearSearchValueInUserSession();
 
         if (savedInstanceState != null) {
             currentMedicine = (Medicine) savedInstanceState.getSerializable(AppConstants.MEDICINE);
@@ -91,7 +93,7 @@ public class AddMedicineActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.delete_med_options_item:
-                Consumer invokeAfterMedicineDeleted = new Consumer() {
+                Consumer<Context> invokeAfterMedicineDeleted = new Consumer<Context>() {
                     @Override
                     public void accept(Context context) {
                         Intent intent = new Intent(context, MedicineListActivity.class);

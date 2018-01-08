@@ -1,17 +1,10 @@
 package lmnp.wirtualnaapteczka.listeners.common;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.View;
-import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
-import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.session.SessionManager2;
-import lmnp.wirtualnaapteczka.utils.AppConstants;
-
-import java.util.List;
+import lmnp.wirtualnaapteczka.session.SessionManager;
 
 /**
  * Sets chosen comparator in the Shared Preferences.
@@ -22,26 +15,17 @@ import java.util.List;
 public class SaveDefaultSortingComparatorOnClickListener implements View.OnClickListener {
     private SortingComparatorTypeEnum sortingComparatorTypeEnum;
     private AlertDialog sortListDialog;
-    private MedicineListActivity medicineListActivity;
 
-    public SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum sortingComparatorTypeEnum, AlertDialog sortListDialog, MedicineListActivity medicineListActivity) {
+    public SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum sortingComparatorTypeEnum, AlertDialog sortListDialog) {
         this.sortingComparatorTypeEnum = sortingComparatorTypeEnum;
         this.sortListDialog = sortListDialog;
-        this.medicineListActivity = medicineListActivity;
     }
 
     @Override
     public void onClick(View v) {
-        SharedPreferences sharedPreferences = v.getContext().getSharedPreferences(AppConstants.APP_SETTINGS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = sharedPreferences.edit();
-
-        edit.putString(AppConstants.DEFAULT_COMPARATOR, sortingComparatorTypeEnum.name());
-        edit.commit();
+        DbService dbService = SessionManager.getDbService();
+        dbService.updateDefaultComparatorInUserPreferences(sortingComparatorTypeEnum);
 
         sortListDialog.dismiss();
-
-        DbService dbService = SessionManager2.getDbService();
-        List<Medicine> allMedicinesForCurrentUser = dbService.findAllMedicinesForCurrentUser();
-        medicineListActivity.initializeMedicineList(allMedicinesForCurrentUser);
     }
 }

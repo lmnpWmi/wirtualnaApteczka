@@ -1,23 +1,44 @@
 package lmnp.wirtualnaapteczka.session;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import lmnp.wirtualnaapteczka.services.DbService;
 
+/**
+ * Manager for session.
+ *
+ * @author Sebastian Nowak
+ * @createdAt 08.01.2018
+ */
 public class SessionManager {
-    public static FirebaseSession firebaseSession;
+    private static FirebaseAuth firebaseAuth;
+    private static DbService dbService;
 
     private SessionManager() {
     }
 
-    public static FirebaseSession getFirebaseSession() {
-        return firebaseSession;
+    public static DbService getDbService() {
+        return dbService;
     }
 
-    public static void setFirebaseSession(FirebaseSession firebaseSession) {
-        SessionManager.firebaseSession = firebaseSession;
+    public static void setDbService(DbService dbService) {
+        SessionManager.dbService = dbService;
     }
 
     public static FirebaseAuth getFirebaseAuth() {
-        FirebaseAuth firebaseAuth = firebaseSession.getFirebaseAuth();
         return firebaseAuth;
+    }
+
+    public static void setFirebaseAuth(FirebaseAuth firebaseAuth) {
+        SessionManager.firebaseAuth = firebaseAuth;
+    }
+
+    public static FirebaseUser getFirebaseUser() {
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        return currentUser;
+    }
+
+    public static void clearSearchValueInUserSession() {
+        dbService.updateSearchValueInSession("");
     }
 }

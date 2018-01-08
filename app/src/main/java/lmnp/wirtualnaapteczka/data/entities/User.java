@@ -1,7 +1,15 @@
 package lmnp.wirtualnaapteczka.data.entities;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * Entity for user with his medicines, preferences etc.
+ *
+ * @author Sebastian Nowak
+ * @createdAt 08.01.2018
+ */
 public class User implements Serializable {
     private static final long serialVersionUID = 4551099958890877311L;
 
@@ -13,10 +21,15 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
 
-    private String pharmacyId;
+    private Map<String, Medicine> medicines;
+
     private UserPreferences userPreferences;
+    private UserSession userSession;
 
     public User() {
+        this.medicines = new HashMap<>();
+        this.userPreferences = new UserPreferences();
+        this.userSession = new UserSession();
     }
 
     public String getId() {
@@ -59,12 +72,12 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getPharmacyId() {
-        return pharmacyId;
+    public Map<String, Medicine> getMedicines() {
+        return medicines;
     }
 
-    public void setPharmacyId(String pharmacyId) {
-        this.pharmacyId = pharmacyId;
+    public void setMedicines(Map<String, Medicine> medicines) {
+        this.medicines = medicines;
     }
 
     public UserPreferences getUserPreferences() {
@@ -73,6 +86,18 @@ public class User implements Serializable {
 
     public void setUserPreferences(UserPreferences userPreferences) {
         this.userPreferences = userPreferences;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public UserSession getUserSession() {
+        return userSession;
+    }
+
+    public void setUserSession(UserSession userSession) {
+        this.userSession = userSession;
     }
 
     @Override
@@ -87,8 +112,10 @@ public class User implements Serializable {
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
-        if (pharmacyId != null ? !pharmacyId.equals(user.pharmacyId) : user.pharmacyId != null) return false;
-        return userPreferences != null ? userPreferences.equals(user.userPreferences) : user.userPreferences == null;
+        if (medicines != null ? !medicines.equals(user.medicines) : user.medicines != null) return false;
+        if (userPreferences != null ? !userPreferences.equals(user.userPreferences) : user.userPreferences != null)
+            return false;
+        return userSession != null ? userSession.equals(user.userSession) : user.userSession == null;
     }
 
     @Override
@@ -98,21 +125,9 @@ public class User implements Serializable {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (pharmacyId != null ? pharmacyId.hashCode() : 0);
+        result = 31 * result + (medicines != null ? medicines.hashCode() : 0);
         result = 31 * result + (userPreferences != null ? userPreferences.hashCode() : 0);
+        result = 31 * result + (userSession != null ? userSession.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", pharmacyId='" + pharmacyId + '\'' +
-                ", userPreferences=" + userPreferences +
-                '}';
     }
 }

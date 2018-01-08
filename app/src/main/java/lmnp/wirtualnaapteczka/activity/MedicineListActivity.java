@@ -1,36 +1,37 @@
 package lmnp.wirtualnaapteczka.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.*;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.adapters.MedicineItemArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
+import lmnp.wirtualnaapteczka.data.entities.User;
+import lmnp.wirtualnaapteczka.data.entities.UserPreferences;
+import lmnp.wirtualnaapteczka.data.entities.UserSession;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
 import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
+import lmnp.wirtualnaapteczka.helpers.MedicineFilter;
 import lmnp.wirtualnaapteczka.helpers.SearchMedicineDialogHelper;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.session.SessionManager2;
+import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
+import lmnp.wirtualnaapteczka.utils.FirebaseConstants;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class MedicineListActivity extends AppCompatActivity {
-
-    private DbService dbService;
     private ListView medicineListView;
     private FloatingActionButton floatingActionButton;
 
@@ -41,14 +42,12 @@ public class MedicineListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicine_list);
 
-        dbService = SessionManager2.getDbService();
         medicineListView = (ListView) findViewById(R.id.medicine_list_view);
         medicineListView.setEmptyView(findViewById(R.id.medicine_list_empty));
         floatingActionButton = (FloatingActionButton) findViewById(R.id.save_new_medicine_btn);
         floatingActionButton.setOnClickListener(new AddNewMedicineOnClickListener(this.getClass()));
 
-        List<Medicine> medicines = dbService.findAllMedicinesForCurrentUser();
-        initializeMedicineList(medicines);
+        initializeFirebaseListeners();
     }
 
     @Override
@@ -64,19 +63,6 @@ public class MedicineListActivity extends AppCompatActivity {
                 searchMedicineEditText.setText(potentialMedicineName);
             }
         }
-    }
-
-    public void initializeMedicineList(List<Medicine> medicines) {
-        if (medicines == null) {
-            medicines = new ArrayList<>();
-        }
-
-        Comparator<Medicine> defaultComparator = obtainDefaultMedicineListComparator();
-
-        Collections.sort(medicines, defaultComparator);
-
-        MedicineItemArrayAdapter medicineItemArrayAdapter = new MedicineItemArrayAdapter(this, R.id.medicine_list_view, medicines);
-        medicineListView.setAdapter(medicineItemArrayAdapter);
     }
 
     @Override
@@ -110,13 +96,49 @@ public class MedicineListActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    private Comparator<Medicine> obtainDefaultMedicineListComparator() {
-        SharedPreferences sharedPreferences = getSharedPreferences(AppConstants.APP_SETTINGS, Context.MODE_PRIVATE);
+    private void initializeFirebaseListeners() {
+        FirebaseUser firebaseUser = SessionManager.getFirebaseUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        String defaultComparatorName = sharedPreferences.getString(AppConstants.DEFAULT_COMPARATOR, SortingComparatorTypeEnum.MODIFIED_DESCENDING.name());
-        SortingComparatorTypeEnum defaultComparatorEnum = SortingComparatorTypeEnum.valueOf(defaultComparatorName);
+        DatabaseReference userRef = database.getReference().child(FirebaseConstants.USERS).child(firebaseUser.getUid());
+        userRef.addValueEventListener(new ValueEventListener() {
 
-        Comparator<Medicine> defaultComparator = defaultComparatorEnum.getComparator();
-        return defaultComparator;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+
+                UserPreferences userPreferences = user.getUserPreferences();
+                SortingComparatorTypeEnum defaultSortingComparatorEnum = userPreferences.getDefaultSortingComparatorEnum();
+
+                UserSession userSession = user.getUserSession();
+                String searchValue = userSession.getSearchValue();
+
+                Map<String, Medicine> medicinesMap = user.getMedicines();
+                List<Medicine> medicines = new ArrayList<>(medicinesMap.values());
+
+                if (!TextUtils.isEmpty(searchValue)) {
+                    medicines = MedicineFilter.filterMedicines(searchValue, medicines, false);
+                }
+
+                initializeMedicineList(medicines, defaultSortingComparatorEnum);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    private void initializeMedicineList(List<Medicine> medicines, SortingComparatorTypeEnum defaultSortingComparatorEnum) {
+        if (medicines == null) {
+            medicines = new ArrayList<>();
+        }
+
+        Comparator<Medicine> defaultComparator = defaultSortingComparatorEnum.getComparator();
+
+        Collections.sort(medicines, defaultComparator);
+
+        MedicineItemArrayAdapter medicineItemArrayAdapter = new MedicineItemArrayAdapter(this, R.id.medicine_list_view, medicines);
+        medicineListView.setAdapter(medicineItemArrayAdapter);
     }
 }

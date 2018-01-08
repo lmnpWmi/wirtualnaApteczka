@@ -3,7 +3,6 @@ package lmnp.wirtualnaapteczka.listeners.addmedicineactivity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 import lmnp.wirtualnaapteczka.R;

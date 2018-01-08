@@ -17,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
 import lmnp.wirtualnaapteczka.activity.LogInActivity;
-import lmnp.wirtualnaapteczka.activity.MainActivity;
 import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
 import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
@@ -26,9 +25,7 @@ import lmnp.wirtualnaapteczka.listeners.common.PreviewPhotoWithMedicineOnClickLi
 import lmnp.wirtualnaapteczka.listeners.common.SaveDefaultSortingComparatorOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.ShowMedicineDetailsOnClickListener;
 import lmnp.wirtualnaapteczka.services.DbService;
-import lmnp.wirtualnaapteczka.session.FirebaseSession;
 import lmnp.wirtualnaapteczka.session.SessionManager;
-import lmnp.wirtualnaapteczka.session.SessionManager2;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 import lmnp.wirtualnaapteczka.utils.CollectionUtils;
 import lmnp.wirtualnaapteczka.utils.PhotoUtils;
@@ -43,7 +40,7 @@ import java.util.List;
  * @createdAt 29.12.2017
  */
 public class AlertDialogPreparator {
-    public static void showDeleteMedicineDialog(final Context context, final Medicine medicine, final Consumer invokeAfterActionConsumer) {
+    public static void showDeleteMedicineDialog(final Context context, final Medicine medicine, final Consumer<Context> invokeAfterActionConsumer) {
         AlertDialog.Builder deleteMedicineDialogBuilder = new AlertDialog.Builder(
                 context);
         deleteMedicineDialogBuilder.setTitle(context.getResources().getString(R.string.delete_medicine));
@@ -57,10 +54,12 @@ public class AlertDialogPreparator {
 
                 deleteMedicinePhotos(oldPhotoUrisToDelete);
 
-                DbService dbService = SessionManager2.getDbService();
+                DbService dbService = SessionManager.getDbService();
                 dbService.deleteMedicine(medicine.getId());
 
-                invokeAfterActionConsumer.accept(context);
+                if (invokeAfterActionConsumer != null) {
+                    invokeAfterActionConsumer.accept(context);
+                }
             }
 
             private void deleteMedicinePhotos(List<String> oldPhotoUrisToDelete) {
@@ -85,8 +84,7 @@ public class AlertDialogPreparator {
 
         dialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                FirebaseSession firebaseSession = SessionManager.getFirebaseSession();
-                FirebaseAuth firebaseAuth = firebaseSession.getFirebaseAuth();
+                FirebaseAuth firebaseAuth = SessionManager.getFirebaseAuth();
                 firebaseAuth.signOut();
 
                 SharedPreferences sharedPreferences = context.getSharedPreferences(AppConstants.APP_SETTINGS, Context.MODE_PRIVATE);
@@ -125,11 +123,8 @@ public class AlertDialogPreparator {
                 int amountValue = numberPicker.getValue();
                 medicine.setAmount(amountValue);
 
-                DbService dbService = SessionManager2.getDbService();
-                dbService.updateMedicine(medicine);
-
-                MainActivity mainActivity = (MainActivity) context;
-                mainActivity.initializeRecentlyUsedMedicinesList();
+                DbService dbService = SessionManager.getDbService();
+                dbService.saveOrUpdateMedicine(medicine);
             }
         });
 
@@ -161,14 +156,14 @@ public class AlertDialogPreparator {
         Button sortByModifiedDateAscending = (Button) view.findViewById(R.id.sort_modified_date_ascending);
         Button sortByModifiedDateDescending = (Button) view.findViewById(R.id.sort_modified_date_descending);
 
-        sortByNameAscending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.NAME_ASCENDING, sortListDialog, medicineListActivity));
-        sortByNameDescending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.NAME_DESCENDING, sortListDialog, medicineListActivity));
-        sortByCreatedDateAscending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.CREATED_ASCENDING, sortListDialog, medicineListActivity));
-        sortByCreatedDateDescending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.CREATED_DESCENDING, sortListDialog, medicineListActivity));
-        sortByDueDateAscending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.DUE_DATE_ASCENDING, sortListDialog, medicineListActivity));
-        sortByDueDateDescending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.DUE_DATE_DESCENDING, sortListDialog, medicineListActivity));
-        sortByModifiedDateAscending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.MODIFIED_ASCENDING, sortListDialog, medicineListActivity));
-        sortByModifiedDateDescending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.MODIFIED_DESCENDING, sortListDialog, medicineListActivity));
+        sortByNameAscending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.NAME_ASCENDING, sortListDialog));
+        sortByNameDescending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.NAME_DESCENDING, sortListDialog));
+        sortByCreatedDateAscending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.CREATED_ASCENDING, sortListDialog));
+        sortByCreatedDateDescending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.CREATED_DESCENDING, sortListDialog));
+        sortByDueDateAscending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.DUE_DATE_ASCENDING, sortListDialog));
+        sortByDueDateDescending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.DUE_DATE_DESCENDING, sortListDialog));
+        sortByModifiedDateAscending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.MODIFIED_ASCENDING, sortListDialog));
+        sortByModifiedDateDescending.setOnClickListener(new SaveDefaultSortingComparatorOnClickListener(SortingComparatorTypeEnum.MODIFIED_DESCENDING, sortListDialog));
     }
 
     public static void showTakeNewPictureOrViewExistingDialog(final AddMedicineActivity addMedicineActivity, final Medicine medicine, final Class<? extends AppCompatActivity> addMedicineInvokingClass) {
