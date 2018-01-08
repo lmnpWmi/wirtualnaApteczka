@@ -12,8 +12,7 @@ import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 
 public class RegisterNewUserOnClickListener implements View.OnClickListener {
-    private EditText firstNameText;
-    private EditText lastNameText;
+    private EditText usernameEditText;
     private EditText emailText;
     private EditText passwordText;
     private EditText repeatPasswordText;
@@ -38,34 +37,27 @@ public class RegisterNewUserOnClickListener implements View.OnClickListener {
     }
 
     private void initializeViewComponents(View v) {
-        firstNameText = (EditText) v.findViewById(R.id.register_first_name_text);
-        lastNameText = (EditText) v.findViewById(R.id.register_last_name_text);
+        usernameEditText = (EditText) v.findViewById(R.id.register_username_text);
         emailText = (EditText) v.findViewById(R.id.register_email_text);
         passwordText = (EditText) v.findViewById(R.id.register_password_text);
         repeatPasswordText = (EditText) v.findViewById(R.id.register_password_repeat_text);
     }
 
     private UserRegistrationTO prepareUserRegistrationTO() {
-        String firstName = firstNameText.getText().toString().trim();
-        String lastName = lastNameText.getText().toString().trim();
+        String username = usernameEditText.getText().toString().trim();
         String email = emailText.getText().toString().trim();
         String password = passwordText.getText().toString().trim();
         String repeatedPassword = repeatPasswordText.getText().toString().trim();
 
-        return new UserRegistrationTO(firstName, lastName, email, password, repeatedPassword);
+        return new UserRegistrationTO(username, email, password, repeatedPassword);
     }
 
     private boolean validateUserRegistrationData(Context context, UserRegistrationTO userRegistrationTO) {
         StringBuilder errorMessageBuilder = new StringBuilder();
         String errorMessage = null;
 
-        if (TextUtils.isEmpty(userRegistrationTO.getFirstName())) {
-            errorMessage = context.getResources().getString(R.string.first_name_empty_err_msg);
-            appendErrorMessage(errorMessageBuilder, errorMessage);
-        }
-
-        if (TextUtils.isEmpty(userRegistrationTO.getLastName())) {
-            errorMessage = context.getResources().getString(R.string.last_name_empty_err_msg);
+        if (TextUtils.isEmpty(userRegistrationTO.getUsername())) {
+            errorMessage = context.getResources().getString(R.string.username_empty_err_msg);
             appendErrorMessage(errorMessageBuilder, errorMessage);
         }
 

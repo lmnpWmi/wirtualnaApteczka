@@ -8,7 +8,7 @@ package lmnp.wirtualnaapteczka.utils;
  */
 public final class AppConstants {
     public static final int FIRST_ITEM_INDEX = 0;
-    public static final int RECENTLY_USED_MEDICINES_DEFAULT_AMOUNT = 4;
+    public static final int RECENTLY_USED_MEDICINES_DEFAULT_AMOUNT = 5;
     public static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int REQUEST_VOICE_INPUT_MEDICINE_NAME = 2;
     public static final int REQUEST_VOICE_INPUT_MEDICINE_NOTES = 3;

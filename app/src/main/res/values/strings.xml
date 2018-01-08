@@ -90,7 +90,7 @@
 
     <!--Registration layout-->
     <string name="registration">Rejestracja</string>
-    <string name="name">Imię</string>
+    <string name="username">Nazwa użytkownika</string>
     <string name="repeat_pass">Powtórz hasło</string>
     <string name="registration_accept">Rejestrujac się akceptujesz </string>
     <string name="surname">Nazwisko</string>
@@ -131,7 +131,7 @@
     <string name="invitation_contacts_list_empty">Brak oczekujących zaproszeń.</string>
 
     <!-- Registration layout -->
-    <string name="first_name_empty_err_msg">Proszę podać imię.</string>
+    <string name="username_empty_err_msg">Proszę podać nazwę użytkownika.</string>
     <string name="last_name_empty_err_msg">Proszę podać nazwisko.</string>
     <string name="email_empty_err_msg">Proszę podać email.</string>
     <string name="password_empty_err_msg">Proszę podać hasło.</string>

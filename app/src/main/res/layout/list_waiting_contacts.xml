@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:textSize="16sp"
-            tools:text="@string/name" />
+            tools:text="@string/username" />
 
         <TextView
             android:layout_width="match_parent"

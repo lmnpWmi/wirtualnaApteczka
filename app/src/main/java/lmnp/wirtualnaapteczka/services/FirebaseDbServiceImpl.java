@@ -42,8 +42,7 @@ public class FirebaseDbServiceImpl implements DbService {
 
         User user = new User();
         user.setId(currentUser.getUid());
-        user.setFirstName(userRegistrationTO.getFirstName());
-        user.setLastName(userRegistrationTO.getLastName());
+        user.setUsername(userRegistrationTO.getUsername());
         user.setEmail(userRegistrationTO.getEmail());
 
         userRef.setValue(user);

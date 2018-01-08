@@ -84,7 +84,7 @@
 
     <!--Registration layout-->
     <string name="registration">Registrations</string>
-    <string name="name">Name</string>
+    <string name="username">Username</string>
     <string name="repeat_pass">Confirm password</string>
     <string name="registration_accept">By signing up, you agree to Virtual Med Kit</string>
     <string name="surname">Surname</string>
@@ -119,7 +119,7 @@
     <string name="medicines_share_me">Medicined shared for me</string>
 
     <!-- Registration layout -->
-    <string name="first_name_empty_err_msg">Please state your name.</string>
+    <string name="username_empty_err_msg">Please state your username.</string>
     <string name="last_name_empty_err_msg">Please state your surname.</string>
     <string name="email_empty_err_msg">Please enter your e-mail.</string>
     <string name="password_empty_err_msg">Please enter your password.</string>

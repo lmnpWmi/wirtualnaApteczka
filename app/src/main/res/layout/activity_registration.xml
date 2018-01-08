@@ -11,14 +11,9 @@
         <EditText
                 style="@style/MyEditText"
                 android:layout_weight="1"
-                android:hint="@string/name"
-                android:inputType="textPersonName" android:id="@+id/register_first_name_text"/>
+                android:hint="@string/username"
+                android:inputType="textPersonName" android:id="@+id/register_username_text"/>
 
-        <EditText
-                style="@style/MyEditText"
-                android:layout_weight="1"
-                android:hint="@string/surname"
-                android:inputType="textPersonName" android:id="@+id/register_last_name_text"/>
         <EditText
                 style="@style/MyEditText"
                 android:layout_weight="1"
