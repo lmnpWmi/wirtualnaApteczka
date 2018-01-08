@@ -9,33 +9,38 @@
         android:orientation="vertical">
 
         <EditText
-                style="@style/MyEditText"
-                android:layout_weight="1"
-                android:hint="@string/username"
-                android:inputType="textPersonName" android:id="@+id/register_username_text"/>
+            android:id="@+id/register_username_text"
+            style="@style/MyEditText"
+            android:layout_weight="1"
+            android:hint="@string/username"
+            android:inputType="textPersonName" />
 
         <EditText
-                style="@style/MyEditText"
-                android:layout_weight="1"
-                android:hint="@string/email"
-                android:inputType="textPersonName" android:id="@+id/register_email_text"/>
+            android:id="@+id/register_email_text"
+            style="@style/MyEditText"
+            android:layout_weight="1"
+            android:hint="@string/email"
+            android:inputType="textPersonName" />
 
         <EditText
-                style="@style/MyEditText"
-                android:layout_weight="1"
-                android:hint="@string/pass"
-                android:inputType="textPassword" android:id="@+id/register_password_text"/>
+            android:id="@+id/register_password_text"
+            style="@style/MyEditText"
+            android:layout_weight="1"
+            android:hint="@string/pass"
+            android:inputType="textPassword" />
 
         <EditText
-                style="@style/MyEditText"
-                android:layout_weight="1"
-                android:hint="@string/repeat_pass"
-                android:id="@+id/register_password_repeat_text" android:inputType="textPassword"/>
+            android:id="@+id/register_password_repeat_text"
+            style="@style/MyEditText"
+            android:layout_weight="1"
+            android:hint="@string/repeat_pass"
+            android:inputType="textPassword" />
 
         <Button
-                style="@style/MyButton"
-                android:layout_marginTop="40dp"
-                android:text="@string/register" android:id="@+id/register_new_user_btn"/>
+            android:id="@+id/register_new_user_btn"
+            style="@style/MyButton"
+            android:layout_marginTop="40dp"
+            android:text="@string/register" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,15 +59,16 @@
                 android:textSize="16sp" />
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="2dp"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:text="@string/regulations"
-                    android:textColor="@color/color_primary"
-                    android:textSize="16sp" android:id="@+id/register_regulations_btn"/>
+                android:id="@+id/register_regulations_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="@string/regulations"
+                android:textColor="@color/color_primary"
+                android:textSize="16sp" />
 
         </LinearLayout>
 

@@ -7,7 +7,9 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
 
 
     <LinearLayout
@@ -26,12 +28,6 @@
             android:textSize="16sp"
             tools:text="@string/username" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:textSize="16sp"
-            tools:text="@string/surname" />
 
         <TextView
             android:layout_width="match_parent"

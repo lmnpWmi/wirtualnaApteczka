@@ -84,7 +84,6 @@
 
     <!--Registration layout-->
     <string name="registration">Registrations</string>
-    <string name="username">Username</string>
     <string name="repeat_pass">Confirm password</string>
     <string name="registration_accept">By signing up, you agree to Virtual Med Kit</string>
     <string name="surname">Surname</string>
@@ -170,5 +169,6 @@
     <string name="verification_email_sent">The verification link has been sent to the e-mail address provided</string>
     <string name="facebook_app_id">761655134044259</string>
     <string name="fb_login_protocol_scheme">fb761655134044259</string>
+    <string name="username">Username</string>
 
 </resources>
