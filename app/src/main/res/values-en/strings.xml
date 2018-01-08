@@ -157,5 +157,18 @@
     <string name="view_medicine_photo">Display the picture</string>
     <string name="invitations">Invitations</string>
     <string name="invitation_contacts_list_empty">You do not have any pending invitations.</string>
+    <string name="authentication_failed">Authentication failed.</string>
+    <string name="email_not_verified">The email you have entered has not yet been verified.</string>
+    <string name="empty_email_err_msg">The email can not be empty.</string>
+    <string name="empty_email_or_password_msg">Please complete the email and password.</string>
+    <string name="invalid_email_or_password">Incorrect email or password.</string>
+    <string name="log_out">log out</string>
+    <string name="password_length_err_msg">The password must be at least 6 characters long.</string>
+    <string name="remind_password_email_sent">A message with instructions on resetting the password has been sent to the e-mail address provided.</string>
+    <string name="user_not_registered">" A new user could not be created."</string>
+    <string name="user_registered">The user has been successfully created ..</string>
+    <string name="verification_email_sent">The verification link has been sent to the e-mail address provided</string>
+    <string name="facebook_app_id">761655134044259</string>
+    <string name="fb_login_protocol_scheme">fb761655134044259</string>
 
 </resources>
