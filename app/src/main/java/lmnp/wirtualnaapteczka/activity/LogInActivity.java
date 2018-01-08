@@ -3,9 +3,11 @@ package lmnp.wirtualnaapteczka.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -85,6 +87,8 @@ public class LogInActivity extends AppCompatActivity {
         updateRememberedEmail();
 
         passwordText = (EditText) findViewById(R.id.password_login_text);
+        passwordText.setTypeface(Typeface.DEFAULT);
+        passwordText.setTransformationMethod(new PasswordTransformationMethod());
         passwordText.setSelected(false);
     }
 
