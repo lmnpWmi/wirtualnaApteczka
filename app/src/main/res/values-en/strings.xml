@@ -20,6 +20,7 @@
     <string name="last_added">Recently used:</string>
     <string name="not_searched_yet">You did not search any medicine yet.</string>
     <string name="log_out_popup_msg">Are you sure you want to sing out?</string>
+    <string name="available_soon">Available soon!</string>
 
     <!-- Add medicine layout -->
     <string name="general_info">General information</string>

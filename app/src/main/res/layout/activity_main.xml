@@ -80,14 +80,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/friends_panel"
+                android:id="@+id/family_panel"
                 android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/my_friends_img_btn"
+                    android:id="@+id/my_family_img_btn"
                     android:layout_width="88dp"
                     android:layout_height="88dp"
                     android:layout_gravity="center"
@@ -98,7 +98,7 @@
                     app:srcCompat="@drawable/icon_family" />
 
                 <TextView
-                    android:id="@+id/my_friends_label"
+                    android:id="@+id/my_family_label"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:clickable="false"

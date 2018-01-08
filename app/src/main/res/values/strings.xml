@@ -21,6 +21,7 @@
     <string name="not_searched_yet">Nie wyszukiwałeś jeszcze żadnego leku</string>
     <string name="log_out_popup_msg">Czy na pewno chcesz się wylogować?</string>
     <string name="log_out">wyloguj</string>
+    <string name="available_soon">Dostępne wkrótce!</string>
 
     <!-- Add medicine layout -->
     <string name="general_info">Informacje ogólne</string>

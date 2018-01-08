@@ -1,6 +1,5 @@
 package lmnp.wirtualnaapteczka.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -15,9 +14,8 @@ import lmnp.wirtualnaapteczka.comparators.MedicineModifiedComparator;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
-import lmnp.wirtualnaapteczka.helpers.SearchMedicineDialogHelper;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListener;
-import lmnp.wirtualnaapteczka.listeners.mainactivity.FriendListOnClickListener;
+import lmnp.wirtualnaapteczka.listeners.mainactivity.FamilyListOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.MedicineListOnClickListener;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
@@ -31,7 +29,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private LinearLayout addMedicinePanel;
     private LinearLayout medicineListPanel;
-    private LinearLayout friendsPanel;
+    private LinearLayout familyPanel;
     private ListView recentlyUsedMedicinesSimpleList;
 
     @Override
@@ -43,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         addMedicinePanel = (LinearLayout) findViewById(R.id.add_medicine_panel);
         medicineListPanel = (LinearLayout) findViewById(R.id.medicine_list_panel);
-        friendsPanel = (LinearLayout) findViewById(R.id.friends_panel);
+        familyPanel = (LinearLayout) findViewById(R.id.family_panel);
         recentlyUsedMedicinesSimpleList = (ListView) findViewById(R.id.medicine_list_view_simple);
         recentlyUsedMedicinesSimpleList.setEmptyView(findViewById(R.id.medicine_list_simple_empty));
 
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     private void initializeListeners() {
         addMedicinePanel.setOnClickListener(new AddNewMedicineOnClickListener(this.getClass()));
         medicineListPanel.setOnClickListener(new MedicineListOnClickListener());
-        friendsPanel.setOnClickListener(new FriendListOnClickListener());
+        familyPanel.setOnClickListener(new FamilyListOnClickListener());
     }
 
     private void initializeFirebaseListeners() {
