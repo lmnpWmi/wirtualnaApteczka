@@ -1,8 +1,10 @@
 package lmnp.wirtualnaapteczka.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import com.google.firebase.auth.FirebaseUser;
@@ -13,6 +15,7 @@ import lmnp.wirtualnaapteczka.comparators.MedicineModifiedComparator;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
+import lmnp.wirtualnaapteczka.helpers.SearchMedicineDialogHelper;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.FriendListOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.MedicineListOnClickListener;
@@ -55,8 +58,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void finish() {
-        AlertDialogPreparator.displayLogoutPopup(this);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean result = true;
+
+        switch (item.getItemId()) {
+            case R.id.logout_menu:
+                AlertDialogPreparator.displayLogoutPopup(this);
+                break;
+            default:
+                result = super.onOptionsItemSelected(item);
+        }
+
+        return result;
+    }
+
+    @Override
+    public void onBackPressed() {
+        SessionManager.closeApplication(this);
     }
 
     public void initializeRecentlyUsedMedicinesList(List<Medicine> currentUserMedicines) {

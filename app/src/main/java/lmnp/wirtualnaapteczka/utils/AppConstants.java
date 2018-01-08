@@ -20,7 +20,7 @@ public final class AppConstants {
 
     public static final String ADD_MEDICINE_INVOKING_CLASS = "add_medicine_invoking_class";
     public static final String APP_SETTINGS = "app_settings";
-    public static final String DEFAULT_COMPARATOR = "current_comparator";
+    public static final String EXIT = "exit";
     public static final String MEDICINE = "medicine";
     public static final String MEDICINE_PHOTOS_DIR = "medicine_photos";
     public static final String MEDICINE_PHOTO_URI = "medicine_photo_uri";

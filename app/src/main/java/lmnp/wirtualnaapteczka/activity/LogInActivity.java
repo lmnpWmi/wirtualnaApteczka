@@ -69,7 +69,7 @@ public class LogInActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        SessionManager.closeApplication(this);
     }
 
     private void initializeViewComponents() {

@@ -1,8 +1,13 @@
 package lmnp.wirtualnaapteczka.session;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import lmnp.wirtualnaapteczka.activity.LauncherActivity;
 import lmnp.wirtualnaapteczka.services.DbService;
+import lmnp.wirtualnaapteczka.utils.AppConstants;
 
 /**
  * Manager for session.
@@ -40,5 +45,14 @@ public class SessionManager {
 
     public static void clearSearchValueInUserSession() {
         dbService.updateSearchValueInSession("");
+    }
+
+    public static void closeApplication(AppCompatActivity context) {
+        Intent intent = new Intent(context, LauncherActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(AppConstants.EXIT, true);
+
+        context.startActivity(intent);
+        context.finish();
     }
 }

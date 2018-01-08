@@ -6,9 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.listeners.loginactivity.LogInOnCompleteListener;
 import lmnp.wirtualnaapteczka.services.DbService;
@@ -26,12 +26,24 @@ import static lmnp.wirtualnaapteczka.utils.AppConstants.APP_SETTINGS;
  */
 public class LauncherActivity extends AppCompatActivity {
     private static final String IS_FIRST_LAUNCH = "is_first_launch";
+    private boolean shouldInitializeDBCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
 
+        boolean exitApplicationFlag = getIntent().getBooleanExtra(AppConstants.EXIT, false);
+
+        if (exitApplicationFlag) {
+            finish();
+            android.os.Process.killProcess(android.os.Process.myPid());
+        } else {
+            initializeApplication();
+        }
+    }
+
+    private void initializeApplication() {
         prepareSessionManager();
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(APP_SETTINGS, Context.MODE_PRIVATE);
@@ -45,6 +57,7 @@ public class LauncherActivity extends AppCompatActivity {
 
     private void prepareSessionManager() {
         FirebaseApp.initializeApp(getApplicationContext());
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         DbService dbService = FirebaseDbServiceImpl.createNewInstance();
