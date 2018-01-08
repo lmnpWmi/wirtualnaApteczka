@@ -35,7 +35,7 @@ public class FirebaseDbServiceImpl implements DbService {
     }
 
     @Override
-    public void createUserAccountInFirebase(UserRegistrationTO userRegistrationTO) {
+    public void createOrUpdateUserAccountInFirebase(UserRegistrationTO userRegistrationTO) {
         FirebaseUser currentUser = SessionManager.getFirebaseUser();
 
         DatabaseReference userRef = firebaseDB.getReference(USERS).child(currentUser.getUid());

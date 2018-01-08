@@ -6,6 +6,11 @@ public class UserRegistrationTO {
     private String password;
     private String repeatedPassword;
 
+    public UserRegistrationTO(String username, String email) {
+        this.username = username;
+        this.email = email;
+    }
+
     public UserRegistrationTO(String username, String email, String password, String repeatedPassword) {
         this.username = username;
         this.email = email;

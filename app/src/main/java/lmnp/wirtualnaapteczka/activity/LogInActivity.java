@@ -21,7 +21,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.data.dto.UserRegistrationTO;
 import lmnp.wirtualnaapteczka.listeners.loginactivity.*;
+import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 
@@ -107,7 +109,7 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         FirebaseAuth firebaseAuth = SessionManager.getFirebaseAuth();
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -116,6 +118,13 @@ public class LogInActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            String displayName = acct.getDisplayName();
+                            String email = acct.getEmail();
+                            UserRegistrationTO userRegistrationTO = new UserRegistrationTO(displayName, email);
+
+                            DbService dbService = SessionManager.getDbService();
+                            dbService.createOrUpdateUserAccountInFirebase(userRegistrationTO);
+
                             Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                             LogInActivity.this.startActivity(intent);
                         } else {

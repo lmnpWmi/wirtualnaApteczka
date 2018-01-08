@@ -35,7 +35,7 @@ public class RegistrationOnCompleteListener implements OnCompleteListener<AuthRe
             if (currentUser != null) {
                 currentUser.sendEmailVerification();
                 DbService dbService = SessionManager.getDbService();
-                dbService.createUserAccountInFirebase(userRegistrationTO);
+                dbService.createOrUpdateUserAccountInFirebase(userRegistrationTO);
 
                 messageId = R.string.verification_email_sent;
             }
