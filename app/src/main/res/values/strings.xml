@@ -90,10 +90,10 @@
 
     <!--Registration layout-->
     <string name="registration">Rejestracja</string>
-    <string name="username">Nazwa użytkownika</string>
     <string name="repeat_pass">Powtórz hasło</string>
     <string name="registration_accept">Rejestrujac się akceptujesz </string>
     <string name="surname">Nazwisko</string>
+    <string name="username">Nazwa użytkownika</string>
 
     <!-- Notes Dialog Box -->
     <string name="notes_message">Proszę podać notatki dotyczące leku.</string>
