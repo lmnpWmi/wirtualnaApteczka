@@ -8,6 +8,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
 import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
@@ -198,13 +199,18 @@ public class PhotoUtils {
      * TODO Store photos in DB
      */
     public static boolean arePhotosPhysicallyPresentOnDevice(PhotoDescriptionTO photoDescriptionTO) {
+        boolean arePhotoPhysicallyPresentOnDevice = false;
+
         String fullSizePhotoUri = photoDescriptionTO.getFullSizePhotoUri();
-        File fullSizePhoto = new File(fullSizePhotoUri);
-
         String smallSizePhotoUri = photoDescriptionTO.getSmallSizePhotoUri();
-        File smallSizePhoto = new File(smallSizePhotoUri);
 
-        boolean arePhotoPhysicallyPresentOnDevice = fullSizePhoto.exists() && smallSizePhoto.exists();
+        if (!TextUtils.isEmpty(fullSizePhotoUri) && !TextUtils.isEmpty(smallSizePhotoUri)) {
+            File fullSizePhoto = new File(fullSizePhotoUri);
+            File smallSizePhoto = new File(smallSizePhotoUri);
+
+            arePhotoPhysicallyPresentOnDevice = fullSizePhoto.exists() && smallSizePhoto.exists();
+        }
+
         return arePhotoPhysicallyPresentOnDevice;
     }
 }

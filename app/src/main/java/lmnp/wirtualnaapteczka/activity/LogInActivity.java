@@ -1,10 +1,15 @@
 package lmnp.wirtualnaapteczka.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
@@ -21,12 +26,15 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.dto.UserRegistrationTO;
 import lmnp.wirtualnaapteczka.listeners.loginactivity.*;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
+
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 /**
  * Activity responsible for handling events on the layout for logging in.
@@ -50,6 +58,8 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        verifyNecessaryPermissions();
+
         initializeViewComponents();
         initializeComponentsListeners();
     }
@@ -70,8 +80,45 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case AppConstants.PERMISSION_REQUEST:
+                boolean permissionGranted = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+                if (!permissionGranted) {
+                    Toast.makeText(this, R.string.insufficient_permissions, Toast.LENGTH_SHORT).show();
+                    onBackPressed();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                break;
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         SessionManager.closeApplication(this);
+    }
+
+    private void verifyNecessaryPermissions() {
+        int permissionCheckCamera = ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.CAMERA);
+
+        if (permissionCheckCamera != PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA, Manifest.permission.CAMERA},
+                    AppConstants.PERMISSION_REQUEST);
+        }
+
+        int permissionCheckInternet = ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.INTERNET);
+
+        if (permissionCheckInternet != PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.INTERNET, Manifest.permission.INTERNET},
+                    AppConstants.PERMISSION_REQUEST);
+        }
     }
 
     private void initializeViewComponents() {
@@ -125,7 +172,7 @@ public class LogInActivity extends AppCompatActivity {
                             UserRegistrationTO userRegistrationTO = new UserRegistrationTO(displayName, email);
 
                             DbService dbService = SessionManager.getDbService();
-                            dbService.createOrUpdateUserAccountInFirebase(userRegistrationTO);
+                            dbService.createUserAccountCreatorListener(userRegistrationTO);
 
                             Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                             LogInActivity.this.startActivity(intent);

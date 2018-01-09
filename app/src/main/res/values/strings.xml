@@ -88,6 +88,7 @@
     <string name="regulations">Regulamin</string>
     <string name="or">lub</string>
     <string name="remember_me">Zapamiętaj mnie</string>
+    <string name="insufficient_permissions">Brak wymaganych zezwoleń do poprawnego działania aplikacji.</string>
 
     <!--Registration layout-->
     <string name="registration">Rejestracja</string>

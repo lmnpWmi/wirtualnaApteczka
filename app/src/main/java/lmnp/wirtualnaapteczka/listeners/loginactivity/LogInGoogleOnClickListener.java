@@ -7,7 +7,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.LogInActivity;
-import lmnp.wirtualnaapteczka.activity.MainActivity;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 
 public class LogInGoogleOnClickListener implements View.OnClickListener {

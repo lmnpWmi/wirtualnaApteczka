@@ -82,6 +82,7 @@
     <string name="regulations">Terms and Conditions</string>
     <string name="or">or</string>
     <string name="remember_me">Keep me signed in</string>
+    <string name="insufficient_permissions">Insufficient permissions for application to work properly.</string>
 
     <!--Registration layout-->
     <string name="registration">Registrations</string>

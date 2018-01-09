@@ -8,6 +8,8 @@ import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
 import java.util.List;
 
 public interface DbService {
+    void createUserAccountCreatorListener(UserRegistrationTO user);
+
     void createOrUpdateUserAccountInFirebase(UserRegistrationTO user);
 
     void updateDefaultComparatorInUserPreferences(SortingComparatorTypeEnum defaultSortingComparatorEnum);

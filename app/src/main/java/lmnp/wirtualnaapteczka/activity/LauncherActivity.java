@@ -25,9 +25,6 @@ import static lmnp.wirtualnaapteczka.utils.AppConstants.APP_SETTINGS;
  * @createdAt 07.01.2018
  */
 public class LauncherActivity extends AppCompatActivity {
-    private static final String IS_FIRST_LAUNCH = "is_first_launch";
-    private boolean shouldInitializeDBCache;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +83,7 @@ public class LauncherActivity extends AppCompatActivity {
     }
 
     private void launchProperActivity(SharedPreferences sharedPreferences) {
-        boolean isFirstLaunch = sharedPreferences.getBoolean(IS_FIRST_LAUNCH, true);
+        boolean isFirstLaunch = sharedPreferences.getBoolean(AppConstants.IS_FIRST_LAUNCH, true);
 
         if (isFirstLaunch) {
             markFirstLaunchStatus(sharedPreferences);
@@ -99,7 +96,7 @@ public class LauncherActivity extends AppCompatActivity {
     private void markFirstLaunchStatus(SharedPreferences sharedPreferences) {
         SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
 
-        sharedPreferencesEditor.putBoolean(IS_FIRST_LAUNCH, false);
+        sharedPreferencesEditor.putBoolean(AppConstants.IS_FIRST_LAUNCH, false);
         sharedPreferencesEditor.commit();
     }
 

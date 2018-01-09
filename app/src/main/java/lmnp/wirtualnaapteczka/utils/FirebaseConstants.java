@@ -13,6 +13,7 @@ public final class FirebaseConstants {
     public static final String USERS = "users";
     public static final String USER_PREFERENCES = "userPreferences";
     public static final String USER_SESSION = "userSession";
+    public static final String EMAIL = "email";
 
     private FirebaseConstants() {
     }

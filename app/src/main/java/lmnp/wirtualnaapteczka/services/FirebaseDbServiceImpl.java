@@ -2,13 +2,13 @@ package lmnp.wirtualnaapteczka.services;
 
 import android.text.TextUtils;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.*;
 import lmnp.wirtualnaapteczka.data.dto.UserRegistrationTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
 import lmnp.wirtualnaapteczka.session.SessionManager;
+import lmnp.wirtualnaapteczka.utils.FirebaseConstants;
 
 import java.util.Date;
 import java.util.List;
@@ -32,6 +32,25 @@ public class FirebaseDbServiceImpl implements DbService {
 
     public FirebaseDbServiceImpl(FirebaseDatabase firebaseDB) {
         this.firebaseDB = firebaseDB;
+    }
+
+    public void createUserAccountCreatorListener(final UserRegistrationTO userRegistrationTO) {
+        FirebaseUser currentUser = SessionManager.getFirebaseUser();
+        DatabaseReference userRef = firebaseDB.getReference(USERS).child(currentUser.getUid()).child(FirebaseConstants.EMAIL);
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()) {
+                    createOrUpdateUserAccountInFirebase(userRegistrationTO);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
