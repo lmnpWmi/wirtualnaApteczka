@@ -7,19 +7,19 @@ package lmnp.wirtualnaapteczka.data.enums;
  * @createdAt 02.01.2018
  */
 public enum MedicineTypeEnum {
-    PILL(MedicineQuantitySuffix.PIECES),
-    SYRUP(MedicineQuantitySuffix.MILLILITER),
-    SACHET(MedicineQuantitySuffix.PIECES),
-    SPRAY(MedicineQuantitySuffix.MILLILITER),
-    OTHER(MedicineQuantitySuffix.PIECES);
+    PILL(MedicineQuantitySuffixEnum.PIECES),
+    SYRUP(MedicineQuantitySuffixEnum.MILLILITER),
+    SACHET(MedicineQuantitySuffixEnum.PIECES),
+    SPRAY(MedicineQuantitySuffixEnum.MILLILITER),
+    OTHER(MedicineQuantitySuffixEnum.PIECES);
 
-    private MedicineQuantitySuffix quantitySuffix;
+    private MedicineQuantitySuffixEnum quantitySuffix;
 
-    MedicineTypeEnum(MedicineQuantitySuffix quantitySuffix) {
+    MedicineTypeEnum(MedicineQuantitySuffixEnum quantitySuffix) {
         this.quantitySuffix = quantitySuffix;
     }
 
-    public MedicineQuantitySuffix getQuantitySuffix() {
+    public MedicineQuantitySuffixEnum getQuantitySuffix() {
         return quantitySuffix;
     }
 }

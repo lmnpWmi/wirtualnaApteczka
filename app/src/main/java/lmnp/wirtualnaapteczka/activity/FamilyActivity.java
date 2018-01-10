@@ -5,13 +5,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.adapters.SectionsPagerAdapter;
+import lmnp.wirtualnaapteczka.adapters.FamilySectionsPagerAdapter;
 
 /**
  * Created by Jowita on 2018-01-06.
  */
 public class FamilyActivity extends AppCompatActivity {
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private FamilySectionsPagerAdapter mFamilySectionsPagerAdapter;
 
     private ViewPager mViewPager;
 
@@ -20,10 +20,11 @@ public class FamilyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family);
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), getApplicationContext());
+        mFamilySectionsPagerAdapter = new FamilySectionsPagerAdapter(getSupportFragmentManager(), this);
 
         mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setAdapter(mFamilySectionsPagerAdapter);
+        mViewPager.setOffscreenPageLimit(3);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);

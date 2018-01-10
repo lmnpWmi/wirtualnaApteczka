@@ -6,7 +6,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.data.enums.MedicineQuantitySuffix;
+import lmnp.wirtualnaapteczka.data.enums.MedicineQuantitySuffixEnum;
 import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
 import lmnp.wirtualnaapteczka.utils.LocalizationUtils;
 
@@ -27,7 +27,7 @@ public class MedicineTypeOnItemSelectedListener implements AdapterView.OnItemSel
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         MedicineTypeWithLocalizationTO item = medicineTypesAdapter.getItem(position);
 
-        MedicineQuantitySuffix quantitySuffix = item.getMedicineTypeEnum().getQuantitySuffix();
+        MedicineQuantitySuffixEnum quantitySuffix = item.getMedicineTypeEnum().getQuantitySuffix();
         String localizedQuantitySuffix = LocalizationUtils.retrieveLocalizationForString(quantitySuffix.name(), context);
 
         quantitySuffixLabel.setText(localizedQuantitySuffix);

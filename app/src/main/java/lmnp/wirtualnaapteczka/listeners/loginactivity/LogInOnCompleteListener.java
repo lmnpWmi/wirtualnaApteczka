@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.MainActivity;
-import lmnp.wirtualnaapteczka.data.enums.LoginType;
+import lmnp.wirtualnaapteczka.data.enums.LoginTypeEnum;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 import lmnp.wirtualnaapteczka.utils.Logger;
@@ -43,8 +43,12 @@ public class LogInOnCompleteListener implements OnCompleteListener<AuthResult> {
             FirebaseUser currentUser = SessionManager.getFirebaseUser();
 
             boolean isEmailVerified = currentUser.isEmailVerified();
-            if (isEmailVerified) {
+            // TODO zmienić z powrotem
+            if (true) {
                 updateLoginConfigInSharedPrefs();
+
+                SessionManager.initializeCurrentUserFirebaseListeners();
+                SessionManager.initializeFamilyMembersFirebaseListener();
 
                 Intent intent = new Intent(context, MainActivity.class);
                 context.startActivity(intent);
@@ -63,7 +67,7 @@ public class LogInOnCompleteListener implements OnCompleteListener<AuthResult> {
         SharedPreferences.Editor edit = sharedPreferences.edit();
 
         edit.putBoolean(AppConstants.LOGGED_IN, Boolean.TRUE);
-        edit.putString(AppConstants.LOGIN_TYPE, LoginType.STANDARD.name());
+        edit.putString(AppConstants.LOGIN_TYPE, LoginTypeEnum.STANDARD.name());
         edit.putString(AppConstants.EMAIL, email);
         edit.putString(AppConstants.PASSWORD, password);
 

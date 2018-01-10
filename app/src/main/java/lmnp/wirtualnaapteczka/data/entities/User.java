@@ -19,6 +19,7 @@ public class User implements Serializable {
     private String password;
 
     private Map<String, Medicine> medicines;
+    private Map<String, FamilyMember> familyMembers;
 
     private UserPreferences userPreferences;
     private UserSession userSession;
@@ -69,6 +70,14 @@ public class User implements Serializable {
         this.medicines = medicines;
     }
 
+    public Map<String, FamilyMember> getFamilyMembers() {
+        return familyMembers;
+    }
+
+    public void setFamilyMembers(Map<String, FamilyMember> familyMembers) {
+        this.familyMembers = familyMembers;
+    }
+
     public UserPreferences getUserPreferences() {
         return userPreferences;
     }
@@ -97,6 +106,8 @@ public class User implements Serializable {
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (medicines != null ? !medicines.equals(user.medicines) : user.medicines != null) return false;
+        if (familyMembers != null ? !familyMembers.equals(user.familyMembers) : user.familyMembers != null)
+            return false;
         if (userPreferences != null ? !userPreferences.equals(user.userPreferences) : user.userPreferences != null)
             return false;
         return userSession != null ? userSession.equals(user.userSession) : user.userSession == null;
@@ -109,6 +120,7 @@ public class User implements Serializable {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (medicines != null ? medicines.hashCode() : 0);
+        result = 31 * result + (familyMembers != null ? familyMembers.hashCode() : 0);
         result = 31 * result + (userPreferences != null ? userPreferences.hashCode() : 0);
         result = 31 * result + (userSession != null ? userSession.hashCode() : 0);
         return result;
@@ -122,6 +134,7 @@ public class User implements Serializable {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", medicines=" + medicines +
+                ", familyMembers=" + familyMembers +
                 ", userPreferences=" + userPreferences +
                 ", userSession=" + userSession +
                 '}';

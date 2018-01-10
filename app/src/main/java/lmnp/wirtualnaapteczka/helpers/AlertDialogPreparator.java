@@ -10,9 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.NumberPicker;
+import android.widget.*;
 import com.google.firebase.auth.FirebaseAuth;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
@@ -32,6 +30,7 @@ import lmnp.wirtualnaapteczka.utils.PhotoUtils;
 import lmnp.wirtualnaapteczka.utils.functionalinterfaces.Consumer;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Preparator for Alert Dialogs.
@@ -40,6 +39,51 @@ import java.util.List;
  * @createdAt 29.12.2017
  */
 public class AlertDialogPreparator {
+    public static void showSendFamilyMemberInvitationDialog(final Context context) {
+        AlertDialog.Builder showFamilyMemberInvitationDialogBuilder = new AlertDialog.Builder(context);
+        showFamilyMemberInvitationDialogBuilder.setTitle(R.string.send_invitation_dialog_title);
+
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.email_for_family_invitation, null);
+
+        final EditText emailEditText = (EditText) view.findViewById(R.id.email_family);
+
+        showFamilyMemberInvitationDialogBuilder.setPositiveButton(R.string.send_invitation_btn_msg, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String targetUserEmail = emailEditText.getText().toString();
+                int toastMessageId;
+
+                if (!TextUtils.isEmpty(targetUserEmail)) {
+                    Map<String, String> emailToUserIdMap = SessionManager.getEmailToUserIdMap();
+                    String targetUserId = emailToUserIdMap.get(targetUserEmail.trim());
+
+                    if (!TextUtils.isEmpty(targetUserId)) {
+                        DbService dbService = SessionManager.getDbService();
+                        dbService.createFamilyMemberInvitationForUser(targetUserId);
+
+                        toastMessageId = R.string.user_has_been_invited;
+                    } else {
+                        toastMessageId = R.string.user_with_given_email_not_exists;
+                    }
+                } else {
+                    toastMessageId = R.string.invalid_email_msg;
+                }
+
+                Toast.makeText(context, toastMessageId, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        showFamilyMemberInvitationDialogBuilder.setNegativeButton(R.string.cancel_btn, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        showFamilyMemberInvitationDialogBuilder.setView(view);
+        showFamilyMemberInvitationDialogBuilder.show();
+    }
+
     public static void showDeleteMedicineDialog(final Context context, final Medicine medicine, final Consumer<Context> invokeAfterActionConsumer) {
         AlertDialog.Builder deleteMedicineDialogBuilder = new AlertDialog.Builder(
                 context);

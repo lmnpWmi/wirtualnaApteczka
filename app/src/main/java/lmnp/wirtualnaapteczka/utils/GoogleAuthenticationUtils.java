@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.MainActivity;
-import lmnp.wirtualnaapteczka.data.enums.LoginType;
+import lmnp.wirtualnaapteczka.data.enums.LoginTypeEnum;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 
@@ -72,8 +72,11 @@ public final class GoogleAuthenticationUtils {
                             SharedPreferences sharedPreferences = activity.getApplicationContext().getSharedPreferences(AppConstants.APP_SETTINGS, Context.MODE_PRIVATE);
                             SharedPreferences.Editor edit = sharedPreferences.edit();
                             edit.putBoolean(AppConstants.LOGGED_IN, Boolean.TRUE);
-                            edit.putString(AppConstants.LOGIN_TYPE, LoginType.GOOGLE.name());
+                            edit.putString(AppConstants.LOGIN_TYPE, LoginTypeEnum.GOOGLE.name());
                             edit.commit();
+
+                            SessionManager.initializeCurrentUserFirebaseListeners();
+                            SessionManager.initializeFamilyMembersFirebaseListener();
 
                             Intent intent = new Intent(activity, MainActivity.class);
                             activity.startActivity(intent);

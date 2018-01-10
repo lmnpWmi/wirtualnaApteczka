@@ -9,7 +9,7 @@ import lmnp.wirtualnaapteczka.fragments.ContactsTabFragment;
 import lmnp.wirtualnaapteczka.fragments.InvitationsTabFragment;
 import lmnp.wirtualnaapteczka.fragments.MedicinesFamilyListTabFragment;
 
-public class SectionsPagerAdapter extends FragmentPagerAdapter {
+public class FamilySectionsPagerAdapter extends FragmentPagerAdapter {
 
     private static final int FIRST_TAB_ID = 0;
     private static final int SECOND_TAB_ID = 1;
@@ -18,14 +18,14 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private Context context;
 
-    public SectionsPagerAdapter(FragmentManager fm, Context context) {
+    public FamilySectionsPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
     }
 
     @Override
     public Fragment getItem(int position) {
-        Fragment activeFragment = null;
+        Fragment activeFragment;
 
         switch (position) {
             case FIRST_TAB_ID:
@@ -67,4 +67,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         return pageTitle;
     }
+
+
 }

@@ -131,6 +131,11 @@
     <string name="contacts_list_empty">Nie masz dodanych kontaktów.</string>
     <string name="belongs_to">należy do:</string>
     <string name="invitation_contacts_list_empty">Brak oczekujących zaproszeń.</string>
+    <string name="send_invitation_dialog_title">Wyślij zaproszenie do członka rodziny</string>
+    <string name="send_invitation_btn_msg">Wyślij zaproszenie</string>
+    <string name="invalid_email_msg">Nieprawidłowy adres e-mail.</string>
+    <string name="user_has_been_invited">Zaproszenie zostało wysłane.</string>
+    <string name="user_with_given_email_not_exists">Użytkownik o podanym adresie e-mail nie istnieje.</string>
 
     <!-- Registration layout -->
     <string name="username_empty_err_msg">Proszę podać nazwę użytkownika.</string>

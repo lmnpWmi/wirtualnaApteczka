@@ -6,6 +6,6 @@ package lmnp.wirtualnaapteczka.data.enums;
  * @author Sebastian Nowak
  * @createdAt 02.01.2018
  */
-public enum MedicineQuantitySuffix {
+public enum MedicineQuantitySuffixEnum {
     PIECES, MILLILITER
 }

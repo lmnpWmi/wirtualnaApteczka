@@ -3,7 +3,7 @@ package lmnp.wirtualnaapteczka.utils;
 import android.content.Context;
 import android.text.TextUtils;
 import lmnp.wirtualnaapteczka.data.dto.MedicineTypeWithLocalizationTO;
-import lmnp.wirtualnaapteczka.data.enums.MedicineQuantitySuffix;
+import lmnp.wirtualnaapteczka.data.enums.MedicineQuantitySuffixEnum;
 import lmnp.wirtualnaapteczka.data.enums.MedicineTypeEnum;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class MedicineTypeUtils {
     }
 
     public static String prepareLocalizedTypeSuffix(MedicineTypeEnum medicineType, Context context) {
-        MedicineQuantitySuffix quantitySuffix = medicineType.getQuantitySuffix();
+        MedicineQuantitySuffixEnum quantitySuffix = medicineType.getQuantitySuffix();
         String localizedQuantitySuffix = LocalizationUtils.retrieveLocalizationForString(quantitySuffix.name(), context);
 
         return localizedQuantitySuffix;

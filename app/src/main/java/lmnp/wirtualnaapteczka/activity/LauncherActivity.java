@@ -11,7 +11,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.data.enums.LoginType;
+import lmnp.wirtualnaapteczka.data.enums.LoginTypeEnum;
 import lmnp.wirtualnaapteczka.listeners.loginactivity.LogInOnCompleteListener;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.services.FirebaseDbServiceImpl;
@@ -94,15 +94,15 @@ public class LauncherActivity extends AppCompatActivity {
             String email = sharedPreferences.getString(AppConstants.EMAIL, null);
             String password = sharedPreferences.getString(AppConstants.PASSWORD, null);
             String loginTypeName = sharedPreferences.getString(AppConstants.LOGIN_TYPE, null);
-            LoginType loginType = !TextUtils.isEmpty(loginTypeName) ? LoginType.valueOf(loginTypeName) : null;
+            LoginTypeEnum loginTypeEnum = !TextUtils.isEmpty(loginTypeName) ? LoginTypeEnum.valueOf(loginTypeName) : null;
 
-            if (loginType == LoginType.STANDARD) {
+            if (loginTypeEnum == LoginTypeEnum.STANDARD) {
                 if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
                     FirebaseAuth firebaseAuth = SessionManager.getFirebaseAuth();
                     firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new LogInOnCompleteListener(this, email, password));
                 }
             }
-            else if (loginType == LoginType.GOOGLE) {
+            else if (loginTypeEnum == LoginTypeEnum.GOOGLE) {
                 GoogleAuthenticationUtils.signIn(this);
             }
 
