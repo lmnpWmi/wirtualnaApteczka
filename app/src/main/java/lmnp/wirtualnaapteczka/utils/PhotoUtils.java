@@ -27,7 +27,9 @@ import java.util.UUID;
  * @author Sebastian Nowak
  * @createdAt 26.12.2017
  */
-public class PhotoUtils {
+public final class PhotoUtils {
+    private static final Logger logger = new Logger(PhotoUtils.class);
+
     private static final String DEFAULT_PHOTO_EXTENSION = ".jpg";
     private static final String SMALL_PHOTO_APPENDIX = "_sm";
 
@@ -47,7 +49,7 @@ public class PhotoUtils {
 
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fullSizePhotoURI);
 
-//            Log.i(PhotoUtils.class.getSimpleName(), "Picture saved to: " + fullSizePhotoAbsolutePath);
+            logger.logInfo("Picture saved to: " + fullSizePhotoAbsolutePath);
 
             PhotoDescriptionTO photoDescriptionTO = medicine.getPhotoDescriptionTO();
             List<String> oldPhotoUrisToDelete = Arrays.asList(photoDescriptionTO.getFullSizePhotoUri(), photoDescriptionTO.getSmallSizePhotoUri());
@@ -66,9 +68,9 @@ public class PhotoUtils {
             boolean hasFileBeenDeleted = file.delete();
 
             if (hasFileBeenDeleted) {
-//                Log.i(PhotoUtils.class.getSimpleName(), "File(" + thumbnailUri + ") has been successfully deleted.");
+                logger.logInfo("File(" + thumbnailUri + ") has been successfully deleted.");
             } else {
-//                Log.w(PhotoUtils.class.getSimpleName(), "Could not delete file: " + thumbnailUri);
+                logger.logWarn("Could not delete file: " + thumbnailUri);
             }
         }
     }
@@ -127,7 +129,7 @@ public class PhotoUtils {
             fileOutputStream.flush();
             fileOutputStream.close();
         } catch (IOException e) {
-//            Log.e(PhotoUtils.class.getSimpleName(), "Unable to prepare a small size thumbnail");
+            logger.logError("Unable to prepare a small size thumbnail");
         }
 
         return smallSizePhoto;
@@ -148,7 +150,7 @@ public class PhotoUtils {
         try {
             exif = new ExifInterface(photoFilePath);
         } catch (IOException e) {
-//            Log.e(PhotoUtils.class.getSimpleName(), "Unable to prepare ExifInterface for file: " + photoFilePath);
+            logger.logError("Unable to prepare ExifInterface for file: " + photoFilePath);
             return 0;
         }
 

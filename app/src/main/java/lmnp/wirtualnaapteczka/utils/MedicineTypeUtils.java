@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MedicineTypeUtils {
+    private static final Logger logger = new Logger(MedicineTypeUtils.class);
+
     private MedicineTypeUtils() {
     }
 
@@ -35,7 +37,7 @@ public class MedicineTypeUtils {
         String medicineTypeLocalized = LocalizationUtils.retrieveLocalizationForString(medicineType.name(), context);
 
         if (TextUtils.isEmpty(medicineTypeLocalized)) {
-//            Log.w(MedicineTypeEnum.class.getSimpleName(), "Could not find translation for enum: " + medicineType.name());
+            logger.logWarn("Could not find translation for enum: " + medicineType.name());
         }
 
         return medicineTypeLocalized;

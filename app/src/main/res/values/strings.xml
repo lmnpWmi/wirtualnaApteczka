@@ -68,8 +68,8 @@
 
     <!--Start layout-->
     <string name="welcome">Witamy!</string>
-    <string name="we_happy">Cieszymy się, że wybrałeś naszą aplikacje do zarządzania swoją domową apteczką.</string>
-    <string name="create_konto">Utwórz konto</string>
+    <string name="first_time_welcome_msg">Cieszymy się, że wybrałeś naszą aplikację do zarządzania swoją domową apteczką.</string>
+    <string name="create_account">Utwórz konto</string>
     <string name="log_in">Zaloguj</string>
     <string name="lets_go">Zaczynajmy!</string>
 

@@ -30,7 +30,7 @@
             android:lines="6"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:text="@string/we_happy"
+            android:text="@string/first_time_welcome_msg"
             android:textSize="20sp"
             android:textStyle="bold" />
 

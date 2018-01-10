@@ -1,6 +1,7 @@
 package lmnp.wirtualnaapteczka.services;
 
 import android.text.TextUtils;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import lmnp.wirtualnaapteczka.data.dto.UserRegistrationTO;
@@ -34,9 +35,13 @@ public class FirebaseDbServiceImpl implements DbService {
         this.firebaseDB = firebaseDB;
     }
 
-    public void createUserAccountCreatorListener(final UserRegistrationTO userRegistrationTO) {
+    public void createUserAccountCreatorListenerForGoogleAuth(GoogleSignInAccount acct) {
         FirebaseUser currentUser = SessionManager.getFirebaseUser();
         DatabaseReference userRef = firebaseDB.getReference(USERS).child(currentUser.getUid()).child(FirebaseConstants.EMAIL);
+
+        String displayName = acct.getDisplayName();
+        String email = acct.getEmail();
+        final UserRegistrationTO userRegistrationTO = new UserRegistrationTO(displayName, email);
 
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

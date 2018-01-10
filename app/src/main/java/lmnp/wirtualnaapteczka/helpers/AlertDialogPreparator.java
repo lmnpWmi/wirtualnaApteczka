@@ -89,7 +89,7 @@ public class AlertDialogPreparator {
 
                 SharedPreferences sharedPreferences = context.getSharedPreferences(AppConstants.APP_SETTINGS, Context.MODE_PRIVATE);
                 SharedPreferences.Editor edit = sharedPreferences.edit();
-                edit.putBoolean(AppConstants.REMEMBER_ME, false);
+                edit.putBoolean(AppConstants.LOGGED_IN, Boolean.FALSE);
                 edit.putString(AppConstants.PASSWORD, null);
                 edit.commit();
 

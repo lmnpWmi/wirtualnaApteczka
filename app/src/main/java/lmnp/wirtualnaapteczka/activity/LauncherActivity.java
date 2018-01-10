@@ -4,17 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.data.enums.LoginType;
 import lmnp.wirtualnaapteczka.listeners.loginactivity.LogInOnCompleteListener;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.services.FirebaseDbServiceImpl;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
+import lmnp.wirtualnaapteczka.utils.GoogleAuthenticationUtils;
 
 import static lmnp.wirtualnaapteczka.utils.AppConstants.APP_SETTINGS;
 
@@ -30,6 +33,8 @@ public class LauncherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
 
+        initializeStrictModeForNewerSdksFileAccess();
+
         boolean exitApplicationFlag = getIntent().getBooleanExtra(AppConstants.EXIT, false);
 
         if (exitApplicationFlag) {
@@ -38,6 +43,23 @@ public class LauncherActivity extends AppCompatActivity {
         } else {
             initializeApplication();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == AppConstants.GOOGLE_SIGN_IN) {
+            GoogleAuthenticationUtils.analyseGoogleLoginResult(data, this);
+        }
+    }
+
+    /**
+     * Required to allow saving photo in the app directory for newer sdks.
+     */
+    private void initializeStrictModeForNewerSdksFileAccess() {
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
     }
 
     private void initializeApplication() {
@@ -66,17 +88,25 @@ public class LauncherActivity extends AppCompatActivity {
     private boolean signInIfLoginDataHasBeenRemembered(SharedPreferences sharedPreferences) {
         boolean logInInitialized = false;
 
-        boolean rememberMe = sharedPreferences.getBoolean(AppConstants.REMEMBER_ME, false);
+        boolean userLoggedIn = sharedPreferences.getBoolean(AppConstants.LOGGED_IN, false);
 
-        if (rememberMe) {
+        if (userLoggedIn) {
             String email = sharedPreferences.getString(AppConstants.EMAIL, null);
             String password = sharedPreferences.getString(AppConstants.PASSWORD, null);
+            String loginTypeName = sharedPreferences.getString(AppConstants.LOGIN_TYPE, null);
+            LoginType loginType = !TextUtils.isEmpty(loginTypeName) ? LoginType.valueOf(loginTypeName) : null;
 
-            if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-                FirebaseAuth firebaseAuth = SessionManager.getFirebaseAuth();
-                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new LogInOnCompleteListener(this, email, password, rememberMe));
-                logInInitialized = true;
+            if (loginType == LoginType.STANDARD) {
+                if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+                    FirebaseAuth firebaseAuth = SessionManager.getFirebaseAuth();
+                    firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new LogInOnCompleteListener(this, email, password));
+                }
             }
+            else if (loginType == LoginType.GOOGLE) {
+                GoogleAuthenticationUtils.signIn(this);
+            }
+
+            logInInitialized = true;
         }
 
         return logInInitialized;

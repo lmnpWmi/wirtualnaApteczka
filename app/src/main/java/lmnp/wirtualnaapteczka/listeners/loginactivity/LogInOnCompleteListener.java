@@ -12,8 +12,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.MainActivity;
+import lmnp.wirtualnaapteczka.data.enums.LoginType;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
+import lmnp.wirtualnaapteczka.utils.Logger;
 
 /**
  * Listener executed when the answer regarding authentication of the user returned from the Firebase.
@@ -22,16 +24,16 @@ import lmnp.wirtualnaapteczka.utils.AppConstants;
  * @createdAt 07.01.2018
  */
 public class LogInOnCompleteListener implements OnCompleteListener<AuthResult> {
+    private static final Logger logger = new Logger(LogInOnCompleteListener.class);
+
     private Context context;
     private String email;
     private String password;
-    private boolean isRememberMeChecked;
 
-    public LogInOnCompleteListener(Context context, String email, String password, boolean isRememberMeChecked) {
+    public LogInOnCompleteListener(Context context, String email, String password) {
         this.context = context;
         this.email = email;
         this.password = password;
-        this.isRememberMeChecked = isRememberMeChecked;
     }
 
     @Override
@@ -51,7 +53,7 @@ public class LogInOnCompleteListener implements OnCompleteListener<AuthResult> {
                 Toast.makeText(context, R.string.email_not_verified, Toast.LENGTH_SHORT).show();
             }
         } else {
-//            Log.w(getClass().getSimpleName(), "Sign In Failure: " + task.getException());
+            logger.logWarn("Sign In Failure: " + task.getException());
             Toast.makeText(context, R.string.invalid_email_or_password, Toast.LENGTH_SHORT).show();
         }
     }
@@ -60,14 +62,10 @@ public class LogInOnCompleteListener implements OnCompleteListener<AuthResult> {
         SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences(AppConstants.APP_SETTINGS, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
 
-        edit.putBoolean(AppConstants.REMEMBER_ME, isRememberMeChecked);
+        edit.putBoolean(AppConstants.LOGGED_IN, Boolean.TRUE);
+        edit.putString(AppConstants.LOGIN_TYPE, LoginType.STANDARD.name());
         edit.putString(AppConstants.EMAIL, email);
-
-        if (isRememberMeChecked) {
-            edit.putString(AppConstants.PASSWORD, password);
-        } else {
-            edit.putString(AppConstants.PASSWORD, null);
-        }
+        edit.putString(AppConstants.PASSWORD, password);
 
         edit.commit();
     }

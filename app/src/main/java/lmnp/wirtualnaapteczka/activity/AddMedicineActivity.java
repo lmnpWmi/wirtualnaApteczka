@@ -221,7 +221,6 @@ public class AddMedicineActivity extends AppCompatActivity {
         PhotoDescriptionTO photoDescriptionTO = currentMedicine.getPhotoDescriptionTO();
 
         if (!photoDescriptionTO.isEmpty()) {
-//            Log.e("UWAGA!!", photoDescriptionTO.toString());
             setMedicineThumbnail(photoDescriptionTO);
         }
     }

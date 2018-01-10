@@ -62,8 +62,8 @@
 
     <!--Start layout-->
     <string name="welcome">Welcome!</string>
-    <string name="we_happy">We are glad, that you chose our application to manage your home med kit.</string>
-    <string name="create_konto">Sign up</string>
+    <string name="first_time_welcome_msg">We are glad, that you chose our application to manage your home med kit.</string>
+    <string name="create_account">Sign up</string>
     <string name="log_in">Sign in</string>
     <string name="lets_go">Get started!</string>
 

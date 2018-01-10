@@ -26,13 +26,13 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.FirebaseDatabase;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.data.dto.UserRegistrationTO;
+import lmnp.wirtualnaapteczka.data.enums.LoginType;
 import lmnp.wirtualnaapteczka.listeners.loginactivity.*;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
+import lmnp.wirtualnaapteczka.utils.GoogleAuthenticationUtils;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
@@ -69,13 +69,7 @@ public class LogInActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == AppConstants.GOOGLE_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_SHORT).show();
-            }
+            GoogleAuthenticationUtils.analyseGoogleLoginResult(data, this);
         }
     }
 
@@ -156,30 +150,5 @@ public class LogInActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(email)) {
             emailText.setText(email);
         }
-    }
-
-    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
-        FirebaseAuth firebaseAuth = SessionManager.getFirebaseAuth();
-
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            String displayName = acct.getDisplayName();
-                            String email = acct.getEmail();
-                            UserRegistrationTO userRegistrationTO = new UserRegistrationTO(displayName, email);
-
-                            DbService dbService = SessionManager.getDbService();
-                            dbService.createUserAccountCreatorListener(userRegistrationTO);
-
-                            Intent intent = new Intent(LogInActivity.this, MainActivity.class);
-                            LogInActivity.this.startActivity(intent);
-                        } else {
-                            Toast.makeText(LogInActivity.this, R.string.authentication_failed, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
     }
 }
