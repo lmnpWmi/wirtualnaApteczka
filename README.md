@@ -1,4 +1,4 @@
-![](app/src/main/res/mipmap-mdpi/ic_launcher.png)
+[![](app/src/main/res/mipmap-mdpi/ic_launcher.png)](https://wirtualna-apteczka.herokuapp.com/index.html)
 WirtualnaApteczka 
 ---
 [![Build Status](https://travis-ci.org/lmnpWmi/wirtualnaApteczka.svg?branch=master)](https://travis-ci.org/lmnpWmi/wirtualnaApteczka)
