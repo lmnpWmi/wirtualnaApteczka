@@ -136,6 +136,7 @@
     <string name="invalid_email_msg">Nieprawidłowy adres e-mail.</string>
     <string name="user_has_been_invited">Zaproszenie zostało wysłane.</string>
     <string name="user_with_given_email_not_exists">Użytkownik o podanym adresie e-mail nie istnieje.</string>
+    <string name="username_info">Użytkownik</string>
 
     <!-- Registration layout -->
     <string name="username_empty_err_msg">Proszę podać nazwę użytkownika.</string>

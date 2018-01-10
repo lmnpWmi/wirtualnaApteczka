@@ -9,8 +9,10 @@ package lmnp.wirtualnaapteczka.utils;
 public final class AppConstants {
     /** Default settings. */
     public static final int FIRST_ITEM_INDEX = 0;
-    public static final int RECENTLY_USED_MEDICINES_DEFAULT_AMOUNT = 5;
     public static final int MINIMUM_PASSWORD_LENGTH = 6;
+    public static final int OFF_PAGE_SCREEN_LIMIT = 3;
+    public static final int RECENTLY_USED_MEDICINES_DEFAULT_AMOUNT = 5;
+
     public static final boolean IN_DEVELOPER_MODE = true;
 
     /** For activity results. */

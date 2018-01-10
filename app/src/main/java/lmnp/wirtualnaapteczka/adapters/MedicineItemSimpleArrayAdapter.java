@@ -38,11 +38,14 @@ public class MedicineItemSimpleArrayAdapter extends ArrayAdapter<Medicine> {
     private TextView amount;
     private ImageView thumbnail;
 
+    private AdaptersCommonUtils adaptersCommonUtils;
+
     public MedicineItemSimpleArrayAdapter(Context context, int resource, List<Medicine> medicines) {
         super(context, resource, medicines);
 
         this.medicines = medicines;
         this.context = context;
+        this.adaptersCommonUtils = new AdaptersCommonUtils(context);
     }
 
     @Override
@@ -59,7 +62,7 @@ public class MedicineItemSimpleArrayAdapter extends ArrayAdapter<Medicine> {
 
         name.setText(currentMedicine.getName());
 
-        String amountText = AdaptersCommonUtils.prepareAmountText(currentMedicine.getAmount(), context) + " " + MedicineTypeUtils.prepareLocalizedTypeSuffix(currentMedicine.getType(), context);
+        String amountText = adaptersCommonUtils.prepareAmountText(currentMedicine.getAmount()) + " " + MedicineTypeUtils.prepareLocalizedTypeSuffix(currentMedicine.getType(), context);
         amount.setText(amountText);
 
         PhotoDescriptionTO photoDescriptionTO = currentMedicine.getPhotoDescriptionTO();

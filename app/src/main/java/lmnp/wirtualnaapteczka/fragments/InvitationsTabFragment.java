@@ -1,5 +1,6 @@
 package lmnp.wirtualnaapteczka.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,22 +22,24 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Jowita on 2018-01-06.
+ * Fragment for managing invitations tab.
+ *
+ * @author Sebastian Nowak
+ * @createdAt 10.01.2018
  */
-
 public class InvitationsTabFragment extends Fragment {
     private ListView invitationsListView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View myView = inflater.inflate(R.layout.family_tab_invitations, container, false);
+        View view = inflater.inflate(R.layout.family_tab_invitations, container, false);
 
-        invitationsListView = (ListView) myView.findViewById(R.id.invitation_contacts_list_view);
-        invitationsListView.setEmptyView(myView.findViewById(R.id.invitation_contacts_list_empty));
+        invitationsListView = (ListView) view.findViewById(R.id.invitation_contacts_list_view);
+        invitationsListView.setEmptyView(view.findViewById(R.id.invitation_contacts_list_empty));
 
         initializeFirebaseListeners();
 
-        return myView;
+        return view;
     }
 
     private void initializeFirebaseListeners() {
@@ -60,8 +63,11 @@ public class InvitationsTabFragment extends Fragment {
                     }
                 }
 
-                FamilyInvitationArrayAdapter familyInvitationArrayAdapter = new FamilyInvitationArrayAdapter(getContext(), R.id.invitation_contacts_list_view, pendingFamilyMembers);
-                invitationsListView.setAdapter(familyInvitationArrayAdapter);
+                Context context = getContext();
+                if (context != null) {
+                    FamilyInvitationArrayAdapter familyInvitationArrayAdapter = new FamilyInvitationArrayAdapter(getContext(), R.id.invitation_contacts_list_view, pendingFamilyMembers);
+                    invitationsListView.setAdapter(familyInvitationArrayAdapter);
+                }
             }
 
             @Override

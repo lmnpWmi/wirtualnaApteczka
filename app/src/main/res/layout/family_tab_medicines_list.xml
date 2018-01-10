@@ -3,7 +3,7 @@
     style="@style/AppTheme.Background">
 
     <ListView
-        android:id="@+id/medicine__family_list_view"
+        android:id="@+id/medicine_family_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

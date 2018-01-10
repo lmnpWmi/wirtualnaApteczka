@@ -20,6 +20,7 @@ public class Medicine implements Serializable {
     private String description;
 
     private boolean shareWithFriends;
+    private String ownerUsername;
 
     private PhotoDescriptionTO photoDescriptionTO;
 
@@ -115,6 +116,14 @@ public class Medicine implements Serializable {
         this.photoDescriptionTO = photoDescriptionTO;
     }
 
+    public String getOwnerUsername() {
+        return ownerUsername;
+    }
+
+    public void setOwnerUsername(String ownerUsername) {
+        this.ownerUsername = ownerUsername;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -133,6 +142,8 @@ public class Medicine implements Serializable {
         if (userNotes != null ? !userNotes.equals(medicine.userNotes) : medicine.userNotes != null) return false;
         if (description != null ? !description.equals(medicine.description) : medicine.description != null)
             return false;
+        if (ownerUsername != null ? !ownerUsername.equals(medicine.ownerUsername) : medicine.ownerUsername != null)
+            return false;
         return photoDescriptionTO != null ? photoDescriptionTO.equals(medicine.photoDescriptionTO) : medicine.photoDescriptionTO == null;
     }
 
@@ -148,6 +159,7 @@ public class Medicine implements Serializable {
         result = 31 * result + (userNotes != null ? userNotes.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (shareWithFriends ? 1 : 0);
+        result = 31 * result + (ownerUsername != null ? ownerUsername.hashCode() : 0);
         result = 31 * result + (photoDescriptionTO != null ? photoDescriptionTO.hashCode() : 0);
         return result;
     }
@@ -165,6 +177,7 @@ public class Medicine implements Serializable {
                 ", userNotes='" + userNotes + '\'' +
                 ", description='" + description + '\'' +
                 ", shareWithFriends=" + shareWithFriends +
+                ", ownerUsername='" + ownerUsername + '\'' +
                 ", photoDescriptionTO=" + photoDescriptionTO +
                 '}';
     }

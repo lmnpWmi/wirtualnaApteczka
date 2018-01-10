@@ -13,12 +13,10 @@ import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
 import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.data.enums.MedicineTypeEnum;
 import lmnp.wirtualnaapteczka.listeners.common.PreviewPhotoOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.medicinelistactivity.MedicineItemLongClickListener;
 import lmnp.wirtualnaapteczka.listeners.medicinelistactivity.MedicineItemOnClickListener;
 import lmnp.wirtualnaapteczka.utils.AdaptersCommonUtils;
-import lmnp.wirtualnaapteczka.utils.DateUtils;
 import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
 import lmnp.wirtualnaapteczka.utils.PhotoUtils;
 
@@ -38,20 +36,22 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
 
     private LinearLayout listItemPanel;
 
-    private TextView name;
-    private TextView type;
-    private TextView amount;
-    private TextView createdAt;
-    private TextView dueDate;
-    private ImageView thumbnail;
+    private TextView nameTextView;
+    private TextView typeTextView;
+    private TextView amountTextView;
+    private TextView createdAtTextView;
+    private TextView dueDateTextView;
+    private ImageView thumbnailImageView;
     private Button sharedMedicineBtn;
 
+    private AdaptersCommonUtils adaptersCommonUtils;
 
     public MedicineItemArrayAdapter(Context context, int resource, List<Medicine> medicines) {
         super(context, resource, medicines);
 
         this.medicines = medicines;
         this.context = context;
+        this.adaptersCommonUtils = new AdaptersCommonUtils(context);
     }
 
     @Override
@@ -70,12 +70,12 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
     private void initializeViewComponents(View view) {
         listItemPanel = (LinearLayout) view.findViewById(R.id.list_item_panel);
 
-        name = (TextView) view.findViewById(R.id.medicine_item_name);
-        type = (TextView) view.findViewById(R.id.medicine_item_type);
-        amount = (TextView) view.findViewById(R.id.medicine_item_amount);
-        createdAt = (TextView) view.findViewById(R.id.medicine_item_createdat);
-        dueDate = (TextView) view.findViewById(R.id.medicine_item_duedate);
-        thumbnail = (ImageView) view.findViewById(R.id.medicine_simple_item_thumbnail);
+        nameTextView = (TextView) view.findViewById(R.id.medicine_item_name);
+        typeTextView = (TextView) view.findViewById(R.id.medicine_item_type);
+        amountTextView = (TextView) view.findViewById(R.id.medicine_item_amount);
+        createdAtTextView = (TextView) view.findViewById(R.id.medicine_item_createdat);
+        dueDateTextView = (TextView) view.findViewById(R.id.medicine_item_duedate);
+        thumbnailImageView = (ImageView) view.findViewById(R.id.medicine_simple_item_thumbnail);
         sharedMedicineBtn = (Button) view.findViewById(R.id.share_medicine_btn);
     }
 
@@ -83,23 +83,26 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
         listItemPanel.setOnClickListener(new MedicineItemOnClickListener(currentMedicine, MedicineListActivity.class));
         listItemPanel.setOnLongClickListener(new MedicineItemLongClickListener(currentMedicine, context));
 
-        name.setText(currentMedicine.getName());
-        type.setText(prepareMedicineTypeText(currentMedicine.getType()));
-        createdAt.setText(prepareCreatedAtText(currentMedicine.getCreatedAt()));
-        dueDate.setText(prepareDueDateText(currentMedicine.getDueDate()));
+        nameTextView.setText(currentMedicine.getName());
+        typeTextView.setText(adaptersCommonUtils.prepareMedicineTypeText(currentMedicine.getType()));
+        createdAtTextView.setText(adaptersCommonUtils.prepareCreatedAtText(currentMedicine.getCreatedAt()));
 
-        String amountText = AdaptersCommonUtils.prepareAmountText(currentMedicine.getAmount(), context) + " " + MedicineTypeUtils.prepareLocalizedTypeSuffix(currentMedicine.getType(), context);
-        amount.setText(amountText);
+        Date dueDate = currentMedicine.getDueDate();
+        dueDateTextView.setText(adaptersCommonUtils.prepareDueDateText(dueDate));
+        adaptersCommonUtils.markFieldIfOverdue(dueDate, dueDateTextView);
+
+        String amountText = adaptersCommonUtils.prepareAmountText(currentMedicine.getAmount()) + " " + MedicineTypeUtils.prepareLocalizedTypeSuffix(currentMedicine.getType(), context);
+        amountTextView.setText(amountText);
 
         PhotoDescriptionTO photoDescriptionTO = currentMedicine.getPhotoDescriptionTO();
         boolean arePhotosPhysicallyPresentOnDevice = PhotoUtils.arePhotosPhysicallyPresentOnDevice(photoDescriptionTO);
 
         if (!photoDescriptionTO.isEmpty() && arePhotosPhysicallyPresentOnDevice) {
-            Bitmap thumbnailBitmap = PhotoUtils.prepareBitmap(photoDescriptionTO.getSmallSizePhotoUri(), thumbnail);
+            Bitmap thumbnailBitmap = PhotoUtils.prepareBitmap(photoDescriptionTO.getSmallSizePhotoUri(), thumbnailImageView);
 
             if (thumbnailBitmap != null) {
-                thumbnail.setImageBitmap(thumbnailBitmap);
-                thumbnail.setOnClickListener(new PreviewPhotoOnClickListener(photoDescriptionTO.getFullSizePhotoUri(), MedicineListActivity.class));
+                thumbnailImageView.setImageBitmap(thumbnailBitmap);
+                thumbnailImageView.setOnClickListener(new PreviewPhotoOnClickListener(photoDescriptionTO.getFullSizePhotoUri(), MedicineListActivity.class));
             }
         }
 
@@ -109,39 +112,6 @@ public class MedicineItemArrayAdapter extends ArrayAdapter<Medicine> {
         } else {
             sharedMedicineBtn.getBackground().setColorFilter(Color.parseColor("#FF8F00"), PorterDuff.Mode.SRC_IN);
             sharedMedicineBtn.setText(R.string.private_medicine);
-        }
-    }
-
-    private String prepareCreatedAtText(Date createdAt) {
-        String result = context.getResources().getString(R.string.created_at) + ": " + DateUtils.formatDate(createdAt, context);
-
-        return result;
-    }
-
-    private String prepareMedicineTypeText(MedicineTypeEnum medicineType) {
-        String result = context.getResources().getString(R.string.type) + ": " + MedicineTypeUtils.prepareLocalizedMedicineType(medicineType, context);
-
-        return result;
-    }
-
-    private String prepareDueDateText(Date dueDate) {
-        String result = context.getResources().getString(R.string.due_date) + ": ";
-
-        if (dueDate != null) {
-            result += DateUtils.formatDate(dueDate, context);
-            markFieldIfOverdue(dueDate);
-        } else {
-            result += context.getResources().getString(R.string.not_specified);
-        }
-
-        return result;
-    }
-
-    private void markFieldIfOverdue(Date dueDate) {
-        Date now = new Date();
-
-        if (dueDate.before(now)) {
-            this.dueDate.setTextColor(Color.RED);
         }
     }
 }

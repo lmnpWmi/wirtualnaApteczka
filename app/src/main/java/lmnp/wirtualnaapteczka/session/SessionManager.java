@@ -27,7 +27,7 @@ public class SessionManager {
     private static FirebaseAuth firebaseAuth;
     private static DbService dbService;
     private static User currentUser;
-    private static Map<String, User> familyMembers = new HashMap<>();
+    private static Map<String, User> familyUserMembers = new HashMap<>();
     private static Map<String, User> pendingFamilyInvitations = new HashMap<>();
     private static Map<String, UserBasicTO> emailToUserBasicMap = new HashMap<>();
 
@@ -55,8 +55,8 @@ public class SessionManager {
         return currentUser;
     }
 
-    public static Map<String, User> getFamilyMembers() {
-        return familyMembers;
+    public static Map<String, User> getFamilyUserMembers() {
+        return familyUserMembers;
     }
 
     public static Map<String, User> getPendingFamilyInvitations() {
@@ -135,7 +135,7 @@ public class SessionManager {
                         }
                     }
 
-                    SessionManager.familyMembers = acceptedUserIdToUserMap;
+                    SessionManager.familyUserMembers = acceptedUserIdToUserMap;
                     pendingFamilyInvitations = pendingUserIdToUserMap;
                 }
             }
