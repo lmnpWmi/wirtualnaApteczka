@@ -9,14 +9,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.data.dto.UserBasicTO;
+import lmnp.wirtualnaapteczka.data.entities.FamilyMember;
 import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.data.enums.InvitationStatusEnum;
 import lmnp.wirtualnaapteczka.listeners.familyactivity.UpdateInvitationStatusOnClickListener;
 
 import java.util.List;
 
-public class FamilyInvitationArrayAdapter extends ArrayAdapter<User> {
-    private List<User> usersWithPendingInvitations;
+public class FamilyInvitationArrayAdapter extends ArrayAdapter<FamilyMember> {
+    private List<FamilyMember> pendingFamilyMembers;
     private Context context;
 
     private TextView usernameTextView;
@@ -25,10 +27,10 @@ public class FamilyInvitationArrayAdapter extends ArrayAdapter<User> {
     private ImageButton acceptInvitationBtn;
     private ImageButton rejectInvitationButton;
 
-    public FamilyInvitationArrayAdapter(Context context, int resource, List<User> usersWithPendingInvitations) {
-        super(context, resource, usersWithPendingInvitations);
+    public FamilyInvitationArrayAdapter(Context context, int resource, List<FamilyMember> pendingFamilyMembers) {
+        super(context, resource, pendingFamilyMembers);
 
-        this.usersWithPendingInvitations = usersWithPendingInvitations;
+        this.pendingFamilyMembers = pendingFamilyMembers;
         this.context = context;
     }
 
@@ -39,10 +41,10 @@ public class FamilyInvitationArrayAdapter extends ArrayAdapter<User> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.list_pending_contacts_item, null);
 
-        User user = usersWithPendingInvitations.get(position);
+        FamilyMember familyMember = pendingFamilyMembers.get(position);
 
         initializeViewComponents(view);
-        updateComponentsValues(user);
+        updateComponentsValues(familyMember);
 
         return view;
     }
@@ -55,13 +57,13 @@ public class FamilyInvitationArrayAdapter extends ArrayAdapter<User> {
         rejectInvitationButton = (ImageButton) view.findViewById(R.id.reject_member_img_btn);
     }
 
-    private void updateComponentsValues(User user) {
-        usernameTextView.setText(user.getUsername());
-        emailTextView.setText(user.getEmail());
+    private void updateComponentsValues(FamilyMember familyMember) {
+        usernameTextView.setText(familyMember.getUsername());
+        emailTextView.setText(familyMember.getEmail());
 
-        String familyMemberUserId = user.getId();
+        UserBasicTO userBasicTO = new UserBasicTO(familyMember);
 
-        acceptInvitationBtn.setOnClickListener(new UpdateInvitationStatusOnClickListener(familyMemberUserId, InvitationStatusEnum.ACCEPTED));
-        rejectInvitationButton.setOnClickListener(new UpdateInvitationStatusOnClickListener(familyMemberUserId, InvitationStatusEnum.REJECTED));
+        acceptInvitationBtn.setOnClickListener(new UpdateInvitationStatusOnClickListener(userBasicTO, InvitationStatusEnum.ACCEPTED));
+        rejectInvitationButton.setOnClickListener(new UpdateInvitationStatusOnClickListener(userBasicTO, InvitationStatusEnum.REJECTED));
     }
 }

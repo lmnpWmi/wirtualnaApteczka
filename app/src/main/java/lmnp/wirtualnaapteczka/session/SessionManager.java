@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import lmnp.wirtualnaapteczka.activity.LauncherActivity;
+import lmnp.wirtualnaapteczka.data.dto.UserBasicTO;
 import lmnp.wirtualnaapteczka.data.entities.FamilyMember;
 import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.data.enums.InvitationStatusEnum;
@@ -28,7 +29,7 @@ public class SessionManager {
     private static User currentUser;
     private static Map<String, User> familyMembers = new HashMap<>();
     private static Map<String, User> pendingFamilyInvitations = new HashMap<>();
-    private static Map<String, String> emailToUserIdMap = new HashMap<>();
+    private static Map<String, UserBasicTO> emailToUserBasicMap = new HashMap<>();
 
     private SessionManager() {
     }
@@ -62,8 +63,8 @@ public class SessionManager {
         return pendingFamilyInvitations;
     }
 
-    public static Map<String, String> getEmailToUserIdMap() {
-        return emailToUserIdMap;
+    public static Map<String, UserBasicTO> getEmailToUserBasicMap() {
+        return emailToUserBasicMap;
     }
 
     public static User getCurrentUser() {
@@ -112,8 +113,9 @@ public class SessionManager {
                     for (DataSnapshot userDataSnapshot : allUsersDataSnapshot) {
                         User familyUserObj = userDataSnapshot.getValue(User.class);
                         String familyUserId = familyUserObj.getId();
+                        UserBasicTO userBasicTO = new UserBasicTO(familyUserObj);
 
-                        emailToUserIdMap.put(familyUserObj.getEmail(), familyUserId);
+                        emailToUserBasicMap.put(familyUserObj.getEmail(), userBasicTO);
 
                         FamilyMember familyMember = userIdToFamilyMemberMap.get(familyUserId);
 

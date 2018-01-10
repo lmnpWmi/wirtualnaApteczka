@@ -1,9 +1,7 @@
 package lmnp.wirtualnaapteczka.fragments;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +9,10 @@ import android.widget.ListView;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.adapters.FamilyContactArrayAdapter;
 import lmnp.wirtualnaapteczka.adapters.FamilyInvitationArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.FamilyMember;
 import lmnp.wirtualnaapteczka.data.entities.User;
+import lmnp.wirtualnaapteczka.data.enums.InvitationStatusEnum;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.FirebaseConstants;
 
@@ -34,23 +32,11 @@ public class InvitationsTabFragment extends Fragment {
         View myView = inflater.inflate(R.layout.family_tab_invitations, container, false);
 
         invitationsListView = (ListView) myView.findViewById(R.id.invitation_contacts_list_view);
-
-        FamilyInvitationArrayAdapter familyInvitationArrayAdapter = prepareFamilyInvitationsArrayAdapter();
-        invitationsListView.setAdapter(familyInvitationArrayAdapter);
+        invitationsListView.setEmptyView(myView.findViewById(R.id.invitation_contacts_list_empty));
 
         initializeFirebaseListeners();
 
         return myView;
-    }
-
-    @NonNull
-    private FamilyInvitationArrayAdapter prepareFamilyInvitationsArrayAdapter() {
-        Map<String, User> pendingFamilyInvitations = SessionManager.getPendingFamilyInvitations();
-        List<User> pendingFamilyUsers = new ArrayList<>(pendingFamilyInvitations.values());
-
-        FamilyInvitationArrayAdapter familyInvitationArrayAdapter = new FamilyInvitationArrayAdapter(this.getContext(), R.id.invitation_contacts_list_view, pendingFamilyUsers);
-
-        return familyInvitationArrayAdapter;
     }
 
     private void initializeFirebaseListeners() {
@@ -61,7 +47,20 @@ public class InvitationsTabFragment extends Fragment {
         currentUserReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                FamilyInvitationArrayAdapter familyInvitationArrayAdapter = prepareFamilyInvitationsArrayAdapter();
+                User user = dataSnapshot.getValue(User.class);
+
+                Map<String, FamilyMember> userIdToFamilyMemberObjMap = user.getFamilyMembers();
+                List<FamilyMember> pendingFamilyMembers = new ArrayList<>();
+
+                if (userIdToFamilyMemberObjMap != null) {
+                    for (FamilyMember familyMember : userIdToFamilyMemberObjMap.values()) {
+                        if (familyMember.getInvitationStatus() == InvitationStatusEnum.PENDING) {
+                            pendingFamilyMembers.add(familyMember);
+                        }
+                    }
+                }
+
+                FamilyInvitationArrayAdapter familyInvitationArrayAdapter = new FamilyInvitationArrayAdapter(getContext(), R.id.invitation_contacts_list_view, pendingFamilyMembers);
                 invitationsListView.setAdapter(familyInvitationArrayAdapter);
             }
 

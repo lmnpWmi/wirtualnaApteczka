@@ -1,6 +1,7 @@
 package lmnp.wirtualnaapteczka.services;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import lmnp.wirtualnaapteczka.data.dto.UserBasicTO;
 import lmnp.wirtualnaapteczka.data.dto.UserRegistrationTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.entities.User;
@@ -14,9 +15,9 @@ public interface DbService {
 
     void createOrUpdateUserAccountInFirebase(UserRegistrationTO user);
 
-    void createFamilyMemberInvitationForUser(String userId);
+    void createFamilyMemberInvitationForUser(UserBasicTO userId);
 
-    void updatePendingFamilyMemberInvitationStatus(String invitationUserId, InvitationStatusEnum statusEnum);
+    void updatePendingFamilyMemberInvitationStatus(UserBasicTO userBasicTO, InvitationStatusEnum statusEnum);
 
     void updateDefaultComparatorInUserPreferences(SortingComparatorTypeEnum defaultSortingComparatorEnum);
 

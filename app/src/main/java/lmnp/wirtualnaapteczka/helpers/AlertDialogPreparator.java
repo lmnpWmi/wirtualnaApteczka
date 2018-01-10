@@ -17,6 +17,7 @@ import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
 import lmnp.wirtualnaapteczka.activity.LogInActivity;
 import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
 import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
+import lmnp.wirtualnaapteczka.data.dto.UserBasicTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
 import lmnp.wirtualnaapteczka.listeners.common.PreviewPhotoWithMedicineOnClickListener;
@@ -55,12 +56,12 @@ public class AlertDialogPreparator {
                 int toastMessageId;
 
                 if (!TextUtils.isEmpty(targetUserEmail)) {
-                    Map<String, String> emailToUserIdMap = SessionManager.getEmailToUserIdMap();
-                    String targetUserId = emailToUserIdMap.get(targetUserEmail.trim());
+                    Map<String, UserBasicTO> emailToUserIdMap = SessionManager.getEmailToUserBasicMap();
+                    UserBasicTO userBasicTO = emailToUserIdMap.get(targetUserEmail.trim());
 
-                    if (!TextUtils.isEmpty(targetUserId)) {
+                    if (userBasicTO != null) {
                         DbService dbService = SessionManager.getDbService();
-                        dbService.createFamilyMemberInvitationForUser(targetUserId);
+                        dbService.createFamilyMemberInvitationForUser(userBasicTO);
 
                         toastMessageId = R.string.user_has_been_invited;
                     } else {

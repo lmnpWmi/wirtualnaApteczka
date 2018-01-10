@@ -11,18 +11,14 @@ import lmnp.wirtualnaapteczka.adapters.FamilySectionsPagerAdapter;
  * Created by Jowita on 2018-01-06.
  */
 public class FamilyActivity extends AppCompatActivity {
-    private FamilySectionsPagerAdapter mFamilySectionsPagerAdapter;
-
-    private ViewPager mViewPager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family);
 
-        mFamilySectionsPagerAdapter = new FamilySectionsPagerAdapter(getSupportFragmentManager(), this);
+        FamilySectionsPagerAdapter mFamilySectionsPagerAdapter = new FamilySectionsPagerAdapter(getSupportFragmentManager(), this);
 
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mFamilySectionsPagerAdapter);
         mViewPager.setOffscreenPageLimit(3);
 

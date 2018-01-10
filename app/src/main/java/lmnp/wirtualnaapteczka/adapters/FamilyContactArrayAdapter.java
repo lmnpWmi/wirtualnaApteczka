@@ -8,18 +8,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.data.entities.FamilyMember;
 import lmnp.wirtualnaapteczka.data.entities.User;
 
 import java.util.List;
 
-public class FamilyContactArrayAdapter extends ArrayAdapter<User> {
-    private List<User> familyMembers;
+public class FamilyContactArrayAdapter extends ArrayAdapter<FamilyMember> {
+    private List<FamilyMember> familyMembers;
     private Context context;
 
     private TextView familyMemberUsernameTextView;
     private TextView familyMemberEmailTextView;
 
-    public FamilyContactArrayAdapter(Context context, int resource, List<User> familyMembers) {
+    public FamilyContactArrayAdapter(Context context, int resource, List<FamilyMember> familyMembers) {
         super(context, resource, familyMembers);
         this.familyMembers = familyMembers;
         this.context = context;
@@ -30,7 +31,7 @@ public class FamilyContactArrayAdapter extends ArrayAdapter<User> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.list_family_contact_item, null);
 
-        User currentFamilyMember = familyMembers.get(position);
+        FamilyMember currentFamilyMember = familyMembers.get(position);
 
         initializeViewComponents(view);
         updateComponentsValues(currentFamilyMember);
@@ -38,7 +39,7 @@ public class FamilyContactArrayAdapter extends ArrayAdapter<User> {
         return view;
     }
 
-    private void updateComponentsValues(User currentFamilyMember) {
+    private void updateComponentsValues(FamilyMember currentFamilyMember) {
         String email = currentFamilyMember.getEmail();
         String username = currentFamilyMember.getUsername();
 

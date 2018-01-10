@@ -13,7 +13,9 @@ import com.google.firebase.database.*;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.adapters.FamilyContactArrayAdapter;
 import lmnp.wirtualnaapteczka.adapters.FamilyInvitationArrayAdapter;
+import lmnp.wirtualnaapteczka.data.entities.FamilyMember;
 import lmnp.wirtualnaapteczka.data.entities.User;
+import lmnp.wirtualnaapteczka.data.enums.InvitationStatusEnum;
 import lmnp.wirtualnaapteczka.listeners.familyactivity.AddNewContactOnClickListener;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.FirebaseConstants;
@@ -35,24 +37,14 @@ public class ContactsTabFragment extends Fragment {
         View myView = inflater.inflate(R.layout.family_tab_contacts, container, false);
 
         contactsListView = (ListView) myView.findViewById(R.id.contacts_list_view);
+        contactsListView.setEmptyView(myView.findViewById(R.id.contacts_list_empty));
+
         addNewContactBtn = (FloatingActionButton) myView.findViewById(R.id.add_new_contact_btn);
-
-        FamilyContactArrayAdapter familyContactArrayAdapter = prepareFamilyContactsAdapter();
-        contactsListView.setAdapter(familyContactArrayAdapter);
-
         addNewContactBtn.setOnClickListener(new AddNewContactOnClickListener());
 
         initializeFirebaseListeners();
 
         return myView;
-    }
-
-    @NonNull
-    private FamilyContactArrayAdapter prepareFamilyContactsAdapter() {
-        Map<String, User> familyMembersMap = SessionManager.getFamilyMembers();
-        List<User> familyMembers = new ArrayList<>(familyMembersMap.values());
-
-        return new FamilyContactArrayAdapter(this.getContext(), R.id.contacts_list_view, familyMembers);
     }
 
     private void initializeFirebaseListeners() {
@@ -63,7 +55,20 @@ public class ContactsTabFragment extends Fragment {
         currentUserReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                FamilyContactArrayAdapter familyContactArrayAdapter = prepareFamilyContactsAdapter();
+                User user = dataSnapshot.getValue(User.class);
+
+                Map<String, FamilyMember> userIdToFamilyMemberObjMap = user.getFamilyMembers();
+                List<FamilyMember> acceptedFamilyMembers = new ArrayList<>();
+
+                if (userIdToFamilyMemberObjMap != null) {
+                    for (FamilyMember familyMember : userIdToFamilyMemberObjMap.values()) {
+                        if (familyMember.getInvitationStatus() == InvitationStatusEnum.ACCEPTED) {
+                            acceptedFamilyMembers.add(familyMember);
+                        }
+                    }
+                }
+
+                FamilyContactArrayAdapter familyContactArrayAdapter = new FamilyContactArrayAdapter(getContext(), R.id.contacts_list_view, acceptedFamilyMembers);
                 contactsListView.setAdapter(familyContactArrayAdapter);
             }
 
