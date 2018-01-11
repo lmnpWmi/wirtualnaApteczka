@@ -24,7 +24,6 @@ import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
 import lmnp.wirtualnaapteczka.helpers.MedicineFilter;
 import lmnp.wirtualnaapteczka.helpers.SearchMedicineDialogHelper;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListener;
-import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 import lmnp.wirtualnaapteczka.utils.FirebaseConstants;
@@ -78,7 +77,7 @@ public class MedicineListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.search_medicine_btn:
                 searchMedicineDialogHelper = new SearchMedicineDialogHelper();
-                searchMedicineDialogHelper.initializeDialog(this);
+                searchMedicineDialogHelper.initializeSearchMedicineDialog(this);
                 break;
             case R.id.sort_btn:
                 AlertDialogPreparator.showSortListDialog(this);

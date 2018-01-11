@@ -6,10 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.entities.FamilyMember;
-import lmnp.wirtualnaapteczka.data.entities.User;
+import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class FamilyContactArrayAdapter extends ArrayAdapter<FamilyMember> {
 
     private TextView familyMemberUsernameTextView;
     private TextView familyMemberEmailTextView;
+
+    private ImageView deleteFamilyMemberBtn;
 
     public FamilyContactArrayAdapter(Context context, int resource, List<FamilyMember> familyMembers) {
         super(context, resource, familyMembers);
@@ -39,16 +42,24 @@ public class FamilyContactArrayAdapter extends ArrayAdapter<FamilyMember> {
         return view;
     }
 
-    private void updateComponentsValues(FamilyMember currentFamilyMember) {
+    private void updateComponentsValues(final FamilyMember currentFamilyMember) {
         String email = currentFamilyMember.getEmail();
         String username = currentFamilyMember.getUsername();
 
         familyMemberEmailTextView.setText(email);
         familyMemberUsernameTextView.setText(username);
+
+        deleteFamilyMemberBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialogPreparator.showDeleteFamilyMemberDialog(getContext(), currentFamilyMember.getUserId());
+            }
+        });
     }
 
     private void initializeViewComponents(View view) {
         familyMemberUsernameTextView = (TextView) view.findViewById(R.id.family_member_username);
         familyMemberEmailTextView = (TextView) view.findViewById(R.id.family_member_email);
+        deleteFamilyMemberBtn = (ImageView) view.findViewById(R.id.delete_family_member);
     }
 }

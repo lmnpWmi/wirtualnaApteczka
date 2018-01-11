@@ -40,6 +40,21 @@ import java.util.Map;
  * @createdAt 29.12.2017
  */
 public class AlertDialogPreparator {
+    public static void showDeleteFamilyMemberDialog(final Context context, final String familyMemberUserId) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        dialog.setTitle(R.string.delete_family_member_msg);
+
+        dialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                DbService dbService = SessionManager.getDbService();
+                dbService.deleteFamilyRelationship(familyMemberUserId);
+            }
+        });
+
+        dialog.setNegativeButton(R.string.no, null);
+        dialog.show();
+    }
+
     public static void showSendFamilyMemberInvitationDialog(final Context context) {
         AlertDialog.Builder showFamilyMemberInvitationDialogBuilder = new AlertDialog.Builder(context);
         showFamilyMemberInvitationDialogBuilder.setTitle(R.string.send_invitation_dialog_title);
@@ -124,10 +139,10 @@ public class AlertDialogPreparator {
     }
 
     public static void displayLogoutPopup(final Context context) {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-        dialog.setTitle(R.string.log_out_popup_msg);
+        AlertDialog.Builder logoutDialogBuilder = new AlertDialog.Builder(context);
+        logoutDialogBuilder.setTitle(R.string.log_out_popup_msg);
 
-        dialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+        logoutDialogBuilder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 FirebaseAuth firebaseAuth = SessionManager.getFirebaseAuth();
                 firebaseAuth.signOut();
@@ -144,8 +159,8 @@ public class AlertDialogPreparator {
             }
         });
 
-        dialog.setNegativeButton(R.string.no, null);
-        dialog.show();
+        logoutDialogBuilder.setNegativeButton(R.string.no, null);
+        logoutDialogBuilder.show();
     }
 
     public static void showEditMedicineAmountDialog(final Context context, final Medicine medicine, final Class<? extends AppCompatActivity> invokingClass) {

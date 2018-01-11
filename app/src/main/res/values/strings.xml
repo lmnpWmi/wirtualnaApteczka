@@ -137,6 +137,7 @@
     <string name="user_has_been_invited">Zaproszenie zostało wysłane.</string>
     <string name="user_with_given_email_not_exists">Użytkownik o podanym adresie e-mail nie istnieje.</string>
     <string name="username_info">Użytkownik</string>
+    <string name="delete_family_member_msg">Czy na pewno chcesz usunąć tego użytkownika z listy swoich kontaktów?</string>
 
     <!-- Registration layout -->
     <string name="username_empty_err_msg">Proszę podać nazwę użytkownika.</string>

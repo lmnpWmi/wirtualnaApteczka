@@ -73,6 +73,7 @@ public class SessionManager {
 
     public static void clearSearchValueInUserSession() {
         dbService.updateSearchValueInSession("");
+        dbService.updateSearchValueFamilyInSession("");
     }
 
     public static void initializeCurrentUserFirebaseListeners() {
@@ -85,7 +86,6 @@ public class SessionManager {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 currentUser = dataSnapshot.getValue(User.class);
-
             }
 
             @Override

@@ -91,7 +91,7 @@ public class FirebaseDbServiceImpl implements DbService {
         String currentUserId = currentUser.getId();
 
         DatabaseReference potentialFamilyMemberRef = firebaseDB.getReference(USERS).child(currentUserId).child(FAMILY_MEMBERS).child(userBasicTO.getId());
-        FamilyMember updatedFamilyMember = new FamilyMember(currentUserId, userBasicTO.getUsername(), userBasicTO.getEmail(), statusEnum);
+        FamilyMember updatedFamilyMember = new FamilyMember(userBasicTO.getId(), userBasicTO.getUsername(), userBasicTO.getEmail(), statusEnum);
 
         if (statusEnum == InvitationStatusEnum.ACCEPTED) {
             DatabaseReference currentUserInTargetUserFamilyMembersRef = firebaseDB.getReference(USERS).child(userBasicTO.getId()).child(FAMILY_MEMBERS).child(currentUserId);
@@ -119,14 +119,11 @@ public class FirebaseDbServiceImpl implements DbService {
     }
 
     @Override
-    public User findUserById(String userId) {
-        DatabaseReference child = firebaseDB.getReference(USERS).child(userId);
-        return null;
-    }
+    public void updateSearchValueFamilyInSession(String searchValue) {
+        FirebaseUser currentUser = SessionManager.getFirebaseUser();
+        DatabaseReference userPreferencesRef = firebaseDB.getReference(USERS).child(currentUser.getUid()).child(USER_SESSION).child(SEARCH_VALUE_IN_FAMILY);
 
-    @Override
-    public List<User> findUsersByIds(List<String> userIds) {
-        return null;
+        userPreferencesRef.setValue(searchValue);
     }
 
     @Override
@@ -153,14 +150,15 @@ public class FirebaseDbServiceImpl implements DbService {
     }
 
     @Override
-    public List<Medicine> findAllMedicinesForCurrentUser() {
+    public void deleteFamilyRelationship(String familyMemberUserId) {
         FirebaseUser firebaseUser = SessionManager.getFirebaseUser();
-        DatabaseReference child = firebaseDB.getReference().child(USERS).child(firebaseUser.getUid()).child(MEDICINES);
-        return null;
-    }
+        String currentUserId = firebaseUser.getUid();
 
-    @Override
-    public List<Medicine> findAllMedicinesByUserId(String userId) {
-        return null;
+        DatabaseReference familyMemberRefInCurrentUser = firebaseDB.getReference(USERS).child(currentUserId).child(FAMILY_MEMBERS).child(familyMemberUserId);
+        familyMemberRefInCurrentUser.removeValue();
+
+
+        DatabaseReference currentUserRefInFamilyMemberUser = firebaseDB.getReference(USERS).child(familyMemberUserId).child(FAMILY_MEMBERS).child(currentUserId);
+        currentUserRefInFamilyMemberUser.removeValue();
     }
 }

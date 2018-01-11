@@ -47,11 +47,11 @@
     </LinearLayout>
 
     <ImageView
-        style="@style/SmallButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:background="@drawable/icon_clear_red" />
+            style="@style/SmallButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/icon_clear_red" android:id="@+id/delete_family_member"/>
 
 </LinearLayout>
 

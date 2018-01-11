@@ -69,7 +69,7 @@ public class LogInActivity extends AppCompatActivity {
                 boolean permissionGranted = grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
 
                 if (!permissionGranted) {
-                    Toast.makeText(this, R.string.insufficient_permissions, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.insufficient_permissions, Toast.LENGTH_LONG).show();
                     onBackPressed();
                 }
                 break;

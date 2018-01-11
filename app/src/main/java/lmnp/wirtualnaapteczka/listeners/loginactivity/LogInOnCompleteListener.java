@@ -54,11 +54,11 @@ public class LogInOnCompleteListener implements OnCompleteListener<AuthResult> {
                 context.startActivity(intent);
             } else {
                 firebaseAuth.signOut();
-                Toast.makeText(context, R.string.email_not_verified, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.email_not_verified, Toast.LENGTH_LONG).show();
             }
         } else {
             logger.logWarn("Sign In Failure: " + task.getException());
-            Toast.makeText(context, R.string.invalid_email_or_password, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.invalid_email_or_password, Toast.LENGTH_LONG).show();
         }
     }
 

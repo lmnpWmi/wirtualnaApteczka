@@ -23,15 +23,11 @@ public interface DbService {
 
     void updateSearchValueInSession(String searchValue);
 
-    User findUserById(String userId);
-
-    List<User> findUsersByIds(List<String> userIds);
+    void updateSearchValueFamilyInSession(String searchValue);
 
     void saveOrUpdateMedicine(Medicine medicine);
 
     void deleteMedicine(String medicineId);
 
-    List<Medicine> findAllMedicinesForCurrentUser();
-
-    List<Medicine> findAllMedicinesByUserId(String userId);
+    void deleteFamilyRelationship(String familyMemberUserId);
 }
