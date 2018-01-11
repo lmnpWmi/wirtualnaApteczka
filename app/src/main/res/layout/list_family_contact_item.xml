@@ -1,28 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@android:color/transparent"
-              android:orientation="vertical"
-              android:padding="20dp" android:id="@+id/family_member_contact_panel">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/family_member_contact_panel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="horizontal"
+    android:padding="10dp">
 
+    <ImageView
+        style="@style/SmallButton"
+        android:layout_width="@android:dimen/notification_large_icon_width"
+        android:layout_height="@android:dimen/notification_large_icon_height"
+        android:layout_gravity="center"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/icon_small_guy3" />
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/text_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/family_member_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:textSize="16sp"
-            tools:text="@string/username" android:id="@+id/family_member_username"/>
+            tools:text="@string/username" />
 
-    <TextView
+        <TextView
+            android:id="@+id/family_member_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:textSize="16sp"
-            tools:text="@string/email" android:id="@+id/family_member_email"/>
+            tools:text="@string/email" />
 
+    </LinearLayout>
+
+    <ImageView
+        style="@style/SmallButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@drawable/icon_clear_red" />
 
 </LinearLayout>
 

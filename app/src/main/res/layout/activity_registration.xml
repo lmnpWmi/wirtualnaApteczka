@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="2dp"
+                android:layout_marginLeft="4dp"
                 android:layout_weight="1"
                 android:gravity="left"
                 android:text="@string/regulations"

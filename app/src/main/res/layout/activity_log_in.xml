@@ -11,26 +11,30 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_gravity="center"
             android:background="@drawable/logo" />
 
 
         <Button
-                android:id="@+id/log_in_google_btn"
-                style="@style/MyButton"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/my_button_google"
-                android:drawableLeft="@drawable/icon_google"
-                android:text="@string/gmail"
-                android:textColor="@color/black"/>
+            android:id="@+id/log_in_google_btn"
+            style="@style/MyButton"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/my_button_google"
+            android:drawableLeft="@drawable/icon_google"
+            android:text="@string/gmail"
+            android:textColor="@color/black" />
+
         <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/color_primary" android:id="@+id/view"/>
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/color_primary" />
+
         <EditText
             android:id="@+id/email_login_text"
             style="@style/MyEditText"
@@ -56,6 +60,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -92,6 +97,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
