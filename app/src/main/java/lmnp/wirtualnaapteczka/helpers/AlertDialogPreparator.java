@@ -17,6 +17,7 @@ import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
 import lmnp.wirtualnaapteczka.activity.LogInActivity;
 import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
 import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
+import lmnp.wirtualnaapteczka.data.entities.FamilyMember;
 import lmnp.wirtualnaapteczka.data.entities.UserBasicTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
@@ -67,16 +68,19 @@ public class AlertDialogPreparator {
         showFamilyMemberInvitationDialogBuilder.setPositiveButton(R.string.send_invitation_btn_msg, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String targetUserEmail = emailEditText.getText().toString();
+                String targetUserEmail = emailEditText.getText().toString().trim();
                 int toastMessageId;
 
-                if (!TextUtils.isEmpty(targetUserEmail)) {
-                    Map<String, UserBasicTO> emailToUserIdMap = SessionManager.getEmailToUserData();
-                    UserBasicTO userBasicTO = emailToUserIdMap.get(targetUserEmail.trim());
+                UserBasicTO currentUserData = SessionManager.getCurrentUserData();
+                String currentUserEmail = currentUserData.getEmail().trim();
 
-                    if (userBasicTO != null) {
+                if (!TextUtils.isEmpty(targetUserEmail) && !targetUserEmail.equals(currentUserEmail)) {
+                    Map<String, UserBasicTO> emailToUserIdMap = SessionManager.getEmailToUserData();
+                    UserBasicTO userForInvitation = emailToUserIdMap.get(targetUserEmail);
+
+                    if (userForInvitation != null) {
                         DbService dbService = SessionManager.getDbService();
-                        dbService.createFamilyMemberInvitationForUser(userBasicTO);
+                        dbService.createFamilyMemberInvitationForUser(userForInvitation);
 
                         toastMessageId = R.string.user_has_been_invited;
                     } else {

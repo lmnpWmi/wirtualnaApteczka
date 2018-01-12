@@ -13,7 +13,7 @@ public final class AppConstants {
     public static final int OFF_PAGE_SCREEN_LIMIT = 3;
     public static final int RECENTLY_USED_MEDICINES_DEFAULT_AMOUNT = 5;
 
-    public static final boolean IN_DEVELOPER_MODE = true;
+    public static final boolean IN_DEVELOPER_MODE = false;
 
     /** For activity results. */
     public static final int REQUEST_IMAGE_CAPTURE = 1;

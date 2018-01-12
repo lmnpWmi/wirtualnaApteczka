@@ -8,6 +8,7 @@ import com.google.firebase.database.*;
 import lmnp.wirtualnaapteczka.activity.LauncherActivity;
 import lmnp.wirtualnaapteczka.data.entities.UserBasicTO;
 import lmnp.wirtualnaapteczka.data.entities.UserPreferences;
+import lmnp.wirtualnaapteczka.data.entities.UserSession;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 import lmnp.wirtualnaapteczka.utils.FirebaseConstants;
@@ -25,7 +26,8 @@ public class SessionManager {
     private static FirebaseAuth firebaseAuth;
     private static DbService dbService;
     private static UserBasicTO currentUserData;
-    private static UserPreferences userPeferences;
+    private static UserPreferences userPreferences;
+    private static UserSession userSession;
     private static Map<String, UserBasicTO> emailToUserData;
 
     private SessionManager() {
@@ -60,8 +62,12 @@ public class SessionManager {
         return emailToUserData;
     }
 
-    public static UserPreferences getUserPeferences() {
-        return userPeferences;
+    public static UserPreferences getUserPreferences() {
+        return userPreferences;
+    }
+
+    public static UserSession getUserSession() {
+        return userSession;
     }
 
     public static void clearSearchValueInUserSession() {
@@ -76,6 +82,7 @@ public class SessionManager {
 
         initializeUserDataListener(currentUserUid, database);
         initializeUserPreferencesListener(currentUserUid, database);
+        initializeUserSessionListener(currentUserUid, database);
     }
 
     public static void closeApplication(AppCompatActivity context) {
@@ -116,7 +123,21 @@ public class SessionManager {
         userPreferencesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                userPeferences = dataSnapshot.getValue(UserPreferences.class);
+                userPreferences = dataSnapshot.getValue(UserPreferences.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    private static void initializeUserSessionListener(String currentUserUid, FirebaseDatabase database) {
+        DatabaseReference userPreferencesRef = database.getReference().child(FirebaseConstants.USER_SESSION).child(currentUserUid);
+        userPreferencesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userSession = dataSnapshot.getValue(UserSession.class);
             }
 
             @Override

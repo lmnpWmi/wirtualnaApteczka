@@ -17,13 +17,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.firebase.database.*;
 import lmnp.wirtualnaapteczka.R;
+import lmnp.wirtualnaapteczka.data.entities.*;
 import lmnp.wirtualnaapteczka.listeners.loginactivity.*;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
+import lmnp.wirtualnaapteczka.utils.FirebaseConstants;
 import lmnp.wirtualnaapteczka.utils.GoogleAuthenticationUtils;
 
+import java.util.Map;
+
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static lmnp.wirtualnaapteczka.utils.FirebaseConstants.*;
 
 /**
  * Activity responsible for handling events on the layout for logging in.

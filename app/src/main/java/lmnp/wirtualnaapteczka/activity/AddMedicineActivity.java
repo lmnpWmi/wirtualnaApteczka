@@ -24,9 +24,7 @@ import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.MedicineTypeOnItemSe
 import lmnp.wirtualnaapteczka.listeners.addmedicineactivity.SaveNewMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.common.LaunchVoiceRecognitionOnClickListener;
 import lmnp.wirtualnaapteczka.session.SessionManager;
-import lmnp.wirtualnaapteczka.utils.AppConstants;
-import lmnp.wirtualnaapteczka.utils.MedicineTypeUtils;
-import lmnp.wirtualnaapteczka.utils.PhotoUtils;
+import lmnp.wirtualnaapteczka.utils.*;
 import lmnp.wirtualnaapteczka.utils.functionalinterfaces.Consumer;
 
 import java.io.File;
@@ -40,6 +38,8 @@ import java.util.List;
  * @createdAt 27.12.2017
  */
 public class AddMedicineActivity extends AppCompatActivity {
+    private static final Logger logger = new Logger(AddMedicineActivity.class);
+
     private boolean editingExistingMedicine;
     private Medicine currentMedicine;
 
@@ -127,21 +127,23 @@ public class AddMedicineActivity extends AppCompatActivity {
 
                         setMedicineThumbnail(photoDescriptionTO);
                     } catch (Exception e) {
-                        // Had to remove logs, becasue of google play
+                        logger.logError(e.toString());
                     }
                     break;
                 case AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NAME:
                     String potentialMedicineName = retrievePotentialMedicineNameFromVoiceRecognizedData(data);
 
                     if (!TextUtils.isEmpty(potentialMedicineName)) {
-                        nameEdit.setText(potentialMedicineName);
+                        String capitalizedMedicineName = VoiceRecognitionUtils.capitalizeFirstLetterInRetrievedText(potentialMedicineName);
+                        nameEdit.setText(capitalizedMedicineName);
                     }
                     break;
                 case AppConstants.REQUEST_VOICE_INPUT_MEDICINE_NOTES:
                     String potentialMedicineNotes = retrievePotentialMedicineNameFromVoiceRecognizedData(data);
 
                     if (!TextUtils.isEmpty(potentialMedicineNotes)) {
-                        notesEdit.setText(potentialMedicineNotes);
+                        String capitalizedMedicineNotes = VoiceRecognitionUtils.capitalizeFirstLetterInRetrievedText(potentialMedicineNotes);
+                        notesEdit.setText(capitalizedMedicineNotes);
                     }
                     break;
                 default:

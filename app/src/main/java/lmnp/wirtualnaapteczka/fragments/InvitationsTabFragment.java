@@ -12,7 +12,6 @@ import com.google.firebase.database.*;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.adapters.FamilyInvitationArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.FamilyMember;
-import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.data.enums.InvitationStatusEnum;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.FirebaseConstants;
@@ -46,27 +45,34 @@ public class InvitationsTabFragment extends Fragment {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         FirebaseUser currentUser = SessionManager.getFirebaseUser();
 
-        DatabaseReference currentUserReference = firebaseDatabase.getReference(FirebaseConstants.USERS).child(currentUser.getUid());
+        initializeFamilyInvitationRequestListener(firebaseDatabase, currentUser);
+    }
+
+    private void initializeFamilyInvitationRequestListener(FirebaseDatabase firebaseDatabase, FirebaseUser currentUser) {
+        DatabaseReference currentUserReference = firebaseDatabase.getReference(FirebaseConstants.USER_FAMILY).child(currentUser.getUid());
         currentUserReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
+                if (getContext() != null) {
+                    GenericTypeIndicator<Map<String, FamilyMember>> stringToFamilyMemberMapGenericType = new GenericTypeIndicator<Map<String, FamilyMember>>() {
+                    };
+                    Map<String, FamilyMember> userIdToFamilyMemberMap = dataSnapshot.getValue(stringToFamilyMemberMapGenericType);
 
-                Map<String, FamilyMember> userIdToFamilyMemberObjMap = user.getFamilyMembers();
-                List<FamilyMember> pendingFamilyMembers = new ArrayList<>();
+                    List<FamilyMember> pendingFamilyMembers = new ArrayList<>();
 
-                if (userIdToFamilyMemberObjMap != null) {
-                    for (FamilyMember familyMember : userIdToFamilyMemberObjMap.values()) {
-                        if (familyMember.getInvitationStatus() == InvitationStatusEnum.PENDING) {
-                            pendingFamilyMembers.add(familyMember);
+                    if (userIdToFamilyMemberMap != null) {
+                        for (FamilyMember familyMember : userIdToFamilyMemberMap.values()) {
+                            if (familyMember.getInvitationStatus() == InvitationStatusEnum.PENDING) {
+                                pendingFamilyMembers.add(familyMember);
+                            }
                         }
                     }
-                }
 
-                Context context = getContext();
-                if (context != null) {
-                    FamilyInvitationArrayAdapter familyInvitationArrayAdapter = new FamilyInvitationArrayAdapter(getContext(), R.id.invitation_contacts_list_view, pendingFamilyMembers);
-                    invitationsListView.setAdapter(familyInvitationArrayAdapter);
+                    Context context = getContext();
+                    if (context != null) {
+                        FamilyInvitationArrayAdapter familyInvitationArrayAdapter = new FamilyInvitationArrayAdapter(getContext(), R.id.invitation_contacts_list_view, pendingFamilyMembers);
+                        invitationsListView.setAdapter(familyInvitationArrayAdapter);
+                    }
                 }
             }
 

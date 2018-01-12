@@ -4,11 +4,14 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.speech.RecognizerIntent;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Toast;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
+import lmnp.wirtualnaapteczka.activity.FamilyActivity;
 import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
+import lmnp.wirtualnaapteczka.fragments.MedicinesFamilyListTabFragment;
 
 import java.util.Locale;
 
@@ -32,12 +35,14 @@ public class LaunchVoiceRecognitionOnClickListener implements View.OnClickListen
         try {
             boolean isExecutedFromAddMedicine = context instanceof AddMedicineActivity;
             boolean isExecutedFromMedicineList = context instanceof MedicineListActivity;
+            boolean isExecutedFromFamilyMedicineList = context instanceof FamilyActivity;
 
             if (isExecutedFromAddMedicine) {
                 ((AddMedicineActivity) context).startActivityForResult(intent, requestCode);
-            }
-            else if (isExecutedFromMedicineList) {
+            } else if (isExecutedFromMedicineList) {
                 ((MedicineListActivity) context).startActivityForResult(intent, requestCode);
+            } else if (isExecutedFromFamilyMedicineList) {
+                ((FamilyActivity) context).startActivityForResult(intent, requestCode);
             }
         } catch (ActivityNotFoundException a) {
             Toast.makeText(context,

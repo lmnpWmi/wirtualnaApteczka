@@ -45,6 +45,18 @@ public class MedicineFilter {
         return filteredMedicines;
     }
 
+    public static List<Medicine> filterOnlySharedMedicines(List<Medicine> medicines) {
+        List<Medicine> sharedMedicines = new ArrayList<>();
+
+        for (Medicine medicine : medicines) {
+            if (medicine.isShareWithFriends()) {
+                sharedMedicines.add(medicine);
+            }
+        }
+
+        return sharedMedicines;
+    }
+
     private static String prepareRegexPattern(String searchValue, boolean exactMatches) {
         String pattern;
 

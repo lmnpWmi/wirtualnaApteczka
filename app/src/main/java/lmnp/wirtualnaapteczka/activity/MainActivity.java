@@ -11,8 +11,7 @@ import com.google.firebase.database.*;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.adapters.MedicineItemSimpleArrayAdapter;
 import lmnp.wirtualnaapteczka.comparators.MedicineModifiedComparator;
-import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.data.entities.User;
+import lmnp.wirtualnaapteczka.data.entities.*;
 import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.AddNewMedicineOnClickListener;
 import lmnp.wirtualnaapteczka.listeners.mainactivity.FamilyListOnClickListener;
@@ -25,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import static lmnp.wirtualnaapteczka.utils.FirebaseConstants.*;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout addMedicinePanel;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         SessionManager.closeApplication(this);
     }
 
-    public void initializeRecentlyUsedMedicinesList(List<Medicine> currentUserMedicines) {
+    public void updateRecentlyUsedMedicinesListView(List<Medicine> currentUserMedicines) {
         List<Medicine> recentlyUsedMedicinesList = prepareRecentlyUsedMedicinesList(currentUserMedicines);
         MedicineItemSimpleArrayAdapter recentlyUsedMedicinesAdapter = new MedicineItemSimpleArrayAdapter(this, R.id.medicine_list_view_simple, recentlyUsedMedicinesList);
 
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     currentUserMedicines = new ArrayList<>(medicineIdToMedicineMap.values());
                 }
 
-                initializeRecentlyUsedMedicinesList(currentUserMedicines);
+                updateRecentlyUsedMedicinesListView(currentUserMedicines);
             }
 
             @Override

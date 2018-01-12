@@ -1,6 +1,5 @@
 package lmnp.wirtualnaapteczka.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -13,7 +12,6 @@ import com.google.firebase.database.*;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.adapters.FamilyContactArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.FamilyMember;
-import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.data.enums.InvitationStatusEnum;
 import lmnp.wirtualnaapteczka.listeners.familyactivity.AddNewContactOnClickListener;
 import lmnp.wirtualnaapteczka.session.SessionManager;
@@ -52,26 +50,25 @@ public class ContactsTabFragment extends Fragment {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         FirebaseUser currentUser = SessionManager.getFirebaseUser();
 
-        DatabaseReference currentUserReference = firebaseDatabase.getReference(FirebaseConstants.USERS).child(currentUser.getUid());
+        DatabaseReference currentUserReference = firebaseDatabase.getReference(FirebaseConstants.USER_FAMILY).child(currentUser.getUid());
         currentUserReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
+                if (getContext() != null) {
+                    GenericTypeIndicator<Map<String, FamilyMember>> stringToFamilyMemberMapGenericType = new GenericTypeIndicator<Map<String, FamilyMember>>() {
+                    };
+                    Map<String, FamilyMember> userIdToFamilyMemberMap = dataSnapshot.getValue(stringToFamilyMemberMapGenericType);
 
-                Map<String, FamilyMember> userIdToFamilyMemberObjMap = user.getFamilyMembers();
-                List<FamilyMember> acceptedFamilyMembers = new ArrayList<>();
+                    List<FamilyMember> acceptedFamilyMembers = new ArrayList<>();
 
-                if (userIdToFamilyMemberObjMap != null) {
-                    for (FamilyMember familyMember : userIdToFamilyMemberObjMap.values()) {
-                        if (familyMember.getInvitationStatus() == InvitationStatusEnum.ACCEPTED) {
-                            acceptedFamilyMembers.add(familyMember);
+                    if (userIdToFamilyMemberMap != null) {
+                        for (FamilyMember familyMember : userIdToFamilyMemberMap.values()) {
+                            if (familyMember.getInvitationStatus() == InvitationStatusEnum.ACCEPTED) {
+                                acceptedFamilyMembers.add(familyMember);
+                            }
                         }
                     }
-                }
 
-                Context context = getContext();
-
-                if (context != null) {
                     FamilyContactArrayAdapter familyContactArrayAdapter = new FamilyContactArrayAdapter(getContext(), R.id.contacts_list_view, acceptedFamilyMembers);
                     contactsListView.setAdapter(familyContactArrayAdapter);
                 }

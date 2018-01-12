@@ -73,25 +73,25 @@ public class FirebaseDbServiceImpl implements DbService {
     }
 
     @Override
-    public void createFamilyMemberInvitationForUser(UserBasicTO userBasicTO) {
+    public void createFamilyMemberInvitationForUser(UserBasicTO userForInvitation) {
         UserBasicTO currentUserData = SessionManager.getCurrentUserData();
 
-        DatabaseReference currentUserInTargetUserFamilyMembersRef = firebaseDB.getReference(USERS).child(userBasicTO.getId()).child(FAMILY_MEMBERS).child(currentUserData.getId());
+        DatabaseReference currentUserInTargetUserFamilyMembersRef = firebaseDB.getReference(USER_FAMILY).child(userForInvitation.getId()).child(currentUserData.getId());
         FamilyMember familyMember = new FamilyMember(currentUserData.getId(), currentUserData.getUsername(), currentUserData.getEmail(), InvitationStatusEnum.PENDING);
 
         currentUserInTargetUserFamilyMembersRef.setValue(familyMember);
     }
 
     @Override
-    public void updatePendingFamilyMemberInvitationStatus(UserBasicTO userBasicTO, InvitationStatusEnum statusEnum) {
+    public void updatePendingFamilyMemberInvitationStatus(UserBasicTO friendUserForUpdating, InvitationStatusEnum statusEnum) {
         UserBasicTO currentUserData = SessionManager.getCurrentUserData();
         String currentUserId = currentUserData.getId();
 
-        DatabaseReference potentialFamilyMemberRef = firebaseDB.getReference(USERS).child(currentUserId).child(FAMILY_MEMBERS).child(userBasicTO.getId());
-        FamilyMember updatedFamilyMember = new FamilyMember(userBasicTO.getId(), userBasicTO.getUsername(), userBasicTO.getEmail(), statusEnum);
+        DatabaseReference potentialFamilyMemberRef = firebaseDB.getReference(USER_FAMILY).child(currentUserId).child(friendUserForUpdating.getId());
+        FamilyMember updatedFamilyMember = new FamilyMember(friendUserForUpdating.getId(), friendUserForUpdating.getUsername(), friendUserForUpdating.getEmail(), statusEnum);
 
         if (statusEnum == InvitationStatusEnum.ACCEPTED) {
-            DatabaseReference currentUserInTargetUserFamilyMembersRef = firebaseDB.getReference(USERS).child(userBasicTO.getId()).child(FAMILY_MEMBERS).child(currentUserId);
+            DatabaseReference currentUserInTargetUserFamilyMembersRef = firebaseDB.getReference(USER_FAMILY).child(friendUserForUpdating.getId()).child(currentUserId);
             FamilyMember familyMember = new FamilyMember(currentUserId, currentUserData.getUsername(), currentUserData.getEmail(), InvitationStatusEnum.ACCEPTED);
 
             currentUserInTargetUserFamilyMembersRef.setValue(familyMember);
@@ -151,11 +151,10 @@ public class FirebaseDbServiceImpl implements DbService {
         FirebaseUser firebaseUser = SessionManager.getFirebaseUser();
         String currentUserId = firebaseUser.getUid();
 
-        DatabaseReference familyMemberRefInCurrentUser = firebaseDB.getReference(USERS).child(currentUserId).child(FAMILY_MEMBERS).child(familyMemberUserId);
-        familyMemberRefInCurrentUser.removeValue();
+        DatabaseReference familyMemberStatusRefInCurrentUser = firebaseDB.getReference(USER_FAMILY).child(currentUserId).child(familyMemberUserId).child(INVITATION_STATUS);
+        familyMemberStatusRefInCurrentUser.setValue(InvitationStatusEnum.DELETED);
 
-
-        DatabaseReference currentUserRefInFamilyMemberUser = firebaseDB.getReference(USERS).child(familyMemberUserId).child(FAMILY_MEMBERS).child(currentUserId);
-        currentUserRefInFamilyMemberUser.removeValue();
+        DatabaseReference currentUserStatusRefInFamilyMemberUser = firebaseDB.getReference(USER_FAMILY).child(familyMemberUserId).child(currentUserId).child(INVITATION_STATUS);
+        currentUserStatusRefInFamilyMemberUser.setValue(InvitationStatusEnum.DELETED);
     }
 }
