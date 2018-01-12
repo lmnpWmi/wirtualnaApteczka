@@ -1,7 +1,6 @@
-package lmnp.wirtualnaapteczka.data.dto;
+package lmnp.wirtualnaapteczka.data.entities;
 
-import lmnp.wirtualnaapteczka.data.entities.FamilyMember;
-import lmnp.wirtualnaapteczka.data.entities.User; /**
+/**
  * Transfer object for smaller data of users.
  *
  * @author Sebastian Nowak
@@ -13,6 +12,12 @@ public class UserBasicTO {
     private String email;
 
     public UserBasicTO() {
+    }
+
+    public UserBasicTO(String id, String username, String email) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
     }
 
     public UserBasicTO(User user) {

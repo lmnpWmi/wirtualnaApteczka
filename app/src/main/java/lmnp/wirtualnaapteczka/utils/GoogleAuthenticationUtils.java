@@ -75,8 +75,7 @@ public final class GoogleAuthenticationUtils {
                             edit.putString(AppConstants.LOGIN_TYPE, LoginTypeEnum.GOOGLE.name());
                             edit.commit();
 
-                            SessionManager.initializeCurrentUserFirebaseListeners();
-                            SessionManager.initializeFamilyMembersFirebaseListener();
+                            SessionManager.initializeFirebaseListener();
 
                             Intent intent = new Intent(activity, MainActivity.class);
                             activity.startActivity(intent);

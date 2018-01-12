@@ -9,9 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import lmnp.wirtualnaapteczka.R;
-import lmnp.wirtualnaapteczka.data.dto.UserBasicTO;
+import lmnp.wirtualnaapteczka.data.entities.UserBasicTO;
 import lmnp.wirtualnaapteczka.data.entities.FamilyMember;
-import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.data.enums.InvitationStatusEnum;
 import lmnp.wirtualnaapteczka.listeners.familyactivity.UpdateInvitationStatusOnClickListener;
 

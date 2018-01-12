@@ -1,19 +1,16 @@
 package lmnp.wirtualnaapteczka.services;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import lmnp.wirtualnaapteczka.data.dto.UserBasicTO;
+import lmnp.wirtualnaapteczka.data.entities.UserBasicTO;
 import lmnp.wirtualnaapteczka.data.dto.UserRegistrationTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.data.enums.InvitationStatusEnum;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
-
-import java.util.List;
 
 public interface DbService {
     void createUserAccountCreatorListenerForGoogleAuth(GoogleSignInAccount acct);
 
-    void createOrUpdateUserAccountInFirebase(UserRegistrationTO user);
+    void createUserDataInFirebase(UserRegistrationTO user);
 
     void createFamilyMemberInvitationForUser(UserBasicTO userId);
 

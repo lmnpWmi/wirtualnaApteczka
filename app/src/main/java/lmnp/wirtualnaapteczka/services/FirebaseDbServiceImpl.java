@@ -4,18 +4,14 @@ import android.text.TextUtils;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
-import lmnp.wirtualnaapteczka.data.dto.UserBasicTO;
+import lmnp.wirtualnaapteczka.data.entities.*;
 import lmnp.wirtualnaapteczka.data.dto.UserRegistrationTO;
-import lmnp.wirtualnaapteczka.data.entities.FamilyMember;
-import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.data.enums.InvitationStatusEnum;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
 import lmnp.wirtualnaapteczka.session.SessionManager;
 import lmnp.wirtualnaapteczka.utils.FirebaseConstants;
 
 import java.util.Date;
-import java.util.List;
 
 import static lmnp.wirtualnaapteczka.utils.FirebaseConstants.*;
 
@@ -40,7 +36,7 @@ public class FirebaseDbServiceImpl implements DbService {
 
     public void createUserAccountCreatorListenerForGoogleAuth(GoogleSignInAccount acct) {
         FirebaseUser currentUser = SessionManager.getFirebaseUser();
-        DatabaseReference userRef = firebaseDB.getReference(USERS).child(currentUser.getUid()).child(FirebaseConstants.EMAIL);
+        DatabaseReference userRef = firebaseDB.getReference().child(USER_DATA).child(currentUser.getUid()).child(FirebaseConstants.EMAIL);
 
         String displayName = acct.getDisplayName();
         String email = acct.getEmail();
@@ -50,7 +46,7 @@ public class FirebaseDbServiceImpl implements DbService {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
-                    createOrUpdateUserAccountInFirebase(userRegistrationTO);
+                    createUserDataInFirebase(userRegistrationTO);
                 }
             }
 
@@ -62,40 +58,41 @@ public class FirebaseDbServiceImpl implements DbService {
     }
 
     @Override
-    public void createOrUpdateUserAccountInFirebase(UserRegistrationTO userRegistrationTO) {
+    public void createUserDataInFirebase(UserRegistrationTO userRegistrationTO) {
         FirebaseUser currentUser = SessionManager.getFirebaseUser();
+        UserBasicTO userBasicTO = new UserBasicTO(currentUser.getUid(), userRegistrationTO.getUsername(), userRegistrationTO.getEmail());
 
-        DatabaseReference userRef = firebaseDB.getReference(USERS).child(currentUser.getUid());
+        DatabaseReference userRef = firebaseDB.getReference(USER_DATA).child(currentUser.getUid());
+        userRef.setValue(userBasicTO);
 
-        User user = new User();
-        user.setId(currentUser.getUid());
-        user.setUsername(userRegistrationTO.getUsername());
-        user.setEmail(userRegistrationTO.getEmail());
+        DatabaseReference userPreferencesRef = firebaseDB.getReference(USER_PREFERENCES).child(currentUser.getUid());
+        userPreferencesRef.setValue(new UserPreferences());
 
-        userRef.setValue(user);
+        DatabaseReference userSessionRef = firebaseDB.getReference(USER_SESSION).child(currentUser.getUid());
+        userSessionRef.setValue(new UserSession());
     }
 
     @Override
     public void createFamilyMemberInvitationForUser(UserBasicTO userBasicTO) {
-        User currentUser = SessionManager.getCurrentUser();
+        UserBasicTO currentUserData = SessionManager.getCurrentUserData();
 
-        DatabaseReference currentUserInTargetUserFamilyMembersRef = firebaseDB.getReference(USERS).child(userBasicTO.getId()).child(FAMILY_MEMBERS).child(currentUser.getId());
-        FamilyMember familyMember = new FamilyMember(currentUser.getId(), currentUser.getUsername(), currentUser.getEmail(), InvitationStatusEnum.PENDING);
+        DatabaseReference currentUserInTargetUserFamilyMembersRef = firebaseDB.getReference(USERS).child(userBasicTO.getId()).child(FAMILY_MEMBERS).child(currentUserData.getId());
+        FamilyMember familyMember = new FamilyMember(currentUserData.getId(), currentUserData.getUsername(), currentUserData.getEmail(), InvitationStatusEnum.PENDING);
 
         currentUserInTargetUserFamilyMembersRef.setValue(familyMember);
     }
 
     @Override
     public void updatePendingFamilyMemberInvitationStatus(UserBasicTO userBasicTO, InvitationStatusEnum statusEnum) {
-        User currentUser = SessionManager.getCurrentUser();
-        String currentUserId = currentUser.getId();
+        UserBasicTO currentUserData = SessionManager.getCurrentUserData();
+        String currentUserId = currentUserData.getId();
 
         DatabaseReference potentialFamilyMemberRef = firebaseDB.getReference(USERS).child(currentUserId).child(FAMILY_MEMBERS).child(userBasicTO.getId());
         FamilyMember updatedFamilyMember = new FamilyMember(userBasicTO.getId(), userBasicTO.getUsername(), userBasicTO.getEmail(), statusEnum);
 
         if (statusEnum == InvitationStatusEnum.ACCEPTED) {
             DatabaseReference currentUserInTargetUserFamilyMembersRef = firebaseDB.getReference(USERS).child(userBasicTO.getId()).child(FAMILY_MEMBERS).child(currentUserId);
-            FamilyMember familyMember = new FamilyMember(currentUserId, currentUser.getUsername(), currentUser.getEmail(), InvitationStatusEnum.ACCEPTED);
+            FamilyMember familyMember = new FamilyMember(currentUserId, currentUserData.getUsername(), currentUserData.getEmail(), InvitationStatusEnum.ACCEPTED);
 
             currentUserInTargetUserFamilyMembersRef.setValue(familyMember);
         }
@@ -106,14 +103,14 @@ public class FirebaseDbServiceImpl implements DbService {
     @Override
     public void updateDefaultComparatorInUserPreferences(SortingComparatorTypeEnum defaultSortingComparatorEnum) {
         FirebaseUser currentUser = SessionManager.getFirebaseUser();
-        DatabaseReference userPreferencesRef = firebaseDB.getReference(USERS).child(currentUser.getUid()).child(USER_PREFERENCES).child(DEFAULT_SORTING_COMPARATOR_ENUM);
+        DatabaseReference userPreferencesRef = firebaseDB.getReference(USER_PREFERENCES).child(currentUser.getUid()).child(DEFAULT_SORTING_COMPARATOR_ENUM);
         userPreferencesRef.setValue(defaultSortingComparatorEnum);
     }
 
     @Override
     public void updateSearchValueInSession(String searchValue) {
         FirebaseUser currentUser = SessionManager.getFirebaseUser();
-        DatabaseReference userPreferencesRef = firebaseDB.getReference(USERS).child(currentUser.getUid()).child(USER_SESSION).child(SEARCH_VALUE);
+        DatabaseReference userPreferencesRef = firebaseDB.getReference(USER_SESSION).child(currentUser.getUid()).child(SEARCH_VALUE);
 
         userPreferencesRef.setValue(searchValue);
     }
@@ -121,7 +118,7 @@ public class FirebaseDbServiceImpl implements DbService {
     @Override
     public void updateSearchValueFamilyInSession(String searchValue) {
         FirebaseUser currentUser = SessionManager.getFirebaseUser();
-        DatabaseReference userPreferencesRef = firebaseDB.getReference(USERS).child(currentUser.getUid()).child(USER_SESSION).child(SEARCH_VALUE_IN_FAMILY);
+        DatabaseReference userPreferencesRef = firebaseDB.getReference(USER_SESSION).child(currentUser.getUid()).child(SEARCH_VALUE_IN_FAMILY);
 
         userPreferencesRef.setValue(searchValue);
     }
@@ -129,7 +126,7 @@ public class FirebaseDbServiceImpl implements DbService {
     @Override
     public void saveOrUpdateMedicine(Medicine medicine) {
         FirebaseUser firebaseUser = SessionManager.getFirebaseUser();
-        DatabaseReference medicinesRef = firebaseDB.getReference(USERS).child(firebaseUser.getUid()).child(MEDICINES);
+        DatabaseReference medicinesRef = firebaseDB.getReference(USER_MEDICINES).child(firebaseUser.getUid());
 
         if (TextUtils.isEmpty(medicine.getId())) {
             String medicineId = medicinesRef.push().getKey();
@@ -145,7 +142,7 @@ public class FirebaseDbServiceImpl implements DbService {
     @Override
     public void deleteMedicine(String medicineId) {
         FirebaseUser currentUser = SessionManager.getFirebaseUser();
-        DatabaseReference medicineRef = firebaseDB.getReference(USERS).child(currentUser.getUid()).child(MEDICINES).child(medicineId);
+        DatabaseReference medicineRef = firebaseDB.getReference(USER_MEDICINES).child(currentUser.getUid()).child(medicineId);
         medicineRef.removeValue();
     }
 

@@ -14,8 +14,13 @@ public final class FirebaseConstants {
     public static final String SEARCH_VALUE = "searchValue";
     public static final String SEARCH_VALUE_IN_FAMILY = "searchValueInFamily";
     public static final String USERS = "users";
+
+    // new db structure
+    public static final String USER_DATA = "userData";
+    public static final String USER_MEDICINES = "userMedicines";
     public static final String USER_PREFERENCES = "userPreferences";
     public static final String USER_SESSION = "userSession";
+    public static final String USER_FAMILY = "userFamily";
 
     private FirebaseConstants() {
     }

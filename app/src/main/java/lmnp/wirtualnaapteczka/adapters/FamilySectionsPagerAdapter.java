@@ -29,7 +29,8 @@ public class FamilySectionsPagerAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case FIRST_TAB_ID:
-                activeFragment = new MedicinesFamilyListTabFragment();
+//                activeFragment = new MedicinesFamilyListTabFragment();
+                activeFragment = null;
                 break;
             case SECOND_TAB_ID:
                 activeFragment = new ContactsTabFragment();

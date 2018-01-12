@@ -17,7 +17,7 @@ import lmnp.wirtualnaapteczka.activity.AddMedicineActivity;
 import lmnp.wirtualnaapteczka.activity.LogInActivity;
 import lmnp.wirtualnaapteczka.activity.MedicineListActivity;
 import lmnp.wirtualnaapteczka.data.dto.PhotoDescriptionTO;
-import lmnp.wirtualnaapteczka.data.dto.UserBasicTO;
+import lmnp.wirtualnaapteczka.data.entities.UserBasicTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
 import lmnp.wirtualnaapteczka.listeners.common.PreviewPhotoWithMedicineOnClickListener;
@@ -71,7 +71,7 @@ public class AlertDialogPreparator {
                 int toastMessageId;
 
                 if (!TextUtils.isEmpty(targetUserEmail)) {
-                    Map<String, UserBasicTO> emailToUserIdMap = SessionManager.getEmailToUserBasicMap();
+                    Map<String, UserBasicTO> emailToUserIdMap = SessionManager.getEmailToUserData();
                     UserBasicTO userBasicTO = emailToUserIdMap.get(targetUserEmail.trim());
 
                     if (userBasicTO != null) {

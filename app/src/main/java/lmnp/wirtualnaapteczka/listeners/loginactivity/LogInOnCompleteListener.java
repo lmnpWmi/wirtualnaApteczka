@@ -47,8 +47,7 @@ public class LogInOnCompleteListener implements OnCompleteListener<AuthResult> {
             if (true) {
                 updateLoginConfigInSharedPrefs();
 
-                SessionManager.initializeCurrentUserFirebaseListeners();
-                SessionManager.initializeFamilyMembersFirebaseListener();
+                SessionManager.initializeFirebaseListener();
 
                 Intent intent = new Intent(context, MainActivity.class);
                 context.startActivity(intent);

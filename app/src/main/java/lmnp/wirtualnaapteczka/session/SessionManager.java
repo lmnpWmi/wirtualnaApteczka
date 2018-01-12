@@ -6,10 +6,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import lmnp.wirtualnaapteczka.activity.LauncherActivity;
-import lmnp.wirtualnaapteczka.data.dto.UserBasicTO;
-import lmnp.wirtualnaapteczka.data.entities.FamilyMember;
-import lmnp.wirtualnaapteczka.data.entities.User;
-import lmnp.wirtualnaapteczka.data.enums.InvitationStatusEnum;
+import lmnp.wirtualnaapteczka.data.entities.UserBasicTO;
+import lmnp.wirtualnaapteczka.data.entities.UserPreferences;
 import lmnp.wirtualnaapteczka.services.DbService;
 import lmnp.wirtualnaapteczka.utils.AppConstants;
 import lmnp.wirtualnaapteczka.utils.FirebaseConstants;
@@ -26,10 +24,9 @@ import java.util.Map;
 public class SessionManager {
     private static FirebaseAuth firebaseAuth;
     private static DbService dbService;
-    private static User currentUser;
-    private static Map<String, User> familyUserMembers = new HashMap<>();
-    private static Map<String, User> pendingFamilyInvitations = new HashMap<>();
-    private static Map<String, UserBasicTO> emailToUserBasicMap = new HashMap<>();
+    private static UserBasicTO currentUserData;
+    private static UserPreferences userPeferences;
+    private static Map<String, UserBasicTO> emailToUserData;
 
     private SessionManager() {
     }
@@ -55,20 +52,16 @@ public class SessionManager {
         return currentUser;
     }
 
-    public static Map<String, User> getFamilyUserMembers() {
-        return familyUserMembers;
+    public static UserBasicTO getCurrentUserData() {
+        return currentUserData;
     }
 
-    public static Map<String, User> getPendingFamilyInvitations() {
-        return pendingFamilyInvitations;
+    public static Map<String, UserBasicTO> getEmailToUserData() {
+        return emailToUserData;
     }
 
-    public static Map<String, UserBasicTO> getEmailToUserBasicMap() {
-        return emailToUserBasicMap;
-    }
-
-    public static User getCurrentUser() {
-        return currentUser;
+    public static UserPreferences getUserPeferences() {
+        return userPeferences;
     }
 
     public static void clearSearchValueInUserSession() {
@@ -76,75 +69,13 @@ public class SessionManager {
         dbService.updateSearchValueFamilyInSession("");
     }
 
-    public static void initializeCurrentUserFirebaseListeners() {
+    public static void initializeFirebaseListener() {
         FirebaseUser firebaseUser = getFirebaseUser();
+        final String currentUserUid = firebaseUser.getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        DatabaseReference userRef = database.getReference().child(FirebaseConstants.USERS).child(firebaseUser.getUid());
-        userRef.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                currentUser = dataSnapshot.getValue(User.class);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
-
-    public static void initializeFamilyMembersFirebaseListener() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference usersRef = database.getReference().child(FirebaseConstants.USERS);
-
-        usersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (currentUser != null) {
-                    Map<String, FamilyMember> familyMembers = currentUser.getFamilyMembers();
-                    Map<String, FamilyMember> userIdToFamilyMemberMap = familyMembers != null ? familyMembers : new HashMap<String, FamilyMember>();
-
-                    Iterable<DataSnapshot> allUsersDataSnapshot = dataSnapshot.getChildren();
-
-                    Map<String, User> acceptedUserIdToUserMap = new HashMap<>();
-                    Map<String, User> pendingUserIdToUserMap = new HashMap<>();
-
-                    for (DataSnapshot userDataSnapshot : allUsersDataSnapshot) {
-                        User familyUserObj = userDataSnapshot.getValue(User.class);
-                        String familyUserId = familyUserObj.getId();
-                        UserBasicTO userBasicTO = new UserBasicTO(familyUserObj);
-
-                        emailToUserBasicMap.put(familyUserObj.getEmail(), userBasicTO);
-
-                        FamilyMember familyMember = userIdToFamilyMemberMap.get(familyUserId);
-
-                        if (familyMember != null) {
-                            InvitationStatusEnum invitationStatus = familyMember.getInvitationStatus();
-
-                            switch(invitationStatus) {
-                                case ACCEPTED:
-                                    acceptedUserIdToUserMap.put(familyUserId, familyUserObj);
-                                    break;
-                                case PENDING:
-                                    pendingUserIdToUserMap.put(familyUserId, familyUserObj);
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
-
-                    SessionManager.familyUserMembers = acceptedUserIdToUserMap;
-                    pendingFamilyInvitations = pendingUserIdToUserMap;
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        initializeUserDataListener(currentUserUid, database);
+        initializeUserPreferencesListener(currentUserUid, database);
     }
 
     public static void closeApplication(AppCompatActivity context) {
@@ -154,5 +85,43 @@ public class SessionManager {
 
         context.startActivity(intent);
         context.finish();
+    }
+
+    private static void initializeUserDataListener(final String currentUserUid, FirebaseDatabase database) {
+        DatabaseReference userRef = database.getReference().child(FirebaseConstants.USER_DATA);
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> usersDataSnapshot = dataSnapshot.getChildren();
+                emailToUserData = new HashMap<>();
+
+                for (DataSnapshot userDataSnapshot : usersDataSnapshot) {
+                    UserBasicTO userData = userDataSnapshot.getValue(UserBasicTO.class);
+                    emailToUserData.put(userData.getEmail(), userData);
+
+                    if (userData.getId().equals(currentUserUid)) {
+                        currentUserData = userData;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    private static void initializeUserPreferencesListener(String currentUserUid, FirebaseDatabase database) {
+        DatabaseReference userPreferencesRef = database.getReference().child(FirebaseConstants.USER_PREFERENCES).child(currentUserUid);
+        userPreferencesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userPeferences = dataSnapshot.getValue(UserPreferences.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 }

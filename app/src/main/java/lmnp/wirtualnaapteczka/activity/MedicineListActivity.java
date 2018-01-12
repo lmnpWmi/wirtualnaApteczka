@@ -16,9 +16,7 @@ import com.google.firebase.database.*;
 import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.adapters.MedicineItemArrayAdapter;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
-import lmnp.wirtualnaapteczka.data.entities.User;
 import lmnp.wirtualnaapteczka.data.entities.UserPreferences;
-import lmnp.wirtualnaapteczka.data.entities.UserSession;
 import lmnp.wirtualnaapteczka.data.enums.SortingComparatorTypeEnum;
 import lmnp.wirtualnaapteczka.helpers.AlertDialogPreparator;
 import lmnp.wirtualnaapteczka.helpers.MedicineFilter;
@@ -34,12 +32,16 @@ public class MedicineListActivity extends AppCompatActivity {
     private ListView medicineListView;
     private FloatingActionButton floatingActionButton;
 
+    private List<Medicine> userMedicines;
+
     private SearchMedicineDialogHelper searchMedicineDialogHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicine_list);
+
+        userMedicines = new ArrayList<>();
 
         medicineListView = (ListView) findViewById(R.id.medicine_list_view);
         medicineListView.setEmptyView(findViewById(R.id.medicine_list_empty));
@@ -98,28 +100,76 @@ public class MedicineListActivity extends AppCompatActivity {
     private void initializeFirebaseListeners() {
         FirebaseUser firebaseUser = SessionManager.getFirebaseUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        String currentUserId = firebaseUser.getUid();
 
-        DatabaseReference userRef = database.getReference().child(FirebaseConstants.USERS).child(firebaseUser.getUid());
+        initializeUserMedicineListeners(currentUserId, database);
+        initializeSearchValueListener(currentUserId, database);
+
+        final DatabaseReference defaultSortComparatorRef = database.getReference().child(FirebaseConstants.USER_PREFERENCES).child(currentUserId).child(FirebaseConstants.DEFAULT_SORTING_COMPARATOR_ENUM);
+        defaultSortComparatorRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                SortingComparatorTypeEnum defaultSortingComparator = dataSnapshot.getValue(SortingComparatorTypeEnum.class);
+                List<Medicine> sortedMedicines = new ArrayList<>(userMedicines);
+
+                initializeMedicineList(sortedMedicines, defaultSortingComparator);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void initializeSearchValueListener(String currentUserId, FirebaseDatabase database) {
+        DatabaseReference sessionSearchValueRef = database.getReference().child(FirebaseConstants.USER_SESSION).child(currentUserId).child(FirebaseConstants.SEARCH_VALUE);
+        sessionSearchValueRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String searchValue = dataSnapshot.getValue(String.class);
+
+                if (!TextUtils.isEmpty(searchValue)) {
+                    List<Medicine> filteredMedicines = MedicineFilter.filterMedicines(searchValue, userMedicines, false);
+
+                    UserPreferences userPreferences = SessionManager.getUserPeferences();
+                    SortingComparatorTypeEnum defaultSortingComparatorEnum = userPreferences.getDefaultSortingComparatorEnum();
+
+                    initializeMedicineList(filteredMedicines, defaultSortingComparatorEnum);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void initializeUserMedicineListeners(String currentUserId, FirebaseDatabase database) {
+        DatabaseReference userRef = database.getReference().child(FirebaseConstants.USER_MEDICINES).child(currentUserId);
         userRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-
-                UserPreferences userPreferences = user.getUserPreferences();
+                UserPreferences userPreferences = SessionManager.getUserPeferences();
                 SortingComparatorTypeEnum defaultSortingComparatorEnum = userPreferences.getDefaultSortingComparatorEnum();
 
-                UserSession userSession = user.getUserSession();
-                String searchValue = userSession.getSearchValue();
+                GenericTypeIndicator<Map<String, Medicine>> medicineMapTypeIndicator = new GenericTypeIndicator<Map<String, Medicine>>() {};
+                Map<String, Medicine> medicineIdToMedicineMap = dataSnapshot.getValue(medicineMapTypeIndicator);
 
-                Map<String, Medicine> medicinesMap = user.getMedicines();
-                List<Medicine> medicines = new ArrayList<>(medicinesMap.values());
+                List<Medicine> currentUserMedicines;
 
-                if (!TextUtils.isEmpty(searchValue)) {
-                    medicines = MedicineFilter.filterMedicines(searchValue, medicines, false);
+                if (medicineIdToMedicineMap == null) {
+                    currentUserMedicines = new ArrayList<>();
+                }
+                else{
+                    currentUserMedicines = new ArrayList<>(medicineIdToMedicineMap.values());
                 }
 
-                initializeMedicineList(medicines, defaultSortingComparatorEnum);
+                userMedicines = currentUserMedicines;
+
+                initializeMedicineList(currentUserMedicines, defaultSortingComparatorEnum);
             }
 
             @Override
@@ -129,10 +179,6 @@ public class MedicineListActivity extends AppCompatActivity {
     }
 
     private void initializeMedicineList(List<Medicine> medicines, SortingComparatorTypeEnum defaultSortingComparatorEnum) {
-        if (medicines == null) {
-            medicines = new ArrayList<>();
-        }
-
         Comparator<Medicine> defaultComparator = defaultSortingComparatorEnum.getComparator();
 
         Collections.sort(medicines, defaultComparator);

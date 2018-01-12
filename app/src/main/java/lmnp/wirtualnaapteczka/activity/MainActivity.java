@@ -92,14 +92,21 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = SessionManager.getFirebaseUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        DatabaseReference userRef = database.getReference().child(FirebaseConstants.USERS).child(firebaseUser.getUid());
+        DatabaseReference userRef = database.getReference().child(FirebaseConstants.USER_MEDICINES).child(firebaseUser.getUid());
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
+                GenericTypeIndicator<Map<String, Medicine>> medicineMapTypeIndicator = new GenericTypeIndicator<Map<String, Medicine>>() {};
+                Map<String, Medicine> medicineIdToMedicineMap = dataSnapshot.getValue(medicineMapTypeIndicator);
 
-                Map<String, Medicine> medicinesMap = user.getMedicines();
-                List<Medicine> currentUserMedicines = new ArrayList<>(medicinesMap.values());
+                List<Medicine> currentUserMedicines;
+
+                if (medicineIdToMedicineMap == null) {
+                    currentUserMedicines = new ArrayList<>();
+                }
+                else{
+                    currentUserMedicines = new ArrayList<>(medicineIdToMedicineMap.values());
+                }
 
                 initializeRecentlyUsedMedicinesList(currentUserMedicines);
             }
