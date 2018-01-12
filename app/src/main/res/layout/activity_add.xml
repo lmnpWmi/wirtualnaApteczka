@@ -104,13 +104,14 @@
                     android:textSize="16sp" />
 
                 <EditText
-                    android:id="@+id/medicine_amount"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:gravity="right"
-                    android:inputType="numberSigned" />
+                        android:id="@+id/medicine_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:gravity="right"
+                        android:inputType="numberDecimal" android:digits="0123456789" android:singleLine="true"
+                        android:maxLength="4"/>
 
                 <TextView
                     android:id="@+id/medicine_quantity_suffix_label"

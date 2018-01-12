@@ -6,6 +6,12 @@ import lmnp.wirtualnaapteczka.R;
 import lmnp.wirtualnaapteczka.data.dto.MedicineValidationResultTO;
 import lmnp.wirtualnaapteczka.data.entities.Medicine;
 
+/**
+ * Validates if Medicine meets all necessary requirements to be saved.
+ *
+ * @author Sebastian Nowak
+ * @createdAt 12.01.2018
+ */
 public class MedicineValidator {
     private MedicineValidator() {
     }

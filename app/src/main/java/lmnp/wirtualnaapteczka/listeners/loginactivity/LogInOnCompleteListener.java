@@ -43,8 +43,8 @@ public class LogInOnCompleteListener implements OnCompleteListener<AuthResult> {
             FirebaseUser currentUser = SessionManager.getFirebaseUser();
 
             boolean isEmailVerified = currentUser.isEmailVerified();
-            // TODO zmienić z powrotem
-            if (true) {
+
+            if (isEmailVerified) {
                 updateLoginConfigInSharedPrefs();
 
                 SessionManager.initializeFirebaseListener();
